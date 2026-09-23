@@ -58,7 +58,11 @@
 
 ## Структура на файловете
 
-- Един **самостоятелен** HTML файл на урок (CSS и JS inline, без build стъпки, библиотеки и отделни CSS/JS файлове).
+- **Общи файлове** (без build стъпки и без външни библиотеки):
+  - `assets/lesson.css`: палитрата, оформлението и всички компоненти;
+  - `assets/lesson.js`: всички механики (XP, прогрес, значки, toast, речник, тест, времева линия, карти-личности, машината на времето, аудио, активни карти). Скриптът **не съдържа съдържание**: чете всичко от HTML-а чрез класове и `data-` атрибути (виж „Модел на урок“).
+- **Един HTML файл на урок**: само съдържанието, SVG картите и малко inline CSS/JS за наистина уникални неща (напр. цветовете на империите в урок 01). Общите стилове и механики **не се дублират** в урока. Ако нещо ще трябва и в друг урок, то отива в `assets/`.
+- Общите файлове се включват с версия, за да не остава стар кеш на телефона: `assets/lesson.css?v=N` и `assets/lesson.js?v=N`. При всяка промяна в `assets/` вдигни `N` във **всички** HTML файлове.
 - Имена:
   - уроци: `istoriya-6-urok-NN-tema-na-latinitsa.html` (напр. `istoriya-6-urok-01-velikoto-preselenie.html`);
   - преговори по страниците с времева линия: `istoriya-6-pregovor-NN-tema.html`;
@@ -76,7 +80,7 @@
 
 **Различен от географията** (там основният цвят е тюркоазен `#0F5257`, а шрифтът Rubik). **Без кафяво, без пергамент, без жълтеникав фон.** Червено е добре дошло.
 
-Начални токени за първия урок. След одобрението му се фиксират тук:
+Окончателни токени (одобрени с урок 01, дефинирани в `assets/lesson.css`):
 
 ```css
 :root{
@@ -92,6 +96,8 @@
   --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
   --ok:#1E8E4E; --ok-soft:#E3F5EA;
   --bad:#D1491F; --bad-soft:#FDEBE3;  /* оранжево-червено, различно от --red */
+  --soft:#F1F2F5;       /* фон на задачи и бележки */
+  --sea:#CFE0EE; --land:#E6E8EC;      /* карти */
 }
 ```
 
@@ -137,16 +143,123 @@
 ## Игрови механики (навсякъде)
 
 - XP за всеки прочетен раздел, всяко докоснато/разкрито нещо, всеки въпрос, всяка подредена линия. Анимация „+10 XP“ (`.toast`) при всяко печелене. Броячът в topbar-а е винаги видим.
-- Прогрес бар, нива в теста, значки (`BADGES`), колекция от карти-личности.
+- Прогрес бар, нива в теста, значки (`.badge[data-badge]`), колекция от карти-личности.
 - **Без localStorage за важни данни.** XP и напредъкът са само за текущата сесия.
 
 ## Технически правила
 
 - `<head>`: `charset=utf-8`, `viewport` с `initial-scale=1, viewport-fit=cover`, `theme-color`, `lang="bg"`, четирите `<link>` към иконите.
-- Vanilla JS в IIFE `(function(){"use strict";...})()`, helper-и `$` / `$$`. Без библиотеки, framework-и и build.
+- Vanilla JS в IIFE `(function(){"use strict";...})()`, helper-и `$` / `$$`. Без библиотеки, framework-и и build. Общият JS е в `assets/lesson.js`. Уникален inline JS в урок може да ползва `window.Lesson` (`goal`, `addXP`, `toast`, `speak`).
 - Всичко работи офлайн освен снимките, шрифтовете (с fallback) и външните линкове.
 - Мобилно на първо място: една колона, `.wrap` `max-width:760px`, `overflow-x:hidden` на `body`, бутоните и опциите с `min-height` 44–52px, `env(safe-area-inset-bottom)` за фиксирани долни ленти.
-- След първия одобрен урок **допълни този файл** със секция „Модел на урок“: окончателните токени, класове, скелет на `<head>`/`<body>` и JS модулите. Всички следващи уроци копират структурата от най-близкия съществуващ урок, вместо да пишат от нулата. Запазвай класовете и именуването (напр. бутоните винаги са `.btn`, `.btn.ghost`, `.btn.gold`, `.btn.done`).
+- Всеки нов урок започва от скелета в „Модел на урок“ и от най-близкия съществуващ урок, вместо да се пише от нулата. Запазвай класовете и именуването (напр. бутоните винаги са `.btn`, `.btn.ghost`, `.btn.gold`, `.btn.navy`, `.btn.done`).
+
+## Модел на урок
+
+Моделният урок е `istoriya-6-urok-01-epohata-na-srednovekovieto.html`. Той показва всеки компонент в действие.
+
+### Правила за `assets/`
+
+- **Нов урок не дублира общ CSS/JS.** В урока остават само съдържанието, SVG картите и малък `<style>`/`<script>` за наистина уникални неща.
+- **Обратна съвместимост.** При промяна в `assets/` всички стари уроци трябва да продължат да изглеждат и да работят както преди. Добавяй нови класове и атрибути, но не променяй значението на съществуващите. Ако все пак се налага, обнови и старите уроци в същия PR.
+- След промяна в `assets/` вдигни версията `?v=N` във всички HTML файлове и провери **всички** уроци на ~360px (тест, плъзгане, XP, карта, речник).
+- Нов компонент, който ще се ползва и другаде, се добавя в `assets/` и в таблицата по-долу.
+
+### Скелет на урочен HTML
+
+```html
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок N · Тема</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<link rel="stylesheet" href="assets/lesson.css?v=1">
+<style>/* само уникалното за този урок */</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/<span id="bTotal">0</span></div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span><span class="cell"><b id="tmC">XXI в.</b></span><span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<main class="wrap">
+  <header class="hero"><div class="kicker">История и цивилизации · 6. клас · Раздел … · Урок N</div><h1>Тема</h1></header>
+  <section class="board" id="machine" data-tm="2026|XXI в.|Бургас">… [data-dial] + бутон [data-jump] …</section>
+  <section class="case" id="case">… .clues > .clue[data-clue] …</section>
+  <section class="card" id="s1" data-tm="681|VII в.|Плиска">
+    <div class="dossier-tag">ДОСИЕ №1</div><h2>…</h2>
+    <div data-story>… <button class="term" data-t="ключ">дума</button> … <span class="key">🔑 681 г.</span> …</div>
+    … поне едно интерактивно действие …
+    <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох досието · +10 XP</button>
+  </section>
+  … карта, линия на времето, улика, личности, снимки, „Знаеш ли“, медия, интервю, загадка, рисуване, езици, тест, разкриване, „Запомни“, „За родителя“ …
+</main>
+<div class="glossary"><div data-g="ключ" data-title="Дума">Обяснение…</div></div>
+<div hidden><i data-goal-all="…" data-of="…"></i></div>
+<script src="assets/lesson.js?v=1"></script>
+</body>
+</html>
+```
+
+`lesson.js` сам добавя `#toast`, долната лента за речника (`#sheet`) и аудио лентата (`#audiobar`), ако ги няма в HTML-а.
+
+### Цели, прогрес и зависимости
+
+Всичко се върти около **цели** (ключове). Компонентът изпълнява своята цел (`data-goal`), а други елементи чакат цели (`data-need`).
+
+- **Прогрес барът** = изпълнени / всички различни ключове от `[data-goal]` и `[data-done]` в страницата.
+- `data-need="k1 k2"` е изпълнено, когато всички изброени цели са готови. Така работят значките, уликите и картите-личности.
+- **Служебни цели** (без елемент с `data-goal`):
+  - `say5`: изслушани 5 различни думи (`[data-say]`);
+  - `chief`: всички нива на теста, с поне `data-chief` верни от първи опит;
+  - `card-<id>`: отключена карта-личност;
+  - подцелите от `data-subgoals`.
+
+### Класове и `data-` атрибути, които `lesson.js` разпознава
+
+| Компонент | Разметка | Атрибути |
+|---|---|---|
+| Topbar | `#xp`, `#xpBox`, `#progBar`, `#bCount`, `#bTotal`, `#tmY`, `#tmC`, `#tmP` | `#bTotal` се попълва с броя на `.badge[data-badge]`. |
+| Машината на времето | всяка секция с `data-tm="година\|век\|място"` | При скрол до секцията цифрите в topbar-а се превъртат. Преди скока се прескача само секцията с бутона. |
+| Скок | `button[data-jump="476\|V в.\|Равена"]` в `.board` с `[data-dial="y\|c\|p"]` | `data-goal`, `data-xp` (5), `data-msg`, `data-done-text`, `data-then="#case"` (скрол след скока). |
+| „Прочетох“ | `button[data-done="s1"]` | `data-xp` (10). Ключът е и цел. |
+| Речник | `.term[data-t="k"]` → `.glossary [data-g="k"][data-title]` (HTML вътре) | Отваря долната лента. |
+| Аудио | `[data-read-all="селектор"]`, `[data-read="#id"]`, `[data-say="текст"][data-lang="en-US"]`, `.voicewarn` | `data-say`: +1 XP за нова дума и цел `say5` при 5 думи. |
+| Улики | `.clue[data-clue="1"][data-need="s1"]` с `<template>` за текста | Разкрива се 700 ms след целта, с toast. |
+| Разкриване | `[data-reveal-lock]`, `[data-reveal-body]` | `data-partial` (с `{n}`, `{N}`), `data-ready`, `data-ready-quiz`. Тялото се показва при всички улики. |
+| Точки за докосване | контейнер `[data-hotspots]`, елементи `[data-hs="id"]` (SVG `g.mk`, `.chip`, бутони в `.ribbon`), текстове в `template[data-info="id"]`, изход в `.infobox` (или `data-infobox="#id"`) | `data-xp-each` (2), `data-goal` + `data-xp` + `data-msg` (всички точки видени), `data-subgoals="цел:id1,id2;цел2:id3"`. Добавя класове `.active`, `.seen`. |
+| Стъпки „преди → след“ | контейнер `[data-steps="брой"]`, бутони `[data-st="i"]`, по желание `input[type=range][data-steps-range]` | В контейнера: `data-goal`, `data-xp`, `data-xp-each` (2), `data-msg`, `data-start` (0), `data-cap-init` (показва надписа още при зареждане). Цели: `[data-fills="f0\|f1\|…"]` (fill по стъпка), `[data-steps-on="1 2"]` (opacity 1/0), `[data-steps-on][data-steps-add="клас"]` (добавя клас, `data-restart` рестартира анимацията), `template[data-cap="i"]` → `[data-steps-cap]`, `template[data-legend="i"]` → `[data-steps-legend]`. |
+| Откриване по едно | контейнер `[data-revealset]`, елементи `[data-rv]` с `template.rv-open` (по желание `template.rv-ready`) | `data-seq` (поред, следващият се отключва), `data-xp-each` (2), `data-goal`, `data-xp`, `data-msg`. Ползва се за `.tiles > .tile` и `.chain`. |
+| Един въпрос | `.oneq` с бутони `[data-opt]` (верният: `[data-ok]`) и `.fb` | `data-goal`, `data-xp` (5), `data-xp-retry` (по подразбиране половината), `data-e` (обяснение), `data-hint` (при грешка), `data-ok-title`, `data-bad-title`, `data-msg`, `data-noshuffle`, `data-stamp="#stamp"`, `data-final="#id"` (текст от `data-text` на целта с `{xp} {b} {B} {c} {C}`). На опцията: `data-e` (собствено обяснение). `.opt` получава `.right`/`.wrong`, `.btn` получава `.done`. |
+| Сортиране в две колони | `.sorter[data-left][data-right]` с `.sort-items [data-side="l\|r"]` и `.sort-stage` | `data-goal`, `data-xp` (10), `data-xp-miss` (5), `data-xp-each` (2), `data-hint`, `data-msg`. |
+| Линия на времето | `ol.sortl` с `li[data-order="0"][data-year="330 г."]`, бутон `[data-check]` и `.fb` в същата секция | `data-goal`, `data-xp` (15), `data-xp-retry` (8), `data-msg`, `data-ok-title`, `data-ok`, `data-bad`. Разбърква се, плъзгане с pointer events (☰) и стрелки ▲▼. |
+| Карти-личности | `.pcard[data-card="id"][data-need][data-name][data-how]` > `.pcard-in` > `.pfront` + `.pback`; брояч `[data-card-count]` | Заключената карта показва `data-how`. При отключване: +3 XP, toast, цел `card-<id>`. Докосване = обръщане. |
+| Интервю | `.iv` с `.chat`, `.qbtns` и `template[data-q="въпрос"]` (отговорите като `.bubble.a` / `.bubble.v`) | `data-asker`, `data-end`, `data-xp-each` (2), `data-goal`, `data-xp`. |
+| „Грешката в свитъка“ | `.scroll[data-goal]` с `.frag` (грешните: `[data-bad]`), всички с `data-e`; `.fb` веднага след него | `data-xp-each` (3), `data-fb="#id"`. |
+| Думи с история | `.ety` > `.root` + `.tree` > `.branches` | Докосване отваря, +2 XP първия път. |
+| Тест по нива | `.quiz` с `.node[data-lvl][data-goal]` (текст на нивото в `span`), `.q-area` и `template[data-level="0"]` > `.q[data-e]` > `p` + бутони (верният `[data-ok]`) | `data-chief` (8), `data-end` (HTML). +10 XP от първи опит, +3 след грешка. |
+| Флашкарти | `.flash` > `.flash-in` > `.face.front` + `.face.back`; `.fc-prev`, `.fc-next`, `.fc-num`, `.fc-data li[data-front]` в същата секция | — |
+| Значки | `.badge[data-badge="id"][data-need="…"]` > `.ic` + `b` + описание | Добавя `.on` и показва toast. |
+| Съставна цел | `[data-goal-all="k"][data-of="a b c"]` | `data-xp`, `data-msg`. |
+| Текст за копиране | `textarea.plain[data-from="#sumList"]` и бутон `[data-copy="#plain"]` | `data-head`, `data-tail` (нов ред: `&#10;`). |
+| Снимки | `figure img`, `.av img` | Докосване = пълен размер. При грешка излиза „📷 Снимката се показва, когато има интернет.“ |
+
+Класове без JS (само от `lesson.css`): `.card`, `.dossier-tag` (`.navy`, `.gold`), `.task`, `.stage`, `.note`, `.key`, `.hl`, `.infobox`, `.ribbon` + `.ribticks`, `.mapbox`, `.maplabel`, `.regionlabel`, `.contlabel`, `.river`, `.coast`, `.divline` (с клас `draw`), `.fade`, `.mk` (`.dot`, `.halo`), `.chips`/`.chip`, `.legend`, `.steps`, `.stepcap`, `.gallery`, `.dyk`, `.linkcard`, `.vocab`/`.word`, `.hola`, `.keydates`, `.sum`, `.reveal`, `.stamp`.
 
 ## Стил и тон
 

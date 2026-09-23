@@ -12,337 +12,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<link rel="stylesheet" href="assets/lesson.css?v=1">
 <style>
-:root{
-  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
-  --navy:#1B2A41;
-  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
-  --paper:#F6F7F9; --card:#FFFFFF;
-  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
-  --ok:#1E8E4E; --ok-soft:#E3F5EA;
-  --bad:#D1491F; --bad-soft:#FDEBE3;
-  --soft:#F1F2F5;
-  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
-  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
-  --head:"PT Serif", Georgia, "Times New Roman", serif;
-  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
-h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
-h1{font-size:1.7rem}
-h2{font-size:1.35rem}
-h3{font-size:1.1rem}
-p{margin:.5em 0 .8em}
-a{color:var(--red)}
-button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
-img{max-width:100%}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
-
-/* ---------- Top bar + машината на времето ---------- */
-.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
-.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
-.xp .gem{color:var(--gold)}
-.xp.bump{animation:bump .5s}
-@keyframes bump{30%{transform:scale(1.25)}}
-.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
-.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
-.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
-.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
-.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
-.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
-.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
-.tm .cell.place{flex:1;min-width:0}
-.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
-.tm .cell b.roll{animation:roll .45s ease-out}
-@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
-.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ---------- Hero ---------- */
-.hero{padding:22px 0 6px}
-.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
-.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
-.board h2{color:#fff;margin-bottom:6px}
-.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
-.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
-.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
-.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
-.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
-.dial.wide{grid-column:1/-1}
-.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
-.dial b.roll{animation:roll .45s ease-out}
-.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
-.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
-.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
-.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
-.clue.on b{color:var(--gold-ink)}
-@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
-
-/* ---------- Cards ---------- */
-.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
-.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
-.dossier-tag.navy{background:var(--navy)}
-.dossier-tag.gold{background:var(--gold);color:#2E2000}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
-.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
-.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
-.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
-.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
-.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
-.btn[disabled]{opacity:.6;cursor:default}
-.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
-.readbtn{margin-top:10px}
-.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
-.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
-.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
-.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
-.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
-.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
-
-/* ribbons (епохи, периоди) */
-.ribbon{display:flex;gap:3px;margin:10px 0 6px}
-.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
-.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
-.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
-.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
-.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
-.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
-.infobox p{margin:0}
-
-/* flip tiles */
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
-.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
-.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
-.tile.open b{color:var(--gold-ink)}
-
-/* sorter */
-.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
-.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
-.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
-.col h4{margin:0 0 4px;font-size:.85rem}
-.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
-.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
-.col div{margin-bottom:4px}
-
-/* names chain */
-.chain{display:grid;gap:8px;margin-top:10px}
-.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
-.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
-.chain button[disabled]{opacity:.45}
-.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
-.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
-
-/* map */
-.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
-.mapbox svg{display:block;width:100%;height:auto}
-.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
-.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
-.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
-.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
-.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
-.mk{cursor:pointer}
-.mk .dot{stroke:#fff;stroke-width:1.8}
-.mk .halo{fill:none;stroke-width:2.5;opacity:0}
-.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
-@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
-.mk.seen .dot{stroke:var(--ink)}
-.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
-.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
-.chip.seen{background:#E6ECF5}
-.chip.active{background:var(--navy);color:#fff}
-.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
-.legend span{display:inline-flex;align-items:center;gap:5px}
-.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
-.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
-.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
-.steps button.seen:not(.active){border-color:var(--gold)}
-input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
-.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
-.divline{fill:none;stroke:var(--navy);stroke-width:2.6;stroke-linecap:round}
-.divline.draw{animation:draw 1.4s ease-out forwards}
-@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+/* уникално за урок 01: цветовете на империите и стените на Константинопол */
+:root{--west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E}
 .wall{fill:none;stroke-linecap:round;stroke-linejoin:round}
 .wall.w330{stroke:var(--red);stroke-width:4}
 .wall.w413{stroke:var(--navy);stroke-width:5;stroke-dasharray:1;stroke-dashoffset:1}
 .wall.w413.on{animation:draw 1.6s ease-out forwards}
-.city{transition:opacity .6s}
-
-/* timeline sorting */
-.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
-.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
-.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
-.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
-.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
-.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
-.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
-.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
-.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
-.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
-.sorted .sitem .yr{display:inline}
-
-/* quiz/options */
-.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
-.opts{display:grid;gap:10px;margin-top:10px}
-.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
-.opt:active{transform:translateY(2px)}
-.opt.right{border-color:var(--ok);background:var(--ok-soft)}
-.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
-.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
-.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
-.opt[disabled]{cursor:default}
-.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
-.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
-.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
-.fb b{font-family:var(--body)}
-.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
-.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
-.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
-.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
-.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
-.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
-.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
-.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
-.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
-.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
-.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
-.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
-.pathwrap{padding-bottom:26px}
-
-/* source clue */
-.qblock{margin-top:14px}
-.qblock .qtext{font-size:1.02rem}
-
-/* personality cards */
-.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
-.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
-.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
-.pcard.flip .pcard-in{transform:rotateY(180deg)}
-.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
-.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
-.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
-.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
-.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
-.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
-.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
-.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
-.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
-.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
-.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
-.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
-.pcard.new .pfront{animation:pop .5s}
-
-/* gallery */
-.gallery{display:grid;gap:14px}
-figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
-figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
-.zoomhint{font-size:.78rem;color:var(--muted)}
-figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
-figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
-figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
-
-/* did you know */
-.dyk{display:grid;gap:10px}
-.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
-.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
-
-/* links */
-.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
-.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
-.linkcard small{color:var(--muted)}
-
-/* interview */
-.chat{display:grid;gap:8px;margin-top:10px}
-.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
-.bubble.q{background:var(--navy);color:#fff;justify-self:end}
-.bubble.a{background:var(--soft);justify-self:start}
-.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
-.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
-.qbtns{display:grid;gap:8px;margin-top:10px}
-
-/* scroll puzzle */
-.scroll{background:#fff;border:2px solid var(--gold);border-radius:14px;padding:14px;line-height:2.05;font-family:var(--head);font-size:1.02rem}
-.frag{border:0;background:var(--soft);border-radius:8px;padding:3px 6px;font:inherit;line-height:1.5;color:var(--ink);margin:1px 0}
-.frag.found{background:var(--bad-soft);color:#9C3312;text-decoration:line-through}
-.frag.found:before{content:"✗ ";text-decoration:none;display:inline-block}
-.frag.okay{background:var(--ok-soft)}
-.frag.okay:before{content:"✓ ";display:inline-block}
-
-/* vocab */
-.vocab{display:grid;gap:8px}
-.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
-.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
-.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
-.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
-.hola .word .w{color:#B0452E}
-.etym{display:grid;gap:10px;margin-top:10px}
-.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
-.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
-.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
-.ety .tree{display:none;margin-top:8px}
-.ety.open{border-color:var(--gold)}
-.ety.open .tree{display:block}
-.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
-.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
-.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
-
-/* reveal / badges */
-.reveal{text-align:center;overflow:hidden}
-.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
-.stamp.show{display:block;animation:stamp .5s}
-@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
-.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
-.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
-.badge .ic{font-size:2rem;display:block}
-.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
-.badge b{display:block;font-size:.85rem}
-
-/* flashcards */
-.flash{perspective:900px;margin:12px 0}
-.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
-.flash.flip .flash-in{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
-.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
-.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
-
-/* summary */
-.sum li{margin-bottom:6px}
-.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
-.keydates b{color:var(--gold-ink)}
-textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
-
-/* glossary sheet */
-.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
-.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
-.sheet.open{transform:translateY(0)}
-.sheet h3{margin-bottom:6px}
-
-/* audio panel */
-.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
-.audiobar.show{display:block}
-.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
-.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
-.voicewarn{display:none;margin-top:8px}
-
-details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
-summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
-.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
-@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
-@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.wall.w413{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.wall.w413{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -351,7 +29,7 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <div class="topbar-in">
     <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
     <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
-    <div class="badgecount">🏅 <span id="bCount">0</span>/8</div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/<span id="bTotal">8</span></div>
   </div>
   <div class="tm" aria-live="polite" aria-label="Машината на времето">
     <span class="lbl">🕰</span>
@@ -360,7 +38,6 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
     <span class="cell place"><b id="tmP">Бургас</b></span>
   </div>
 </div>
-<div class="toast" id="toast"></div>
 
 <main class="wrap">
 
@@ -374,11 +51,11 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <h2>🕰 Машината на времето</h2>
   <p>Детектив Венета, машината е готова. Днешната мисия започва преди повече от 1500 години. Натисни бутона и скочи!</p>
   <div class="dials">
-    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
-    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
-    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+    <div class="dial"><small>Година</small><b data-dial="y">2026</b></div>
+    <div class="dial"><small>Век</small><b data-dial="c">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b data-dial="p">Бургас, България</b></div>
   </div>
-  <button class="btn gold" id="jumpBtn">🚀 Скочи в 476 г.</button>
+  <button class="btn gold" data-jump="476|V в.|Равена, Италия" data-goal="jump" data-xp="5" data-msg="Скок във времето!" data-done-text="✓ Пристигна в 476 г." data-then="#case">🚀 Скочи в 476 г.</button>
 </section>
 
 <section class="case" id="case">
@@ -386,20 +63,20 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <h2>„Короната, която пътува“</h2>
   <p>476 г., град Равена в Италия. Военачалникът Одоакър сваля от трона последния западен император, едно момче. После праща императорските знаци (пурпурната мантия и украшенията) далеч на изток, в Константинопол. <b>Свършила ли е Римската империя? И защо точно тук историците слагат началото на нова епоха?</b></p>
   <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
-  <div class="clues" id="clues">
-    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №1</div>
-    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №3</div>
-    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №4</div>
-    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 „Знаеш ли, че…“</div>
+  <div class="clues">
+    <div class="clue" data-clue="1" data-need="s1"><b>УЛИКА 1</b>🔒 Досие №1<template>476 г. е границата: краят на Западната Римска империя и началото на Средновековието.</template></div>
+    <div class="clue" data-clue="2" data-need="s3"><b>УЛИКА 2</b>🔒 Досие №3<template>От 395 г. има ДВЕ империи: Западна и Източна (Византия).</template></div>
+    <div class="clue" data-clue="3" data-need="s4"><b>УЛИКА 3</b>🔒 Досие №4<template>Византия живее още близо 1000 години, до 1453 г.</template></div>
+    <div class="clue" data-clue="4" data-need="dyk"><b>УЛИКА 4</b>🔒 „Знаеш ли, че…“<template>Одоакър праща знаците на властта в Константинопол: „На Запада не му трябва отделен император.“</template></div>
   </div>
 </section>
 
 <div class="card" style="padding:12px 16px">
   <div class="row">
-    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" data-read-all='section[id^="s"] h2, [data-story]'>🔊 Чуй урока</button>
     <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
   </div>
-  <div class="note voicewarn" id="voiceWarn">
+  <div class="note voicewarn">
     Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
   </div>
 </div>
@@ -413,11 +90,22 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
     <p>За начало на <button class="term" data-t="sredn">Средновековието</button> се смята <span class="key">🔑 476 г.</span>, когато изчезва Западната Римска империя. Краят е <span class="key">🔑 1492 г.</span>, когато Христофор Колумб открива Америка. Преди Средновековието е <button class="term" data-t="antich">Античността</button>, а след него идва <button class="term" data-t="novo">Новото време</button>.</p>
     <p>Самото име „Средновековие“ идва от италиански учени през XV в. За тях това е времето „по средата“, между Античността и тяхното време. (Как са го мислели, ще разбереш в досие №6.)</p>
   </div>
-  <div class="task">
+  <div class="task" data-hotspots data-goal="epochs" data-xp="5" data-msg="Всички епохи!" data-subgoals="col:novo">
     <h3>👆 Разгледай лентата на времето</h3>
-    <div class="ribbon" id="epochs"></div>
+    <div class="ribbon">
+      <button data-hs="ant" style="flex:1.1;background:#6B7280">Античност</button>
+      <button data-hs="early" style="flex:2.2;background:#9E1B32">Ранно</button>
+      <button data-hs="high" style="flex:1.6;background:#7A1426">Същинско</button>
+      <button data-hs="late" style="flex:1.2;background:#1B2A41">Късно</button>
+      <button data-hs="novo" style="flex:1;background:#C9962B;color:#2E2000">Ново време</button>
+    </div>
     <div class="ribticks"><span>пр. Хр.</span><span>476</span><span>1492</span><span>днес</span></div>
-    <div class="infobox" id="epochInfo"><h3>Докосни епоха</h3><p>Тук ще се появи какво знаем за нея.</p></div>
+    <div class="infobox"><h3>Докосни епоха</h3><p>Тук ще се появи какво знаем за нея.</p></div>
+    <template data-info="ant"><h3>Античност (до V в.)</h3><p>Времето на древните гърци и римляни. Завършва с края на Западната Римска империя през 476 г.</p></template>
+    <template data-info="early"><h3>Ранно средновековие (V – XI в.)</h3><p>Варварски нашествия и нови държави на Запад. Византия е най-силната държава в Европа. През 681 г. е създадена България.</p></template>
+    <template data-info="high"><h3>Същинско средновековие (XI – XIII в.)</h3><p>На Запад растат градовете и търговията, появяват се първите университети. От 1185 г. има Втора българска държава.</p></template>
+    <template data-info="late"><h3>Късно средновековие (XIV – XV в.)</h3><p>Османците завладяват Балканите, а през 1453 г. и Константинопол. На Запад учените преоткриват Античността.</p></template>
+    <template data-info="novo"><h3>Ново време (от 1492 г.)</h3><p>Започва с откриването на Америка от Христофор Колумб през 1492 г. Ти откри картата на Колумб в „Моята колекция“!</p></template>
   </div>
   <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох досието · +10 XP</button>
 </section>
@@ -433,14 +121,22 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   </div>
   <div class="task">
     <h3>👆 Какво прави Църквата? Обърни всяка плочка</h3>
-    <div class="tiles" id="tiles">
-      <button class="tile" data-tile="0"><b>✝ Вяра</b>Докосни…</button>
-      <button class="tile" data-tile="1"><b>⚖ Ценности</b>Докосни…</button>
-      <button class="tile" data-tile="2"><b>📖 Образование</b>Докосни…</button>
-      <button class="tile" data-tile="3"><b>👑 Власт</b>Докосни…</button>
+    <div class="tiles" data-revealset data-goal="tiles" data-xp="3">
+      <button class="tile" data-rv><b>✝ Вяра</b>Докосни…<template class="rv-open"><b>✝ Вяра</b>Оформя как хората виждат света и в какво вярват.</template></button>
+      <button class="tile" data-rv><b>⚖ Ценности</b>Докосни…<template class="rv-open"><b>⚖ Ценности</b>Учи ги какво е добро и лошо и как да се държат.</template></button>
+      <button class="tile" data-rv><b>📖 Образование</b>Докосни…<template class="rv-open"><b>📖 Образование</b>Училищата, книгите и изкуството са в ръцете на Църквата.</template></button>
+      <button class="tile" data-rv><b>👑 Власт</b>Докосни…<template class="rv-open"><b>👑 Власт</b>Влияе и на царете. Те вярват, че Бог им е дал властта.</template></button>
     </div>
   </div>
-  <div class="stage" id="q2"></div>
+  <div class="stage oneq" data-goal="q2" data-xp="5" data-e="Монарсите вярват, че властта им е дадена от Бога. Затова на мозайките стоят до Христос." data-hint="Погледни пак последния абзац на досието.">
+    <p class="qtext">Според хората през Средновековието откъде монархът получава властта си?</p>
+    <div class="opts">
+      <button class="opt" data-opt data-ok>От Бога</button>
+      <button class="opt" data-opt>Избират го всички жители на страната</button>
+      <button class="opt" data-opt>Купува я на пазара</button>
+    </div>
+    <div class="fb"></div>
+  </div>
   <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох досието · +10 XP</button>
 </section>
 
@@ -457,28 +153,67 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   </div>
   <div class="task">
     <h3>👆 Запад или Изток? Подреди уликите</h3>
-    <div class="sorter" id="sorter"></div>
+    <div class="sorter" data-left="Запад" data-right="Изток" data-goal="sorter" data-xp="10" data-xp-miss="5" data-msg="Запад и Изток" data-hint="Помисли пак: кой говори гръцки и кой латински? Къде е Рим и къде Константинопол?">
+      <div class="sort-items">
+        <div data-side="r">Столицата е Константинопол</div>
+        <div data-side="l">Християнският център е Рим</div>
+        <div data-side="r">Говорят и пишат на гръцки</div>
+        <div data-side="l">Латинският език обединява хората</div>
+        <div data-side="r">Смятат се за единствената империя, създадена от Бога</div>
+        <div data-side="l">Варварски нашествия и нови държави</div>
+        <div data-side="l">От XII в.: градове, търговия и първите университети</div>
+        <div data-side="r">През XV в. държавите изчезват под ударите на завоеватели</div>
+      </div>
+      <div class="sort-stage"></div>
+    </div>
   </div>
   <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох досието · +10 XP</button>
 </section>
 
 <!-- ===== АКТИВНА КАРТА ===== -->
-<section class="card" id="map" data-tm="395|IV в.|Средиземноморието">
+<section class="card" id="map" data-tm="395|IV в.|Средиземноморието" data-steps="4" data-goal="mapSteps" data-xp="5" data-xp-each="2" data-msg="Картата оживя!" data-cap-init>
   <div class="dossier-tag navy">🗺 КАРТА НА ДЕТЕКТИВА</div>
   <h2>Една империя става две</h2>
   <p>Мести плъзгача или натискай бутоните по години. После докосни градовете. Открий и <b>петте центъра на Църквата</b> (златните точки), за да получиш значката „Пазител“.</p>
-  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на Европа и Средиземноморието"></svg></div>
-  <input type="range" id="mapRange" min="0" max="3" step="1" value="0" aria-label="Време">
-  <div class="steps" id="mapSteps">
-    <button data-st="0" class="active">до 395 г.</button>
-    <button data-st="1">395 г.</button>
-    <button data-st="2">476 г.</button>
-    <button data-st="3">Запад и Изток</button>
+  <div data-hotspots data-subgoals="centres:rome,cpl,alex,ant,jer">
+    <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на Европа и Средиземноморието"><defs><pattern id="hW" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#F6DDE1"></rect><line x1="0" y1="0" x2="0" y2="6" stroke="#C4596B" stroke-width="2"></line></pattern><pattern id="hE" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="6" height="6" fill="#E1E8F3"></rect><line x1="0" y1="0" x2="0" y2="6" stroke="#6E86AE" stroke-width="2"></line></pattern><mask id="landMask"><rect width="400" height="308" fill="#fff"></rect><path d="M35.4,188.4 L43.3,182.4 L56.4,181.6 L65.6,174.7 L70.2,158.5 L78.1,148.2 L86.6,142.2 L93.8,134.5 L95.1,125.9 L107.6,125.9 L120.1,122.5 L130.6,116.5 L136.5,119.1 L139.7,124.2 L141.1,129.3 L152.2,138.8 L160.7,143.9 L165.3,147.3 L169.3,149.0 L174.5,154.2 L175.2,162.7 L174.5,171.3 L177.8,172.2 L181.1,167.9 L184.4,162.7 L180.4,156.7 L185.0,150.7 L192.9,155.9 L193.5,153.3 L190.3,149.0 L183.0,144.7 L178.5,137.9 L165.3,132.8 L160.7,123.3 L154.8,119.1 L152.9,107.9 L162.1,106.2 L161.4,110.5 L163.4,113.1 L166.6,108.8 L171.9,119.1 L179.8,124.2 L190.9,131.9 L197.5,137.0 L199.4,143.0 L200.1,150.7 L203.4,157.6 L208.0,162.7 L211.9,168.7 L210.6,173.0 L214.5,181.6 L219.1,185.0 L222.4,184.1 L224.4,185.0 L221.8,174.7 L224.4,172.2 L227.7,172.2 L229.6,174.3 L229.6,167.9 L223.1,162.7 L222.4,160.2 L222.4,149.0 L226.3,154.2 L229.6,152.5 L232.3,146.5 L242.1,146.9 L244.1,151.6 L245.4,153.3 L244.1,155.0 L247.3,160.2 L249.3,167.9 L250.6,172.2 L251.9,179.9 L255.9,182.4 L263.1,183.3 L271.6,185.9 L273.6,180.7 L278.8,182.4 L285.4,187.6 L295.2,185.9 L299.2,181.6 L309.7,183.3 L307.7,189.3 L307.0,192.7 L307.0,202.1 L305.1,206.4 L301.8,215.8 L300.5,221.8 L297.9,227.0 L288.7,230.4 L284.1,228.7 L280.8,227.0 L271.6,227.0 L268.3,229.5 L255.9,230.4 L237.5,226.1 L229.6,221.8 L219.8,215.8 L204.0,221.8 L196.8,237.3 L183.7,230.4 L172.5,220.1 L158.8,215.0 L147.6,212.4 L143.7,208.1 L138.4,206.4 L143.0,199.6 L145.0,195.3 L143.0,190.1 L144.3,179.0 L139.7,180.7 L137.1,177.3 L128.6,180.7 L123.3,180.7 L114.2,179.0 L91.9,181.6 L78.7,184.1 L68.2,191.0 L57.7,196.1 L46.6,195.3 L37.4,189.3 L34.1,190.1 Z" fill="#000"></path><path d="M246.7,150.7 L252.6,146.0 L259.8,145.6 L262.4,145.4 L264.4,147.7 L261.8,150.7 L254.6,151.2 L249.3,151.6 Z" fill="#000"></path><path d="M263.1,143.9 L255.9,137.9 L252.6,132.8 L255.2,126.8 L259.2,125.0 L260.5,118.2 L267.0,109.6 L273.6,98.5 L281.5,97.6 L286.1,101.9 L292.6,101.9 L288.0,105.3 L285.4,108.3 L291.3,109.6 L292.0,114.8 L296.5,115.6 L304.4,111.3 L311.6,108.8 L303.8,107.9 L300.5,101.9 L300.5,101.1 L313.6,96.8 L318.9,93.4 L327.4,92.5 L323.4,96.8 L320.2,102.8 L317.5,108.8 L312.9,109.6 L316.9,112.2 L320.2,113.9 L332.6,123.3 L341.2,128.5 L345.8,136.2 L345.1,140.5 L332.6,145.6 L320.8,145.6 L310.3,143.0 L302.5,137.0 L290.6,137.0 L278.2,143.0 L270.3,143.9 L266.4,143.9 Z" fill="#000"></path><path d="M383.8,104.5 L387.1,98.5 L396.9,97.6 L410.0,94.2 L410.0,181.6 L403.5,179.9 L397.6,176.4 L394.3,175.6 L393.0,165.3 L395.0,158.5 L399.6,150.7 L389.1,136.2 L383.8,128.5 L379.2,113.1 Z" fill="#000"></path><path d="M286.1,240.2 L290.6,251.8 L296.9,259.1 L299.2,253.5 L301.5,244.1 L301.1,255.2 L303.8,256.9 L312.3,275.8 L322.1,291.2 L329.4,312.6 L332.0,329.8 L318.2,329.8 L316.2,316.9 L314.3,308.3 L305.1,291.2 L295.2,271.5 L292.0,262.9 L286.1,243.2 Z" fill="#000"></path><path d="M387.1,245.0 L391.7,239.8 L396.9,239.8 L403.5,246.7 L410.0,257.8 L410.0,291.2 L401.5,278.4 L397.6,266.4 L392.3,260.4 Z" fill="#000"></path><path d="M-6.6,325.5 L-6.6,254.4 L5.2,245.0 L8.5,235.5 L7.9,227.0 L11.8,218.4 L16.4,211.6 L22.3,209.0 L27.6,205.6 L31.5,195.3 L33.5,190.1 L35.4,188.4 L30.8,184.1 L23.6,178.2 L20.3,179.9 L13.4,179.9 L14.4,167.9 L9.8,165.3 L13.1,154.2 L15.1,143.9 L13.8,132.8 L11.2,129.3 L17.1,125.0 L26.2,123.3 L34.8,123.3 L47.2,124.2 L60.4,125.0 L62.3,124.2 L64.3,114.8 L64.3,102.8 L57.7,92.5 L52.5,89.9 L43.3,87.4 L41.3,82.2 L52.5,78.8 L61.7,79.7 L59.7,71.1 L63.6,71.1 L70.9,74.5 L72.8,72.8 L82.0,67.7 L84.6,60.0 L95.8,56.5 L99.7,51.4 L103.0,43.7 L106.9,39.4 L118.1,37.7 L127.9,37.7 L130.6,34.3 L128.6,25.7 L125.3,21.4 L126.0,11.1 L134.5,7.7 L141.7,2.6 L141.1,6.9 L139.7,12.8 L139.1,17.1 L137.1,24.0 L137.8,27.4 L139.1,30.8 L143.7,34.3 L151.6,32.5 L160.1,29.1 L165.3,35.1 L177.1,31.7 L187.0,27.4 L194.9,30.8 L200.8,30.0 L203.4,26.6 L210.6,19.7 L209.9,12.8 L213.2,5.1 L219.8,2.6 L228.3,8.6 L232.3,6.0 L231.6,-8.6 L181.7,-8.6 L181.7,0.0 L181.1,1.7 L179.8,11.1 L176.5,16.3 L166.0,18.0 L163.4,22.3 L157.5,20.6 L155.5,17.1 L154.8,12.0 L150.2,2.6 L146.3,-8.6 L121.4,-8.6 L118.1,0.0 L111.5,-2.6 L108.3,-8.6 L-6.6,-8.6 Z" fill="#000"></path><path d="M153.5,170.4 L160.1,169.6 L174.5,168.7 L171.2,179.0 L171.2,182.4 L166.0,179.9 L154.8,174.7 Z" fill="#fff"></path><path d="M126.0,145.6 L135.2,144.7 L136.5,153.3 L135.2,161.9 L130.6,163.6 L127.3,161.9 L127.3,150.7 Z" fill="#fff"></path><path d="M133.8,128.5 L134.5,136.2 L132.5,142.2 L128.6,139.6 L128.6,132.8 Z" fill="#fff"></path><path d="M87.9,157.6 L95.1,155.9 L93.2,160.2 L89.2,159.3 Z" fill="#fff"></path><path d="M226.3,191.9 L233.6,192.7 L244.7,194.4 L243.4,197.0 L233.6,196.1 L227.0,195.3 Z" fill="#fff"></path><path d="M284.1,196.1 L288.7,193.6 L299.2,191.0 L294.6,197.0 L288.0,200.4 L284.1,198.7 Z" fill="#fff"></path><path d="M34.8,68.1 L44.6,65.1 L49.9,63.4 L62.3,62.5 L74.1,61.7 L81.4,58.2 L83.3,46.3 L74.1,42.0 L72.8,37.7 L68.2,30.0 L63.0,23.1 L59.0,18.0 L52.5,17.1 L55.8,12.8 L60.4,4.3 L59.0,2.6 L49.2,2.6 L45.9,3.4 L52.5,-5.1 L39.4,-5.1 L37.4,0.0 L35.4,6.0 L34.8,12.8 L35.4,22.3 L38.7,25.7 L43.3,27.4 L49.9,26.6 L51.2,32.5 L52.5,36.0 L51.8,40.3 L42.6,39.4 L41.3,44.5 L45.3,48.8 L37.4,53.1 L44.6,54.8 L52.5,55.7 L49.9,58.2 L42.6,60.0 Z" fill="#fff"></path><path d="M30.8,49.7 L32.8,42.8 L31.5,37.7 L36.1,31.7 L32.8,24.0 L24.3,22.3 L17.7,24.0 L15.7,31.7 L6.6,32.5 L7.2,39.4 L10.5,46.3 L3.9,51.4 L7.9,55.7 L17.1,54.8 L26.2,50.5 Z" fill="#fff"></path><path d="M144.3,24.0 L151.6,26.6 L154.8,20.6 L152.9,16.3 L144.3,18.0 Z" fill="#fff"></path><path d="M136.5,21.4 L143.0,23.1 L141.7,25.7 L137.1,24.8 Z" fill="#fff"></path></mask></defs><rect width="400" height="308" style="fill:var(--land)"></rect><path d="M35.4,188.4 L43.3,182.4 L56.4,181.6 L65.6,174.7 L70.2,158.5 L78.1,148.2 L86.6,142.2 L93.8,134.5 L95.1,125.9 L107.6,125.9 L120.1,122.5 L130.6,116.5 L136.5,119.1 L139.7,124.2 L141.1,129.3 L152.2,138.8 L160.7,143.9 L165.3,147.3 L169.3,149.0 L174.5,154.2 L175.2,162.7 L174.5,171.3 L177.8,172.2 L181.1,167.9 L184.4,162.7 L180.4,156.7 L185.0,150.7 L192.9,155.9 L193.5,153.3 L190.3,149.0 L183.0,144.7 L178.5,137.9 L165.3,132.8 L160.7,123.3 L154.8,119.1 L152.9,107.9 L162.1,106.2 L161.4,110.5 L163.4,113.1 L166.6,108.8 L171.9,119.1 L179.8,124.2 L190.9,131.9 L197.5,137.0 L199.4,143.0 L200.1,150.7 L203.4,157.6 L208.0,162.7 L211.9,168.7 L210.6,173.0 L214.5,181.6 L219.1,185.0 L222.4,184.1 L224.4,185.0 L221.8,174.7 L224.4,172.2 L227.7,172.2 L229.6,174.3 L229.6,167.9 L223.1,162.7 L222.4,160.2 L222.4,149.0 L226.3,154.2 L229.6,152.5 L232.3,146.5 L242.1,146.9 L244.1,151.6 L245.4,153.3 L244.1,155.0 L247.3,160.2 L249.3,167.9 L250.6,172.2 L251.9,179.9 L255.9,182.4 L263.1,183.3 L271.6,185.9 L273.6,180.7 L278.8,182.4 L285.4,187.6 L295.2,185.9 L299.2,181.6 L309.7,183.3 L307.7,189.3 L307.0,192.7 L307.0,202.1 L305.1,206.4 L301.8,215.8 L300.5,221.8 L297.9,227.0 L288.7,230.4 L284.1,228.7 L280.8,227.0 L271.6,227.0 L268.3,229.5 L255.9,230.4 L237.5,226.1 L229.6,221.8 L219.8,215.8 L204.0,221.8 L196.8,237.3 L183.7,230.4 L172.5,220.1 L158.8,215.0 L147.6,212.4 L143.7,208.1 L138.4,206.4 L143.0,199.6 L145.0,195.3 L143.0,190.1 L144.3,179.0 L139.7,180.7 L137.1,177.3 L128.6,180.7 L123.3,180.7 L114.2,179.0 L91.9,181.6 L78.7,184.1 L68.2,191.0 L57.7,196.1 L46.6,195.3 L37.4,189.3 L34.1,190.1 Z" style="fill:var(--sea)"></path><path d="M246.7,150.7 L252.6,146.0 L259.8,145.6 L262.4,145.4 L264.4,147.7 L261.8,150.7 L254.6,151.2 L249.3,151.6 Z" style="fill:var(--sea)"></path><path d="M263.1,143.9 L255.9,137.9 L252.6,132.8 L255.2,126.8 L259.2,125.0 L260.5,118.2 L267.0,109.6 L273.6,98.5 L281.5,97.6 L286.1,101.9 L292.6,101.9 L288.0,105.3 L285.4,108.3 L291.3,109.6 L292.0,114.8 L296.5,115.6 L304.4,111.3 L311.6,108.8 L303.8,107.9 L300.5,101.9 L300.5,101.1 L313.6,96.8 L318.9,93.4 L327.4,92.5 L323.4,96.8 L320.2,102.8 L317.5,108.8 L312.9,109.6 L316.9,112.2 L320.2,113.9 L332.6,123.3 L341.2,128.5 L345.8,136.2 L345.1,140.5 L332.6,145.6 L320.8,145.6 L310.3,143.0 L302.5,137.0 L290.6,137.0 L278.2,143.0 L270.3,143.9 L266.4,143.9 Z" style="fill:var(--sea)"></path><path d="M383.8,104.5 L387.1,98.5 L396.9,97.6 L410.0,94.2 L410.0,181.6 L403.5,179.9 L397.6,176.4 L394.3,175.6 L393.0,165.3 L395.0,158.5 L399.6,150.7 L389.1,136.2 L383.8,128.5 L379.2,113.1 Z" style="fill:var(--sea)"></path><path d="M286.1,240.2 L290.6,251.8 L296.9,259.1 L299.2,253.5 L301.5,244.1 L301.1,255.2 L303.8,256.9 L312.3,275.8 L322.1,291.2 L329.4,312.6 L332.0,329.8 L318.2,329.8 L316.2,316.9 L314.3,308.3 L305.1,291.2 L295.2,271.5 L292.0,262.9 L286.1,243.2 Z" style="fill:var(--sea)"></path><path d="M387.1,245.0 L391.7,239.8 L396.9,239.8 L403.5,246.7 L410.0,257.8 L410.0,291.2 L401.5,278.4 L397.6,266.4 L392.3,260.4 Z" style="fill:var(--sea)"></path><path d="M-6.6,325.5 L-6.6,254.4 L5.2,245.0 L8.5,235.5 L7.9,227.0 L11.8,218.4 L16.4,211.6 L22.3,209.0 L27.6,205.6 L31.5,195.3 L33.5,190.1 L35.4,188.4 L30.8,184.1 L23.6,178.2 L20.3,179.9 L13.4,179.9 L14.4,167.9 L9.8,165.3 L13.1,154.2 L15.1,143.9 L13.8,132.8 L11.2,129.3 L17.1,125.0 L26.2,123.3 L34.8,123.3 L47.2,124.2 L60.4,125.0 L62.3,124.2 L64.3,114.8 L64.3,102.8 L57.7,92.5 L52.5,89.9 L43.3,87.4 L41.3,82.2 L52.5,78.8 L61.7,79.7 L59.7,71.1 L63.6,71.1 L70.9,74.5 L72.8,72.8 L82.0,67.7 L84.6,60.0 L95.8,56.5 L99.7,51.4 L103.0,43.7 L106.9,39.4 L118.1,37.7 L127.9,37.7 L130.6,34.3 L128.6,25.7 L125.3,21.4 L126.0,11.1 L134.5,7.7 L141.7,2.6 L141.1,6.9 L139.7,12.8 L139.1,17.1 L137.1,24.0 L137.8,27.4 L139.1,30.8 L143.7,34.3 L151.6,32.5 L160.1,29.1 L165.3,35.1 L177.1,31.7 L187.0,27.4 L194.9,30.8 L200.8,30.0 L203.4,26.6 L210.6,19.7 L209.9,12.8 L213.2,5.1 L219.8,2.6 L228.3,8.6 L232.3,6.0 L231.6,-8.6 L181.7,-8.6 L181.7,0.0 L181.1,1.7 L179.8,11.1 L176.5,16.3 L166.0,18.0 L163.4,22.3 L157.5,20.6 L155.5,17.1 L154.8,12.0 L150.2,2.6 L146.3,-8.6 L121.4,-8.6 L118.1,0.0 L111.5,-2.6 L108.3,-8.6 L-6.6,-8.6 Z" style="fill:var(--sea)"></path><path d="M153.5,170.4 L160.1,169.6 L174.5,168.7 L171.2,179.0 L171.2,182.4 L166.0,179.9 L154.8,174.7 Z" style="fill:var(--land)"></path><path d="M126.0,145.6 L135.2,144.7 L136.5,153.3 L135.2,161.9 L130.6,163.6 L127.3,161.9 L127.3,150.7 Z" style="fill:var(--land)"></path><path d="M133.8,128.5 L134.5,136.2 L132.5,142.2 L128.6,139.6 L128.6,132.8 Z" style="fill:var(--land)"></path><path d="M87.9,157.6 L95.1,155.9 L93.2,160.2 L89.2,159.3 Z" style="fill:var(--land)"></path><path d="M226.3,191.9 L233.6,192.7 L244.7,194.4 L243.4,197.0 L233.6,196.1 L227.0,195.3 Z" style="fill:var(--land)"></path><path d="M284.1,196.1 L288.7,193.6 L299.2,191.0 L294.6,197.0 L288.0,200.4 L284.1,198.7 Z" style="fill:var(--land)"></path><path d="M34.8,68.1 L44.6,65.1 L49.9,63.4 L62.3,62.5 L74.1,61.7 L81.4,58.2 L83.3,46.3 L74.1,42.0 L72.8,37.7 L68.2,30.0 L63.0,23.1 L59.0,18.0 L52.5,17.1 L55.8,12.8 L60.4,4.3 L59.0,2.6 L49.2,2.6 L45.9,3.4 L52.5,-5.1 L39.4,-5.1 L37.4,0.0 L35.4,6.0 L34.8,12.8 L35.4,22.3 L38.7,25.7 L43.3,27.4 L49.9,26.6 L51.2,32.5 L52.5,36.0 L51.8,40.3 L42.6,39.4 L41.3,44.5 L45.3,48.8 L37.4,53.1 L44.6,54.8 L52.5,55.7 L49.9,58.2 L42.6,60.0 Z" style="fill:var(--land)"></path><path d="M30.8,49.7 L32.8,42.8 L31.5,37.7 L36.1,31.7 L32.8,24.0 L24.3,22.3 L17.7,24.0 L15.7,31.7 L6.6,32.5 L7.2,39.4 L10.5,46.3 L3.9,51.4 L7.9,55.7 L17.1,54.8 L26.2,50.5 Z" style="fill:var(--land)"></path><path d="M144.3,24.0 L151.6,26.6 L154.8,20.6 L152.9,16.3 L144.3,18.0 Z" style="fill:var(--land)"></path><path d="M136.5,21.4 L143.0,23.1 L141.7,25.7 L137.1,24.8 Z" style="fill:var(--land)"></path><g mask="url(#landMask)" style="pointer-events:none"><g id="gXW" class="fade" opacity="0" data-steps-on="3"><path d="M98.4,51.4 L124.7,38.5 L124.7,-4.3 L232.9,-4.3 L232.9,34.3 L229.6,68.5 L219.8,81.4 L232.9,87.4 L219.8,104.5 L209.9,111.3 L198.8,109.6 L196.2,102.8 L196.8,89.9 L195.5,87.4 L179.8,83.9 L160.1,80.5 L137.8,82.2 L134.5,89.1 L122.0,89.4 L123.0,80.7 L126.6,68.5 L122.0,65.1 L118.1,60.8 L112.2,53.1 Z" fill="url(#hW)"></path><path d="M0.0,60.0 L37.4,51.4 L37.4,28.3 L51.2,25.7 L63.0,25.7 L72.2,-4.3 L0.0,-4.3 Z" fill="url(#hW)"></path></g><g id="gXE" class="fade" opacity="0" data-steps-on="3"><path d="M232.9,-4.3 L400.2,-4.3 L400.2,51.4 L367.4,94.2 L334.6,92.5 L301.8,100.2 L288.7,101.1 L275.6,97.6 L273.6,98.5 L267.0,109.6 L255.7,109.0 L251.3,119.1 L238.2,123.3 L222.4,119.9 L219.8,114.8 L209.9,111.3 L219.8,104.5 L232.9,87.4 L219.8,81.4 L229.6,68.5 L232.9,34.3 Z" fill="url(#hE)"></path></g><g id="gW"><path id="pW" data-fills="var(--unit)|var(--west)|url(#hW)|url(#hW)" d="M98.4,51.4 L112.2,53.1 L118.1,60.8 L122.0,65.1 L126.6,68.5 L123.0,80.7 L122.0,89.4 L134.5,89.1 L137.8,82.2 L151.6,77.1 L160.1,80.5 L179.8,83.9 L184.4,84.8 L195.5,87.4 L196.8,89.9 L196.2,102.8 L198.8,109.6 L198.8,115.6 L198.1,124.2 L196.2,135.3 L196.2,171.3 L195.5,236.4 L195.5,252.7 L164.0,235.5 L137.8,227.0 L105.0,209.8 L72.2,203.8 L39.4,207.3 L26.2,210.7 L-13.1,210.7 L-13.1,119.9 L32.8,77.1 L45.9,51.4 L72.2,42.8 Z"></path><path id="pWB" data-fills="var(--unit)|var(--west)|url(#hW)|url(#hW)" d="M26.2,72.8 L88.6,64.2 L88.6,38.5 L63.0,25.7 L51.2,25.7 L37.4,28.3 L37.4,51.4 L26.2,68.5 Z"></path></g><path id="pE" data-fills="var(--unit)|var(--east)|var(--east)|var(--east)" d="M198.8,109.6 L206.7,113.1 L219.8,114.8 L222.4,119.9 L229.6,122.5 L238.2,123.3 L242.4,121.2 L251.3,119.1 L255.7,109.0 L267.0,109.6 L275.6,115.6 L308.4,124.2 L345.1,137.9 L351.0,141.3 L354.3,149.9 L344.4,158.5 L337.9,171.3 L334.6,179.9 L326.7,188.4 L323.4,201.3 L314.9,218.4 L311.6,231.3 L307.0,239.8 L301.8,244.1 L297.2,258.7 L292.6,265.5 L294.6,291.2 L288.0,292.9 L269.0,291.2 L255.9,269.8 L237.5,244.1 L229.6,235.5 L203.4,244.1 L195.5,252.7 L195.5,236.4 L196.2,171.3 L196.2,135.3 L198.1,124.2 L198.8,115.6 Z"></path></g><path class="coast" d="M35.4,188.4 L43.3,182.4 L56.4,181.6 L65.6,174.7 L70.2,158.5 L78.1,148.2 L86.6,142.2 L93.8,134.5 L95.1,125.9 L107.6,125.9 L120.1,122.5 L130.6,116.5 L136.5,119.1 L139.7,124.2 L141.1,129.3 L152.2,138.8 L160.7,143.9 L165.3,147.3 L169.3,149.0 L174.5,154.2 L175.2,162.7 L174.5,171.3 L177.8,172.2 L181.1,167.9 L184.4,162.7 L180.4,156.7 L185.0,150.7 L192.9,155.9 L193.5,153.3 L190.3,149.0 L183.0,144.7 L178.5,137.9 L165.3,132.8 L160.7,123.3 L154.8,119.1 L152.9,107.9 L162.1,106.2 L161.4,110.5 L163.4,113.1 L166.6,108.8 L171.9,119.1 L179.8,124.2 L190.9,131.9 L197.5,137.0 L199.4,143.0 L200.1,150.7 L203.4,157.6 L208.0,162.7 L211.9,168.7 L210.6,173.0 L214.5,181.6 L219.1,185.0 L222.4,184.1 L224.4,185.0 L221.8,174.7 L224.4,172.2 L227.7,172.2 L229.6,174.3 L229.6,167.9 L223.1,162.7 L222.4,160.2 L222.4,149.0 L226.3,154.2 L229.6,152.5 L232.3,146.5 L242.1,146.9 L244.1,151.6 L245.4,153.3 L244.1,155.0 L247.3,160.2 L249.3,167.9 L250.6,172.2 L251.9,179.9 L255.9,182.4 L263.1,183.3 L271.6,185.9 L273.6,180.7 L278.8,182.4 L285.4,187.6 L295.2,185.9 L299.2,181.6 L309.7,183.3 L307.7,189.3 L307.0,192.7 L307.0,202.1 L305.1,206.4 L301.8,215.8 L300.5,221.8 L297.9,227.0 L288.7,230.4 L284.1,228.7 L280.8,227.0 L271.6,227.0 L268.3,229.5 L255.9,230.4 L237.5,226.1 L229.6,221.8 L219.8,215.8 L204.0,221.8 L196.8,237.3 L183.7,230.4 L172.5,220.1 L158.8,215.0 L147.6,212.4 L143.7,208.1 L138.4,206.4 L143.0,199.6 L145.0,195.3 L143.0,190.1 L144.3,179.0 L139.7,180.7 L137.1,177.3 L128.6,180.7 L123.3,180.7 L114.2,179.0 L91.9,181.6 L78.7,184.1 L68.2,191.0 L57.7,196.1 L46.6,195.3 L37.4,189.3 L34.1,190.1 Z"></path><path class="coast" d="M246.7,150.7 L252.6,146.0 L259.8,145.6 L262.4,145.4 L264.4,147.7 L261.8,150.7 L254.6,151.2 L249.3,151.6 Z"></path><path class="coast" d="M263.1,143.9 L255.9,137.9 L252.6,132.8 L255.2,126.8 L259.2,125.0 L260.5,118.2 L267.0,109.6 L273.6,98.5 L281.5,97.6 L286.1,101.9 L292.6,101.9 L288.0,105.3 L285.4,108.3 L291.3,109.6 L292.0,114.8 L296.5,115.6 L304.4,111.3 L311.6,108.8 L303.8,107.9 L300.5,101.9 L300.5,101.1 L313.6,96.8 L318.9,93.4 L327.4,92.5 L323.4,96.8 L320.2,102.8 L317.5,108.8 L312.9,109.6 L316.9,112.2 L320.2,113.9 L332.6,123.3 L341.2,128.5 L345.8,136.2 L345.1,140.5 L332.6,145.6 L320.8,145.6 L310.3,143.0 L302.5,137.0 L290.6,137.0 L278.2,143.0 L270.3,143.9 L266.4,143.9 Z"></path><path class="coast" d="M383.8,104.5 L387.1,98.5 L396.9,97.6 L410.0,94.2 L410.0,181.6 L403.5,179.9 L397.6,176.4 L394.3,175.6 L393.0,165.3 L395.0,158.5 L399.6,150.7 L389.1,136.2 L383.8,128.5 L379.2,113.1 Z"></path><path class="coast" d="M286.1,240.2 L290.6,251.8 L296.9,259.1 L299.2,253.5 L301.5,244.1 L301.1,255.2 L303.8,256.9 L312.3,275.8 L322.1,291.2 L329.4,312.6 L332.0,329.8 L318.2,329.8 L316.2,316.9 L314.3,308.3 L305.1,291.2 L295.2,271.5 L292.0,262.9 L286.1,243.2 Z"></path><path class="coast" d="M387.1,245.0 L391.7,239.8 L396.9,239.8 L403.5,246.7 L410.0,257.8 L410.0,291.2 L401.5,278.4 L397.6,266.4 L392.3,260.4 Z"></path><path class="coast" d="M-6.6,325.5 L-6.6,254.4 L5.2,245.0 L8.5,235.5 L7.9,227.0 L11.8,218.4 L16.4,211.6 L22.3,209.0 L27.6,205.6 L31.5,195.3 L33.5,190.1 L35.4,188.4 L30.8,184.1 L23.6,178.2 L20.3,179.9 L13.4,179.9 L14.4,167.9 L9.8,165.3 L13.1,154.2 L15.1,143.9 L13.8,132.8 L11.2,129.3 L17.1,125.0 L26.2,123.3 L34.8,123.3 L47.2,124.2 L60.4,125.0 L62.3,124.2 L64.3,114.8 L64.3,102.8 L57.7,92.5 L52.5,89.9 L43.3,87.4 L41.3,82.2 L52.5,78.8 L61.7,79.7 L59.7,71.1 L63.6,71.1 L70.9,74.5 L72.8,72.8 L82.0,67.7 L84.6,60.0 L95.8,56.5 L99.7,51.4 L103.0,43.7 L106.9,39.4 L118.1,37.7 L127.9,37.7 L130.6,34.3 L128.6,25.7 L125.3,21.4 L126.0,11.1 L134.5,7.7 L141.7,2.6 L141.1,6.9 L139.7,12.8 L139.1,17.1 L137.1,24.0 L137.8,27.4 L139.1,30.8 L143.7,34.3 L151.6,32.5 L160.1,29.1 L165.3,35.1 L177.1,31.7 L187.0,27.4 L194.9,30.8 L200.8,30.0 L203.4,26.6 L210.6,19.7 L209.9,12.8 L213.2,5.1 L219.8,2.6 L228.3,8.6 L232.3,6.0 L231.6,-8.6 L181.7,-8.6 L181.7,0.0 L181.1,1.7 L179.8,11.1 L176.5,16.3 L166.0,18.0 L163.4,22.3 L157.5,20.6 L155.5,17.1 L154.8,12.0 L150.2,2.6 L146.3,-8.6 L121.4,-8.6 L118.1,0.0 L111.5,-2.6 L108.3,-8.6 L-6.6,-8.6 Z"></path><path class="coast" d="M153.5,170.4 L160.1,169.6 L174.5,168.7 L171.2,179.0 L171.2,182.4 L166.0,179.9 L154.8,174.7 Z"></path><path class="coast" d="M126.0,145.6 L135.2,144.7 L136.5,153.3 L135.2,161.9 L130.6,163.6 L127.3,161.9 L127.3,150.7 Z"></path><path class="coast" d="M133.8,128.5 L134.5,136.2 L132.5,142.2 L128.6,139.6 L128.6,132.8 Z"></path><path class="coast" d="M87.9,157.6 L95.1,155.9 L93.2,160.2 L89.2,159.3 Z"></path><path class="coast" d="M226.3,191.9 L233.6,192.7 L244.7,194.4 L243.4,197.0 L233.6,196.1 L227.0,195.3 Z"></path><path class="coast" d="M284.1,196.1 L288.7,193.6 L299.2,191.0 L294.6,197.0 L288.0,200.4 L284.1,198.7 Z"></path><path class="coast" d="M34.8,68.1 L44.6,65.1 L49.9,63.4 L62.3,62.5 L74.1,61.7 L81.4,58.2 L83.3,46.3 L74.1,42.0 L72.8,37.7 L68.2,30.0 L63.0,23.1 L59.0,18.0 L52.5,17.1 L55.8,12.8 L60.4,4.3 L59.0,2.6 L49.2,2.6 L45.9,3.4 L52.5,-5.1 L39.4,-5.1 L37.4,0.0 L35.4,6.0 L34.8,12.8 L35.4,22.3 L38.7,25.7 L43.3,27.4 L49.9,26.6 L51.2,32.5 L52.5,36.0 L51.8,40.3 L42.6,39.4 L41.3,44.5 L45.3,48.8 L37.4,53.1 L44.6,54.8 L52.5,55.7 L49.9,58.2 L42.6,60.0 Z"></path><path class="coast" d="M30.8,49.7 L32.8,42.8 L31.5,37.7 L36.1,31.7 L32.8,24.0 L24.3,22.3 L17.7,24.0 L15.7,31.7 L6.6,32.5 L7.2,39.4 L10.5,46.3 L3.9,51.4 L7.9,55.7 L17.1,54.8 L26.2,50.5 Z"></path><path class="coast" d="M144.3,24.0 L151.6,26.6 L154.8,20.6 L152.9,16.3 L144.3,18.0 Z"></path><path class="coast" d="M136.5,21.4 L143.0,23.1 L141.7,25.7 L137.1,24.8 Z"></path><path class="river" d="M127.9,86.1 L137.8,82.2 L151.6,77.1 L160.1,80.5 L179.8,83.9 L184.4,84.8 L195.5,87.4 L196.8,89.9 L196.2,102.8 L202.1,108.8 L206.7,113.1 L219.8,114.8 L222.4,119.9 L229.6,122.5 L238.2,123.3 L242.4,121.2 L251.3,119.1 L255.7,109.0 L255.9,107.9 L267.0,109.6"></path><path class="river" d="M134.5,89.9 L122.0,89.4 L123.0,80.7 L126.6,68.5 L122.0,65.1 L118.1,60.8 L112.2,53.1 L99.7,51.8"></path><path class="river" d="M278.2,312.6 L288.0,290.4 L286.1,276.6 L276.9,263.8 L276.9,239.8 L271.6,227.8"></path><path class="river" d="M276.9,239.8 L280.8,227.8"></path><path id="divLine" class="divline" data-steps-on="1 2 3" data-steps-add="draw" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M198.8,109.6 L198.8,115.6 L198.1,124.2 L196.2,135.3 L196.2,171.3 L195.5,236.4 L195.5,252.7"></path><text x="134.5" y="194.4" class="maplabel">СРЕДИЗЕМНО МОРЕ</text><text x="277.5" y="125.9" class="maplabel">ЧЕРНО МОРЕ</text><text x="9.2" y="244.1" class="maplabel" style="font-size:9px" transform="rotate(-90 9.2 244.1)">АТЛАНТИЧЕСКИ ОКЕАН</text><text x="98.4" y="265.5" class="contlabel">А Ф Р И К А</text><text x="341.2" y="42.8" class="contlabel">А З И Я</text><text x="150.9" y="42.8" class="contlabel">Е В Р О П А</text><g id="lblW" opacity="0" data-steps-on="1"><text x="75.4" y="89.9" class="regionlabel" fill="#7A1426">ЗАПАДНА</text><text x="65.6" y="101.1" class="regionlabel" fill="#7A1426">РИМСКА ИМПЕРИЯ</text></g><g id="lblW2" data-steps-on="2" opacity="0"><text x="75.4" y="89.9" class="regionlabel" fill="#7A1426">ВАРВАРСКИ</text><text x="65.6" y="101.1" class="regionlabel" fill="#7A1426">КРАЛСТВА</text></g><g id="lblE" opacity="0" data-steps-on="1 2"><text x="265.7" y="166.2" class="regionlabel" fill="#1B2A41">ИЗТОЧНА РИМСКА</text><text x="285.4" y="178.2" class="regionlabel" fill="#1B2A41">ИМПЕРИЯ</text></g><g id="lblU" opacity="1" data-steps-on="0"><text x="141.1" y="97.6" class="regionlabel" fill="#7A5A10">РИМСКАТА ИМПЕРИЯ</text></g><g id="lblX" opacity="0" data-steps-on="3"><text x="65.6" y="64.2" class="regionlabel" fill="#7A1426">ЕВРОПЕЙСКИ ЗАПАД</text><text x="249.3" y="64.2" class="regionlabel" fill="#1B2A41">ЕВРОПЕЙСКИ ИЗТОК</text></g><g class="mk" data-hs="rome" transform="translate(154.2,137.9)"><circle class="halo" r="6" stroke="#C9962B"></circle><circle class="dot" r="6" fill="#C9962B"></circle><text x="8" y="4" text-anchor="start">Рим</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="cpl" transform="translate(262.3,145.5)"><circle class="halo" r="6" stroke="#C9962B"></circle><circle class="dot" r="6" fill="#C9962B"></circle><text x="8" y="4" text-anchor="start">Константинопол</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="alex" transform="translate(268.3,229.5)"><circle class="halo" r="6" stroke="#C9962B"></circle><circle class="dot" r="6" fill="#C9962B"></circle><text x="-8" y="4" text-anchor="end">Александрия</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="ant" transform="translate(309.4,186.7)"><circle class="halo" r="6" stroke="#C9962B"></circle><circle class="dot" r="6" fill="#C9962B"></circle><text x="8" y="-6" text-anchor="start">Антиохия</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="jer" transform="translate(303.3,224.6)"><circle class="halo" r="6" stroke="#C9962B"></circle><circle class="dot" r="6" fill="#C9962B"></circle><text x="8" y="12" text-anchor="start">Йерусалим</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="rav" transform="translate(152.2,116.5)"><circle class="halo" r="6" stroke="#9E1B32"></circle><circle class="dot" r="5" fill="#9E1B32"></circle><text x="8" y="4" text-anchor="start">Равена</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="pli" transform="translate(250.1,125.2)"><circle class="halo" r="6" stroke="#1B2A41"></circle><circle class="dot" r="5" fill="#1B2A41"></circle><text x="-8" y="4" text-anchor="end">Плиска</text><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="str" transform="translate(123.0,80.7)"><circle class="halo" r="6" stroke="#1B2A41"></circle><circle class="dot" r="5" fill="#1B2A41"></circle><text x="8" y="4" text-anchor="start">Страсбург</text><circle r="15" fill="transparent"></circle></g></svg></div>
+    <input type="range" data-steps-range min="0" max="3" step="1" value="0" aria-label="Време">
+    <div class="steps">
+      <button data-st="0">до 395 г.</button>
+      <button data-st="1">395 г.</button>
+      <button data-st="2">476 г.</button>
+      <button data-st="3">Запад и Изток</button>
+    </div>
+    <p class="stepcap" data-steps-cap></p>
+    <div class="legend" data-steps-legend></div>
+    <template data-cap="0"><b>До 395 г.</b> Една огромна Римска империя обгражда цялото Средиземно море: от Британия до Египет.</template>
+    <template data-cap="1"><b>395 г.</b> Империята се разделя на <b>Западна</b> (столица Рим, по-късно Равена) и <b>Източна</b> (столица Константинопол). Източната наричаме Византия.</template>
+    <template data-cap="2"><b>476 г.</b> Западната Римска империя изчезва. На нейно място се появяват <b>варварски кралства</b> (щрихованото). Източната (Византия) остава!</template>
+    <template data-cap="3"><b>Европейски Запад и Европейски Изток.</b> Християнството се разпространява на север. Западът се свързва с Рим и латинския език, Изтокът с Константинопол и гръцкия.</template>
+    <template data-legend="0"><span><i style="background:var(--unit)"></i>Римската империя</span></template>
+    <template data-legend="1"><span><i style="background:var(--west)"></i>Западна Римска империя, 395 г.</span><span><i style="background:var(--east)"></i>Източна Римска империя, 395 г.</span><span><i style="background:var(--navy);height:3px"></i>линията на разделянето</span></template>
+    <template data-legend="2"><span><i style="background:#F6DDE1;border:2px solid #C4596B"></i>варварски кралства / Западът</span><span><i style="background:var(--east)"></i>Източна Римска империя, 395 г.</span><span><i style="background:var(--navy);height:3px"></i>линията на разделянето</span></template>
+    <template data-legend="3"><span><i style="background:#F6DDE1;border:2px solid #C4596B"></i>варварски кралства / Западът</span><span><i style="background:var(--east)"></i>Източна Римска империя, 395 г.</span><span><i style="background:#E1E8F3;border:2px solid #6E86AE"></i>християнският Изток по-късно</span><span><i style="background:var(--navy);height:3px"></i>линията на разделянето</span></template>
+    <div class="infobox"><h3>Избери точка</h3><p>Тук ще се появи досието на мястото.</p></div>
+    <div class="chips">
+      <button class="chip" data-hs="rome"><i style="background:#C9962B"></i>Рим</button>
+      <button class="chip" data-hs="cpl"><i style="background:#C9962B"></i>Константинопол</button>
+      <button class="chip" data-hs="alex"><i style="background:#C9962B"></i>Александрия</button>
+      <button class="chip" data-hs="ant"><i style="background:#C9962B"></i>Антиохия</button>
+      <button class="chip" data-hs="jer"><i style="background:#C9962B"></i>Йерусалим</button>
+      <button class="chip" data-hs="rav"><i style="background:#9E1B32"></i>Равена</button>
+      <button class="chip" data-hs="pli"><i style="background:#1B2A41"></i>Плиска</button>
+      <button class="chip" data-hs="str"><i style="background:#1B2A41"></i>Страсбург</button>
+    </div>
+    <template data-info="rome"><h3>✝ Рим</h3><p><b>Център на Църквата на Запад.</b> Старата столица на империята. Тук е папата, главата на Църквата на Запад. Латинският език тръгва оттук.</p></template>
+    <template data-info="cpl"><h3>✝ Константинопол</h3><p><b>Столица на Византия и център на Църквата на Изток.</b> Построен от Константин Велики (330 г.) на мястото на Византион. Пада под ударите на османците през 1453 г.</p></template>
+    <template data-info="alex"><h3>✝ Александрия</h3><p><b>Център на Църквата</b> в Египет. Огромно пристанище в делтата на река Нил, прочуто още от Античността.</p></template>
+    <template data-info="ant"><h3>✝ Антиохия</h3><p><b>Център на Църквата</b> в Сирия. Един от най-големите градове на Изтока.</p></template>
+    <template data-info="jer"><h3>✝ Йерусалим</h3><p><b>Център на Църквата</b> и свят град за християните. Тук според Евангелието е разпнат и възкръсва Иисус Христос.</p></template>
+    <template data-info="rav"><h3>Равена</h3><p>Столица на Западната Римска империя в последните ѝ години. Тук през <b>476 г.</b> Одоакър сваля от трона последния западен император.</p></template>
+    <template data-info="pli"><h3>Плиска</h3><p><b>Първата столица на България</b> (след 681 г.). Намира се между Константинопол и Дунав.</p></template>
+    <template data-info="str"><h3>Страсбург</h3><p>Град на река Рейн. В учебника (с. 11) има рисунка на укрепен град близо до него от XIV в. Така изглеждат градовете на Запад: стени, кули и църкви.</p></template>
   </div>
-  <p class="stepcap" id="stepCap"></p>
-  <div class="legend" id="mapLegend"></div>
-  <div class="infobox" id="info"><h3>Избери точка</h3><p>Тук ще се появи досието на мястото.</p></div>
-  <div class="chips" id="chips"></div>
   <p class="note">Картата е опростена. Границите са приблизителни, както на картата в учебника (с. 9).</p>
 </section>
 
@@ -493,39 +228,74 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   </div>
   <div class="task">
     <h3>👆 Един град, три имена. Отключи ги поред</h3>
-    <div class="chain" id="chain">
-      <button data-n="0"><b>Византион</b> · докосни</button>
+    <div class="chain" data-revealset data-seq data-goal="chain" data-xp="3" data-msg="Три имена!">
+      <button data-rv><b>Византион</b> · докосни<template class="rv-open"><b>Византион</b> · древна гръцка колония на брега на протока Босфор.</template></button>
       <div class="arrow">↓</div>
-      <button data-n="1" disabled><b>Константинопол</b> · 🔒</button>
+      <button data-rv><b>Константинопол</b> · 🔒<template class="rv-ready"><b>Константинопол</b> · докосни</template><template class="rv-open"><b>Константинопол</b> · през 330 г. Константин Велики изгражда тук новата столица на империята. Наричат я и „Новия Рим“.</template></button>
       <div class="arrow">↓</div>
-      <button data-n="2" disabled><b>Истанбул</b> · 🔒</button>
+      <button data-rv><b>Истанбул</b> · 🔒<template class="rv-ready"><b>Истанбул</b> · докосни</template><template class="rv-open"><b>Истанбул</b> · така се казва градът днес. Той е най-големият град на Турция.</template></button>
     </div>
   </div>
   <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох досието · +10 XP</button>
 </section>
 
-<!-- ===== КАРТА НА КОНСТАНТИНОПОЛ (анимация) ===== -->
-<section class="card" id="cmap" data-tm="413|V в.|Константинопол">
+<!-- ===== КАРТОСХЕМА НА КОНСТАНТИНОПОЛ (анимация) ===== -->
+<section class="card" id="cmap" data-tm="413|V в.|Константинопол" data-steps="2" data-goal="w413" data-xp-each="3" data-xp="0">
   <div class="dossier-tag navy">🏰 АНИМАЦИЯ · КАРТОСХЕМА</div>
   <h2>Столицата Константинопол (IV – VI в.)</h2>
   <p>Натисни годините и виж как расте градът. После докосни сградите и местата.</p>
-  <div class="mapbox"><svg id="cSvg" viewBox="0 0 400 300" role="img" aria-label="Картосхема на Константинопол"></svg></div>
-  <div class="row" style="margin-top:10px">
-    <button class="btn small" id="w330">🧱 330 г.: стената на Константин</button>
-    <button class="btn navy small" id="w413">🧱 413 г.: стената на Теодосий II</button>
+  <div data-hotspots data-goal="cmapPts">
+    <div class="mapbox"><svg id="cSvg" viewBox="0 0 400 300" role="img" aria-label="Картосхема на Константинопол"><rect width="400" height="300" style="fill:var(--sea)"></rect><path d="M0,0 L345,0 L345,95 L325,108 L270,88 L200,65 L120,35 L95,42 L0,52 Z" style="fill:var(--land)" stroke="#8FAAC4"></path><path d="M365,0 L400,0 L400,300 L372,300 L372,200 L360,150 L362,60 Z" style="fill:var(--land)" stroke="#8FAAC4"></path><path d="M0,52 L95,42 L110,45 L200,80 L270,100 L320,118 L340,140 L335,160 L300,185 L230,215 L150,240 L60,262 L0,268 Z" style="fill:var(--land)" stroke="#8FAAC4"></path><path id="area413" class="fade" opacity="0" data-steps-on="1" d="M102,44 L110,45 L200,80 L270,100 L320,118 L340,140 L335,160 L300,185 L230,215 L150,240 L78,258 C70,200 70,120 102,44 Z" fill="#F1E3C2"></path><path id="area330" class="fade" d="M178,72 L200,80 L270,100 L320,118 L340,140 L335,160 L300,185 L230,215 L205,222 C185,170 172,120 178,72 Z" fill="#EBD39A"></path><path class="wall w330" d="M178,72 C170,120 185,170 205,222"></path><path id="wall413" class="wall w413" data-steps-on="1" data-steps-add="on" data-restart pathLength="1" d="M102,44 C70,120 70,200 78,258"></path><text x="150" y="58" class="maplabel" transform="rotate(20.5 150 58)">ЗЛАТЕН РОГ</text><text x="120" y="285" class="maplabel">МРАМОРНО МОРЕ</text><text x="354" y="235" class="maplabel" transform="rotate(-90 354 235)">БОСФОР</text><g class="mk" data-hs="sofia" transform="translate(292,132)"><circle class="halo" r="6" stroke="#7B4FA0"></circle><circle class="dot" r="6" fill="#7B4FA0"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="palace" transform="translate(304,160)"><circle class="halo" r="6" stroke="#9E1B32"></circle><circle class="dot" r="6" fill="#9E1B32"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="hippo" transform="translate(272,158)"><circle class="halo" r="6" stroke="#9E1B32"></circle><circle class="dot" r="6" fill="#9E1B32"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="forum" transform="translate(238,142)"><circle class="halo" r="6" stroke="#1C8C8C"></circle><circle class="dot" r="6" fill="#1C8C8C"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="acro" transform="translate(324,128)"><circle class="halo" r="6" stroke="#C9962B"></circle><circle class="dot" r="6" fill="#C9962B"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="blach" transform="translate(104,66)"><circle class="halo" r="6" stroke="#9E1B32"></circle><circle class="dot" r="6" fill="#9E1B32"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="port" transform="translate(222,206)"><circle class="halo" r="6" stroke="#1B2A41"></circle><circle class="dot" r="6" fill="#1B2A41"></circle><circle r="15" fill="transparent"></circle></g><g class="mk" data-hs="horn" transform="translate(262,90)"><circle class="halo" r="6" stroke="#46617E"></circle><circle class="dot" r="6" fill="#46617E"></circle><circle r="15" fill="transparent"></circle></g></svg></div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn small" data-st="0">🧱 330 г.: стената на Константин</button>
+      <button class="btn navy small" data-st="1">🧱 413 г.: стената на Теодосий II</button>
+    </div>
+    <template data-cap="0"><h3>330 г.: стената на Константин</h3><p>Константин Велики огражда новата си столица с мощна стена. Градът бързо се пълни с хора и скоро му става тесен.</p></template>
+    <template data-cap="1"><h3>413 г.: стената на Теодосий II</h3><p>Новата стена е по-далеч на запад и градът става почти двойно по-голям. Тези стени пазят Константинопол повече от 1000 години!</p></template>
+    <div class="legend">
+      <span><i style="background:var(--red)"></i>стената на Константин (330 г.)</span>
+      <span><i style="background:var(--navy)"></i>стената на Теодосий II (413 г.)</span>
+      <span><i style="background:#7B4FA0;border-radius:50%"></i>църква</span>
+      <span><i style="background:#1C8C8C;border-radius:50%"></i>форум</span>
+    </div>
+    <div class="infobox" data-steps-cap><h3>Докосни място</h3><p>Кое прави този град столица на империя?</p></div>
+    <div class="chips">
+      <button class="chip" data-hs="sofia"><i style="background:#7B4FA0"></i>„Св. София“</button>
+      <button class="chip" data-hs="palace"><i style="background:#9E1B32"></i>Императорският дворец</button>
+      <button class="chip" data-hs="hippo"><i style="background:#9E1B32"></i>Хиподрумът</button>
+      <button class="chip" data-hs="forum"><i style="background:#1C8C8C"></i>Форум</button>
+      <button class="chip" data-hs="acro"><i style="background:#C9962B"></i>Акрополът</button>
+      <button class="chip" data-hs="blach"><i style="background:#9E1B32"></i>Влахернският дворец</button>
+      <button class="chip" data-hs="port"><i style="background:#1B2A41"></i>Пристанище</button>
+      <button class="chip" data-hs="horn"><i style="background:#46617E"></i>Златният рог</button>
+    </div>
+    <template data-info="sofia"><h3>„Св. София“</h3><p>Най-големият храм на града и на целия християнски свят в онова време. Тук стои и мозайката от нашата улика. Това е <b>християнското</b> наследство.</p></template>
+    <template data-info="palace"><h3>Императорският дворец</h3><p>Тук живее императорът. Дворецът показва, че това е <b>столица</b> на империя.</p></template>
+    <template data-info="hippo"><h3>Хиподрумът</h3><p>Огромен стадион за надбягвания с колесници, до двореца. Това е <b>римско</b> наследство: забавленията за народа като в Рим.</p></template>
+    <template data-info="forum"><h3>Форум</h3><p>Площад за събрания, търговия и паметници, като в стария Рим. Главната улица минава през няколко такива форума.</p></template>
+    <template data-info="acro"><h3>Акрополът</h3><p>Най-високата част на древния Византион. Думата е гръцка („горен град“). Това е <b>елинско</b> наследство.</p></template>
+    <template data-info="blach"><h3>Влахернският дворец</h3><p>Друг императорски дворец, в северозападния край, до стените и до Златния рог.</p></template>
+    <template data-info="port"><h3>Пристанище</h3><p>По Мраморно море и Босфора идват кораби от Черно и от Средиземно море. Градът е на кръстопът между Европа и Азия.</p></template>
+    <template data-info="horn"><h3>Златният рог</h3><p>Дълъг и спокоен залив. Удобно пристанище, защитено от бурите.</p></template>
   </div>
-  <div class="legend">
-    <span><i style="background:var(--red)"></i>стената на Константин (330 г.)</span>
-    <span><i style="background:var(--navy)"></i>стената на Теодосий II (413 г.)</span>
-    <span><i style="background:#7B4FA0;border-radius:50%"></i>църква</span>
-    <span><i style="background:#1C8C8C;border-radius:50%"></i>форум</span>
-  </div>
-  <div class="infobox" id="cInfo"><h3>Докосни място</h3><p>Кое прави този град столица на империя?</p></div>
-  <div class="chips" id="cChips"></div>
   <div class="task">
     <h3>🧩 Наследството на града (задача от учебника)</h3>
     <p style="margin:0;font-size:.95rem">В Константинопол се срещат три наследства: елинско (гръцко), римско и християнско. Кое е всяко от тези места?</p>
-    <div id="herit"></div>
+    <div class="stage oneq" data-noshuffle data-goal="h0" data-xp="2" data-xp-retry="2" data-ok-title="Вярно!" data-bad-title="Не е това." data-e="Акрополът: елинско наследство." data-hint="Докосни мястото на картата и прочети.">
+      <p class="qtext" style="font-size:1rem">Акрополът</p>
+      <div class="row"><button class="btn ghost small" data-opt data-ok>елинско</button><button class="btn ghost small" data-opt>римско</button><button class="btn ghost small" data-opt>християнско</button></div>
+      <div class="fb"></div>
+    </div>
+    <div class="stage oneq" data-noshuffle data-goal="h1" data-xp="2" data-xp-retry="2" data-ok-title="Вярно!" data-bad-title="Не е това." data-e="Хиподрумът и форумите: римско наследство." data-hint="Докосни мястото на картата и прочети.">
+      <p class="qtext" style="font-size:1rem">Хиподрумът и форумите</p>
+      <div class="row"><button class="btn ghost small" data-opt>елинско</button><button class="btn ghost small" data-opt data-ok>римско</button><button class="btn ghost small" data-opt>християнско</button></div>
+      <div class="fb"></div>
+    </div>
+    <div class="stage oneq" data-noshuffle data-goal="h2" data-xp="2" data-xp-retry="2" data-ok-title="Вярно!" data-bad-title="Не е това." data-e="„Св. София“ и църквите: християнско наследство." data-hint="Докосни мястото на картата и прочети.">
+      <p class="qtext" style="font-size:1rem">„Св. София“ и църквите</p>
+      <div class="row"><button class="btn ghost small" data-opt>елинско</button><button class="btn ghost small" data-opt>римско</button><button class="btn ghost small" data-opt data-ok>християнско</button></div>
+      <div class="fb"></div>
+    </div>
   </div>
 </section>
 
@@ -539,13 +309,30 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
     <p>През 1018 г. България попада под <button class="term" data-t="vlad">византийско владичество</button>. Българите запазват културата си и търсят път към свободата. От края на XII до края на XIV в. <b>Втората българска държава</b> отново е важен културен и политически център на Балканите.</p>
     <p>След това идва османската власт. През XV – XVII в. българите и другите балкански народи продължават да живеят по средновековному, докато останалата Европа вече навлиза в Новото време.</p>
   </div>
-  <div class="task">
+  <div class="task" data-hotspots data-goal="bgper" data-xp="3">
     <h3>👆 Докосни всеки период</h3>
-    <div class="ribbon" id="bgper"></div>
+    <div class="ribbon">
+      <button data-hs="p1" style="flex:337;background:#9E1B32">Първа</button>
+      <button data-hs="p2" style="flex:167;background:#8A909B">Виз.</button>
+      <button data-hs="p3" style="flex:211;background:#7A1426">Втора</button>
+      <button data-hs="p4" style="flex:482;background:#1B2A41">Османска власт</button>
+    </div>
     <div class="ribticks"><span>681</span><span>1018</span><span>1185</span><span>1396</span><span>1878</span></div>
-    <div class="infobox" id="bgInfo"><h3>Периодите на българската история</h3><p>Докосни цветна ивица.</p></div>
+    <div class="infobox"><h3>Периодите на българската история</h3><p>Докосни цветна ивица.</p></div>
+    <template data-info="p1"><h3>681 – 1018 · Първата българска държава</h3><p>Създадена през 681 г. Столици: Плиска, по-късно Преслав. Расте като важна сила между Константинопол и Рим.</p></template>
+    <template data-info="p2"><h3>1018 – 1185 · Византийско владичество</h3><p>България е под властта на Византия. Българите пазят културата си и търсят път към свободата.</p></template>
+    <template data-info="p3"><h3>1185 – 1396 · Втората българска държава</h3><p>Отново важен културен и политически център на Балканите. Столица е Търново.</p></template>
+    <template data-info="p4"><h3>1396 – 1878 · Османска власт</h3><p>През XV – XVII в. българите продължават да живеят в Средновековието, докато Западна Европа навлиза в Новото време.</p></template>
   </div>
-  <div class="stage" id="q5"></div>
+  <div class="stage oneq" data-goal="q5" data-xp="5" data-e="Под османска власт българите и другите балкански народи остават в Средновековието, докато Западна Европа навлиза в Новото време." data-hint="Прочети пак последния абзац.">
+    <p class="qtext">Защо Българското средновековие продължава чак до XVII в.?</p>
+    <div class="opts">
+      <button class="opt" data-opt data-ok>Защото под османска власт българите продължават да живеят като през Средновековието</button>
+      <button class="opt" data-opt>Защото в България не знаят за Колумб</button>
+      <button class="opt" data-opt>Защото България е създадена чак през XV в.</button>
+    </div>
+    <div class="fb"></div>
+  </div>
   <button class="btn readbtn" data-done="s5" data-xp="10">✓ Прочетох досието · +10 XP</button>
 </section>
 
@@ -557,7 +344,15 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
     <p>През XV в. италиански учени дават името <b>Средни векове</b> на времето между Античността и тяхното съвремие. По това време те започват отново да откриват ценностите на древните гърци и римляни.</p>
     <p>За тях Средновековието е време на безкрайни войни, жестокост и невежество. Днес обаче никой учен не говори за него с пренебрежение. Близо хиляда години европейска история не може да бъдат „празни“: тогава живеят мъдри владетели, смели воини, изкусни занаятчии и строители, талантливи поети и художници. Наследството им е част от основата на днешна Европа.</p>
   </div>
-  <div class="stage" id="q6"></div>
+  <div class="stage oneq" data-goal="q6" data-xp="5" data-e="Днес никой учен не говори за Средновековието с пренебрежение. Наследството му е основа на съвременна Европа.">
+    <p class="qtext">Италианските учени от XV в. смятат Средновековието за „мрачно“ време. Какво мислят историците днес?</p>
+    <div class="opts">
+      <button class="opt" data-opt data-ok>Че е важна епоха с мъдри владетели, строители, поети и художници, основа на днешна Европа</button>
+      <button class="opt" data-opt>Че наистина е било само време на войни и невежество</button>
+      <button class="opt" data-opt>Че Средновековието изобщо не е съществувало</button>
+    </div>
+    <div class="fb"></div>
+  </div>
   <button class="btn readbtn" data-done="s6" data-xp="10">✓ Прочетох досието · +10 XP</button>
 </section>
 
@@ -566,9 +361,16 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
   <h2>Подреди събитията</h2>
   <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
-  <ol class="sortl" id="sortl"></ol>
-  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
-  <div class="fb" id="tlFb"></div>
+  <ol class="sortl" data-goal="tl" data-xp="15" data-xp-retry="8" data-msg="Линията е подредена" data-ok-title="Отлично, хронисте!" data-ok="Всичко е на мястото си. Виж годините: от 330 до 1492 г. минават над 1100 години!" data-bad="Премести събитията с ✗ и провери пак. Подсказка: започни с Константин Велики.">
+    <li data-order="0" data-year="330 г.">Константин Велики прави Константинопол столица</li>
+    <li data-order="1" data-year="395 г.">Римската империя се разделя на Западна и Източна</li>
+    <li data-order="2" data-year="476 г.">Краят на Западната Римска империя</li>
+    <li data-order="3" data-year="681 г.">Създадена е Първата българска държава</li>
+    <li data-order="4" data-year="1453 г.">Османците превземат Константинопол</li>
+    <li data-order="5" data-year="1492 г.">Колумб открива Америка</li>
+  </ol>
+  <div class="row"><button class="btn gold" data-check>Провери подредбата</button></div>
+  <div class="fb"></div>
 </section>
 
 <!-- ===== УЛИКА: ИЗВОР ===== -->
@@ -580,7 +382,26 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
     <figcaption>Мозайка в храма „Св. София“ в Константинопол (днес Истанбул). Вляво е император Константин IX Мономах, в средата е Христос, а вдясно е императрица Зоя. Точно този император виждаш и в учебника (с. 10).<small>XI в. · Автор на снимката и лиценз: на <a href="https://commons.wikimedia.org/wiki/File:Empress_Zoe_mosaic_Hagia_Sophia.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
   </figure>
   <p style="margin-top:12px">Детективът разпитва извора. Отговори на 4-те въпроса.</p>
-  <div id="clueQs"></div>
+  <div class="qblock stage oneq" data-goal="cq0" data-xp="4" data-e="Такива мозайки поръчват императорите. Те искат хората в храма да ги виждат до Христос.">
+    <p class="qtext">1. Кой е създал мозайката?</p>
+    <div class="opts"><button class="opt" data-opt data-ok>Майстори мозайкари по поръчка на императорския двор</button><button class="opt" data-opt>Самият император със собствените си ръце</button><button class="opt" data-opt>Османците след 1453 г.</button></div>
+    <div class="fb"></div>
+  </div>
+  <div class="qblock stage oneq" data-goal="cq1" data-xp="4" data-e="През XI в., когато управлява Константин IX Мономах (1042 – 1055).">
+    <p class="qtext">2. Кога е направена?</p>
+    <div class="opts"><button class="opt" data-opt data-ok>През XI в.</button><button class="opt" data-opt>През IV в.</button><button class="opt" data-opt>През XIX в.</button></div>
+    <div class="fb"></div>
+  </div>
+  <div class="qblock stage oneq" data-goal="cq2" data-xp="4" data-e="Ореолът около главата, короната и дарът към Христос показват, че императорът е „поставен от Бога“.">
+    <p class="qtext">3. Какво ни казва за властта на императора?</p>
+    <div class="opts"><button class="opt" data-opt data-ok>Той стои до Христос и Му поднася дар: властта му е свързана с Бога</button><button class="opt" data-opt>Той е най-богатият търговец в града</button><button class="opt" data-opt>Че императорът не е християнин</button></div>
+    <div class="fb"></div>
+  </div>
+  <div class="qblock stage oneq" data-goal="cq3" data-xp="4" data-e="Първоначално до Зоя е стоял първият ѝ съпруг. После лицата са сменени и на мястото му е поставен Константин IX, третият ѝ съпруг. Изворът е истински, но разказва „официалната“ версия.">
+    <p class="qtext">4. Може ли да ѝ вярваме напълно?</p>
+    <div class="opts"><button class="opt" data-opt data-ok>Не съвсем: лицата са подменяни, а мозайката показва как императорът иска да го виждат</button><button class="opt" data-opt>Да, мозайките винаги показват истината</button><button class="opt" data-opt>Не, защото е направена през XX в.</button></div>
+    <div class="fb"></div>
+  </div>
 </section>
 
 <!-- ===== ДОСИЕТА НА ЛИЧНОСТИТЕ ===== -->
@@ -588,8 +409,29 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
   <h2>Моята колекция</h2>
   <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
-  <div class="pcards" id="pcards"></div>
-  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+  <div class="pcards">
+    <button class="pcard" data-card="const" data-need="s4" data-name="Константин Велики" data-how="Прочети досие №4"><div class="pcard-in">
+      <div class="pface pfront"><div class="av"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Constantine_I_Hagia_Sophia.jpg?width=300" alt=""></div><b>Константин Велики</b><small>управлява 306 – 337</small><div class="sp">⚡ Строи нова столица</div></div>
+      <div class="pface pback"><b>Константин Велики</b>Римски император. През 330 г. прави Константинопол нова столица.<br><br>💡 Първият римски император, приел християнството.</div>
+    </div></button>
+    <button class="pcard" data-card="theo" data-need="w413" data-name="Теодосий II" data-how="Построй стената от 413 г. на картосхемата"><div class="pcard-in">
+      <div class="pface pfront"><div class="av">🧱</div><b>Теодосий II</b><small>управлява 408 – 450</small><div class="sp">⚡ Непревземаеми стени</div></div>
+      <div class="pface pback"><b>Теодосий II</b>Император на Византия. През 413 г. при него е завършена новата стена на Константинопол.<br><br>💡 Сухопътните стени удържат врага повече от 1000 години.</div>
+    </div></button>
+    <button class="pcard" data-card="odo" data-need="s1" data-name="Одоакър" data-how="Прочети досие №1"><div class="pcard-in">
+      <div class="pface pfront"><div class="av">⚔️</div><b>Одоакър</b><small>ок. 433 – 493</small><div class="sp">⚡ Затваря вратата на Античността</div></div>
+      <div class="pface pback"><b>Одоакър</b>Германски военачалник. През 476 г. сваля последния западен император.<br><br>💡 Не става император, а праща знаците на властта в Константинопол.</div>
+    </div></button>
+    <button class="pcard" data-card="mono" data-need="clue" data-name="Константин IX Мономах" data-how="Разпитай извора-улика"><div class="pcard-in">
+      <div class="pface pfront"><div class="av"><img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Empress_Zoe_mosaic_Hagia_Sophia.jpg?width=400" alt="" style="object-position:left top"></div><b>Константин IX Мономах</b><small>управлява 1042 – 1055</small><div class="sp">⚡ Лице в мозайка</div></div>
+      <div class="pface pback"><b>Константин IX Мономах</b>Византийски император, третият съпруг на императрица Зоя.<br><br>💡 Лицето му в „Св. София“ заменя лицето на предишния император.</div>
+    </div></button>
+    <button class="pcard" data-card="col" data-need="col" data-name="Христофор Колумб" data-how="Докосни „Ново време“ в досие №1"><div class="pcard-in">
+      <div class="pface pfront"><div class="av">⛵</div><b>Христофор Колумб</b><small>1451 – 1506</small><div class="sp">⚡ Отваря Новото време</div></div>
+      <div class="pface pback"><b>Христофор Колумб</b>Мореплавател от Генуа. През 1492 г. достига Америка.<br><br>💡 С неговото откритие историците слагат край на Средновековието.</div>
+    </div></button>
+  </div>
+  <p data-card-count style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
 </section>
 
 <!-- ===== СНИМКИ ===== -->
@@ -646,8 +488,13 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <div class="dossier-tag">🎙 ВЪОБРАЗЯЕМО ИНТЕРВЮ</div>
   <h2>Разговор с италиански учен от XV в.</h2>
   <p class="note">⚠️ Интервюто е <b>измислено</b>. Събеседникът е обобщен образ на италианските учени, които дават името на епохата.</p>
-  <div class="chat" id="chat"></div>
-  <div class="qbtns" id="qbtns"></div>
+  <div class="iv" data-goal="interview" data-xp-each="2" data-xp="3" data-asker="Венета" data-end="✓ Интервюто е готово. Кой е прав според теб? Защо?">
+    <div class="chat"></div>
+    <div class="qbtns"></div>
+    <template data-q="Защо наричате тези векове „средни“?"><div class="bubble a"><small>Италиански учен (измислен)</small>Защото ги виждам по средата: между славната Античност на древните гърци и римляни и нашето време. Сега отново четем техните книги и строим като тях.</div></template>
+    <template data-q="А защо смятате, че са били мрачни?"><div class="bubble a"><small>Италиански учен (измислен)</small>Струва ми се, че тогава е имало само войни, жестокост и невежество. Такава е моята представа.</div><div class="bubble v"><small>💡 Уточнение</small>Детектив Венета: Днешните историци не мислят така. Тогава се строят огромни храмове като „Св. София“, появяват се университетите, работят изкусни майстори и поети.</div></template>
+    <template data-q="Мислехте ли, че името ще остане?"><div class="bubble a"><small>Италиански учен (измислен)</small>Надявах се… И виждам, че и след 500 години казвате „Средновековие“!</div><div class="bubble v"><small>💡 Уточнение</small>Детектив Венета: Да! На английски е Middle Ages, на испански Edad Media, на немски Mittelalter. Всички значат „средно време“.</div></template>
+  </div>
 </section>
 
 <!-- ===== ЗАГАДКА ===== -->
@@ -655,8 +502,17 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
   <h2>Грешката в свитъка</h2>
   <p>Намерихме дневника на пътник от 550 г. Но някой е вмъкнал в него <b>3 неща, които по онова време не може да ги има</b>. Докосни ги!</p>
-  <div class="scroll" id="scroll"></div>
-  <div class="fb" id="scrollFb"></div>
+  <div class="scroll" data-goal="scroll" data-xp-each="3">
+    <button class="frag" data-e="Вярно: много кораби пристигат по Мраморно море.">Година 550. Пристигнах в Константинопол с кораб по Мраморно море.</button>
+    <button class="frag" data-e="Вярно: Теодосиевите стени са от 413 г.">Градът е ограден с мощни стени.</button>
+    <button class="frag" data-bad data-e="Грешка! Америка е открита чак през 1492 г.">На пазара купих картофи, донесени от Америка.</button>
+    <button class="frag" data-e="Вярно: византийците се наричат „ромеи“.">Хората тук се наричат ромеи и говорят гръцки.</button>
+    <button class="frag" data-bad data-e="Грешка! Печатни вестници има чак след повече от 1000 години.">Сутринта прочетох новините във вестника.</button>
+    <button class="frag" data-e="Вярно: той е завършен през 537 г.">Влязох в новия огромен храм „Св. София“.</button>
+    <button class="frag" data-bad data-e="Грешка! Османците превземат града чак през 1453 г.">Вечерта видях как минава османският султан.</button>
+    <button class="frag" data-e="Вярно: Хиподрумът е стадионът на града.">На Хиподрума гледах надбягване с колесници.</button>
+  </div>
+  <div class="fb"></div>
 </section>
 
 <!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
@@ -678,48 +534,112 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
   <h2>Words of the day</h2>
   <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
-  <div class="vocab" id="vocabEn"></div>
+  <div class="vocab">
+    <div class="word"><span class="w">Middle Ages</span><span class="ex">Средновековие<br><i>The Middle Ages lasted about 1000 years.</i></span><button data-say="Middle Ages. The Middle Ages lasted about 1000 years." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">medieval</span><span class="ex">средновековен<br><i>This is a medieval castle.</i></span><button data-say="medieval. This is a medieval castle." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">empire</span><span class="ex">империя<br><i>The Roman Empire was very big.</i></span><button data-say="empire. The Roman Empire was very big." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">emperor</span><span class="ex">император<br><i>The emperor wears a crown.</i></span><button data-say="emperor. The emperor wears a crown." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">church</span><span class="ex">църква<br><i>There is an old church in the town.</i></span><button data-say="church. There is an old church in the town." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">Christianity</span><span class="ex">християнство<br><i>Christianity came to all of Europe.</i></span><button data-say="Christianity. Christianity came to all of Europe." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">king</span><span class="ex">крал, цар<br><i>The king rules the country.</i></span><button data-say="king. The king rules the country." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+    <div class="word"><span class="w">university</span><span class="ex">университет<br><i>My sister goes to university.</i></span><button data-say="university. My sister goes to university." data-lang="en-US" aria-label="Чуй">🔊</button></div>
+  </div>
   <div class="hola" style="margin-top:18px">
     <h3 style="color:#B0452E">¡Hola! 🇪🇸 Бонус на испански</h3>
-    <div class="vocab" id="vocabEs"></div>
+    <div class="vocab">
+      <div class="word"><span class="w">la Edad Media</span><span class="ex">Средновековие<br><i>Me gusta la Edad Media.</i></span><button data-say="la Edad Media. Me gusta la Edad Media." data-lang="es-ES" aria-label="Чуй">🔊</button></div>
+      <div class="word"><span class="w">la iglesia</span><span class="ex">църквата<br><i>La iglesia es muy antigua.</i></span><button data-say="la iglesia. La iglesia es muy antigua." data-lang="es-ES" aria-label="Чуй">🔊</button></div>
+      <div class="word"><span class="w">el emperador</span><span class="ex">императорът<br><i>El emperador tiene corona.</i></span><button data-say="el emperador. El emperador tiene corona." data-lang="es-ES" aria-label="Чуй">🔊</button></div>
+      <div class="word"><span class="w">la universidad</span><span class="ex">университетът<br><i>Voy a la universidad.</i></span><button data-say="la universidad. Voy a la universidad." data-lang="es-ES" aria-label="Чуй">🔊</button></div>
+      <div class="word"><span class="w">el castillo</span><span class="ex">замъкът<br><i>El castillo es alto.</i></span><button data-say="el castillo. El castillo es alto." data-lang="es-ES" aria-label="Чуй">🔊</button></div>
+    </div>
   </div>
   <h3 style="margin-top:18px">🌳 Думи с история</h3>
   <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
-  <div class="etym" id="etym"></div>
+  <div class="etym">
+    <button class="ety"><div class="root">imperium <small>лат. „власт, заповед“ (от imperare, „заповядвам“)</small></div><div class="tree"><div class="branches"><span>империя</span><span>император</span><span>empire</span><span>emperor</span><span>imperio</span><span>emperador</span></div><p>Императорът е буквално „този, който заповядва“. Отначало така римските войници наричат победоносния си пълководец.</p></div></button>
+    <button class="ety"><div class="root">universitas <small>лат. „цялото, общността“</small></div><div class="tree"><div class="branches"><span>университет</span><span>university</span><span>universidad</span><span>Universität</span></div><p>Първо значи „общност на учители и ученици“. Сродна е с думите „универсален“ и „Вселена“ (лат. universum).</p></div></button>
+    <button class="ety"><div class="root">medium aevum <small>лат. „средна епоха“</small></div><div class="tree"><div class="branches"><span>Средновековие</span><span>medieval</span><span>Middle Ages</span><span>Edad Media</span><span>Mittelalter</span></div><p>През XV в. италиански учени пишат за „средното време“ (на латински media tempestas, 1469 г.). Българската дума е „превод“ от части: средно + век.</p></div></button>
+    <button class="ety"><div class="root">κυριακόν <small>гр. „Господен (дом)“</small></div><div class="tree"><div class="branches"><span>църква</span><span>church</span><span>Kirche</span></div><p>Учебникът обяснява „църква“ с гръцката дума за „събрание“. Това е ἐκκλησία (еклесия), от която идват исп. iglesia и фр. église. Самата българска дума обаче идва от друга гръцка дума, κυριακόν, „Господен“. Тя минава през германските езици, също като англ. church и нем. Kirche.</p></div></button>
+  </div>
 </section>
 
 <!-- ===== ТЕСТ ===== -->
-<section class="card" id="quiz">
+<section class="card quiz" id="quiz" data-chief="8" data-end="Всички нива са готови! Сега отиди към &lt;b&gt;Разкриването&lt;/b&gt; ↓">
   <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
   <h2>Изпитът на детектива</h2>
   <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
-  <div class="pathwrap"><div class="path" id="path">
-    <button class="node" data-lvl="0">1<span>Чирак</span></button>
-    <button class="node" data-lvl="1" disabled>2<span>Хронист</span></button>
-    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  <div class="pathwrap"><div class="path">
+    <button class="node" data-lvl="0" data-goal="quiz0">1<span>Чирак</span></button>
+    <button class="node" data-lvl="1" data-goal="quiz1" disabled>2<span>Хронист</span></button>
+    <button class="node" data-lvl="2" data-goal="quiz2" disabled>3<span>Главен детектив</span></button>
   </div></div>
-  <div id="qArea"></div>
+  <div class="q-area"></div>
+  <template data-level="0">
+    <div class="q" data-e="476 г. е началото. 1492 г. е краят, а 395 г. е разделянето."><p>Кое събитие се смята за начало на Средновековието?</p><button data-ok>Краят на Западната Римска империя (476 г.)</button><button>Откриването на Америка (1492 г.)</button><button>Разделянето на империята (395 г.)</button></div>
+    <div class="q" data-e="Християнството и монархията. Монарсите вярват, че властта им е от Бога."><p>Кои са двете отличителни черти на Средновековието?</p><button data-ok>Християнството и монархията</button><button>Демокрацията и пирамидите</button><button>Интернетът и колите</button></div>
+    <div class="q" data-e="Италианските учени от XV в. наричат така времето между Античността и тяхното съвремие."><p>Кой дава името „Средни векове“?</p><button data-ok>Италиански учени през XV в.</button><button>Римските императори</button><button>Византийците</button></div>
+  </template>
+  <template data-level="1">
+    <div class="q" data-e="През 395 г. Източната империя по-късно наричаме Византия."><p>През коя година Римската империя се разделя на Западна и Източна?</p><button data-ok>395 г.</button><button>476 г.</button><button>681 г.</button></div>
+    <div class="q" data-e="Ромеи, тоест „римляни“. Името „Византия“ дават по-късно учените."><p>Как се наричат самите византийци?</p><button data-ok>Ромеи</button><button>Византийци</button><button>Латинци</button></div>
+    <div class="q" data-e="Латинският. На Изток (във Византия) говорят гръцки."><p>Кой език обединява хората на Запад?</p><button data-ok>Латинският</button><button>Гръцкият</button><button>Старобългарският</button></div>
+  </template>
+  <template data-level="2">
+    <div class="q" data-e="През 1453 г. Така Византия изчезва след близо 1000 години."><p>Кога османците превземат Константинопол?</p><button data-ok>1453 г.</button><button>1396 г.</button><button>1018 г.</button></div>
+    <div class="q" data-e="През 681 г. Тя е една от най-старите държави в Европа."><p>Кога е създадена Първата българска държава?</p><button data-ok>681 г.</button><button>1185 г.</button><button>476 г.</button></div>
+    <div class="q" data-e="1185 – 1396. Между 1018 и 1185 г. България е под византийска власт."><p>Кой период е Втората българска държава?</p><button data-ok>1185 – 1396</button><button>681 – 1018</button><button>1018 – 1185</button></div>
+  </template>
 
   <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
   <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
-  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
-  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+  <div class="flash"><div class="flash-in"><div class="face front"></div><div class="face back"></div></div></div>
+  <div class="row"><button class="btn ghost small fc-prev">← Назад</button><span class="fc-num" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small fc-next">Напред →</button></div>
+  <ul class="fc-data">
+    <li data-front="Средновековие">Епохата от V до XV в. (476 – 1492 г.), между Античността и Новото време.</li>
+    <li data-front="Монархия">Държава, начело на която стои един владетел: цар, крал, император.</li>
+    <li data-front="Църква">Организацията, която ръководи духовния живот на християните. Също: християнски храм.</li>
+    <li data-front="Византия">Източната Римска империя, 395 – 1453 г. Столица: Константинопол.</li>
+    <li data-front="Ромеи">„Римляни“: така се наричат самите византийци.</li>
+    <li data-front="Университет">Висше училище: общност от преподаватели и студенти. На Запад от XII в.</li>
+    <li data-front="395 г.">Римската империя се разделя на Западна и Източна.</li>
+    <li data-front="476 г.">Край на Западната Римска империя. Начало на Средновековието.</li>
+    <li data-front="681 г.">Създадена е Първата българска държава.</li>
+    <li data-front="1453 г.">Османците превземат Константинопол.</li>
+    <li data-front="1492 г.">Колумб открива Америка. Край на Средновековието.</li>
+  </ul>
 </section>
 
 <!-- ===== РАЗКРИВАНЕ ===== -->
 <section class="card reveal" id="reveal" data-tm="476|V в.|Равена → Константинопол">
   <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
   <h2>Какво означава пътят на короната?</h2>
-  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
-  <div id="revealBody" style="display:none;text-align:left">
+  <p data-reveal-lock data-partial="Събрани улики: {n} от {N}. Прочети досиетата и „Знаеш ли, че…“." data-ready="Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита)." data-ready-quiz="Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div data-reveal-body style="display:none;text-align:left">
     <p>Погледни уликите. Кое обяснение е вярно?</p>
-    <div class="opts" id="suspects"></div>
-    <div class="fb" id="revealFb"></div>
+    <div class="oneq" data-goal="solved" data-xp="20" data-xp-retry="20" data-msg="Случаят е разкрит!" data-ok-title="Случаят е разкрит!" data-bad-title="Не е това." data-stamp="#stamp" data-final="#finalXp">
+      <div class="opts">
+        <button class="opt" data-opt data-e="Не. Погледни улика 3: Източната империя живее още близо 1000 години.">Римската империя изчезва напълно и навсякъде</button>
+        <button class="opt" data-opt data-ok data-e="Точно! От 395 г. има две империи (улика 2). През 476 г. Западната изчезва и историците слагат тук началото на Средновековието (улика 1). Одоакър праща знаците на властта в Константинопол, защото там все още има император (улика 4). А Византия живее до 1453 г. (улика 3).">На Запад вече няма император, но Източната империя (Византия) продължава. Затова 476 г. е границата на нова епоха.</button>
+        <button class="opt" data-opt data-e="Не. Одоакър сам им я праща (улика 4).">Византийците открадват короната на Запада</button>
+        <button class="opt" data-opt data-e="Не. Одоакър остава в Италия и не взема титлата император (улика 4).">Одоакър става император в Константинопол</button>
+      </div>
+      <div class="fb"></div>
+    </div>
   </div>
   <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
   <h3 style="margin-top:14px">Твоите значки</h3>
-  <div class="badges" id="badges"></div>
-  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+  <div class="badges">
+    <div class="badge" data-badge="detective" data-need="s1 s2 s3 s4 s5 s6 dyk"><span class="ic">🕵️</span><b>Детектив</b>Прочети всички досиета</div>
+    <div class="badge" data-badge="keeper" data-need="centres"><span class="ic">✝️</span><b>Пазител</b>Открий петте центъра на Църквата</div>
+    <div class="badge" data-badge="builder" data-need="cmapPts w413"><span class="ic">🏰</span><b>Строител</b>Разгледай целия Константинопол</div>
+    <div class="badge" data-badge="chrono" data-need="tl"><span class="ic">⏳</span><b>Хронист</b>Подреди линията на времето</div>
+    <div class="badge" data-badge="scribe" data-need="scroll"><span class="ic">📜</span><b>Книжовник</b>Намери грешките в свитъка</div>
+    <div class="badge" data-badge="collector" data-need="card-const card-theo card-odo card-mono card-col"><span class="ic">🃏</span><b>Колекционер</b>Отключи всички 5 карти</div>
+    <div class="badge" data-badge="polyglot" data-need="say5"><span class="ic">💬</span><b>Полиглот</b>Чуй 5 думи</div>
+    <div class="badge" data-badge="chief" data-need="chief"><span class="ic">👑</span><b>Главен детектив</b>Поне 8 от 9 верни от първи опит</div>
+  </div>
+  <p id="finalXp" data-text="Общо събра {xp} XP, {b} от {B} значки и {c} от {C} карти-личности." style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
 </section>
 
 <!-- ===== ЗАПОМНИ ===== -->
@@ -743,8 +663,8 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
   </ol>
   <details>
     <summary>📄 Текст за копиране (Google Docs / печат)</summary>
-    <textarea class="plain" id="plain" readonly></textarea>
-    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+    <textarea class="plain" id="plain" readonly data-from="#sumList" data-head="Урок 1. Епохата на Европейското средновековие (V – XV в.)&#10;&#10;ЗАПОМНИ:&#10;" data-tail="&#10;&#10;Ключови дати: 395 – разделяне на Римската империя; 476 – край на Западната Римска империя; 681 – Първата българска държава; 1453 – османците превземат Константинопол; 1492 – Колумб открива Америка.&#10;&#10;Понятия: Средновековие, християнство, монархия, Църква, университет, Византия, ромеи."></textarea>
+    <button class="btn small" data-copy="#plain" style="margin-top:8px">📋 Копирай текста</button>
   </details>
 </section>
 
@@ -773,655 +693,31 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
 
 </main>
 
-<div class="audiobar" id="audiobar">
-  <div class="audiobar-in">
-    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
-    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
-    <span class="t" id="aText">Чета…</span>
-    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
-  </div>
+<!-- Речник: чете се от assets/lesson.js -->
+<div class="glossary">
+  <div data-g="epoha" data-title="Епоха">Дълъг период от историята, в който животът на хората има общи черти. Например Античност, Средновековие, Ново време.</div>
+  <div data-g="sredn" data-title="Средновековие (Средни векове)">Историческата епоха в Европа от V до XV в., между Античността и Новото време.</div>
+  <div data-g="antich" data-title="Античност">Древността: времето на старите гърци и римляни, преди Средновековието.</div>
+  <div data-g="novo" data-title="Ново време">Епохата след Средновековието. За начало често се приема 1492 г., когато Колумб открива Америка.</div>
+  <div data-g="hrist" data-title="Християнство">Религията, основана на учението на Иисус Христос. През Средновековието това е вярата на почти цяла Европа.</div>
+  <div data-g="monarh" data-title="Монархия">Държава, начело на която стои един владетел: цар, крал или император. Обикновено той наследява властта от баща си.</div>
+  <div data-g="church" data-title="Църква">Организацията, която ръководи духовния живот на християните. Църква се нарича и християнският храм. (Учебникът обяснява думата с гръцката „събрание“. Виж и „Думи с история“ по-долу.)</div>
+  <div data-g="svetska" data-title="Светска власт">Властта на владетелите (царе, крале, императори), за разлика от властта на Църквата.</div>
+  <div data-g="viz" data-title="Византия">Източната Римска империя със столица Константинопол. Съществува от 395 до 1453 г.</div>
+  <div data-g="varv" data-title="Варвари">Така римляните и гърците наричат чуждите народи извън империята, които не говорят нито латински, нито гръцки.</div>
+  <div data-g="univ" data-title="Университет">От лат. „общност“. Висше училище. В началото е общност от преподаватели и студенти, която сама се управлява.</div>
+  <div data-g="colony" data-title="Колония">Селище, основано от преселници далеч от родния им град. Византион е основан от древни гърци.</div>
+  <div data-g="romei" data-title="Ромеи">На гръцки „римляни“. Така се наричат самите византийци.</div>
+  <div data-g="osm" data-title="Османци">Турците от държавата на династията на Осман. През XIV – XV в. завладяват Балканите, а през 1453 г. и Константинопол.</div>
+  <div data-g="vlad" data-title="Владичество">Чужда власт над завладяна земя и хората в нея.</div>
 </div>
 
-<div class="sheet-bg" id="sheetBg"></div>
-<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+<!-- Съставни цели: изпълняват се, когато са готови всички изброени -->
+<div hidden>
+  <i data-goal-all="clue" data-of="cq0 cq1 cq2 cq3" data-xp="5" data-msg="Изворът е разпитан!"></i>
+  <i data-goal-all="herit" data-of="h0 h1 h2" data-xp="3" data-msg="Три наследства!"></i>
+</div>
 
-<script>
-(function(){
-"use strict";
-var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
-
-/* ================= STATE ================= */
-var S={xp:0,done:{},badges:{},seen:{},cseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
-var GOALS=['s1','s2','s3','s4','s5','s6','dyk','draw'];
-var FLAGS=['jump','epochs','tiles','q2','sorter','chain','mapSteps','centres','cmap','herit','bgper','q5','q6','tl','clue','interview','scroll'];
-function progress(){
-  var n=0,tot=GOALS.length+FLAGS.length+4;
-  GOALS.forEach(function(k){if(S.done[k])n++});
-  FLAGS.forEach(function(k){if(S.flags[k])n++});
-  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
-  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
-}
-function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
-function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
-function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
-
-/* ================= TIME MACHINE ================= */
-function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
-function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
-var jumped=false;
-$('#jumpBtn').addEventListener('click',function(){
-  if(jumped)return;jumped=true;var b=this;b.disabled=true;
-  var y=2026,t0=null,dur=1400;
-  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
-    $('#dY').textContent=Math.round(2026-(2026-476)*e);if(k<1)requestAnimationFrame(step);else{
-      setDial($('#dC'),'V в.');setDial($('#dP'),'Равена, Италия');setTM('476','V в.','Равена, Италия');
-      b.textContent='✓ Пристигна в 476 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
-      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
-    }}
-  requestAnimationFrame(step);
-});
-if('IntersectionObserver' in window){
-  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
-    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
-  })},{rootMargin:'-45% 0px -50% 0px'});
-  $$('[data-tm]').forEach(function(s){io.observe(s)});
-}
-
-/* ================= BADGES ================= */
-var BADGES=[
-  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета'},
-  {id:'keeper',ic:'✝️',n:'Пазител',d:'Открий петте центъра на Църквата'},
-  {id:'builder',ic:'🏰',n:'Строител',d:'Разгледай целия Константинопол'},
-  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди линията на времето'},
-  {id:'scribe',ic:'📜',n:'Книжовник',d:'Намери грешките в свитъка'},
-  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички 5 карти'},
-  {id:'polyglot',ic:'💬',n:'Полиглот',d:'Чуй 5 думи'},
-  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
-];
-function renderBadges(){
-  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
-  $('#bCount').textContent=Object.keys(S.badges).length;
-}
-function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
-
-/* ================= CLUES ================= */
-var CLUES={
-  1:'476 г. е границата: краят на Западната Римска империя и началото на Средновековието.',
-  2:'От 395 г. има ДВЕ империи: Западна и Източна (Византия).',
-  3:'Византия живее още близо 1000 години, до 1453 г.',
-  4:'Одоакър праща знаците на властта в Константинопол: „На Запада не му трябва отделен император.“'
-};
-var CLUE_FOR={s1:1,s3:2,s4:3,dyk:4};
-function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
-
-/* ================= READ BUTTONS ================= */
-$$('[data-done]').forEach(function(b){
-  b.addEventListener('click',function(){
-    var k=b.getAttribute('data-done'); if(S.done[k])return;
-    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
-    addXP(+b.getAttribute('data-xp'));
-    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
-    if(k==='s1')unlockCard('odo');
-    if(k==='s4')unlockCard('const');
-    if(['s1','s2','s3','s4','s5','s6','dyk'].every(function(x){return S.done[x]}))award('detective');
-  });
-});
-
-/* ================= GLOSSARY ================= */
-var G={
-  epoha:['Епоха','Дълъг период от историята, в който животът на хората има общи черти. Например Античност, Средновековие, Ново време.'],
-  sredn:['Средновековие (Средни векове)','Историческата епоха в Европа от V до XV в., между Античността и Новото време.'],
-  antich:['Античност','Древността: времето на старите гърци и римляни, преди Средновековието.'],
-  novo:['Ново време','Епохата след Средновековието. За начало често се приема 1492 г., когато Колумб открива Америка.'],
-  hrist:['Християнство','Религията, основана на учението на Иисус Христос. През Средновековието това е вярата на почти цяла Европа.'],
-  monarh:['Монархия','Държава, начело на която стои един владетел: цар, крал или император. Обикновено той наследява властта от баща си.'],
-  church:['Църква','Организацията, която ръководи духовния живот на християните. Църква се нарича и християнският храм. (Учебникът обяснява думата с гръцката „събрание“. Виж и „Думи с история“ по-долу.)'],
-  svetska:['Светска власт','Властта на владетелите (царе, крале, императори), за разлика от властта на Църквата.'],
-  viz:['Византия','Източната Римска империя със столица Константинопол. Съществува от 395 до 1453 г.'],
-  varv:['Варвари','Така римляните и гърците наричат чуждите народи извън империята, които не говорят нито латински, нито гръцки.'],
-  univ:['Университет','От лат. „общност“. Висше училище. В началото е общност от преподаватели и студенти, която сама се управлява.'],
-  colony:['Колония','Селище, основано от преселници далеч от родния им град. Византион е основан от древни гърци.'],
-  romei:['Ромеи','На гръцки „римляни“. Така се наричат самите византийци.'],
-  osm:['Османци','Турците от държавата на династията на Осман. През XIV – XV в. завладяват Балканите, а през 1453 г. и Константинопол.'],
-  vlad:['Владичество','Чужда власт над завладяна земя и хората в нея.']
-};
-var sheet=$('#sheet'),sbg=$('#sheetBg');
-function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
-function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
-$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
-sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
-
-/* ================= SPEECH ================= */
-var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
-function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
-  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
-function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
-  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
-if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
-function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
-  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
-function speakNext(){
-  if(qi>=queue.length){stopSpeech();return}
-  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
-  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
-  $('#aText').textContent=queue[qi];synth.speak(u);
-}
-function speak(text,lang,showBar){
-  if(!synth){toast('Този браузър не може да чете на глас');return}
-  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
-  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
-  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
-}
-function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
-$('#aPause').addEventListener('click',function(){
-  if(!speaking)return;
-  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}  // cancel + продължаване от изречението: надеждно на Android
-  else{paused=false;gen++;this.textContent='⏸';speakNext()}
-});
-$('#aStop').addEventListener('click',stopSpeech);
-$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
-$('#readAll').addEventListener('click',function(){
-  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
-  speak(txt,'bg-BG');
-});
-
-/* ================= ДОСИЕ 1: ЕПОХИ ================= */
-var EPOCHS=[
-  {n:'Античност',f:1.1,c:'#6B7280',t:'Античност (до V в.)',d:'Времето на древните гърци и римляни. Завършва с края на Западната Римска империя през 476 г.'},
-  {n:'Ранно',f:2.2,c:'#9E1B32',t:'Ранно средновековие (V – XI в.)',d:'Варварски нашествия и нови държави на Запад. Византия е най-силната държава в Европа. През 681 г. е създадена България.'},
-  {n:'Същинско',f:1.6,c:'#7A1426',t:'Същинско средновековие (XI – XIII в.)',d:'На Запад растат градовете и търговията, появяват се първите университети. От 1185 г. има Втора българска държава.'},
-  {n:'Късно',f:1.2,c:'#1B2A41',t:'Късно средновековие (XIV – XV в.)',d:'Османците завладяват Балканите, а през 1453 г. и Константинопол. На Запад учените преоткриват Античността.'},
-  {n:'Ново време',f:1,c:'#C9962B',t:'Ново време (от 1492 г.)',d:'Започва с откриването на Америка от Христофор Колумб през 1492 г. Ти откри картата на Колумб в „Моята колекция“!'}
-];
-$('#epochs').innerHTML=EPOCHS.map(function(e,i){return '<button data-e="'+i+'" style="flex:'+e.f+';background:'+e.c+(i===4?';color:#2E2000':'')+'">'+e.n+'</button>'}).join('');
-var eSeen={};
-$$('#epochs button').forEach(function(b){b.addEventListener('click',function(){
-  var i=+b.getAttribute('data-e'),e=EPOCHS[i];
-  $$('#epochs button').forEach(function(x){x.classList.toggle('active',x===b)});
-  $('#epochInfo').innerHTML='<h3>'+e.t+'</h3><p>'+e.d+'</p>';
-  if(!eSeen[i]){eSeen[i]=1;b.classList.add('seen');addXP(2);if(i===4)unlockCard('col');
-    if(Object.keys(eSeen).length===5&&flag('epochs'))addXP(5,'Всички епохи!');}
-})});
-
-/* ================= generic one-question helper ================= */
-function oneQ(box,Q,flagKey,xp){
-  var order=shuffle(Q.o.map(function(_,i){return i}));var tried=false;
-  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb"></div>';
-  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
-    var i=+b.getAttribute('data-i'),fb=$('.fb',box);
-    if(i===Q.a){b.classList.add('right');$$('.opt',box).forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Точно така!</b> '+Q.e;
-      if(flag(flagKey))addXP(tried?Math.ceil(xp/2):xp);if(Q.after)Q.after();}
-    else{tried=true;b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+(Q.hint||'Опитай друг отговор.');}
-  })});
-}
-
-/* ================= ДОСИЕ 2 ================= */
-var TILES=['Оформя как хората виждат света и в какво вярват.','Учи ги какво е добро и лошо и как да се държат.','Училищата, книгите и изкуството са в ръцете на Църквата.','Влияе и на царете. Те вярват, че Бог им е дал властта.'];
-var tSeen={};
-$$('.tile').forEach(function(t){t.addEventListener('click',function(){
-  var i=+t.getAttribute('data-tile');if(tSeen[i])return;tSeen[i]=1;
-  t.innerHTML=t.querySelector('b').outerHTML+TILES[i];t.classList.add('open');addXP(2);
-  if(Object.keys(tSeen).length===4&&flag('tiles'))addXP(3);
-})});
-oneQ($('#q2'),{q:'Според хората през Средновековието откъде монархът получава властта си?',o:['От Бога','Избират го всички жители на страната','Купува я на пазара'],a:0,e:'Монарсите вярват, че властта им е дадена от Бога. Затова на мозайките стоят до Христос.',hint:'Погледни пак последния абзац на досието.'},'q2',5);
-
-/* ================= ДОСИЕ 3: СОРТИРАНЕ ================= */
-var SORT=shuffle([
-  ['Столицата е Константинопол','e'],['Християнският център е Рим','w'],['Говорят и пишат на гръцки','e'],['Латинският език обединява хората','w'],
-  ['Смятат се за единствената империя, създадена от Бога','e'],['Варварски нашествия и нови държави','w'],['От XII в.: градове, търговия и първите университети','w'],['През XV в. държавите изчезват под ударите на завоеватели','e']
-]);
-var sI=0,sMiss=0,sorter=$('#sorter');
-function renderSorter(){
-  var cols='<div class="cols"><div class="col w"><h4>⬅ ЗАПАД</h4>'+SORT.slice(0,sI).filter(function(x){return x[1]==='w'}).map(function(x){return '<div>✓ '+x[0]+'</div>'}).join('')+'</div><div class="col e"><h4>ИЗТОК ➡</h4>'+SORT.slice(0,sI).filter(function(x){return x[1]==='e'}).map(function(x){return '<div>✓ '+x[0]+'</div>'}).join('')+'</div></div>';
-  if(sI>=SORT.length){sorter.innerHTML='<p style="margin:0;font-weight:700;color:var(--ok)">✓ Всички 8 са подредени!'+(sMiss?' (грешки: '+sMiss+')':' Без нито една грешка!')+'</p>'+cols;
-    if(flag('sorter'))addXP(sMiss?5:10,'Запад и Изток');return}
-  sorter.innerHTML='<div style="font-size:.85rem;color:var(--muted);margin-bottom:6px">Карта '+(sI+1)+' от '+SORT.length+'</div><div class="sortcard">'+SORT[sI][0]+'</div>'+
-    '<div class="sortbtns"><button class="btn" data-side="w">⬅ Запад</button><button class="btn navy" data-side="e">Изток ➡</button></div><div class="fb" id="sortFb"></div>'+cols;
-  $$('[data-side]',sorter).forEach(function(b){b.addEventListener('click',function(){
-    if(b.getAttribute('data-side')===SORT[sI][1]){sI++;addXP(2);renderSorter()}
-    else{sMiss++;var fb=$('#sortFb');fb.className='fb bad';fb.innerHTML='<b>Опа!</b> Помисли пак: кой говори гръцки и кой латински? Къде е Рим и къде Константинопол?'}
-  })});
-}
-renderSorter();
-
-/* ================= ДОСИЕ 4: ИМЕНАТА ================= */
-var NAMES=['<b>Византион</b> · древна гръцка колония на брега на протока Босфор.','<b>Константинопол</b> · през 330 г. Константин Велики изгражда тук новата столица на империята. Наричат я и „Новия Рим“.','<b>Истанбул</b> · така се казва градът днес. Той е най-големият град на Турция.'];
-$$('#chain button').forEach(function(b){b.addEventListener('click',function(){
-  var n=+b.getAttribute('data-n');if(b.classList.contains('open'))return;
-  b.classList.add('open');b.innerHTML=NAMES[n];addXP(2);
-  var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}
-  else if(flag('chain'))addXP(3,'Три имена!');
-})});
-
-/* ================= КАРТА: ЕВРОПА ================= */
-var MK=8.565,COS=0.766;
-function P(lon,lat){return [((lon+11)*MK*COS).toFixed(1),((58-lat)*MK).toFixed(1)]}
-function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
-function line(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
-var SEA={
- med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
- marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
- black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]],
- casp:[[47.5,45.8],[48.0,46.5],[49.5,46.6],[51.5,47],[51.5,36.8],[50.5,37.0],[49.6,37.4],[49.1,37.5],[48.9,38.7],[49.2,39.5],[49.9,40.4],[48.3,42.1],[47.5,43.0],[46.8,44.8]],
- red:[[32.6,29.95],[33.3,28.6],[34.25,27.75],[34.6,28.4],[34.95,29.5],[34.9,28.2],[35.3,28.0],[36.6,25.8],[38.1,24.0],[39.2,21.5],[39.6,19.5],[37.5,19.5],[37.2,21.0],[36.9,22.0],[35.5,24.0],[34.0,26.3],[33.5,27.3],[32.6,29.6]],
- pers:[[48.0,29.4],[48.7,30.0],[49.5,30.0],[50.5,29.2],[51.5,27.9],[51.5,24],[50.2,25.5],[49.6,26.9],[48.8,27.6]],
- atl:[[-12,20],[-12,28.3],[-10.2,29.4],[-9.7,30.5],[-9.8,31.5],[-9.2,32.5],[-8.5,33.3],[-7.6,33.6],[-6.8,34.0],[-6.2,35.2],[-5.9,35.8],[-5.6,36.0],[-6.3,36.5],[-7.4,37.2],[-7.9,37.0],[-8.95,37.0],[-8.8,38.4],[-9.5,38.7],[-9.0,40.0],[-8.7,41.2],[-8.9,42.5],[-9.3,42.9],[-8.4,43.4],[-7.0,43.6],[-5.7,43.6],[-3.8,43.5],[-1.8,43.4],[-1.5,43.5],[-1.2,44.6],[-1.2,46.0],[-2.2,47.2],[-3.0,47.5],[-4.4,47.8],[-4.7,48.4],[-3.0,48.8],[-1.6,48.7],[-1.9,49.7],[-1.3,49.7],[-0.2,49.3],[0.1,49.5],[1.5,50.1],[1.9,51.0],[3.6,51.4],[4.2,52.0],[4.7,52.9],[5.3,53.4],[7.0,53.6],[8.5,53.6],[8.9,54.0],[8.6,55.0],[8.1,55.5],[8.2,56.7],[9.5,57.1],[10.6,57.7],[10.5,57.2],[10.3,56.5],[10.2,56.0],[9.9,55.2],[10.0,54.8],[10.2,54.4],[10.9,54.0],[12.1,54.2],[13.4,54.6],[14.2,53.9],[16.0,54.3],[17.5,54.8],[18.7,54.4],[19.6,54.5],[20.0,54.9],[21.1,55.7],[21.0,56.5],[21.5,57.4],[22.5,57.7],[23.8,57.0],[24.4,57.3],[24.3,59],[16.7,59],[16.7,58.0],[16.6,57.8],[16.4,56.7],[15.9,56.1],[14.3,55.9],[13.9,55.4],[13.0,55.6],[12.7,56.0],[12.6,56.6],[11.9,57.7],[11.3,59],[7.5,59],[7.0,58.0],[6.0,58.3],[5.5,59],[-12,59]]
-};
-var ISL={
- sic:{p:[[12.4,38.1],[13.4,38.2],[15.6,38.3],[15.1,37.1],[15.1,36.7],[14.3,37.0],[12.6,37.6]]},
- sar:{p:[[8.2,41.0],[9.6,41.1],[9.8,40.1],[9.6,39.1],[8.9,38.9],[8.4,39.1],[8.4,40.4]]},
- cor:{p:[[9.4,43.0],[9.5,42.1],[9.2,41.4],[8.6,41.7],[8.6,42.5]]},
- mal:{p:[[2.4,39.6],[3.5,39.8],[3.2,39.3],[2.6,39.4]]},
- cre:{p:[[23.5,35.6],[24.6,35.5],[26.3,35.3],[26.1,35.0],[24.6,35.1],[23.6,35.2]]},
- cyp:{p:[[32.3,35.1],[33.0,35.4],[34.6,35.7],[33.9,35.0],[32.9,34.6],[32.3,34.8]]},
- gb:{p:[[-5.7,50.05],[-4.2,50.4],[-3.4,50.6],[-1.5,50.7],[0.3,50.8],[1.4,51.2],[1.7,52.6],[0.3,53.1],[0.1,53.6],[-0.6,54.5],[-1.4,55.3],[-2.0,55.9],[-3.0,56.0],[-2.5,56.5],[-1.8,57.5],[-2.0,57.7],[-3.5,57.7],[-4.0,57.6],[-3.0,58.6],[-5.0,58.6],[-5.3,58.0],[-5.6,57.3],[-5.7,56.5],[-5.6,55.4],[-5.1,55.0],[-4.4,54.8],[-3.4,54.9],[-3.2,54.2],[-3.0,53.8],[-3.1,53.3],[-4.5,53.4],[-4.7,52.8],[-4.1,52.3],[-5.3,51.8],[-4.2,51.6],[-3.0,51.5],[-3.4,51.2],[-4.5,51.0]]},
- ire:{p:[[-6.3,52.2],[-6.0,53.0],[-6.2,53.6],[-5.5,54.3],[-6.0,55.2],[-7.3,55.4],[-8.3,55.2],[-8.6,54.3],[-10.0,54.2],[-9.9,53.4],[-9.4,52.6],[-10.4,52.0],[-9.8,51.5],[-8.4,51.6],[-7.0,52.1]]},
- zea:{p:[[11.0,55.2],[12.1,54.9],[12.6,55.6],[12.3,56.1],[11.0,55.9]]},
- fyn:{p:[[9.8,55.5],[10.8,55.3],[10.6,55.0],[9.9,55.1]]}
-};
-var WRE=[[4.0,52.0],[6.1,51.8],[7.0,50.9],[7.6,50.4],[8.3,50.0],[7.75,48.58],[7.6,47.56],[9.5,47.6],[10.0,48.4],[12.1,49.0],[13.4,48.6],[16.4,48.2],[17.1,48.1],[18.8,47.8],[19.0,47.5],[18.9,46.0],[19.3,45.2],[19.3,44.5],[19.2,43.5],[18.9,42.2],[18.9,38],[18.8,30.4],[18.8,28.5],[14,30.5],[10,31.5],[5,33.5],[0,34.2],[-5,33.8],[-7,33.4],[-13,33.4],[-13,44],[-6,49],[-4,52],[0,53]];
-var WBR=[[-7,49.5],[2.5,50.5],[2.5,53.5],[-1.4,55.0],[-3.2,55.0],[-5.3,54.7],[-5.3,52],[-7,50]];
-var ERE=[[19.3,45.2],[20.5,44.8],[22.5,44.6],[22.9,44.0],[24.0,43.7],[25.3,43.6],[25.95,43.85],[27.3,44.1],[27.97,45.27],[29.7,45.2],[31,44.5],[36,43.5],[41.6,41.9],[42.5,41.5],[43.0,40.5],[41.5,39.5],[40.5,38.0],[40.0,37.0],[38.8,36.0],[38.3,34.5],[37.0,32.5],[36.5,31.0],[35.8,30.0],[35.0,29.5],[34.3,27.8],[33.6,27.0],[33.9,24.0],[32.9,23.8],[30.0,24.0],[28.0,26.5],[25.2,29.5],[24.0,30.5],[20.0,29.5],[18.8,28.5],[18.8,30.4],[18.9,38],[18.9,42.2],[19.2,43.5],[19.3,44.5]];
-var XW=[[4,52],[8,53.5],[8,58.5],[24.5,58.5],[24.5,54],[24,50],[22.5,48.5],[24.5,47.8],[22.5,45.8],[21,45],[19.3,45.2],[18.9,46.0],[19.0,47.5],[18.8,47.8],[16.4,48.2],[13.4,48.6],[10,48.4],[9.5,47.6],[7.6,47.56],[7.75,48.58],[8.3,50],[7.6,50.4],[7.0,50.9],[6.1,51.8]];
-var XW2=[[-11,51],[-5.3,52],[-5.3,54.7],[-3.2,55.0],[-1.4,55.0],[0,58.5],[-11,58.5]];
-var XE=[[24.5,58.5],[50,58.5],[50,52],[45,47],[40,47.2],[35,46.3],[33,46.2],[31,46.6],[30.7,46.5],[29.7,45.2],[27.97,45.27],[27.3,44.1],[25.3,43.6],[22.9,44.0],[22.5,44.6],[21,45],[22.5,45.8],[24.5,47.8],[22.5,48.5],[24,50],[24.5,54]];
-var DIV=[[19.3,45.2],[19.3,44.5],[19.2,43.5],[18.9,42.2],[18.9,38],[18.8,30.4],[18.8,28.5]];
-var RIV={dan:[[8.5,47.95],[10.0,48.4],[12.1,49.0],[13.4,48.6],[16.4,48.2],[17.1,48.1],[18.8,47.8],[19.0,47.5],[18.9,46.0],[19.8,45.3],[20.5,44.8],[22.5,44.6],[22.9,44.0],[24.0,43.7],[25.3,43.6],[25.95,43.85],[27.3,44.1],[27.97,45.27],[28.0,45.4],[29.7,45.2]],
- rh:[[9.5,47.5],[7.6,47.56],[7.75,48.58],[8.3,50.0],[7.6,50.4],[7.0,50.9],[6.1,51.8],[4.2,51.95]],
- nile:[[31.4,21.5],[32.9,24.1],[32.6,25.7],[31.2,27.2],[31.2,30.0],[30.4,31.4]],nile2:[[31.2,30.0],[31.8,31.4]]};
-(function buildMap(){
-  var s='<defs>'+
-    '<pattern id="hW" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#F6DDE1"/><line x1="0" y1="0" x2="0" y2="6" stroke="#C4596B" stroke-width="2"/></pattern>'+
-    '<pattern id="hE" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="6" height="6" fill="#E1E8F3"/><line x1="0" y1="0" x2="0" y2="6" stroke="#6E86AE" stroke-width="2"/></pattern>'+
-    '<mask id="landMask"><rect width="400" height="308" fill="#fff"/>';
-  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" fill="#000"/>'});
-  Object.keys(ISL).forEach(function(k){s+='<path d="'+poly(ISL[k].p)+'" fill="#fff"/>'});
-  s+='</mask></defs><rect width="400" height="308" style="fill:var(--land)"/>';
-  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea)"/>'});
-  Object.keys(ISL).forEach(function(k){s+='<path d="'+poly(ISL[k].p)+'" style="fill:var(--land)"/>'});
-  s+='<g mask="url(#landMask)" style="pointer-events:none">'+
-    '<g id="gXW" class="city" opacity="0"><path d="'+poly(XW)+'" fill="url(#hW)"/><path d="'+poly(XW2)+'" fill="url(#hW)"/></g>'+
-    '<g id="gXE" class="city" opacity="0"><path d="'+poly(XE)+'" fill="url(#hE)"/></g>'+
-    '<g id="gW"><path id="pW" d="'+poly(WRE)+'"/><path id="pWB" d="'+poly(WBR)+'"/></g>'+
-    '<path id="pE" d="'+poly(ERE)+'"/>'+
-  '</g>';
-  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'"/>'});
-  Object.keys(ISL).forEach(function(k){s+='<path class="coast" d="'+poly(ISL[k].p)+'"/>'});
-  Object.keys(RIV).forEach(function(k){s+='<path class="river" d="'+line(RIV[k])+'"/>'});
-  s+='<path id="divLine" class="divline" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="'+line(DIV)+'"/>';
-  function T(txt,lon,lat,cls,extra){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'" '+(extra||'')+'>'+txt+'</text>'}
-  s+=T('СРЕДИЗЕМНО МОРЕ',9.5,35.3,'maplabel')+T('ЧЕРНО МОРЕ',31.3,43.3,'maplabel')+(function(){var p=P(-9.6,29.5);return '<text x="'+p[0]+'" y="'+p[1]+'" class="maplabel" style="font-size:9px" transform="rotate(-90 '+p[0]+' '+p[1]+')">АТЛАНТИЧЕСКИ ОКЕАН</text>'})()+
-     T('А Ф Р И К А',4,27,'contlabel')+T('А З И Я',41,53,'contlabel')+T('Е В Р О П А',12,53,'contlabel');
-  s+='<g id="lblW">'+T('ЗАПАДНА',0.5,47.5,'regionlabel','fill="#7A1426"')+T('РИМСКА ИМПЕРИЯ',-1,46.2,'regionlabel','fill="#7A1426"')+'</g>';
-  s+='<g id="lblE">'+T('ИЗТОЧНА РИМСКА',29.5,38.6,'regionlabel','fill="#1B2A41"')+T('ИМПЕРИЯ',32.5,37.2,'regionlabel','fill="#1B2A41"')+'</g>';
-  s+='<g id="lblU">'+T('РИМСКАТА ИМПЕРИЯ',10.5,46.6,'regionlabel','fill="#7A5A10"')+'</g>';
-  s+='<g id="lblX" opacity="0">'+T('ЕВРОПЕЙСКИ ЗАПАД',-1,50.5,'regionlabel','fill="#7A1426"')+T('ЕВРОПЕЙСКИ ИЗТОК',27,50.5,'regionlabel','fill="#1B2A41"')+'</g>';
-  $('#mapSvg').innerHTML=s;
-})();
-var MSTEPS=[
-  {cap:'<b>До 395 г.</b> Една огромна Римска империя обгражда цялото Средиземно море: от Британия до Египет.',u:1},
-  {cap:'<b>395 г.</b> Империята се разделя на <b>Западна</b> (столица Рим, по-късно Равена) и <b>Източна</b> (столица Константинопол). Източната наричаме Византия.',w:1,e:1,line:1},
-  {cap:'<b>476 г.</b> Западната Римска империя изчезва. На нейно място се появяват <b>варварски кралства</b> (щрихованото). Източната (Византия) остава!',w:2,e:1,line:1},
-  {cap:'<b>Европейски Запад и Европейски Изток.</b> Християнството се разпространява на север. Западът се свързва с Рим и латинския език, Изтокът с Константинопол и гръцкия.',w:2,e:1,x:1,line:1}
-];
-function mapStep(i){
-  var st=MSTEPS[i];$('#mapRange').value=i;
-  $$('#mapSteps button').forEach(function(b){var on=+b.getAttribute('data-st')===i;b.classList.toggle('active',on);if(on)b.classList.add('seen')});
-  $('#pW').style.fill=(st.u?'var(--unit)':st.w===2?'url(#hW)':'var(--west)');
-  $('#pWB').style.fill=(st.u?'var(--unit)':st.w===2?'url(#hW)':'var(--west)');
-  $('#pE').style.fill=(st.u?'var(--unit)':'var(--east)');
-  $('#lblU').setAttribute('opacity',st.u?1:0);
-  $('#lblW').setAttribute('opacity',st.u||st.x?0:1);$('#lblE').setAttribute('opacity',st.u||st.x?0:1);
-  $('#lblX').setAttribute('opacity',st.x?1:0);$('#gXW').setAttribute('opacity',st.x?1:0);$('#gXE').setAttribute('opacity',st.x?1:0);
-  var dl=$('#divLine');if(st.line){if(!dl.classList.contains('draw')){dl.classList.add('draw')}}else{dl.classList.remove('draw')}
-  $('#lblW').innerHTML=st.w===2?$('#lblW').innerHTML.replace('ЗАПАДНА','ВАРВАРСКИ').replace('РИМСКА ИМПЕРИЯ','КРАЛСТВА'):$('#lblW').innerHTML.replace('ВАРВАРСКИ','ЗАПАДНА').replace('КРАЛСТВА','РИМСКА ИМПЕРИЯ');
-  $('#stepCap').innerHTML=st.cap;
-  $('#mapLegend').innerHTML=st.u?'<span><i style="background:var(--unit)"></i>Римската империя</span>':
-    '<span><i style="background:'+(st.w===2?'#F6DDE1;border:2px solid #C4596B':'var(--west)')+'"></i>'+(st.w===2?'варварски кралства / Западът':'Западна Римска империя, 395 г.')+'</span><span><i style="background:var(--east)"></i>Източна Римска империя, 395 г.</span>'+(st.x?'<span><i style="background:#E1E8F3;border:2px solid #6E86AE"></i>християнският Изток по-късно</span>':'')+'<span><i style="background:var(--navy);height:3px"></i>линията на разделянето</span>';
-  if(!mSeen[i]){mSeen[i]=1;if(i>0)addXP(2);if(Object.keys(mSeen).length===4&&flag('mapSteps'))addXP(5,'Картата оживя!');}
-}
-var mSeen={};
-$('#mapRange').addEventListener('input',function(){mapStep(+this.value)});
-$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){mapStep(+b.getAttribute('data-st'))})});
-var COLS={c:'#C9962B',r:'#9E1B32',b:'#1B2A41'};
-var PTS=[
-  {id:'rome',t:'c',n:'Рим',lon:12.5,lat:41.9,d:'<b>Център на Църквата на Запад.</b> Старата столица на империята. Тук е папата, главата на Църквата на Запад. Латинският език тръгва оттук.'},
-  {id:'cpl',t:'c',n:'Константинопол',lon:28.98,lat:41.01,d:'<b>Столица на Византия и център на Църквата на Изток.</b> Построен от Константин Велики (330 г.) на мястото на Византион. Пада под ударите на османците през 1453 г.'},
-  {id:'alex',t:'c',n:'Александрия',lon:29.9,lat:31.2,d:'<b>Център на Църквата</b> в Египет. Огромно пристанище в делтата на река Нил, прочуто още от Античността.'},
-  {id:'ant',t:'c',n:'Антиохия',lon:36.16,lat:36.2,d:'<b>Център на Църквата</b> в Сирия. Един от най-големите градове на Изтока.'},
-  {id:'jer',t:'c',n:'Йерусалим',lon:35.23,lat:31.78,d:'<b>Център на Църквата</b> и свят град за християните. Тук според Евангелието е разпнат и възкръсва Иисус Христос.'},
-  {id:'rav',t:'r',n:'Равена',lon:12.2,lat:44.4,d:'Столица на Западната Римска империя в последните ѝ години. Тук през <b>476 г.</b> Одоакър сваля от трона последния западен император.'},
-  {id:'pli',t:'b',n:'Плиска',lon:27.12,lat:43.38,d:'<b>Първата столица на България</b> (след 681 г.). Намира се между Константинопол и Дунав.'},
-  {id:'str',t:'b',n:'Страсбург',lon:7.75,lat:48.58,d:'Град на река Рейн. В учебника (с. 11) има рисунка на укрепен град близо до него от XIV в. Така изглеждат градовете на Запад: стени, кули и църкви.'}
-];
-(function(){
-  var g='';PTS.forEach(function(p){var c=P(p.lon,p.lat);var dx=(p.id==='alex'||p.id==='pli')?-8:8,anc=dx<0?'end':'start';
-    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+c[0]+','+c[1]+')"><circle class="halo" r="6" stroke="'+COLS[p.t]+'"/><circle class="dot" r="'+(p.t==='c'?6:5)+'" fill="'+COLS[p.t]+'"/><text x="'+dx+'" y="'+(p.id==='jer'?12:p.id==='ant'?-6:4)+'" text-anchor="'+anc+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
-  $('#mapSvg').insertAdjacentHTML('beforeend',g);
-  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+COLS[p.t]+'"></i>'+p.n+'</button>'}).join('');
-})();
-function showPt(id){
-  var p=PTS.filter(function(x){return x.id===id})[0];
-  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
-  $('#info').innerHTML='<h3>'+(p.t==='c'?'✝ ':'')+p.n+'</h3><p>'+p.d+'</p>';
-  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
-    if(['rome','cpl','alex','ant','jer'].every(function(k){return S.seen[k]})&&flag('centres')){award('keeper');}}
-}
-$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
-mapStep(0);mSeen={0:1};
-
-/* ================= КАРТОСХЕМА: КОНСТАНТИНОПОЛ ================= */
-(function(){
-  var s='<rect width="400" height="300" style="fill:var(--sea)"/>'+
-    '<path d="M0,0 L345,0 L345,95 L325,108 L270,88 L200,65 L120,35 L95,42 L0,52 Z" style="fill:var(--land)" stroke="#8FAAC4"/>'+
-    '<path d="M365,0 L400,0 L400,300 L372,300 L372,200 L360,150 L362,60 Z" style="fill:var(--land)" stroke="#8FAAC4"/>'+
-    '<path d="M0,52 L95,42 L110,45 L200,80 L270,100 L320,118 L340,140 L335,160 L300,185 L230,215 L150,240 L60,262 L0,268 Z" style="fill:var(--land)" stroke="#8FAAC4"/>'+
-    '<path id="area413" class="city" opacity="0" d="M102,44 L110,45 L200,80 L270,100 L320,118 L340,140 L335,160 L300,185 L230,215 L150,240 L78,258 C70,200 70,120 102,44 Z" fill="#F1E3C2"/>'+
-    '<path id="area330" class="city" d="M178,72 L200,80 L270,100 L320,118 L340,140 L335,160 L300,185 L230,215 L205,222 C185,170 172,120 178,72 Z" fill="#EBD39A"/>'+
-    '<path class="wall w330" d="M178,72 C170,120 185,170 205,222"/>'+
-    '<path id="wall413" class="wall w413" pathLength="1" d="M102,44 C70,120 70,200 78,258"/>'+
-    '<text x="150" y="58" class="maplabel" transform="rotate(20.5 150 58)">ЗЛАТЕН РОГ</text>'+
-    '<text x="120" y="285" class="maplabel">МРАМОРНО МОРЕ</text>'+
-    '<text x="354" y="235" class="maplabel" transform="rotate(-90 354 235)">БОСФОР</text>';
-  $('#cSvg').innerHTML=s;
-})();
-var CP=[
-  {id:'sofia',x:292,y:132,c:'#7B4FA0',n:'„Св. София“',d:'Най-големият храм на града и на целия християнски свят в онова време. Тук стои и мозайката от нашата улика. Това е <b>християнското</b> наследство.'},
-  {id:'palace',x:304,y:160,c:'#9E1B32',n:'Императорският дворец',d:'Тук живее императорът. Дворецът показва, че това е <b>столица</b> на империя.'},
-  {id:'hippo',x:272,y:158,c:'#9E1B32',n:'Хиподрумът',d:'Огромен стадион за надбягвания с колесници, до двореца. Това е <b>римско</b> наследство: забавленията за народа като в Рим.'},
-  {id:'forum',x:238,y:142,c:'#1C8C8C',n:'Форум',d:'Площад за събрания, търговия и паметници, като в стария Рим. Главната улица минава през няколко такива форума.'},
-  {id:'acro',x:324,y:128,c:'#C9962B',n:'Акрополът',d:'Най-високата част на древния Византион. Думата е гръцка („горен град“). Това е <b>елинско</b> наследство.'},
-  {id:'blach',x:104,y:66,c:'#9E1B32',n:'Влахернският дворец',d:'Друг императорски дворец, в северозападния край, до стените и до Златния рог.'},
-  {id:'port',x:222,y:206,c:'#1B2A41',n:'Пристанище',d:'По Мраморно море и Босфора идват кораби от Черно и от Средиземно море. Градът е на кръстопът между Европа и Азия.'},
-  {id:'horn',x:262,y:90,c:'#46617E',n:'Златният рог',d:'Дълъг и спокоен залив. Удобно пристанище, защитено от бурите.'}
-];
-(function(){
-  var g='';CP.forEach(function(p){g+='<g class="mk" data-id="'+p.id+'" transform="translate('+p.x+','+p.y+')"><circle class="halo" r="6" stroke="'+p.c+'"/><circle class="dot" r="6" fill="'+p.c+'"/><circle r="15" fill="transparent"/></g>'});
-  $('#cSvg').insertAdjacentHTML('beforeend',g);
-  $('#cChips').innerHTML=CP.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+p.c+'"></i>'+p.n+'</button>'}).join('');
-})();
-function showCP(id){
-  var p=CP.filter(function(x){return x.id===id})[0];
-  $$('#cmap .mk, #cmap .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
-  $('#cInfo').innerHTML='<h3>'+p.n+'</h3><p>'+p.d+'</p>';
-  if(!S.cseen[id]){S.cseen[id]=true;$$('#cmap [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);cmapCheck()}
-}
-function cmapCheck(){if(Object.keys(S.cseen).length===CP.length&&S.flags.w413&&flag('cmap')){award('builder')}}
-$$('#cmap .mk, #cmap .chip').forEach(function(e){e.addEventListener('click',function(){showCP(e.getAttribute('data-id'))})});
-$('#w330').addEventListener('click',function(){
-  $('#area413').setAttribute('opacity',0);$('#wall413').classList.remove('on');
-  $('#cInfo').innerHTML='<h3>330 г.: стената на Константин</h3><p>Константин Велики огражда новата си столица с мощна стена. Градът бързо се пълни с хора и скоро му става тесен.</p>';
-});
-$('#w413').addEventListener('click',function(){
-  var w=$('#wall413');w.classList.remove('on');void w.getBoundingClientRect();w.classList.add('on');$('#area413').setAttribute('opacity',1);
-  $('#cInfo').innerHTML='<h3>413 г.: стената на Теодосий II</h3><p>Новата стена е по-далеч на запад и градът става почти двойно по-голям. Тези стени пазят Константинопол повече от 1000 години!</p>';
-  if(!S.flags.w413){S.flags.w413=true;addXP(3);unlockCard('theo');cmapCheck()}
-});
-var HER=[['Акрополът','е'],['Хиподрумът и форумите','р'],['„Св. София“ и църквите','х']];
-var HNAMES={'е':'елинско','р':'римско','х':'християнско'};
-(function(){
-  var box=$('#herit'),done=0;
-  box.innerHTML=HER.map(function(h,i){return '<div class="stage" data-h="'+i+'"><p class="qtext" style="font-size:1rem">'+h[0]+'</p><div class="row">'+['е','р','х'].map(function(k){return '<button class="btn ghost small" data-k="'+k+'">'+HNAMES[k]+'</button>'}).join('')+'</div><div class="fb"></div></div>'}).join('');
-  $$('[data-h]',box).forEach(function(st){var i=+st.getAttribute('data-h');$$('[data-k]',st).forEach(function(b){b.addEventListener('click',function(){
-    var fb=$('.fb',st);if(b.getAttribute('data-k')===HER[i][1]){$$('[data-k]',st).forEach(function(x){x.disabled=true});b.classList.add('done');fb.className='fb ok';fb.innerHTML='<b>Вярно!</b> '+HER[i][0]+': '+HNAMES[HER[i][1]]+' наследство.';addXP(2);done++;if(done===3&&flag('herit'))addXP(3,'Три наследства!')}
-    else{b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> Докосни мястото на картата и прочети.'}
-  })})});
-})();
-
-/* ================= ДОСИЕ 5: ПЕРИОДИ ================= */
-var BGP=[
-  {n:'Първа',f:337,c:'#9E1B32',t:'681 – 1018 · Първата българска държава',d:'Създадена през 681 г. Столици: Плиска, по-късно Преслав. Расте като важна сила между Константинопол и Рим.'},
-  {n:'Виз.',f:167,c:'#8A909B',t:'1018 – 1185 · Византийско владичество',d:'България е под властта на Византия. Българите пазят културата си и търсят път към свободата.'},
-  {n:'Втора',f:211,c:'#7A1426',t:'1185 – 1396 · Втората българска държава',d:'Отново важен културен и политически център на Балканите. Столица е Търново.'},
-  {n:'Османска власт',f:482,c:'#1B2A41',t:'1396 – 1878 · Османска власт',d:'През XV – XVII в. българите продължават да живеят в Средновековието, докато Западна Европа навлиза в Новото време.'}
-];
-$('#bgper').innerHTML=BGP.map(function(e,i){return '<button data-b="'+i+'" style="flex:'+e.f+';background:'+e.c+'">'+e.n+'</button>'}).join('');
-var bSeen={};
-$$('#bgper button').forEach(function(b){b.addEventListener('click',function(){
-  var i=+b.getAttribute('data-b'),e=BGP[i];
-  $$('#bgper button').forEach(function(x){x.classList.toggle('active',x===b)});
-  $('#bgInfo').innerHTML='<h3>'+e.t+'</h3><p>'+e.d+'</p>';
-  if(!bSeen[i]){bSeen[i]=1;b.classList.add('seen');addXP(2);if(Object.keys(bSeen).length===4&&flag('bgper'))addXP(3);}
-})});
-oneQ($('#q5'),{q:'Защо Българското средновековие продължава чак до XVII в.?',o:['Защото под османска власт българите продължават да живеят като през Средновековието','Защото в България не знаят за Колумб','Защото България е създадена чак през XV в.'],a:0,e:'Под османска власт българите и другите балкански народи остават в Средновековието, докато Западна Европа навлиза в Новото време.',hint:'Прочети пак последния абзац.'},'q5',5);
-
-/* ================= ДОСИЕ 6 ================= */
-oneQ($('#q6'),{q:'Италианските учени от XV в. смятат Средновековието за „мрачно“ време. Какво мислят историците днес?',o:['Че е важна епоха с мъдри владетели, строители, поети и художници, основа на днешна Европа','Че наистина е било само време на войни и невежество','Че Средновековието изобщо не е съществувало'],a:0,e:'Днес никой учен не говори за Средновековието с пренебрежение. Наследството му е основа на съвременна Европа.'},'q6',5);
-
-/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
-var TL=[[330,'Константин Велики прави Константинопол столица'],[395,'Римската империя се разделя на Западна и Източна'],[476,'Краят на Западната Римска империя'],[681,'Създадена е Първата българска държава'],[1453,'Османците превземат Константинопол'],[1492,'Колумб открива Америка']];
-var sortl=$('#sortl');
-function tlRender(order){
-  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+' г. ·</span>'+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
-  $$('.sitem',sortl).forEach(bindItem);
-}
-var order0;do{order0=shuffle([0,1,2,3,4,5])}while(order0.join()==='0,1,2,3,4,5');
-tlRender(order0);
-function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb'}
-function bindItem(li){
-  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
-    if(sortl.classList.contains('sorted'))return;
-    var d=+b.getAttribute('data-mv');
-    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
-    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
-    clearMarks();
-  })});
-  var h=$('.handle',li),startY=0,dragging=false,pid=null;
-  h.addEventListener('pointerdown',function(ev){
-    if(sortl.classList.contains('sorted'))return;
-    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
-    try{h.setPointerCapture(pid)}catch(e){}
-    ev.preventDefault();
-  });
-  h.addEventListener('pointermove',function(ev){
-    if(!dragging||ev.pointerId!==pid)return;
-    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
-    var prev=li.previousElementSibling,next=li.nextElementSibling;
-    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
-    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
-  });
-  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
-  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
-}
-var tlTries=0;
-$('#tlCheck').addEventListener('click',function(){
-  if(sortl.classList.contains('sorted'))return;
-  tlTries++;var items=$$('.sitem',sortl),ok=0;
-  items.forEach(function(li,pos){var good=+li.getAttribute('data-i')===pos;li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
-  var fb=$('#tlFb');
-  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML='<b>Отлично, хронисте!</b> Всичко е на мястото си. Виж годините: от 330 до 1492 г. минават над 1100 години!';
-    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
-  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: започни с Константин Велики.'}
-});
-
-/* ================= УЛИКА: ИЗВОР ================= */
-var CQ=[
-  {q:'1. Кой е създал мозайката?',o:['Майстори мозайкари по поръчка на императорския двор','Самият император със собствените си ръце','Османците след 1453 г.'],a:0,e:'Такива мозайки поръчват императорите. Те искат хората в храма да ги виждат до Христос.'},
-  {q:'2. Кога е направена?',o:['През XI в.','През IV в.','През XIX в.'],a:0,e:'През XI в., когато управлява Константин IX Мономах (1042 – 1055).'},
-  {q:'3. Какво ни казва за властта на императора?',o:['Той стои до Христос и Му поднася дар: властта му е свързана с Бога','Той е най-богатият търговец в града','Че императорът не е християнин'],a:0,e:'Ореолът около главата, короната и дарът към Христос показват, че императорът е „поставен от Бога“.'},
-  {q:'4. Може ли да ѝ вярваме напълно?',o:['Не съвсем: лицата са подменяни, а мозайката показва как императорът иска да го виждат','Да, мозайките винаги показват истината','Не, защото е направена през XX в.'],a:0,e:'Първоначално до Зоя е стоял първият ѝ съпруг. После лицата са сменени и на мястото му е поставен Константин IX, третият ѝ съпруг. Изворът е истински, но разказва „официалната“ версия.'}
-];
-(function(){
-  var box=$('#clueQs'),n=0;
-  box.innerHTML=CQ.map(function(_,i){return '<div class="qblock stage" id="cq'+i+'"></div>'}).join('');
-  CQ.forEach(function(Q,i){Q.after=function(){n++;if(n===CQ.length){unlockCard('mono');if(flag('clue'))addXP(5,'Изворът е разпитан!')}};oneQ($('#cq'+i),Q,'cq'+i,4)});
-})();
-
-/* ================= КАРТИ-ЛИЧНОСТИ ================= */
-var CARDS=[
-  {id:'const',n:'Константин Велики',y:'управлява 306 – 337',av:'<img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Constantine_I_Hagia_Sophia.jpg?width=300" alt="">',sp:'⚡ Строи нова столица',how:'Прочети досие №4',back:'Римски император. През 330 г. прави Константинопол нова столица.<br><br>💡 Първият римски император, приел християнството.'},
-  {id:'theo',n:'Теодосий II',y:'управлява 408 – 450',av:'🧱',sp:'⚡ Непревземаеми стени',how:'Построй стената от 413 г. на картосхемата',back:'Император на Византия. През 413 г. при него е завършена новата стена на Константинопол.<br><br>💡 Сухопътните стени удържат врага повече от 1000 години.'},
-  {id:'odo',n:'Одоакър',y:'ок. 433 – 493',av:'⚔️',sp:'⚡ Затваря вратата на Античността',how:'Прочети досие №1',back:'Германски военачалник. През 476 г. сваля последния западен император.<br><br>💡 Не става император, а праща знаците на властта в Константинопол.'},
-  {id:'mono',n:'Константин IX Мономах',y:'управлява 1042 – 1055',av:'<img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Empress_Zoe_mosaic_Hagia_Sophia.jpg?width=400" alt="" style="object-position:left top">',sp:'⚡ Лице в мозайка',how:'Разпитай извора-улика',back:'Византийски император, третият съпруг на императрица Зоя.<br><br>💡 Лицето му в „Св. София“ заменя лицето на предишния император.'},
-  {id:'col',n:'Христофор Колумб',y:'1451 – 1506',av:'⛵',sp:'⚡ Отваря Новото време',how:'Докосни „Ново време“ в досие №1',back:'Мореплавател от Генуа. През 1492 г. достига Америка.<br><br>💡 С неговото откритие историците слагат край на Средновековието.'}
-];
-function renderCards(){
-  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
-    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
-  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
-  $$('.pfront .av img').forEach(function(img){img.addEventListener('error',function(){img.replaceWith(document.createTextNode('👤'))})});
-  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
-}
-function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
-  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
-  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
-renderCards();
-
-/* ================= ИНТЕРВЮ ================= */
-var IV=[
-  {q:'Защо наричате тези векове „средни“?',a:'Защото ги виждам по средата: между славната Античност на древните гърци и римляни и нашето време. Сега отново четем техните книги и строим като тях.'},
-  {q:'А защо смятате, че са били мрачни?',a:'Струва ми се, че тогава е имало само войни, жестокост и невежество. Такава е моята представа.',v:'Детектив Венета: Днешните историци не мислят така. Тогава се строят огромни храмове като „Св. София“, появяват се университетите, работят изкусни майстори и поети.'},
-  {q:'Мислехте ли, че името ще остане?',a:'Надявах се… И виждам, че и след 500 години казвате „Средновековие“!',v:'Детектив Венета: Да! На английски е Middle Ages, на испански Edad Media, на немски Mittelalter. Всички значат „средно време“.'}
-];
-var ivI=0;
-function renderIV(){
-  $('#qbtns').innerHTML=ivI<IV.length?'<button class="btn navy" id="ivAsk">❓ '+IV[ivI].q+'</button>':'<p class="note" style="margin:0">✓ Интервюто е готово. Кой е прав според теб? Защо?</p>';
-  if(ivI<IV.length)$('#ivAsk').addEventListener('click',function(){
-    var it=IV[ivI];var c=$('#chat');
-    c.insertAdjacentHTML('beforeend','<div class="bubble q"><small>Венета</small>'+it.q+'</div><div class="bubble a"><small>Италиански учен (измислен)</small>'+it.a+'</div>'+(it.v?'<div class="bubble v"><small>💡 Уточнение</small>'+it.v+'</div>':''));
-    ivI++;addXP(2);if(ivI===IV.length&&flag('interview'))addXP(3);renderIV();
-  });
-}
-renderIV();
-
-/* ================= ГРЕШКАТА В СВИТЪКА ================= */
-var SCR=[
-  ['Година 550. Пристигнах в Константинопол с кораб по Мраморно море.',0,'Вярно: много кораби пристигат по Мраморно море.'],
-  ['Градът е ограден с мощни стени.',0,'Вярно: Теодосиевите стени са от 413 г.'],
-  ['На пазара купих картофи, донесени от Америка.',1,'Грешка! Америка е открита чак през 1492 г.'],
-  ['Хората тук се наричат ромеи и говорят гръцки.',0,'Вярно: византийците се наричат „ромеи“.'],
-  ['Сутринта прочетох новините във вестника.',1,'Грешка! Печатни вестници има чак след повече от 1000 години.'],
-  ['Влязох в новия огромен храм „Св. София“.',0,'Вярно: той е завършен през 537 г.'],
-  ['Вечерта видях как минава османският султан.',1,'Грешка! Османците превземат града чак през 1453 г.'],
-  ['На Хиподрума гледах надбягване с колесници.',0,'Вярно: Хиподрумът е стадионът на града.']
-];
-(function(){
-  var box=$('#scroll'),found=0,wrong=0;
-  box.innerHTML=SCR.map(function(s,i){return '<button class="frag" data-f="'+i+'">'+s[0]+'</button>'}).join(' ');
-  $$('.frag',box).forEach(function(b){b.addEventListener('click',function(){
-    var i=+b.getAttribute('data-f'),s=SCR[i],fb=$('#scrollFb');if(b.classList.contains('found')||b.classList.contains('okay'))return;
-    if(s[1]){b.classList.add('found');found++;fb.className='fb ok';fb.innerHTML='<b>Хванах те!</b> '+s[2]+' ('+found+' от 3)';addXP(3);
-      if(found===3){fb.innerHTML+='<br>Свитъкът е изчистен!'+(wrong?'':' Без нито един фалшив сигнал.');if(flag('scroll'))award('scribe')}}
-    else{b.classList.add('okay');wrong++;fb.className='fb bad';fb.innerHTML='<b>Това е наред.</b> '+s[2]}
-  })});
-})();
-
-/* ================= ЕЗИКОВ ЪГЪЛ ================= */
-var EN=[['Middle Ages','Средновековие','The Middle Ages lasted about 1000 years.'],['medieval','средновековен','This is a medieval castle.'],['empire','империя','The Roman Empire was very big.'],['emperor','император','The emperor wears a crown.'],['church','църква','There is an old church in the town.'],['Christianity','християнство','Christianity came to all of Europe.'],['king','крал, цар','The king rules the country.'],['university','университет','My sister goes to university.']];
-var ES=[['la Edad Media','Средновековие','Me gusta la Edad Media.'],['la iglesia','църквата','La iglesia es muy antigua.'],['el emperador','императорът','El emperador tiene corona.'],['la universidad','университетът','Voy a la universidad.'],['el castillo','замъкът','El castillo es alto.']];
-$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
-$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
-var heard={};
-function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1);if(Object.keys(heard).length>=5)award('polyglot')}
-$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
-$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
-var ETY=[
-  {r:'imperium',s:'лат. „власт, заповед“ (от imperare, „заповядвам“)',b:['империя','император','empire','emperor','imperio','emperador'],p:'Императорът е буквално „този, който заповядва“. Отначало така римските войници наричат победоносния си пълководец.'},
-  {r:'universitas',s:'лат. „цялото, общността“',b:['университет','university','universidad','Universität'],p:'Първо значи „общност на учители и ученици“. Сродна е с думите „универсален“ и „Вселена“ (лат. universum).'},
-  {r:'medium aevum',s:'лат. „средна епоха“',b:['Средновековие','medieval','Middle Ages','Edad Media','Mittelalter'],p:'През XV в. италиански учени пишат за „средното време“ (на латински media tempestas, 1469 г.). Българската дума е „превод“ от части: средно + век.'},
-  {r:'κυριακόν',s:'гр. „Господен (дом)“',b:['църква','church','Kirche'],p:'Учебникът обяснява „църква“ с гръцката дума за „събрание“. Това е ἐκκλησία (еклесия), от която идват исп. iglesia и фр. église. Самата българска дума обаче идва от друга гръцка дума, κυριακόν, „Господен“. Тя минава през германските езици, също като англ. church и нем. Kirche.'}
-];
-$('#etym').innerHTML=ETY.map(function(e,i){return '<button class="ety" data-y="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('');
-var ySeen={};
-$$('.ety').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
-
-/* ================= ТЕСТ ================= */
-var LV=[
- [{q:'Кое събитие се смята за начало на Средновековието?',o:['Краят на Западната Римска империя (476 г.)','Откриването на Америка (1492 г.)','Разделянето на империята (395 г.)'],a:0,e:'476 г. е началото. 1492 г. е краят, а 395 г. е разделянето.'},
-  {q:'Кои са двете отличителни черти на Средновековието?',o:['Християнството и монархията','Демокрацията и пирамидите','Интернетът и колите'],a:0,e:'Християнството и монархията. Монарсите вярват, че властта им е от Бога.'},
-  {q:'Кой дава името „Средни векове“?',o:['Италиански учени през XV в.','Римските императори','Византийците'],a:0,e:'Италианските учени от XV в. наричат така времето между Античността и тяхното съвремие.'}],
- [{q:'През коя година Римската империя се разделя на Западна и Източна?',o:['395 г.','476 г.','681 г.'],a:0,e:'През 395 г. Източната империя по-късно наричаме Византия.'},
-  {q:'Как се наричат самите византийци?',o:['Ромеи','Византийци','Латинци'],a:0,e:'Ромеи, тоест „римляни“. Името „Византия“ дават по-късно учените.'},
-  {q:'Кой език обединява хората на Запад?',o:['Латинският','Гръцкият','Старобългарският'],a:0,e:'Латинският. На Изток (във Византия) говорят гръцки.'}],
- [{q:'Кога османците превземат Константинопол?',o:['1453 г.','1396 г.','1018 г.'],a:0,e:'През 1453 г. Така Византия изчезва след близо 1000 години.'},
-  {q:'Кога е създадена Първата българска държава?',o:['681 г.','1185 г.','476 г.'],a:0,e:'През 681 г. Тя е една от най-старите държави в Европа.'},
-  {q:'Кой период е Втората българска държава?',o:['1185 – 1396','681 – 1018','1018 – 1185'],a:0,e:'1185 – 1396. Между 1018 и 1185 г. България е под византийска власт.'}]
-];
-var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
-var qState=null;
-function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
-function renderQ(){
-  var st=qState,area=$('#qArea');
-  if(!st.queue.length){finishLevel();return}
-  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
-  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
-   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
-   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
-  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
-  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
-    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
-    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
-      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
-    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
-      st.missed[qi]=true;st.queue.push(st.queue.shift());}
-    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
-    $('#qNext').addEventListener('click',renderQ);
-  })});
-}
-function finishLevel(){
-  var st=qState,l=st.l,area=$('#qArea');
-  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
-  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
-  var names=['Чирак','Хронист','Главен детектив'];
-  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
-   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
-  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
-  progress();
-  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
-  qState=null;
-}
-$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
-
-var FC=[['Средновековие','Епохата от V до XV в. (476 – 1492 г.), между Античността и Новото време.'],['Монархия','Държава, начело на която стои един владетел: цар, крал, император.'],['Църква','Организацията, която ръководи духовния живот на християните. Също: християнски храм.'],['Византия','Източната Римска империя, 395 – 1453 г. Столица: Константинопол.'],['Ромеи','„Римляни“: така се наричат самите византийци.'],['Университет','Висше училище: общност от преподаватели и студенти. На Запад от XII в.'],['395 г.','Римската империя се разделя на Западна и Източна.'],['476 г.','Край на Западната Римска империя. Начало на Средновековието.'],['681 г.','Създадена е Първата българска държава.'],['1453 г.','Османците превземат Константинопол.'],['1492 г.','Колумб открива Америка. Край на Средновековието.']];
-var fI=0,flash=$('#flash');
-function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
-flash.addEventListener('click',function(){flash.classList.toggle('flip')});
-$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC()});
-$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC()});
-renderFC();
-
-/* ================= РАЗКРИВАНЕ ================= */
-function checkReveal(){
-  var n=Object.keys(S.clues).length;
-  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
-  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата и „Знаеш ли, че…“.';
-}
-var SUS=[
- {t:'Римската империя изчезва напълно и навсякъде',ok:0,e:'Не. Погледни улика 3: Източната империя живее още близо 1000 години.'},
- {t:'На Запад вече няма император, но Източната империя (Византия) продължава. Затова 476 г. е границата на нова епоха.',ok:1,e:'Точно! От 395 г. има две империи (улика 2). През 476 г. Западната изчезва и историците слагат тук началото на Средновековието (улика 1). Одоакър праща знаците на властта в Константинопол, защото там все още има император (улика 4). А Византия живее до 1453 г. (улика 3).'},
- {t:'Византийците открадват короната на Запада',ok:0,e:'Не. Одоакър сам им я праща (улика 4).'},
- {t:'Одоакър става император в Константинопол',ok:0,e:'Не. Одоакър остава в Италия и не взема титлата император (улика 4).'}
-];
-$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
-$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
-  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
-  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
-    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
-    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от 8 значки и '+Object.keys(S.cards).length+' от 5 карти-личности.';}
-  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
-})});
-checkReveal();
-
-/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
-var plain='Урок 1. Епохата на Европейското средновековие (V – XV в.)\n\nЗАПОМНИ:\n'+
- $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
- '\n\nКлючови дати: 395 – разделяне на Римската империя; 476 – край на Западната Римска империя; 681 – Първата българска държава; 1453 – османците превземат Константинопол; 1492 – Колумб открива Америка.\n\nПонятия: Средновековие, християнство, монархия, Църква, университет, Византия, ромеи.';
-$('#plain').value=plain;
-$('#copyBtn').addEventListener('click',function(){
-  var ta=$('#plain');
-  function ok(){toast('Текстът е копиран ✓')}
-  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
-  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
-});
-
-/* снимки: резервен вариант без интернет */
-$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
-  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
-  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
-
-renderBadges();progress();
-})();
-</script>
+<script src="assets/lesson.js?v=1"></script>
 </body>
 </html>
