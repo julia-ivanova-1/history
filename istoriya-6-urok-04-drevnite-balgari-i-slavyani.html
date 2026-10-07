@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 4 · Древните българи и славяни</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== добавки за урок 4 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.routes path.r1{stroke:#1B2A41}.routes path.r2{stroke:#9E1B32}.routes path.r3{stroke:#7A5A10}.routes path.r4{stroke:#1E8E4E}.routes path.r5{stroke:#C9962B}
+.routes polygon{opacity:0;transition:opacity .3s .7s}
+.routes polygon.show{opacity:1}
+.routes polygon.r1{fill:#1B2A41}.routes polygon.r2{fill:#9E1B32}.routes polygon.r3{fill:#7A5A10}.routes polygon.r4{fill:#1E8E4E}.routes polygon.r5{fill:#C9962B}
+.steps{grid-template-columns:repeat(3,1fr)}
+.duel-pool{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;min-height:52px;padding:10px;background:var(--soft);border-radius:14px}
+.duel-chip{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:44px;padding:8px 10px;font-size:.88rem;line-height:1.3;color:var(--ink);text-align:left;touch-action:manipulation}
+.duel-chip.sel{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 3px 0 #C9962B66}
+.duel-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.duel-col{border:2px dashed #B7BFCB;border-radius:14px;background:#fff;padding:8px;min-height:140px;cursor:pointer;touch-action:manipulation}
+.duel-col:active{border-color:var(--gold)}
+.duel-col h3{font-size:1rem;margin:0 0 6px;color:var(--navy);font-family:var(--body)}
+.duel-drop{display:grid;gap:5px}
+.duel-tag{display:block;background:var(--ok-soft);border:1px solid var(--ok);border-radius:8px;padding:4px 6px;font-size:.76rem;line-height:1.25;animation:pop .35s}
+.stickbox{text-align:center}
+.sticks{font-size:2.2rem;letter-spacing:-6px;margin:6px 0 10px;transition:letter-spacing .5s}
+.sticks.tried{animation:shake .5s}
+.sticks.broken{letter-spacing:6px;opacity:.7;transform:rotate(-4deg)}
+.stickcap{font-size:.92rem;min-height:3em;margin:8px 0 0}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.dirbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.dirbox svg{width:100%;height:auto;display:block}
+.dirbox .dl{stroke-width:3;stroke-linecap:round;stroke-dasharray:200;stroke-dashoffset:200}
+.dirbox.go .dl{animation:dirline .9s ease forwards}
+.dirbox .dt{font:700 9px var(--body);fill:var(--ink);opacity:0}
+.dirbox.go .dt{animation:dirfade .5s forwards}
+.dirbox .dirt{font:700 10px var(--body);fill:var(--red-2)}
+.dircap{display:block;font-size:.85rem;color:var(--muted);text-align:center;margin-top:4px}
+@keyframes dirline{to{stroke-dashoffset:0}}
+@keyframes dirfade{to{opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/8</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 4</div>
+  <h1>Древните българи и славяни във Великото преселение на народите</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детектив Венета, днес търсим корените на България. Машината те отвежда в степите северно от Черно море — там, където един хан събира българите под една власт. Натисни бутона и скочи!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 632 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„Един баща, пет посоки“</h2>
+  <p>665 г. Великият хан Кубрат е починал. Държавата, която той е събрал, изчезва от картата. И изведнъж българи се появяват на съвсем различни места: до река Волга, в Италия, в Карпатската котловина, на Балканите. <b>Какво се е случило със семейството на хана и как точно от тази разпиляна държава се ражда днешна България?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №1</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №3</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Картата на синовете</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №5</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+</div>
+
+<!-- ===== ДОСИЕ 1: ПЪТЯТ ===== -->
+<section class="card" id="s1" data-tm="II – VII в.|·|от Азия към Европа">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Пътят на българите и славяните</h2>
+  <div data-story>
+    <p>Във Великото преселение на народите участват два народа, чиято съдба е свързана със съвременна България: <button class="term" data-t="prabalgari">древните българи</button> и славяните. Пътищата им са различни.</p>
+    <p>През II – IV в. българите тръгват от Централна Азия към Европа. Част от тях се заселват в земите на север от Кавказките планини, а други продължават с хуните към Централна Европа. През V – VII в. се вписват трайно в историята на Византия: ту като съюзници, ту като врагове.</p>
+    <p>Славяните живеят на огромна територия в Централна и Източна Европа и постепенно се разделят на три големи групи: <b>източни, западни и южни</b>. В началото на преселението попадат под властта на готите, а след разгрома им — под тази на хуните. Когато хунският съюз се разпада, славяните се разселват масово. Южните заемат земите на север от Дунав и оттам нападат за плячка Византия. От края на VI в. започват трайно да се заселват в балканските ѝ провинции.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Пътят на българите. Докосни всяка стъпка</h3>
+    <div class="ribbon" id="path"></div>
+    <div class="ribticks"><span>II – IV в.</span><span>V – VII в.</span></div>
+    <div class="infobox" id="pathInfo"><h3>Докосни стъпка</h3><p>Тук ще се появи какво знаем за нея.</p></div>
+  </div>
+  <div class="task">
+    <h3>👆 Славяните накратко. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles">
+      <button class="tile" data-tile="0"><b>🧭 Три групи</b>Докосни…</button>
+      <button class="tile" data-tile="1"><b>🛡️ Под властта на…</b>Докосни…</button>
+      <button class="tile" data-tile="2"><b>🌊 Южните славяни</b>Докосни…</button>
+      <button class="tile" data-tile="3"><b>🏘️ Към Балканите</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2: ДРЕВНИТЕ БЪЛГАРИ ===== -->
+<section class="card" id="s2" data-tm="VI – VII в.|·|степите северно от Черно море">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>Древните българи</h2>
+  <div data-story>
+    <p>Българите са <button class="term" data-t="nomad">номади</button>. Занимават се със скотовъдство, лов и риболов, а отглеждат най-вече коне. С преминаването към уседнал начин на живот постепенно навлиза и земеделието. Усъвършенстват занаятите си — ковачество, златарство и други. Живеят в <button class="term" data-t="yurta">юрти</button>.</p>
+    <p>Бойните им умения им спечелват славата на войнствен народ. Вярват в един бог — <button class="term" data-t="tangra">Тангра</button> („Небе“). Начело на всяко племе стои <button class="term" data-t="han">хан</button>, който е и върховен жрец. По време на Великото преселение ханската власт става наследствена: родовете, от които произлизат владетелите, се утвърждават като управляващи династии.</p>
+    <p>Тук е ключът към загадката. <b>Добре развитата военна организация и едноличната власт</b> довеждат до появата на български държави в различни райони на Европа.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Древните българи накратко. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles2">
+      <button class="tile" data-tile2="0"><b>🐎 Номади</b>Докосни…</button>
+      <button class="tile" data-tile2="1"><b>⚒️ Занаяти</b>Докосни…</button>
+      <button class="tile" data-tile2="2"><b>☁️ Тангра</b>Докосни…</button>
+      <button class="tile" data-tile2="3"><b>👑 Ханът</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 3: СТАРА ВЕЛИКА БЪЛГАРИЯ ===== -->
+<section class="card" id="s3" data-tm="632|VII в.|Фанагория, северно от Азовско море">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Старата Велика България</h2>
+  <div data-story>
+    <p>Първата българска държава, възникнала в Европа, е <b>Старата Велика България</b>. Създадена е през <span class="key">🔑 632 г.</span> и се простира в земите на север от Черно и Азовско море.</p>
+    <p>Създател на държавата е хан <b>Кубрат</b> от рода <button class="term" data-t="dulo">Дуло</button>. Той поддържа мирни отношения с Византийската империя. Такива са и правилата на времето: силният съсед се привлича, а не се дразни.</p>
+    <p>След смъртта на великия хан държавата се разпада. Затова се появява въпросът от нашия случай: накъде тръгват хората му и какво остава от замисъла на Кубрат?</p>
+  </div>
+  <div class="task">
+    <h3>👆 Историята на държавата стъпка по стъпка</h3>
+    <div class="chain" id="chain">
+      <button data-n="0"><b>632 г. — държавата</b> · докосни</button>
+      <div class="arrow">↓</div>
+      <button data-n="1" disabled><b>Мир с Византия</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="2" disabled><b>След Кубрат</b> · 🔒</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== АКТИВНА КАРТА ===== -->
+<section class="card" id="map" data-tm="IV – VII в.|·|Европа">
+  <div class="dossier-tag navy">🗺 КАРТА НА ДЕТЕКТИВА</div>
+  <h2>Петте разселвания на древните българи</h2>
+  <p>Първо докосни точките на картата. После натискай <b>„Следващ син →“</b> и гледай как българите тръгват в различни посоки — стрелка по стрелка.</p>
+  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на древните българи и славяните в Европа, IV – VII в."></svg></div>
+  <div class="steps" id="mapSteps">
+    <button data-st="0" class="active">Преди</button>
+    <button data-st="1">№1 Панония</button>
+    <button data-st="2">№2 Котраг</button>
+    <button data-st="3">№3 Алцек</button>
+    <button data-st="4">№4 Кубер</button>
+    <button data-st="5">№5 Аспарух</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="nextSon">Следващ син →</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка</h3><p>Тук ще се появи описание на мястото.</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Картата е опростена и показва само основните посоки. Границите са приблизителни: в учебника териториите са означени за средата на VII в.</p>
+</section>
+
+<!-- ===== ДОСИЕ 4: СЛАВЯНИТЕ ===== -->
+<section class="card" id="s4" data-tm="V – VII в.|·|земите на славяните">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Славяните</h2>
+  <div data-story>
+    <p>Славяните са земеделци. Отглеждат различни зърнени култури и домашни животни. На Балканите местното население ги учи да отглеждат маслини и лозя. Усъвършенстват и занаятчийските си умения.</p>
+    <p>Живеят в землянки — жилища, полувкопани в земята. Селищата им са край реки, езера и гори.</p>
+    <p>Почитат много богове, но един от тях е върховен — <b>Перун</b>, творец на мълнията и господар на всичко. Вярват, че горите и реките са обитавани от самодиви и русалки — свръхестествени същества с женски образ. Славяните са разделени на много племена. Начело на всяко стои <button class="term" data-t="knyaz">княз</button>, а важните решения се вземат от събрание на племето.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Славяните накратко. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles3">
+      <button class="tile" data-tile3="0"><b>🌾 Земеделци</b>Докосни…</button>
+      <button class="tile" data-tile3="1"><b>🏚️ Землянка</b>Докосни…</button>
+      <button class="tile" data-tile3="2"><b>⚡ Перун</b>Докосни…</button>
+      <button class="tile" data-tile3="3"><b>🗣️ Княз и събрание</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 5: ИЗВОДЪТ ===== -->
+<section class="card" id="s5" data-tm="VII в.|·|едно сравнение">
+  <div class="dossier-tag">ДОСИЕ №5</div>
+  <h2>Две различни света, един извод</h2>
+  <div data-story>
+    <p>Древните българи и славяните се различават по бит и вярвания. Едните са конници-номади, които постепенно се установяват, а другите са земеделци в землянки. Едните вярват в Тангра, другите — в Перун.</p>
+    <p>Разликата във властта е най-важната: при българите е еднолична и наследствена, а при славяните — племенна, със събрание. <b>Добре развитата военна организация и едноличната власт при древните българи са важна причина за появата на техните държави в различни райони на Европа.</b></p>
+  </div>
+  <div class="task">
+    <h3>👆 Провери се: каква е причината за българските държави?</h3>
+    <div id="s5q" class="qblock"></div>
+  </div>
+  <button class="btn readbtn" data-done="s5" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ИГРА: БЪЛГАРИ ИЛИ СЛАВЯНИ ===== -->
+<section class="card" id="duel" data-tm="VII в.|·|два народа, две колони">
+  <div class="dossier-tag gold">🎮 ИГРА</div>
+  <h2>Българи или славяни?</h2>
+  <p>Докосни карта от купчината, после докосни колоната, в която според теб принадлежи. Верният отговор остава в колоната, а грешният се връща в купчината.</p>
+  <div class="duel-pool" id="duelPool"></div>
+  <div class="duel-cols">
+    <div class="duel-col" id="colB" data-col="B" role="button" tabindex="0"><h3>🐎 Българи</h3><div class="duel-drop" id="dropB"></div></div>
+    <div class="duel-col" id="colS" data-col="S" role="button" tabindex="0"><h3>🌾 Славяни</h3><div class="duel-drop" id="dropS"></div></div>
+  </div>
+  <div class="fb" id="duelFb"></div>
+  <p id="duelCnt" style="font-weight:700;color:var(--red-2);margin:8px 0 0"></p>
+</section>
+
+<!-- ===== МИНИ ВРЕМЕВА ЛИНИЯ ===== -->
+<section class="card" id="tl" data-tm="II – VII в.|·|по линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
+  <h2>Подреди събитията</h2>
+  <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+</section>
+
+<!-- ===== УЛИКА: ИЗВОР ===== -->
+<section class="card" id="clue" data-tm="VII в.|·|съкровището от Малая Перещепина">
+  <div class="dossier-tag">🔎 УЛИКАТА: ИСТОРИЧЕСКИ ИЗВОР</div>
+  <h2>Пръстенът от съкровището на Кубрат</h2>
+  <p>Този път изворът е вещ, не текст. През 1912 г. в Украйна, край село Малая Перещепина (Полтавска област), са намерени случайно над 800 златни и сребърни предмета: съдове, оръжие, украшения и 69 византийски златни монети. Сред находките е <b>златен пръстен-печат</b> с монограм (вплетени гръцки букви), който се чете като името на Кубрат. Именно такива пръстени помагат на учените да разберат чие е съкровището. Днес то се пази в музея Ермитаж в Санкт Петербург.</p>
+  <div class="stage" style="margin:10px 0">
+    <p style="margin:0">🔍 <b>Какво виждаме на снимката в учебника:</b> златен пръстен с кръгло печатно поле, върху което са врязани преплетени знаци, и до него — златна чаша с богата украса. Монограмът е като кратък „подпис“, с който владетелят запечатва свои документи и вещи.</p>
+  </div>
+  <p style="margin-top:12px">Детективът разпитва улика. Отговори на 4-те въпроса.</p>
+  <div id="clueQs"></div>
+  <p class="note" style="margin-top:10px">Едно предупреждение: докато говорим за „пръстена на Кубрат“, не бива да забравяме, че точната принадлежност на съкровището се обсъжда. Повечето учени го свързват с Кубрат, но има и други мнения.</p>
+</section>
+
+<!-- ===== ДОСИЕТА НА ЛИЧНОСТИТЕ ===== -->
+<section class="card" id="people" data-tm="VII в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Old%20Great%20Bulgaria%20and%20migration%20of%20Bulgarians.png?width=900" alt="Карта на Старата Велика България и разселването на българите">
+      <figcaption>Карта на Старата Велика България (около 632 – 665 г.) и на разселването на българите след смъртта на хан Кубрат.<small>Автор и лиценз: на <a href="https://commons.wikimedia.org/wiki/File:Old_Great_Bulgaria_and_migration_of_Bulgarians.png" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/SB%20-%20Inside%20a%20Kazakh%20yurt.jpg?width=900" alt="Вътрешността на съвременна юрта в Казахстан">
+      <figcaption>Вътрешността на юрта в Казахстан. Номадските народи в степите до днес живеят в жилища от същия тип, като юртата на древните българи.<small>Автор и лиценз: на <a href="https://commons.wikimedia.org/wiki/File:SB_-_Inside_a_Kazakh_yurt.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="VII в.|·|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="📜">Името „българи“ се споменава за първи път в римска хроника от IV в. Някои учени ги наричат „прабългари“, за да ги отличат от по-късния съвременен български народ. Древните българи почитат предците, звездите и животни (куче, вълк, заек) и си служат със собствен календар.</div>
+    <div data-i="🗣️">Учебникът твърди, че и днес използваме думи, запазени от езика на древните българи: мома, момък, бисер, кокиче, кутре. <i>Според езиковедите обаче произходът на тези думи е спорен: например „момък“ и „мома“ се смятат за славянски, а „бисер“ е заета през тюркски, от арабски. Затова ги представяме като „според учебника“.</i></div>
+    <div data-i="💰">Съкровището от Малая Перещепина е намерено през 1912 г. от двама млади пастири, които се препънали в златен съд. Намерено е над 50 кг злато и сребро, а според някои изследователи принадлежи на хан Кубрат.</div>
+    <div data-i="🏺">В учебника има изображение на „български воин“ върху златна кана от съкровището от Наг Сент Миклош (дн. Румъния, IX в.). Учените обаче спорят чие е съкровището: днес мнозина го смятат за аварско, а други — за българско.</div>
+    <div data-i="🏛️">Византийският патриарх и летописец Никифор пише, че през 635 г. император Ираклий дава на Кубрат титлата „патриций“ — висока византийска почест. Така се вижда как българският хан и византийският двор поддържат връзки.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ПРЕДАНИЕ ===== -->
+<section class="card" id="legend" data-tm="665|VII в.|шатрата на умиращия хан">
+  <div class="dossier-tag navy">📖 ПРЕДАНИЕ — НЕ Е ИЗВОР</div>
+  <h2>Снопът пръчки</h2>
+  <p class="note">⚠️ Тази история е <b>предание</b>, т.е. разказва се от поколение на поколение, но не е документ от епохата. Затова я четем като красива легенда, а не като доказателство.</p>
+  <p>Разказват, че умиращият Кубрат извикал синовете си и им дал сноп тънки пръчки. Никой не можал да счупи снопа наведнъж. Тогава ханът развързал пръчките и всеки син лесно счупил по една. „Докато сте заедно, нищо не може да ви победи“, казал бащата. В действителност византийският летописец Никифор пише само, че Кубрат е посъветвал синовете си никога да не се делят — това е завещание на един владетел, а не точен разказ за снопа.</p>
+  <div class="task">
+    <h3>👆 Счупи ли пръчките?</h3>
+    <div class="stickbox" id="stickBox">
+      <div class="sticks" id="sticks">🪵🪵🪵🪵🪵</div>
+      <div class="row"><button class="btn ghost small" id="stickBtn">Счупи снопа наведнъж</button></div>
+      <p class="stickcap" id="stickCap">Опитай!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== АНИМАЦИЯ ===== -->
+<section class="card" id="anim">
+  <div class="dossier-tag navy">🎞 АНИМАЦИЯ</div>
+  <h2>Петте посоки</h2>
+  <p>След смъртта на Кубрат неговата държава се разпада и синовете поемат на различни страни. Натисни бутона и гледай как пет лъча излитат от една точка.</p>
+  <div class="dirbox" id="dirBox">
+    <svg viewBox="0 0 300 175" role="img" aria-label="Пет стрелки излизат от една точка">
+      <g id="dirG"></g>
+      <circle cx="150" cy="80" r="8" fill="var(--red)"/>
+      <text x="150" y="104" text-anchor="middle" class="dirt">Кубрат</text>
+    </svg>
+    <span class="dircap" id="dirCap">Натисни „Пусни“.</span>
+  </div>
+  <button class="btn ghost small" id="dirBtn" style="margin-top:10px">▶ Пусни</button>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="635|VII в.|двор на хан Кубрат">
+  <div class="dossier-tag">🎭 РОЛЯ</div>
+  <h2>Ти си византийски пратеник при хан Кубрат</h2>
+  <p class="note">⚠️ Разказът е <b>измислен</b>, но обстоятелствата са истински.</p>
+  <div data-story>
+    <p>Ти си млад пратеник на император Ираклий. Пристигаш до хановата юрта — голяма, от бяла кожа, със златна украса. Носиш писмо, дарове и титла, с която императорът иска да спечели Кубрат за приятел.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Кубрат те пита: „Защо Византия ми носи дарове?“</h3>
+    <div class="opts" id="roleOpts"></div>
+    <div class="fb" id="roleFb"></div>
+  </div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="665|VII в.|хановият двор, след смъртта му">
+  <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
+  <h2>Кой лъже?</h2>
+  <p>Трима свидетели разказват накъде тръгват синовете на Кубрат. Двама от тях казват истината, а един лъже. Прочети внимателно и докосни лъжеца. (Подсказка: картата отгоре помага!)</p>
+  <div class="opts" id="witnesses"></div>
+  <div class="fb" id="witFb"></div>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Монограм на хан</h2>
+  <p>Пръстенът на Кубрат е запечатвал документи и вещи с кратък монограм. Направи свой собствен печат на лист:</p>
+  <ul>
+    <li>избери 3 – 4 букви или знаци (например първите букви на името си);</li>
+    <li>вплети ги в един кръг като монограм;</li>
+    <li>добави малък символ — кон, звезда или слънце — за българския хан.</li>
+  </ul>
+  <p><b>По желание:</b> нарисувай и юртата на хана с кръгъл отвор отгоре.</p>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Бонус на испански</h3>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Чирак</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Хронист</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="665|VII в.|Дунавската делта">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>Какво се случва със семейството на Кубрат?</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 632</b> · Старата Велика България (хан Кубрат)</span>
+    <span><b>II – IV в.</b> · българите идват от Азия към Европа</span>
+    <span><b>края на VI в.</b> · южните славяни се заселват на Балканите</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>През II – IV в. древните българи се преселват от Централна Азия към Европа. Част от тях заемат земите на север от Кавказ, а други продължават с хуните към Централна Европа. През V – VII в. са съюзници или врагове на Византия.</li>
+    <li>Славяните са три групи — източни, западни и южни. Първо са под властта на готите, после на хуните. След разпада на хунския съюз се разселват. От края на VI в. южните славяни трайно се заселват на Балканите.</li>
+    <li>Древните българи са номади: скотовъдство (коне), лов и риболов, постепенно земеделие, занаяти (ковачество, златарство). Живеят в юрти и вярват в Тангра. Начело на племето е ханът — и върховен жрец; властта му става наследствена.</li>
+    <li>Славяните са земеделци. Живеят в землянки, селищата им са край реки, езера и гори. Почитат много богове (Перун е върховен), вярват в самодиви и русалки. Начело на племето е княз, а решенията се вземат от събрание.</li>
+    <li>През <b>632 г.</b> хан Кубрат от рода Дуло създава Старата Велика България — на север от Черно и Азовско море. Поддържа мир с Византия. След смъртта му държавата се разпада.</li>
+    <li>Синовете на Кубрат запазват българската държавност на различни места. Котраг тръгва по Волга (Волжка България — до XIII в.). Алцек отива в Южна Италия. Кубер заема югозападната част на Балканите. Аспарух — североизточната, където започва днешна България.</li>
+    <li>Добре развитата военна организация и едноличната власт са важна причина за появата на български държави в различни райони на Европа.</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 22 – 23. Извън учебника са добавени: пръстенът от Малая Перещепина като улика (находка през 1912 г., над 800 предмета, 69 византийски монети, монограм с името на Кубрат, пази се в Ермитажа; принадлежността към Кубрат се обсъжда); титлата „патриций“ от император Ираклий (635 г., по Никифор); предание за снопа пръчки (ясно отбелязано като предание); етимологиите на „княз“ и „бисер“. Думите мома, момък, кокиче и кутре са дадени „според учебника“ със забележка за спор. Ролята и загадката са измислени.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/Pereshchepina_Treasure" target="_blank" rel="noopener">Pereshchepina Treasure</a> · <a href="https://bibliophilia.eu/the-treasure-of-khan-kubrat" target="_blank" rel="noopener">The treasure of khan Kubrat</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Kubrat" target="_blank" rel="noopener">Kubrat</a> · <a href="https://en.wikipedia.org/wiki/Old_Great_Bulgaria" target="_blank" rel="noopener">Old Great Bulgaria</a> · <a href="https://en.wikipedia.org/wiki/Sermesianoi" target="_blank" rel="noopener">Sermesianoi</a></li>
+      <li><a href="https://www.wikipedia.org/wiki/Knjaz" target="_blank" rel="noopener">Knjaz</a> · <a href="https://www.etymonline.com/index.php?term=king" target="_blank" rel="noopener">king</a></li>
+      <li><a href="https://journals.azbuki.bg/bel/km-izvorite-na-blgarskite-dumi-v-blgarskiya-etimologicen-recnik/pdf" target="_blank" rel="noopener">За думите в Българския етимологичен речник</a> · <a href="https://bg.wiktionary.org/wiki/%D0%BC%D0%BE%D0%BC%D1%8A%D0%BA" target="_blank" rel="noopener">момък — Уикиречник</a></li>
+      <li><a href="https://artofthemiddleages.com/s/main/item/1268" target="_blank" rel="noopener">Nagyszentmiklós Treasure</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-04-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var EX=(SAVED&&SAVED.ex)||{};
+var booted=false;
+function tlOrderNow(){return (typeof sortl!=='undefined'&&sortl)?$$('.sitem',sortl).map(function(li){return +li.getAttribute('data-i')}):(EX.tlOrder||[])}
+function saveNow(){
+  if(!booted)return;
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:{
+      tSeen:tSeen,t2Seen:t2Seen,t3Seen:t3Seen,pathSeen:pathSeen,chainN:chainN,mapCur:mapCur,mapReach:mapReach,
+      heard:heard,ySeen:ySeen,fI:fI,jumped:jumped,duelDone:duelDone,
+      tlOrder:tlOrderNow(),tlSolved:sortl.classList.contains('sorted'),tlTries:tlTries,
+      roleI:roleI,witState:witState,stickDone:stickDone,dirPlayed:dirPlayed
+    }}))
+  }catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','s5','dyk'];
+var FLAGS=['jump','path','slavpath','nomad','kubrat','sons','cartograph','slavs','s5q','duel','tl','clue','stick','role','puzzle'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=EX.jumped||false;
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;var b=this;b.disabled=true;
+  var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $('#dY').textContent=Math.round(2026-(2026-632)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($('#dC'),'VII в.');setDial($('#dP'),'Фанагория, северно от Азовско море');setTM('632','VII в.','Фанагория');
+      b.textContent='✓ Пристигна в 632 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
+      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички места на картата'},
+  {id:'sons',ic:'🧭',n:'Следотърсач',d:'Проследи петте разселвания'},
+  {id:'duelist',ic:'🎮',n:'Познавач',d:'Разпредели всички карти „българи или славяни“'},
+  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди линията на времето'},
+  {id:'corrector',ic:'🔎',n:'Разобличител',d:'Разкрий кой лъже'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'kubrat',n:'Кубрат',y:'ок. 605 – ок. 665',av:'👑',sp:'⚡ Създател на Велика България',how:'Мини през историята на Старата Велика България (досие №3)',back:'Хан от рода Дуло. През 632 г. създава Старата Велика България, на север от Черно и Азовско море, и поддържа мир с Византия.<br><br>💡 Печатът с неговото име е сред находките от съкровището при Малая Перещепина.'},
+  {id:'kotrag',n:'Котраг',y:'VII в.',av:'🌊',sp:'⚡ Посока Волга',how:'Стигни до разселване №2 на картата',back:'Син на Кубрат. След смъртта на баща си повежда част от народа по река Волга.<br><br>💡 Там по-късно възниква Волжка България, която просъществува до XIII в.'},
+  {id:'alcek',n:'Алцек',y:'VII в.',av:'⛰️',sp:'⚡ Към Южна Италия',how:'Стигни до разселване №3 на картата',back:'Син на Кубрат. Водените от него българи се заселват в Южна Италия.<br><br>💡 Така българи се озовават на хиляди километри от степите на Азов.'},
+  {id:'kuber',n:'Кубер',y:'VII в.',av:'🏞️',sp:'⚡ Югозападните Балкани',how:'Стигни до разселване №4 на картата',back:'Син на Кубрат. Предвожданите от него българи заемат югозападната част на Балканския полуостров.<br><br>💡 Още едно място, където българската държавност оцелява по различен път.'},
+  {id:'asparuh',n:'Аспарух',y:'VII в.',av:'⭐',sp:'⚡ Началото на днешна България',how:'Стигни до разселване №5 на картата',back:'Син на Кубрат. Неговите българи заемат североизточната част на Балканите — там се слага началото на днешна България.<br><br>💡 Това е най-важният от петте пътя за нашата история.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'Българите не са сами в Европа: по пътя си срещат хуни, Византия и славяни, но пазят своя ред и своя вожд.',
+  2:'През 632 г. Кубрат създава голяма държава и мирува с Византия — държавата стои на плещите на един силен хан.',
+  3:'След смъртта на Кубрат държавата се разпада, а синовете му отвеждат хората си по различни места: Волга, Италия, Панония, Балканите.',
+  4:'Групата на Аспарух поставя началото на днешна България — българската държавност продължава на ново място.'
+};
+var CLUE_FOR={s1:1,s3:2,s5:4};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  prabalgari:['Древни българи (прабългари)','Така учените наричат ранните българи, за да ги различат от по-късния съвременен български народ.'],
+  nomad:['Номади','Хора, които не живеят на едно място, а се местят със стадата си в търсене на пасища.'],
+  yurta:['Юрта','Палатка от пръти, покрити с кожа. По средата има кръгъл отвор, откъдето излиза димът от огнището.'],
+  tangra:['Тангра','Върховният бог на древните българи. Името му значи „Небе“.'],
+  han:['Хан / кан','Титла на племенен вожд или на самостоятелен владетел при древните българи.'],
+  dulo:['Дуло','Родът, от който произлиза хан Кубрат.'],
+  knyaz:['Княз','Титла на племенен вожд или на самостоятелен владетел при славяните.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+
+/* ================= плочки (общ помощник) ================= */
+function tilesInit(attr,TXT,seen,flagKey,bonusMsg){
+  $$('.tile['+attr+']').forEach(function(t){t.addEventListener('click',function(){
+    var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+    t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+    if(Object.keys(seen).length===TXT.length&&flag(flagKey))addXP(3,bonusMsg);
+  })});
+}
+function tilesRestore(attr,TXT,seen){
+  Object.keys(seen).forEach(function(i){var t=$('.tile['+attr+'="'+i+'"]');if(t&&!t.classList.contains('open')){t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open')}});
+}
+
+/* ================= ДОСИЕ 1: ПЪТ (ribbon) + ПЛОЧКИ ================= */
+var PATHR=[
+  {n:'Азия → Европа',f:1,c:'#5B6270',t:'II – IV в. — от Азия към Европа',d:'Древните българи се преселват от Централна Азия към Европа.'},
+  {n:'Кавказ · хуните',f:1,c:'#9E1B32',t:'На север от Кавказ и с хуните',d:'Част от българите заемат земите на север от Кавказките планини, а други продължават с хуните към Централна Европа.'},
+  {n:'Византия',f:1,c:'#1B2A41',t:'V – VII в. — съюзници или врагове на Византия',d:'Българите се вписват трайно в историята на Византия — ту като съюзници, ту като врагове.'}
+];
+$('#path').innerHTML=PATHR.map(function(e,i){return '<button data-e="'+i+'" style="flex:'+e.f+';background:'+e.c+'">'+e.n+'</button>'}).join('');
+var pathSeen=EX.pathSeen||{};
+$$('#path button').forEach(function(b){b.addEventListener('click',function(){
+  var i=+b.getAttribute('data-e'),e=PATHR[i];
+  $$('#path button').forEach(function(x){x.classList.toggle('active',x===b)});
+  $('#pathInfo').innerHTML='<h3>'+e.t+'</h3><p>'+e.d+'</p>';
+  if(!pathSeen[i]){pathSeen[i]=1;b.classList.add('seen');addXP(2);
+    if(Object.keys(pathSeen).length===PATHR.length&&flag('path'))addXP(5,'Целият път на българите!');}
+})});
+var SLAVP=['Славяните са три големи групи: източни, западни и южни.','В началото на преселението са под властта на готите, а след разгрома им — под властта на хуните.','Когато хунският съюз се разпада, славяните се разселват масово. Южните заемат земите на север от Дунав и оттам нападат Византия за плячка.','От края на VI в. южните славяни започват трайно да се заселват в балканските провинции на Византия.'];
+var tSeen=EX.tSeen||{};
+tilesInit('data-tile',SLAVP,tSeen,'slavpath','Пътят на славяните!');
+
+/* ================= ДОСИЕ 2: ДРЕВНИТЕ БЪЛГАРИ (плочки) ================= */
+var NOM=['Скотовъдство (най-вече коне), лов и риболов. С уседналия живот постепенно навлиза и земеделието. Живеят в юрти.','Усъвършенстват ковачеството, златарството и други занаяти. Златните вещи от съкровището на хан Кубрат са пример.','Вярват в един бог — Тангра („Небе“).','Начело на племето е хан, който е и върховен жрец. Властта му става наследствена, а родовете на владетелите се утвърждават като управляващи династии.'];
+var t2Seen=EX.t2Seen||{};
+tilesInit('data-tile2',NOM,t2Seen,'nomad','Опозна древните българи!');
+
+/* ================= ДОСИЕ 3: СТАРАТА ВЕЛИКА БЪЛГАРИЯ (chain) ================= */
+var CHAINN=['<b>632 г. — държавата</b> · хан Кубрат от рода Дуло създава Старата Велика България в земите на север от Черно и Азовско море.','<b>Мир с Византия</b> · Кубрат поддържа мирни отношения с Византийската империя. (По византийския летописец Никифор император Ираклий му дава титлата „патриций“.)','<b>След Кубрат</b> · след смъртта на великия хан държавата се разпада. Синовете му поемат по различни пътища.'];
+var chainN=EX.chainN||0;
+$$('#chain button').forEach(function(b){b.addEventListener('click',function(){
+  var n=+b.getAttribute('data-n');if(b.classList.contains('open'))return;
+  b.classList.add('open');b.innerHTML=CHAINN[n];addXP(2);chainN=Math.max(chainN,n+1);
+  var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}
+  else if(flag('kubrat')){addXP(3,'Историята на държавата!');unlockCard('kubrat')}
+})});
+
+/* ================= ДОСИЕ 4: СЛАВЯНИТЕ (плочки) ================= */
+var SLAV=['Отглеждат зърнени култури и домашни животни. От местните на Балканите научават за маслините и лозята.','Живеят в землянки, полувкопани в земята. Селищата им са край реки, езера и гори.','Почитат много богове, а най-главен е Перун — творец на мълнията. В горите и реките живеят самодиви и русалки.','Начело на племето е княз, но важните решения се вземат от събрание на племето.'];
+var t3Seen=EX.t3Seen||{};
+tilesInit('data-tile3',SLAV,t3Seen,'slavs','Опозна славяните!');
+
+/* ================= ДОСИЕ 5: ИЗВОДЪТ ================= */
+(function(){
+  var Q={q:'Според учебника, коя е важна причина за появата на български държави в различни райони на Европа?',o:['Добре развитата военна организация и едноличната власт','Само слабостта на Византия','Това, че българите живеят в землянки'],a:0,e:'Развитата военна организация и едноличната власт на хана са важна причина за появата на български държави.'};
+  oneQ($('#s5q'),Q,'s5q',5);restoreOneQ($('#s5q'),Q,'s5q');
+})();
+
+/* ================= КАРТА: ОБЩА ГЕОГРАФИЯ ================= */
+var MK=8.565,COS=0.766;
+function P(lon,lat){return [((lon+11)*MK*COS).toFixed(1),((58-lat)*MK).toFixed(1)]}
+function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
+function linePath(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+var SEA={
+ med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
+ marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
+ black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]],
+ red:[[32.6,29.95],[33.3,28.6],[34.25,27.75],[34.6,28.4],[34.95,29.5],[34.9,28.2],[35.3,28.0],[36.6,25.8],[38.1,24.0],[39.2,21.5],[39.6,19.5],[37.5,19.5],[37.2,21.0],[36.9,22.0],[35.5,24.0],[34.0,26.3],[33.5,27.3],[32.6,29.6]],
+ atl:[[-12,20],[-12,28.3],[-10.2,29.4],[-9.7,30.5],[-9.8,31.5],[-9.2,32.5],[-8.5,33.3],[-7.6,33.6],[-6.8,34.0],[-6.2,35.2],[-5.9,35.8],[-5.6,36.0],[-6.3,36.5],[-7.4,37.2],[-7.9,37.0],[-8.95,37.0],[-8.8,38.4],[-9.5,38.7],[-9.0,40.0],[-8.7,41.2],[-8.9,42.5],[-9.3,42.9],[-8.4,43.4],[-7.0,43.6],[-5.7,43.6],[-3.8,43.5],[-1.8,43.4],[-1.5,43.5],[-1.2,44.6],[-1.2,46.0],[-2.2,47.2],[-3.0,47.5],[-4.4,47.8],[-4.7,48.4],[-3.0,48.8],[-1.6,48.7],[-1.9,49.7],[-1.3,49.7],[-0.2,49.3],[0.1,49.5],[1.5,50.1],[1.9,51.0],[3.6,51.4],[4.2,52.0],[4.7,52.9],[5.3,53.4],[7.0,53.6],[8.5,53.6],[8.9,54.0],[8.6,55.0],[8.1,55.5],[8.2,56.7],[9.5,57.1],[10.6,57.7],[10.5,57.2],[10.3,56.5],[10.2,56.0],[9.9,55.2],[10.0,54.8],[10.2,54.4],[10.9,54.0],[12.1,54.2],[13.4,54.6],[14.2,53.9],[16.0,54.3],[17.5,54.8],[18.7,54.4],[19.6,54.5],[20.0,54.9],[21.1,55.7],[21.0,56.5],[21.5,57.4],[22.5,57.7],[23.8,57.0],[24.4,57.3],[24.3,59],[16.7,59],[16.7,58.0],[16.6,57.8],[16.4,56.7],[15.9,56.1],[14.3,55.9],[13.9,55.4],[13.0,55.6],[12.7,56.0],[12.6,56.6],[11.9,57.7],[11.3,59],[7.5,59],[7.0,58.0],[6.0,58.3],[5.5,59],[-12,59]]
+};
+var ISL={
+ sic:{p:[[12.4,38.1],[13.4,38.2],[15.6,38.3],[15.1,37.1],[15.1,36.7],[14.3,37.0],[12.6,37.6]]},
+ cre:{p:[[23.5,35.6],[24.6,35.5],[26.3,35.3],[26.1,35.0],[24.6,35.1],[23.6,35.2]]},
+ cyp:{p:[[32.3,35.1],[33.0,35.4],[34.6,35.7],[33.9,35.0],[32.9,34.6],[32.3,34.8]]}
+};
+SEA.casp=[[47.0,45.0],[47.4,43.0],[48.4,41.9],[49.2,40.5],[49.0,39.2],[49.0,38.0],[50.3,37.0],[53,36.8],[54,37.5],[53.9,39.5],[53,40.5],[52.8,41.8],[53,42.5],[51,44.5],[51.2,45.5],[53,46.5],[53,47],[50,46.9],[48.5,46.5],[47.2,45.9]];
+/* територии към средата на VII в. (опростено); чертаят се ПОД морето, така че брегът ги изрязва */
+var TER=[
+ {id:'slav',c:'#B5D99C',pts:[[12.5,52.5],[13.5,55],[19,55],[24,57.5],[30,58],[40,58],[41,52],[38,50.5],[32,50.2],[29,49.2],[26,48],[28,45.3],[24,45.2],[22.8,46.2],[24,48.5],[22,49.3],[18.5,49.7],[14,50.2],[12.2,51]]},
+ {id:'frank',c:'#9DB0CF',pts:[[-4.5,48.4],[-1.8,43.4],[3,42.5],[7.2,43.6],[7.6,46],[8.5,47.5],[9.5,49.5],[8,52],[7,53.4],[4,52],[2,51.2],[-1.8,49.7]]},
+ {id:'byz',c:'#B9A4D6',pts:[[12,38],[15,41.8],[17,41.2],[19,42.5],[20,43.2],[22.5,44],[28,43.8],[28.8,44.3],[30,45.2],[31,44],[31,41.3],[36,42],[41.5,42],[44,40.8],[45,37.5],[36.2,36.6],[30,36],[24,35.5],[18,36],[12,36.5]]},
+ {id:'avar',c:'#8FC6C6',pts:[[16.5,47.8],[17.5,48.8],[20,49.3],[22.8,49],[24.5,47.8],[24.2,46],[22.5,45.2],[20.5,45.1],[19,45.6],[17.5,45.9]]},
+ {id:'ogb',c:'#F0A35E',pts:[[29.5,46.5],[31.5,48.3],[34,50.2],[39,50.5],[44,49.5],[47.5,47.5],[47.5,44.5],[45,43],[41.5,43.3],[39.7,44],[38,45.2],[37.5,46],[35.5,45.5],[34,46.2],[32,46.1]]}
+];
+var TLAB=[['ФРАНКСКО',2,47.6],['КРАЛСТВО',2,46.4],['западни',17.5,52.6],['източни',31,54],['южни',25.8,45.7],['АВАРСКИ',19.8,49.6],['ХАГАНАТ',19.8,48.9],['СТАРА ВЕЛИКА',38,48.4],['БЪЛГАРИЯ',38,47.5],['ВИЗАНТИЯ',35,39.4]];
+function buildBaseMap(id){
+  var s='<rect width="400" height="308" style="fill:var(--land)"/>';
+  TER.forEach(function(t){s+='<path d="'+poly(t.pts)+'" style="fill:'+t.c+';stroke:#fff;stroke-width:.8"/>'});
+  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea)"/>'});
+  Object.keys(ISL).forEach(function(k){s+='<path d="'+poly(ISL[k].p)+'" style="fill:var(--land)"/>'});
+  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'"/>'});
+  Object.keys(ISL).forEach(function(k){s+='<path class="coast" d="'+poly(ISL[k].p)+'"/>'});
+  function T(txt,lon,lat,cls){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'">'+txt+'</text>'}
+  s+=T('СРЕДИЗЕМНО МОРЕ',9.5,35.3,'maplabel')+T('ЧЕРНО МОРЕ',34.5,42.2,'maplabel')+T('А Ф Р И К А',4,27,'contlabel');
+  TLAB.forEach(function(l){s+=T(l[0],l[1],l[2],'tlabel')});
+  $('#'+id).innerHTML=s;
+}
+buildBaseMap('mapSvg');
+
+/* ================= ГЛАВНА КАРТА: ПЕТТЕ РАЗСЕЛВАНИЯ ================= */
+var MCOL='#9E1B32';
+var PTS=[
+  {id:'fan',n:'Фанагория',lon:37.0,lat:45.3,d:'Град при Азовско море. Смята се, че оттук хан Кубрат управлява Старата Велика България, която е на север от Черно и Азовско море.'},
+  {id:'pan',n:'Панония',lon:19.5,lat:47.3,a:'end',dy:-10,d:'Карпатската котловина — земите на Аварския хаганат. Част от българите се заселват тук (разселване №1 на картата в учебника).'},
+  {id:'volga',n:'Волга',lon:48.2,lat:55.0,a:'end',d:'Тук Котраг повежда част от народа. По-късно възниква Волжка България, която просъществува до XIII в.'},
+  {id:'ital',n:'Южна Италия',lon:15.8,lat:40.2,a:'end',dy:12,d:'Българите на Алцек се заселват в Южна Италия — далеч от степите, където е държавата на Кубрат.'},
+  {id:'mak',n:'ЮЗ Балкани',lon:21.3,lat:41.0,dy:14,d:'Югозападната част на Балканския полуостров — тук заселването на българите на Кубер.'},
+  {id:'dun',n:'Дунавско устие',lon:29.0,lat:45.2,dy:14,d:'Североизточните земи на Балканите — оттук Аспарух слага началото на днешна България.'},
+  {id:'cpl',n:'Константинопол',lon:28.98,lat:41.01,d:'Столицата на Византия. С империята българите са ту съюзници, ту врагове.'},
+  {id:'rome',n:'Рим',lon:12.5,lat:41.9,a:'end',dx:-8,d:'Рим е ориентир на картата: българите на Алцек се заселват в Южна Италия — на юг от Рим.'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){var c=P(p.lon,p.lat);var a=p.a||'start',dx=(p.dx!==undefined?p.dx:(a==='end'?-8:8)),dy=(p.dy||0)+4;
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+c[0]+','+c[1]+')"><circle class="halo" r="6" stroke="'+MCOL+'"/><circle class="dot" r="6" fill="'+MCOL+'"/><text x="'+dx+'" y="'+dy+'" text-anchor="'+a+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+MCOL+'"></i>'+p.n+'</button>'}).join('');
+})();
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.n+'</h3><p>'+p.d+'</p>';
+  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('cartograph'))award('cartograph');}
+}
+$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+
+var ROUTES=[
+  {step:1,cls:'r1',pts:[[37,47.8],[31,48.2],[25,47.6],[19.8,47.2]]},
+  {step:2,cls:'r2',pts:[[41,49],[44,51.5],[46.5,53.5],[48,55]]},
+  {step:3,cls:'r3',pts:[[19.8,47.2],[17.5,45],[15,42.8],[14.5,41.4]]},
+  {step:4,cls:'r4',pts:[[19.8,47.2],[20.8,45],[21.2,43],[21.3,41.2]]},
+  {step:5,cls:'r5',pts:[[36,47.2],[32,46.5],[29.2,45.3]]}
+];
+(function(){
+  var g='<g class="routes" id="routesG">';
+  ROUTES.forEach(function(r){
+    g+='<path data-step="'+r.step+'" class="'+r.cls+'" pathLength="1" d="'+linePath(r.pts)+'"/>';
+    var a=P(r.pts[r.pts.length-2][0],r.pts[r.pts.length-2][1]),b=P(r.pts[r.pts.length-1][0],r.pts[r.pts.length-1][1]);
+    var ax=+a[0],ay=+a[1],bx=+b[0],by=+b[1],dx=bx-ax,dy=by-ay,L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var h=[[bx,by],[bx-dx*9+dy*4.5,by-dy*9-dx*4.5],[bx-dx*9-dy*4.5,by-dy*9+dx*4.5]].map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+    g+='<polygon data-step="'+r.step+'" class="head '+r.cls+'" points="'+h+'"/>';
+  });
+  g+='</g>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+})();
+var MSTEPS=[
+  {cap:'<b>Преди разселванията.</b> Старата Велика България е на север от Черно и Азовско море. До нея са земите на славяните, Аварският хаганат, Франкското кралство и Византия. Натисни „Следващ син“.'},
+  {cap:'<b>№1 · Панония.</b> Част от българите се установяват в Панония — Карпатската котловина, в земите на Аварския хаганат.'},
+  {cap:'<b>№2 · Котраг.</b> След смъртта на хан Кубрат синът му Котраг повежда част от народа по река Волга. Там по-късно възниква Волжка България, която просъществува до XIII в.'},
+  {cap:'<b>№3 · Алцек.</b> Друга част от народа, водена от Алцек, се заселва в Южна Италия.'},
+  {cap:'<b>№4 · Кубер.</b> Предвожданите от Кубер българи заемат югозападната част на Балканския полуостров.'},
+  {cap:'<b>№5 · Аспарух.</b> Българите на Аспарух заемат североизточната част на Балканите, където слагат началото на днешна България.'}
+];
+var mapCur=EX.mapCur||0, mapReach=EX.mapReach||0;
+var STEPCARD={2:'kotrag',3:'alcek',4:'kuber',5:'asparuh'};
+function mapStep(i,quiet){
+  mapCur=i;var st=MSTEPS[i];
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',k<=mapReach&&k>0)});
+  $$('#routesG [data-step]').forEach(function(p){p.classList.toggle('show',+p.getAttribute('data-step')<=i)});
+  $('#stepCap').innerHTML=st.cap;
+  $('#nextSon').textContent=i>=5?'↺ Отначало':'Следващ син →';
+  $('#mapLegend').innerHTML=
+    '<span><i style="background:#B5D99C"></i>славяни</span><span><i style="background:#8FC6C6"></i>Аварски хаганат</span><span><i style="background:#F0A35E"></i>Стара Велика България</span><span><i style="background:#B9A4D6"></i>Византия</span><span><i style="background:#9DB0CF"></i>Франкско кралство</span>'+
+    '<span><i style="background:#1B2A41"></i>№1 Панония</span><span><i style="background:#9E1B32"></i>№2 Котраг</span><span><i style="background:#7A5A10"></i>№3 Алцек</span><span><i style="background:#1E8E4E"></i>№4 Кубер</span><span><i style="background:#C9962B"></i>№5 Аспарух</span>';
+  if(!quiet&&i>mapReach){
+    mapReach=i;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',k<=mapReach&&k>0)});
+    addXP(3);
+    if(STEPCARD[i])unlockCard(STEPCARD[i]);
+    if(i===5&&flag('sons')){award('sons');setTimeout(function(){giveClue(3)},700)}
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){mapStep(+b.getAttribute('data-st'))})});
+$('#nextSon').addEventListener('click',function(){mapStep(mapCur>=5?0:mapCur+1)});
+mapStep(mapCur,true);
+
+/* ================= ИГРА: БЪЛГАРИ ИЛИ СЛАВЯНИ ================= */
+var DUEL=[
+  {t:'⛺ Юрта — палатка от пръти и кожа',c:'B',e:'Юртата е основното жилище на древните българи.'},
+  {t:'🏚️ Землянка, полувкопана в земята',c:'S',e:'Славяните живеят в землянки край реки, езера и гори.'},
+  {t:'☁️ Тангра — богът „Небе“',c:'B',e:'Древните българи вярват в един бог — Тангра.'},
+  {t:'⚡ Перун — творецът на мълнията',c:'S',e:'Перун е върховният бог на славяните.'},
+  {t:'👑 Хан — вожд и върховен жрец',c:'B',e:'Начело на българското племе е хан, който е и върховен жрец.'},
+  {t:'🛡️ Княз — племенен вожд',c:'S',e:'Начело на славянското племе е княз.'},
+  {t:'🐎 Номади — скотовъдство и коне',c:'B',e:'Българите са номади и отглеждат най-вече коне.'},
+  {t:'🌾 Земеделци — зърнени култури, лозя, маслини',c:'S',e:'Славяните са земеделци, а от местните на Балканите научават за маслините и лозята.'},
+  {t:'📜 Наследствена власт, управляващи династии',c:'B',e:'При българите ханската власт става наследствена и родовете образуват династии.'},
+  {t:'🗣️ Събрание на племето решава важните въпроси',c:'S',e:'При славяните важните решения се вземат от събрание на племето.'},
+  {t:'🧚 Самодиви и русалки в горите и реките',c:'S',e:'Славяните вярват в самодиви и русалки — свръхестествени същества с женски образ.'},
+  {t:'⭐ Почит към предците, звездите и животни (куче, вълк, заек)',c:'B',e:'Това е свързано с древните българи (рубриката „Любопитно“ в учебника).'}
+];
+var duelDone=EX.duelDone||[], duelSel=null;
+function duelRender(){
+  var pool=$('#duelPool'),B=$('#dropB'),Sl=$('#dropS');pool.innerHTML='';B.innerHTML='';Sl.innerHTML='';
+  shuffle(DUEL.map(function(_,i){return i})).forEach(function(i){
+    if(duelDone.indexOf(i)>=0)return;
+    var b=document.createElement('button');b.className='duel-chip';b.setAttribute('data-i',i);b.textContent=DUEL[i].t;
+    b.addEventListener('click',function(){duelSel=(duelSel===i?null:i);$$('.duel-chip').forEach(function(x){x.classList.toggle('sel',+x.getAttribute('data-i')===duelSel)})});
+    pool.appendChild(b);
+  });
+  duelDone.forEach(function(i){var s=document.createElement('span');s.className='duel-tag';s.textContent='✓ '+DUEL[i].t;(DUEL[i].c==='B'?B:Sl).appendChild(s)});
+  $('#duelCnt').textContent='Разпределени: '+duelDone.length+' от '+DUEL.length;
+  if(duelDone.length===DUEL.length&&!pool.children.length)pool.innerHTML='<span style="color:var(--ok);font-weight:700">✓ Купчината е празна!</span>';
+}
+function duelPlace(col){
+  var fb=$('#duelFb');
+  if(duelSel===null){fb.className='fb bad';fb.innerHTML='<b>Първо избери карта.</b> Докосни карта от купчината, после колона.';return}
+  var it=DUEL[duelSel];
+  if(it.c===col){
+    duelDone.push(duelSel);duelSel=null;fb.className='fb ok';fb.innerHTML='<b>Вярно!</b> '+it.e;addXP(2);duelRender();
+    if(duelDone.length===DUEL.length&&flag('duel')){addXP(10,'Всичко е на мястото си!');award('duelist')}
+  }else{
+    fb.className='fb bad';fb.innerHTML='<b>Не е тази колона.</b> '+it.e+' Опитай пак.';duelSel=null;$$('.duel-chip').forEach(function(x){x.classList.remove('sel')});
+  }
+  saveNow();
+}
+$$('.duel-col').forEach(function(c){
+  c.addEventListener('click',function(){duelPlace(c.getAttribute('data-col'))});
+  c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();duelPlace(c.getAttribute('data-col'))}});
+});
+duelRender();
+
+/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
+var TL=[['II – IV в.','Българите тръгват от Централна Азия към Европа'],['IV в.','Първо споменаване на „българите“ в римска хроника'],['V в.','Хунският съюз се разпада и славяните се разселват масово'],['края на VI в.','Южните славяни започват трайно да се заселват на Балканите'],['632 г.','Хан Кубрат създава Старата Велика България'],['след смъртта на Кубрат','Държавата се разпада — синовете поемат по различни пътища']];
+var sortl=$('#sortl');
+function tlRender(order){
+  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+' ·</span>'+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+  $$('.sitem',sortl).forEach(bindItem);
+}
+var order0=(EX.tlOrder&&EX.tlOrder.length===TL.length)?EX.tlOrder:(function(){var o;do{o=shuffle([0,1,2,3,4,5])}while(o.join()==='0,1,2,3,4,5');return o})();
+tlRender(order0);
+var TLOK='<b>Отлично, хронисте!</b> От първите преселения до разселването на синовете на Кубрат минават няколко века.';
+if(EX.tlSolved){
+  sortl.classList.add('sorted');
+  $$('.sitem',sortl).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});
+  $('#tlCheck').disabled=true;
+  $('#tlFb').className='fb ok';
+  $('#tlFb').innerHTML=TLOK;
+}
+function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb';saveNow()}
+function bindItem(li){
+  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+    if(sortl.classList.contains('sorted'))return;
+    var d=+b.getAttribute('data-mv');
+    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
+    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
+    clearMarks();
+  })});
+  var h=$('.handle',li),startY=0,dragging=false,pid=null;
+  h.addEventListener('pointerdown',function(ev){
+    if(sortl.classList.contains('sorted'))return;
+    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+    try{h.setPointerCapture(pid)}catch(e){}
+    ev.preventDefault();
+  });
+  h.addEventListener('pointermove',function(ev){
+    if(!dragging||ev.pointerId!==pid)return;
+    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+    var prev=li.previousElementSibling,next=li.nextElementSibling;
+    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+  });
+  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+}
+var tlTries=EX.tlTries||0;
+$('#tlCheck').addEventListener('click',function(){
+  if(sortl.classList.contains('sorted'))return;
+  tlTries++;saveNow();var items=$$('.sitem',sortl),ok=0;
+  items.forEach(function(li,pos){var good=+li.getAttribute('data-i')===pos;li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+  var fb=$('#tlFb');
+  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML=TLOK;
+    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
+  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: държавата на Кубрат е преди разселванията на синовете му.'}
+});
+
+/* ================= УЛИКА: ИЗВОР (пръстенът) ================= */
+var CQ=[
+  {q:'1. На кого е бил този печат?',o:['На хан Кубрат — монограмът се чете като неговото име','На император Ираклий','На славянски княз'],a:0,e:'Монограмът на пръстена се чете като името на Кубрат, затова повечето учени свързват съкровището с него.'},
+  {q:'2. Кога е изработен?',o:['През VII в., по времето на Кубрат','През IV в., по времето на хуните','През XII в.'],a:0,e:'Съкровището е от времето на Старата Велика България — VII в.'},
+  {q:'3. Какво ни казва за българите?',o:['Ханът е богат и има връзки с Византия — гръцки букви на печата и византийски монети в съкровището','Българите не познават златарството','Българите не се срещат с други народи'],a:0,e:'Пръстенът и византийските монети показват, че българският хан поддържа връзки с Византия и че българите работят със злато.'},
+  {q:'4. Може ли да му вярваме напълно?',o:['Не напълно — вещите не доказват сами чие е съкровището и учените имат различни мнения','Да, един пръстен доказва всичко','Не, защото е измислен днес'],a:0,e:'Печатът е истинска находка, но една вещ не е цял разказ: учените я свързват с Кубрат, макар да няма пълно съгласие.'}
+];
+(function(){
+  var box=$('#clueQs'),n=0;
+  box.innerHTML=CQ.map(function(_,i){return '<div class="qblock stage" id="cq'+i+'"></div>'}).join('');
+  CQ.forEach(function(Q,i){Q.after=function(){n++;if(n===CQ.length){if(flag('clue'))addXP(5,'Уликата е разпитана!')}};oneQ($('#cq'+i),Q,'cq'+i,4);restoreOneQ($('#cq'+i),Q,'cq'+i)});
+})();
+
+/* ================= ПРЕДАНИЕ: СНОПЪТ ПРЪЧКИ ================= */
+var stickDone=EX.stickDone||false;
+function stickShow(){
+  $('#sticks').classList.add('broken');$('#sticks').innerHTML='🪵 🪵 🪵 🪵 🪵';
+  $('#stickCap').textContent='Поотделно всяка пръчка се чупи лесно. Така учим урока на преданието: докато синовете са заедно, са силни. Но припомни си: това е предание, не документ.';
+  $('#stickBtn').textContent='✓ Разбрах';$('#stickBtn').disabled=true;
+}
+$('#stickBtn').addEventListener('click',function(){
+  if($('#stickBtn').disabled)return;
+  if(!$('#sticks').classList.contains('tried')){
+    $('#sticks').classList.add('tried');$('#stickCap').textContent='Не се чупи! Пет пръчки заедно са силни. Сега ги развържи.';this.textContent='Развържи и счупи по една';
+  }else{
+    stickShow();if(!stickDone){stickDone=true;flag('stick');addXP(3,'Преданието е изслушано');}
+  }
+});
+if(stickDone)stickShow();
+
+/* ================= АНИМАЦИЯ: ПЕТТЕ ПОСОКИ ================= */
+var DIRS=[[22,50,'№1 Панония','#1B2A41'],[272,18,'№2 Волга','#9E1B32'],[28,134,'№3 Италия','#7A5A10'],[120,146,'№4 Балканите','#1E8E4E'],[272,128,'№5 Дунав','#C9962B']];
+var dirPlayed=EX.dirPlayed||false;
+function buildDirs(){$('#dirG').innerHTML=DIRS.map(function(d,i){return '<line class="dl" style="animation-delay:'+(i*0.35)+'s" x1="150" y1="80" x2="'+d[0]+'" y2="'+d[1]+'" stroke="'+d[3]+'"/><text class="dt" style="animation-delay:'+(i*0.35+0.5)+'s" x="'+(d[0]<150?d[0]+2:d[0]-2)+'" y="'+(d[1]+(d[1]<80?-4:(d[1]>140?20:12)))+'" text-anchor="'+(d[0]<150?'start':'end')+'">'+d[2]+'</text>'}).join('')}
+buildDirs();
+function playDirs(){
+  var b=$('#dirBox');b.classList.remove('go');buildDirs();void b.offsetWidth;b.classList.add('go');
+  $('#dirCap').textContent='Пет лъча — пет пътя. Само един от тях води към днешна България.';
+  if(!dirPlayed){dirPlayed=true;addXP(3);saveNow()}
+}
+$('#dirBtn').addEventListener('click',playDirs);
+if(dirPlayed)setTimeout(playDirs,300);
+
+/* ================= РОЛЯ ================= */
+var ROLE=[
+  {t:'„Императорът иска мир и приятелство. Затова ти изпраща дарове и титлата „патриций“ — да останем съседи и съюзници.“',v:'Кубрат кимва доволно: точно така мирува силният владетел — с дарове, титли и добро съседство. Мирът с Византия е важна част от неговата политика.'},
+  {t:'„Императорът ти дължи тези дарове, защото го победи в битка.“',v:'Кубрат се намръщва: според учебника той поддържа мирни отношения с Византия, а не воюва с нея. Затова даровете са за приятелство.'},
+  {t:'„Даровете са, за да напуснеш земите си и да отидеш далеч.“',v:'Кубрат се засмива. Той няма да остави Старата Велика България заради дарове, а дарът е знак за уважение, не за изгонване.'}
+];
+var roleI=EX.roleI;
+function renderRole(){
+  var box=$('#roleOpts');
+  box.innerHTML=ROLE.map(function(r,i){return '<button class="opt" data-r="'+i+'">'+r.t+'</button>'}).join('');
+  $$('[data-r]',box).forEach(function(b){b.addEventListener('click',function(){
+    if(roleI!==undefined)return;
+    var i=+b.getAttribute('data-r');roleI=i;saveNow();
+    $$('[data-r]',box).forEach(function(x){x.disabled=true});b.classList.add(i===0?'right':'wrong');
+    var fb=$('#roleFb');fb.className='fb '+(i===0?'ok':'bad');fb.innerHTML='<b>'+(i===0?'Точно така!':'Хм…')+'</b> '+ROLE[i].v;
+    if(flag('role'))addXP(5,'Влезе в ролята!');
+  })});
+}
+renderRole();
+if(roleI!==undefined){$$('[data-r]',$('#roleOpts'))[roleI].click()}
+
+/* ================= ЗАГАДКА: КОЙ ЛЪЖЕ? ================= */
+var WIT=[
+  {t:'Свидетел А: „Котраг тръгна по река Волга — оттам по-късно дойде Волжка България.“',lie:0,e:'Вярно. Котраг повежда част от народа по Волга.'},
+  {t:'Свидетел Б: „Алцек поведе хората си към Франкското кралство и стана негов крал.“',lie:1,e:'Лъжа! Алцек повежда българите към Южна Италия, а не към Франкското кралство, и не става негов крал.'},
+  {t:'Свидетел В: „Аспарух стигна в североизточната част на Балканите, където започна днешна България.“',lie:0,e:'Вярно. Така започва днешна България.'}
+];
+var witState=EX.witState;
+function renderWit(){
+  var box=$('#witnesses');
+  box.innerHTML=WIT.map(function(w,i){return '<button class="opt" data-w="'+i+'">'+w.t+'</button>'}).join('');
+  $$('[data-w]',box).forEach(function(b){b.addEventListener('click',function(){
+    if(witState!==undefined)return;
+    var i=+b.getAttribute('data-w');witState=i;saveNow();
+    $$('[data-w]',box).forEach(function(x,xi){x.disabled=true;x.classList.add(WIT[xi].lie?'wrong':'right')});
+    var fb=$('#witFb');
+    if(WIT[i].lie){fb.className='fb ok';fb.innerHTML='<b>Разобличен!</b> '+WIT[i].e;if(flag('puzzle')){addXP(8,'Лъжецът е разкрит!');award('corrector')}}
+    else{fb.className='fb bad';fb.innerHTML='<b>Не е този.</b> '+WIT[i].e+' Потърси лъжеца сред другите двама.';witState=undefined}
+  })});
+}
+renderWit();
+if(witState!==undefined){var _wb=$$('[data-w]',$('#witnesses'));_wb.forEach(function(x,xi){x.disabled=true;x.classList.add(WIT[xi].lie?'wrong':'right')});
+  var _fb=$('#witFb');_fb.className='fb ok';_fb.innerHTML='<b>Разобличен!</b> '+WIT[witState].e;}
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['nomad','номад','A nomad moves with his horses.'],['tent','палатка','The family sleeps in a round tent.'],['horse','кон','The horse is fast and strong.'],['tribe','племе','Each tribe has a leader.'],['ruler','владетел','The ruler makes peace with his neighbour.'],['farmer','земеделец','The farmer grows wheat.'],['treasure','съкровище','They found a treasure in the field.'],['ring','пръстен','The khan has a gold ring.']];
+var ES=[['el caballo','конят','El caballo corre.'],['la tienda','палатката','La tienda es blanca.'],['el anillo','пръстенът','El anillo es de oro.'],['el oro','златото','El oro brilla mucho.'],['el rey','кралят','El rey es fuerte.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+var heard=EX.heard||{};
+function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'*kuningaz',s:'ранно германско „владетел, вожд“ → праславянско *kъnędzь',b:['княз','king (англ.)','König (нем.)','kuningas (фин.)'],p:'Думата „княз“ е ранна заемка от германски език. От същия корен идват английското „king“ и немското „König“, а и финландското „kuningas“. Така славянският вожд-княз и английският крал са „далечни роднини“ по произход на думата.'},
+  {r:'bisr (тюрк.)',s:'арабски „зрънца стъкло“ → тюркски → старославянски бисьръ',b:['бисер','бисьръ (ст.-слав.)','бисер (сръб.)'],p:'Според езиковедите „бисер“ е заета дума: дошла е през тюркски от арабски. Учебникът я посочва сред думите, останали от езика на древните българи. Тук има различни мнения — така учените спорят.'}
+];
+$('#etym').innerHTML=ETY.map(function(e,i){return '<button class="ety" data-y="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('');
+var ySeen=EX.ySeen||{};
+$$('.ety').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'От къде тръгват древните българи към Европа през II – IV в.?',o:['От Централна Азия','От Северна Африка','От Скандинавия'],a:0,e:'Древните българи се преселват от Централна Азия към Европа.'},
+  {q:'С какво се занимават българите най-вече в началото?',o:['Скотовъдство, най-вече коне','Корабостроене','Добив на сол'],a:0,e:'Българите са номади-скотовъдци и отглеждат най-вече коне.'},
+  {q:'В кой бог вярват древните българи?',o:['Тангра („Небе“)','Перун','Зевс']  ,a:0,e:'Древните българи почитат един бог — Тангра, чието име значи „Небе“.'}],
+ [{q:'Как се казва вождът на българско племе, който е и върховен жрец?',o:['Хан','Княз','Консул'],a:0,e:'Ханът е вожд и върховен жрец. „Княз“ е титлата при славяните.'},
+  {q:'През коя година се създава Старата Велика България?',o:['632 г.','375 г.','476 г.'],a:0,e:'През 632 г. хан Кубрат създава Старата Велика България.'},
+  {q:'От кой род е хан Кубрат?',o:['Дуло','Меровинги','Хуни'],a:0,e:'Кубрат е от рода Дуло.'}],
+ [{q:'Кой син на Кубрат повежда част от народа по река Волга?',o:['Котраг','Алцек','Аспарух'],a:0,e:'Котраг. Там по-късно възниква Волжка България.'},
+  {q:'Къде се заселват българите, водени от Алцек?',o:['В Южна Италия','В Скандинавия','В Египет'],a:0,e:'Алцек повежда българите към Южна Италия.'},
+  {q:'Какъв е изводът на учебника за появата на български държави?',o:['Добре развитата военна организация и едноличната власт са важна причина','Българите нямат никакви вождове','Всичко се случва случайно'],a:0,e:'Развитата военна организация и едноличната власт са важна причина.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Чирак','Хронист','Главен детектив'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Хан / кан','Титла на племенен вожд или на самостоятелен владетел при древните българи.'],['Княз','Титла на племенен вожд или на самостоятелен владетел при славяните.'],['Тангра','Върховният бог на древните българи — „Небе“.'],['Юрта','Основното жилище на древните българи — палатка от пръти и кожа.'],['Землянка','Жилище на славяните, полувкопано в земята.'],['Перун','Върховният бог на славяните — творец на мълнията.'],['Кубрат','Хан от рода Дуло, създател на Старата Велика България (632 г.).'],['Котраг','Син на Кубрат — повежда народа си по Волга.'],['Алцек','Син на Кубрат — заселва се в Южна Италия.'],['Кубер','Син на Кубрат — югозападните Балкани.'],['Аспарух','Син на Кубрат — началото на днешна България.'],['632 г.','Създава се Старата Велика България.']];
+var fI=EX.fI||0,flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата и карта.';
+}
+var SUS=[
+ {t:'Синовете се бият помежду си и никой не оставя следа',ok:0,e:'Не. Улика 3: синовете отвеждат хората си по различни пътища и те се заселват на нови места.'},
+ {t:'След смъртта на великия хан държавата се разпада, а синовете му водят части от народа на различни места. Българската държавност оцелява в много посоки, а групата на Аспарух поставя началото на днешна България',ok:1,e:'Точно! Кубрат създава силна държава (улика 2). След смъртта му тя се разпада и синовете му тръгват на различни места (улика 3). Аспарух стига до североизточните земи на Балканите (улика 4) — така от разпиляното наследство на баща му започва днешна България.'},
+ {t:'Държавата остава единна и става още по-голяма',ok:0,e:'Не. Улика 3: държавата се разпада след смъртта на Кубрат.'},
+ {t:'Българите изчезват безследно след смъртта на Кубрат',ok:0,e:'Не. Волжка България съществува до XIII в., а при Аспарух започва днешна България.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 4. Древните българи и славяни във Великото преселение на народите\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nКлючови дати: 632 – Старата Велика България (хан Кубрат); II – IV в. – преселение на българите от Азия към Европа; края на VI в. – южните славяни се заселват на Балканите.\n\nПонятия: хан/кан, княз, Тангра, юрта, землянка, Перун.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='632';$('#dC').textContent='VII в.';$('#dP').textContent='Фанагория, северно от Азовско море';
+    setTM('632','VII в.','Фанагория');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 632 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  tilesRestore('data-tile',SLAVP,tSeen);tilesRestore('data-tile2',NOM,t2Seen);tilesRestore('data-tile3',SLAV,t3Seen);
+  Object.keys(pathSeen).forEach(function(i){var b=$('#path button[data-e="'+i+'"]');if(b)b.classList.add('seen')});
+  for(var cn=0;cn<chainN;cn++){(function(n){var b=$('#chain button[data-n="'+n+'"]');if(b){b.classList.add('open');b.innerHTML=CHAINN[n]}var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;if(!nx.classList.contains('open'))nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}})(cn)}
+  Object.keys(S.seen).forEach(function(id){if(S.seen[id])$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(ySeen).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>
