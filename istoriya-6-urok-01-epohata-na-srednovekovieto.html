@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#9E1B32">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -372,7 +373,7 @@ summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
 
 <section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
   <h2>🕰 Машината на времето</h2>
-  <p>Детектив Венета, машината е готова. Днешната мисия започва преди повече от 1500 години. Натисни бутона и скочи!</p>
+  <p>Детективе, машината е готова. Днешната мисия започва преди повече от 1500 години. Натисни бутона и скочи!</p>
   <div class="dials">
     <div class="dial"><small>Година</small><b id="dY">2026</b></div>
     <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
@@ -1308,19 +1309,19 @@ renderCards();
 /* ================= ИНТЕРВЮ ================= */
 var IV=[
   {q:'Защо наричате тези векове „средни“?',a:'Защото ги виждам по средата: между славната Античност на древните гърци и римляни и нашето време. Сега отново четем техните книги и строим като тях.'},
-  {q:'А защо смятате, че са били мрачни?',a:'Струва ми се, че тогава е имало само войни, жестокост и невежество. Такава е моята представа.',v:'Детектив Венета: Днешните историци не мислят така. Тогава се строят огромни храмове като „Св. София“, появяват се университетите, работят изкусни майстори и поети.'},
-  {q:'Мислехте ли, че името ще остане?',a:'Надявах се… И виждам, че и след 500 години казвате „Средновековие“!',v:'Детектив Венета: Да! На английски е Middle Ages, на испански Edad Media, на немски Mittelalter. Всички значат „средно време“.'}
+  {q:'А защо смятате, че са били мрачни?',a:'Струва ми се, че тогава е имало само войни, жестокост и невежество. Такава е моята представа.',v:'Детективът: Днешните историци не мислят така. Тогава се строят огромни храмове като „Св. София“, появяват се университетите, работят изкусни майстори и поети.'},
+  {q:'Мислехте ли, че името ще остане?',a:'Надявах се… И виждам, че и след 500 години казвате „Средновековие“!',v:'Детективът: Да! На английски е Middle Ages, на испански Edad Media, на немски Mittelalter. Всички значат „средно време“.'}
 ];
 var ivI=EX.ivI||0;
 function renderIV(){
   $('#qbtns').innerHTML=ivI<IV.length?'<button class="btn navy" id="ivAsk">❓ '+IV[ivI].q+'</button>':'<p class="note" style="margin:0">✓ Интервюто е готово. Кой е прав според теб? Защо?</p>';
   if(ivI<IV.length)$('#ivAsk').addEventListener('click',function(){
     var it=IV[ivI];var c=$('#chat');
-    c.insertAdjacentHTML('beforeend','<div class="bubble q"><small>Венета</small>'+it.q+'</div><div class="bubble a"><small>Италиански учен (измислен)</small>'+it.a+'</div>'+(it.v?'<div class="bubble v"><small>💡 Уточнение</small>'+it.v+'</div>':''));
+    c.insertAdjacentHTML('beforeend','<div class="bubble q"><small>Ти</small>'+it.q+'</div><div class="bubble a"><small>Италиански учен (измислен)</small>'+it.a+'</div>'+(it.v?'<div class="bubble v"><small>💡 Уточнение</small>'+it.v+'</div>':''));
     ivI++;addXP(2);if(ivI===IV.length&&flag('interview'))addXP(3);renderIV();
   });
 }
-if(ivI>0){var _chat='';for(var _ivk=0;_ivk<ivI;_ivk++){var _it=IV[_ivk];_chat+='<div class="bubble q"><small>Венета</small>'+_it.q+'</div><div class="bubble a"><small>Италиански учен (измислен)</small>'+_it.a+'</div>'+(_it.v?'<div class="bubble v"><small>💡 Уточнение</small>'+_it.v+'</div>':'')}$('#chat').innerHTML=_chat}
+if(ivI>0){var _chat='';for(var _ivk=0;_ivk<ivI;_ivk++){var _it=IV[_ivk];_chat+='<div class="bubble q"><small>Ти</small>'+_it.q+'</div><div class="bubble a"><small>Италиански учен (измислен)</small>'+_it.a+'</div>'+(_it.v?'<div class="bubble v"><small>💡 Уточнение</small>'+_it.v+'</div>':'')}$('#chat').innerHTML=_chat}
 renderIV();
 
 /* ================= ГРЕШКАТА В СВИТЪКА ================= */
