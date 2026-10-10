@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 5 · Могъществото на Византийската империя</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== добавки за урок 4 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.routes path.r1{stroke:#1B2A41}.routes path.r2{stroke:#9E1B32}.routes path.r3{stroke:#7A5A10}.routes path.r4{stroke:#1E8E4E}.routes path.r5{stroke:#C9962B}
+.routes polygon{opacity:0;transition:opacity .3s .7s}
+.routes polygon.show{opacity:1}
+.routes polygon.r1{fill:#1B2A41}.routes polygon.r2{fill:#9E1B32}.routes polygon.r3{fill:#7A5A10}.routes polygon.r4{fill:#1E8E4E}.routes polygon.r5{fill:#C9962B}
+.steps{grid-template-columns:repeat(3,1fr)}
+.duel-pool{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;min-height:52px;padding:10px;background:var(--soft);border-radius:14px}
+.duel-chip{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:44px;padding:8px 10px;font-size:.88rem;line-height:1.3;color:var(--ink);text-align:left;touch-action:manipulation}
+.duel-chip.sel{border-color:var(--gold);background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 3px 0 #C9962B66}
+.duel-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.duel-col{border:2px dashed #B7BFCB;border-radius:14px;background:#fff;padding:8px;min-height:140px;cursor:pointer;touch-action:manipulation}
+.duel-col:active{border-color:var(--gold)}
+.duel-col h3{font-size:1rem;margin:0 0 6px;color:var(--navy);font-family:var(--body)}
+.duel-drop{display:grid;gap:5px}
+.duel-tag{display:block;background:var(--ok-soft);border:1px solid var(--ok);border-radius:8px;padding:4px 6px;font-size:.76rem;line-height:1.25;animation:pop .35s}
+.stickbox{text-align:center}
+.sticks{font-size:2.2rem;letter-spacing:-6px;margin:6px 0 10px;transition:letter-spacing .5s}
+.sticks.tried{animation:shake .5s}
+.sticks.broken{letter-spacing:6px;opacity:.7;transform:rotate(-4deg)}
+.stickcap{font-size:.92rem;min-height:3em;margin:8px 0 0}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.dirbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.dirbox svg{width:100%;height:auto;display:block}
+.dirbox .dl{stroke-width:3;stroke-linecap:round;stroke-dasharray:200;stroke-dashoffset:200}
+.dirbox.go .dl{animation:dirline .9s ease forwards}
+.dirbox .dt{font:700 9px var(--body);fill:var(--ink);opacity:0}
+.dirbox.go .dt{animation:dirfade .5s forwards}
+.dirbox .dirt{font:700 10px var(--body);fill:var(--red-2)}
+.dircap{display:block;font-size:.85rem;color:var(--muted);text-align:center;margin-top:4px}
+@keyframes dirline{to{stroke-dashoffset:0}}
+@keyframes dirfade{to{opacity:1}}
+/* ===== добавки за урок 5 ===== */
+.hsbox{background:#E3E8F0;border-color:#C5CEDB}
+.hslab{font:700 9px var(--body);fill:#46526A;pointer-events:none;letter-spacing:.06em}
+.hsm{cursor:pointer}
+.hsm .dot{fill:var(--red);stroke:#fff;stroke-width:1.8}
+.hsm .halo{fill:none;stroke:var(--red);stroke-width:2.5;opacity:0}
+.hsm.active .halo{opacity:1;animation:ring 1.2s infinite}
+.hsm.seen .dot{fill:var(--ok)}
+.hsm text{font:800 11px var(--body);fill:#fff;text-anchor:middle;pointer-events:none}
+.ray{opacity:0}
+#hsSvg.lit .ray{animation:hsray 2.6s ease-in-out infinite}
+@keyframes hsray{0%,100%{opacity:.08}50%{opacity:.5}}
+.river{fill:none;stroke:#7FA9D1;stroke-width:1.6;stroke-linecap:round;pointer-events:none}
+.rivlabel{font:italic 700 7px var(--body);fill:#46617E;pointer-events:none}
+.routes path.o{stroke:#fff;stroke-width:5.4}
+.routes path.bel{stroke:#1B2A41}.routes path.per{stroke:#17703F}.routes path.her{stroke:#C9962B}.routes path.avar{stroke:#D1491F}
+.routes polygon.bel{fill:#1B2A41}.routes polygon.per{fill:#17703F}.routes polygon.her{fill:#C9962B}.routes polygon.avar{fill:#D1491F}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/9</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 5</div>
+  <h1>Могъществото на Византийската империя (V – VII в.)</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детектив Венета, днес отиваме в Константинопол, столицата на Византия. Там императорът мечтае да върне славата на Рим, а после империята ще се разклати и ще се обнови. Натисни бутона и скочи!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 527 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„Езерото, което ставаше тясно“</h2>
+  <p>540 г. Византийските войски са превзели Рим, а Средиземно море прилича на „византийско езеро“. Но само около сто години по-късно Йерусалим и Египет са в ръцете на персите, а столицата е обсадена. <b>Как се стига от върха на славата до ръба на пропастта и как империята успява да се спаси и да се промени?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №1</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Картата</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №4</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №5</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+</div>
+
+<!-- ===== ДОСИЕ 1: ЮСТИНИАН ===== -->
+<section class="card" id="s1" data-tm="527|VI в.|Константинопол">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Юстиниан I Велики: мечтата за единна империя</h2>
+  <div data-story>
+    <p>Император <b>Юстиниан I Велики</b> (<span class="key">🔑 527 – 565 г.</span>) е вдъхновен от славното минало на Рим. Цялата му политика има една цел: да върне единството на империята, като <b>отвоюва Запада</b>.</p>
+    <p>През първата половина на VI в. византийските войски тръгват на големи походи срещу варварските кралства в днешна Италия и Испания и в Северна Африка. Начело е един от най-великите пълководци — <b>Велизарий</b>, опитен стратег и смел военачалник. Варварите са разгромени, а през 540 г. византийците отвоюват Рим (така е в учебника). Голяма част от земите на Западната римска империя отново са под една власт, а Средиземно море се превръща във „Византийско езеро“.</p>
+    <p>Но войните на запад изтощават силите на Византия. Това използват старите ѝ врагове — персите, както и племената на север: славяни, българи и авари. Колкото по-тежко е положението, толкова повече империята разчита на <button class="term" data-t="diplo">дипломацията</button>: византийците нямат равни в умението да водят преговори, да сключват съюзи и да противопоставят враговете си един на друг.</p>
+    <p>Така Юстиниан се опитва да спре набезите на варварите на Балканите. Назначава един славянин, свой доверен човек, за военен управител на Тракия. Няколко години той успява да отбива нападенията на съплеменниците си. Но нито тези ходове, нито крепостите, които императорът строи, спират славяните във византийските земи.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Как се държи една империя? Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles">
+      <button class="tile" data-tile="0"><b>⚔️ Походите</b>Докосни…</button>
+      <button class="tile" data-tile="1"><b>🌊 Езерото</b>Докосни…</button>
+      <button class="tile" data-tile="2"><b>🪫 Цената</b>Докосни…</button>
+      <button class="tile" data-tile="3"><b>🤝 Хитростта</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2: ЛИЦАТА НА ИСТОРИЯТА ===== -->
+<section class="card" id="s2" data-tm="527|VI в.|императорският дворец">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>Лицата на историята: Юстиниан и Теодора</h2>
+  <div data-story>
+    <p>Юстиниан е роден в селско семейство. Като млад заминава за Константинопол при чичо си <b>Юстин</b>, който след успешна кариера в армията става император. Юстиниан получава високо за времето си образование и макар да не е войник по призвание, успява да възстанови единството на Римската империя.</p>
+    <p>До него е <b>Теодора</b>, неговата съпруга, бедна танцьорка, за която той се жени преди да бъде коронясан. В началото на управлението му константинополската тълпа се разбунтува срещу него. Теодора проявява решителност и му вдъхва сили да запази властта си.</p>
+    <p>Тя присъства на срещи с чужди посланици, кореспондира с владетели, прокарва закони и строи храмове. Когато Теодора умира, Юстиниан е съсипан от скръб. До края на управлението си той не издава нов закон.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Двамата владетели. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles2">
+      <button class="tile" data-tile2="0"><b>🌾 Началото</b>Докосни…</button>
+      <button class="tile" data-tile2="1"><b>🎓 Образованието</b>Докосни…</button>
+      <button class="tile" data-tile2="2"><b>💃 Теодора</b>Докосни…</button>
+      <button class="tile" data-tile2="3"><b>🔥 Бунтът</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 3: ПОСТИЖЕНИЯТА ===== -->
+<section class="card" id="s3" data-tm="529|VI в.|Константинопол">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Постиженията на Юстиниановата епоха</h2>
+  <div data-story>
+    <p>Освен единство на територията Юстиниан създава и единство в законите. Специална комисия, назначена от него, събира близо <b>5000 римски закона</b> и ги преработва в духа на християнската вяра: както всички са равни пред Бога, така са равни и пред закона. Сборникът е известен като <b>Юстиниановия <button class="term" data-t="codex">кодекс</button></b> (<span class="key">🔑 529 г.</span>).</p>
+    <p>В него има решения по въпроси за брака, собствеността и правата на жените, а също за престъпленията и наказанията. Кодексът оказва голямо влияние върху средновековното законодателство и до днес е основен извор за римските закони.</p>
+    <p>Юстиниан е и голям строител. Издигат се водопроводи и мостове, манастири, църкви и дворци, а по обширните граници на империята — крепости за защита. Заради размаха на плановете му го наричат <b>Велики</b>.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Какво строи императорът? Докосни всяка част</h3>
+    <div class="ribbon" id="rib"></div>
+    <div class="infobox" id="ribInfo"><h3>Докосни част</h3><p>Тук ще се появи кратко обяснение.</p></div>
+  </div>
+  <div class="task">
+    <h3>👆 Юстиниановият кодекс накратко. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles3">
+      <button class="tile" data-tile3="0"><b>📜 Комисията</b>Докосни…</button>
+      <button class="tile" data-tile3="1"><b>⚖️ Равни</b>Докосни…</button>
+      <button class="tile" data-tile3="2"><b>🧾 Какво урежда</b>Докосни…</button>
+      <button class="tile" data-tile3="3"><b>🕰 До днес</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== „СВ. СОФИЯ“ ОТВЪТРЕ ===== -->
+<section class="card" id="hs" data-tm="537|VI в.|храмът „Св. София“">
+  <div class="dossier-tag navy">🏛 РАЗРЕЗ НА ХРАМА</div>
+  <h2>„Св. София“ отвътре</h2>
+  <div data-story>
+    <p>За да затвърди християнския облик на империята, Юстиниан издига в Константинопол църквата <b>„Св. София“</b> (построена между 532 и 537 г., <span class="key">🔑 537 г.</span> — освещаването). Тя е най-внушителният храм в цяла тогавашна Европа. По замисъл трябва да е образ на единния християнски свят.</p>
+  </div>
+  <p>Докосни номерата върху разреза и разгледай храма. После пусни светлината!</p>
+  <div class="mapbox hsbox"><svg id="hsSvg" viewBox="0 0 400 250" role="img" aria-label="Опростен разрез на храма „Св. София“: купол, прозорци, колони, галерия, мозайки и външни стени">
+    <defs><pattern id="mos" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#F3D98B"/><rect width="4" height="4" fill="#C9962B" opacity=".55"/><rect x="4" y="4" width="4" height="4" fill="#C9962B" opacity=".55"/></pattern></defs>
+    <rect width="400" height="250" fill="#E3E8F0"/>
+    <rect y="232" width="400" height="18" fill="#B3B9C6"/>
+    <polygon points="6,232 20,150 20,232" fill="#8C95A6"/><polygon points="394,232 380,150 380,232" fill="#8C95A6"/>
+    <rect x="20" y="128" width="22" height="104" fill="#9AA3B2"/><rect x="358" y="128" width="22" height="104" fill="#9AA3B2"/>
+    <rect x="42" y="128" width="316" height="104" fill="#FFF4DA"/>
+    <path d="M50,128 Q52,92 110,100 L110,128 Z" fill="url(#mos)" stroke="#7A5A10" stroke-width="1"/>
+    <path d="M350,128 Q348,92 290,100 L290,128 Z" fill="url(#mos)" stroke="#7A5A10" stroke-width="1"/>
+    <path d="M110,112 A90,72 0 0 1 290,112 Z" fill="url(#mos)" stroke="#7A5A10" stroke-width="1.4"/>
+    <path d="M200,40 v-15 M193,32 h14" stroke="#1B2A41" stroke-width="2.6" fill="none"/>
+    <g id="hsRays"></g>
+    <rect x="100" y="122" width="14" height="110" fill="#7C8699"/><rect x="286" y="122" width="14" height="110" fill="#7C8699"/>
+    <g id="hsWins"></g>
+    <g id="hsCols"></g>
+    <text x="200" y="224" text-anchor="middle" class="hslab">главен кораб</text>
+    <text x="72" y="137" text-anchor="middle" class="hslab">горен етаж</text>
+    <g class="hsm" data-id="dome" transform="translate(200,72)"><circle class="halo" r="10"/><circle class="dot" r="10"/><text y="4">1</text><circle r="17" fill="transparent"/></g>
+    <g class="hsm" data-id="win" transform="translate(200,136)"><circle class="halo" r="10"/><circle class="dot" r="10"/><text y="4">2</text><circle r="17" fill="transparent"/></g>
+    <g class="hsm" data-id="col" transform="translate(70,208)"><circle class="halo" r="10"/><circle class="dot" r="10"/><text y="4">3</text><circle r="17" fill="transparent"/></g>
+    <g class="hsm" data-id="gal" transform="translate(70,162)"><circle class="halo" r="10"/><circle class="dot" r="10"/><text y="4">4</text><circle r="17" fill="transparent"/></g>
+    <g class="hsm" data-id="mos" transform="translate(326,190)"><circle class="halo" r="10"/><circle class="dot" r="10"/><text y="4">5</text><circle r="17" fill="transparent"/></g>
+    <g class="hsm" data-id="ext" transform="translate(31,190)"><circle class="halo" r="10"/><circle class="dot" r="10"/><text y="4">6</text><circle r="17" fill="transparent"/></g>
+  </svg></div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="lightBtn">☀️ Пусни светлината</button></div>
+  <div class="infobox" id="hsInfo"><h3>Избери номер</h3><p>Тук ще се появи описание на частта от храма.</p></div>
+  <div class="chips" id="hsChips"></div>
+  <p class="note">Разрезът е силно опростен схематичен чертеж, не точен архитектурен план. Размерите и числата са по учебника.</p>
+  <div class="stage" style="margin-top:10px">
+    <p style="margin:0">ℹ️ <b>Днес.</b> Учебникът пише, че храмът е музей, а в него са разкрити византийски мозайки. През юли 2020 г. обаче по решение на турския съд и указ на президента на Турция „Св. София“ отново е джамия. Сградата остава отворена за посетители. Минаретата (четири на брой) са добавени по-късно, когато османците превземат Константинопол и превръщат храма в джамия.</p>
+  </div>
+</section>
+
+<!-- ===== ДОСИЕ 4: ИРАКЛИЙ ===== -->
+<section class="card" id="s4" data-tm="614|VII в.|Йерусалим">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Ираклий и „свещената война“</h2>
+  <div data-story>
+    <p>При наследниците на Юстиниан Западът отново е загубен за Византия. Когато в началото на VII в. на престола се възкачва <b>Ираклий</b> (<span class="key">🔑 610 – 641 г.</span>), съдбата на империята зависи от изхода на войната с вековния враг на изток — <b>Персия</b>.</p>
+    <p>За кратко време персите превземат Сирия, Месопотамия и Палестина. В техни ръце попада Йерусалим (614 г.) и <b>Светият кръст</b>, на който бил разпнат Христос. Завладяна е и житницата на империята — Египет, която изхранва жителите на Константинопол. Положението става критично, когато столицата е обсадена от славяни, перси и авари (626 г.).</p>
+    <p>С подкрепата на Константинополския патриарх Ираклий започва „<button class="term" data-t="holy">свещена война</button>“. Скоро ромеите нанасят съкрушително поражение на персите при <b>Ниневия</b> (<span class="key">🔑 627 г.</span>). Източните провинции отново са в пределите на Византия. Краят на войната настъпва, когато Ираклий връща в Йерусалим Светия кръст. Така завършва първата от многото свещени войни, които християните водят през Средновековието с „враговете на Кръста“.</p>
+    <p>В края на управлението си Ираклий става свидетел на зараждането на нова неподозирана сила на изток — <b>арабите</b>. Те откъсват отново източните провинции и дори след време се опитват да превземат Константинопол.</p>
+    <p>И още нещо, свързано с миналия урок: според времевата линия в учебника през <b>635 г.</b> Византия сключва мирен договор с хан <b>Кубрат</b>, създателя на Старата Велика България.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Войната стъпка по стъпка</h3>
+    <div class="chain" id="chain">
+      <button data-n="0"><b>610 г. — Ираклий</b> · докосни</button>
+      <div class="arrow">↓</div>
+      <button data-n="1" disabled><b>614 г. — Йерусалим</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="2" disabled><b>626 г. — обсадата</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="3" disabled><b>627 г. — Ниневия</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="4" disabled><b>След войната</b> · 🔒</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== АКТИВНА КАРТА ===== -->
+<section class="card" id="map" data-tm="VI – VII в.|·|Средиземноморието">
+  <div class="dossier-tag navy">🗺 КАРТА НА ДЕТЕКТИВА</div>
+  <h2>Византия през VI – VII в.</h2>
+  <p>Първо докосни точките. После избирай стъпка: <b>годините 527 → 565 → 600</b> показват как се променят земите, а <b>походите</b> се чертаят стрелка по стрелка.</p>
+  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на Византийската империя през VI – VII в."></svg></div>
+  <div class="steps" id="mapSteps">
+    <button data-st="0" class="active">527 г.</button>
+    <button data-st="1">565 г.</button>
+    <button data-st="2">600 г.</button>
+    <button data-st="3">533 Картаген</button>
+    <button data-st="4">540 Рим</button>
+    <button data-st="5">550 Испания</button>
+    <button data-st="6">552 Италия</button>
+    <button data-st="7">614 Йерусалим</button>
+    <button data-st="8">626 Обсада</button>
+    <button data-st="9">627 Ниневия</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="nextSon">Следваща стъпка →</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка</h3><p>Тук ще се появи описание на мястото.</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Картата е опростена. Границите са приблизителни: в учебника те са означени с цветове за VI – VII в. Годините на походите са по учебника.</p>
+</section>
+
+<!-- ===== ДОСИЕ 5: ОБНОВЯВАНЕТО ===== -->
+<section class="card" id="s5" data-tm="VII в.|·|реформите на Ираклий">
+  <div class="dossier-tag">ДОСИЕ №5</div>
+  <h2>Обновяването на империята</h2>
+  <div data-story>
+    <p>При Ираклий е сложен край на <b>римския период</b> в историята на Византия. Мнозинството от поданиците на императора вече са гърци и империята постепенно става <b>гръцка държава</b>. В имперското управление и в Църквата латинският език е заменен с гръцкия. Променена е и титлата на владетеля — той е „<button class="term" data-t="vasileus">василевс</button> на ромеите“.</p>
+    <p>Променя се и държавното управление. Територията е разделена на области, наречени <button class="term" data-t="tema">теми</button>. Всяка има свой управител — <button class="term" data-t="strateg">стратег</button>, в чиито ръце са обединени военната и гражданската власт. Оформят се и институциите на централното управление, оглавени от <button class="term" data-t="logo">логотети</button> (министри).</p>
+    <p>Наемните войници струват скъпо и по време на битка могат да изоставят своя пълководец. Затова армията е реформирана и е съставена от <button class="term" data-t="stratiot">стратиоти</button> — свободни селяни, които срещу военната си служба получават от държавата земя, за да се издържат.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Новата империя. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles4">
+      <button class="tile" data-tile4="0"><b>🇬🇷 Гръцка държава</b>Докосни…</button>
+      <button class="tile" data-tile4="1"><b>👑 Василевс</b>Докосни…</button>
+      <button class="tile" data-tile4="2"><b>🗺️ Теми и стратези</b>Докосни…</button>
+      <button class="tile" data-tile4="3"><b>🏛️ Логотети</b>Докосни…</button>
+      <button class="tile" data-tile4="4"><b>💰 Защо реформа?</b>Докосни…</button>
+      <button class="tile" data-tile4="5"><b>🧑‍🌾 Стратиоти</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task">
+    <h3>👆 Провери се: какво се случва при Ираклий?</h3>
+    <div id="s5q" class="qblock"></div>
+  </div>
+  <button class="btn readbtn" data-done="s5" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ИГРА: РИМСКИ ИЛИ ГРЪЦКИ ПЕРИОД ===== -->
+<section class="card" id="duel" data-tm="VII в.|·|два периода, две колони">
+  <div class="dossier-tag gold">🎮 ИГРА</div>
+  <h2>Римски или гръцки период?</h2>
+  <p>Докосни карта от купчината, после докосни колоната, в която според теб принадлежи. Верният отговор остава в колоната, а грешният се връща в купчината.</p>
+  <div class="duel-pool" id="duelPool"></div>
+  <div class="duel-cols">
+    <div class="duel-col" id="colB" data-col="B" role="button" tabindex="0"><h3>🏛️ Римски период</h3><div class="duel-drop" id="dropB"></div></div>
+    <div class="duel-col" id="colS" data-col="S" role="button" tabindex="0"><h3>🇬🇷 Гръцки период</h3><div class="duel-drop" id="dropS"></div></div>
+  </div>
+  <div class="fb" id="duelFb"></div>
+  <p id="duelCnt" style="font-weight:700;color:var(--red-2);margin:8px 0 0"></p>
+</section>
+
+<!-- ===== МИНИ ВРЕМЕВА ЛИНИЯ ===== -->
+<section class="card" id="tl" data-tm="VI – VII в.|·|по линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
+  <h2>Подреди събитията</h2>
+  <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+</section>
+
+<!-- ===== УЛИКА: ИЗВОР ===== -->
+<section class="card" id="clue" data-tm="VI в.|·|свитъкът на Прокопий">
+  <div class="dossier-tag">🔎 УЛИКАТА: ИСТОРИЧЕСКИ ИЗВОР</div>
+  <h2>Прокопий Кесарийски за „Св. София“</h2>
+  <p>Прокопий Кесарийски е византийски историк от VI в., съвременник на Юстиниан. В съчинението си „За строежите“ описва какво е построил императорът. Ето какво казва за „Св. София“, преразказано със съвременни думи:</p>
+  <div class="stage" style="margin:10px 0">
+    <p style="margin:0">„Храмът е прочут с блясъка на украсата и хармонията на размерите си. Издига се почти до небето и над другите сгради сякаш се надвесва над града и го краси. Огромният купол като че ли не стъпва на твърда основа, а е спуснат от небето. А всеки, който влезе да се помоли, разбира, че това дело не е само човешка сила и изкуство, а е завършено с Божието одобрение.“</p>
+  </div>
+  <p style="margin-top:12px">Детективът разпитва улика. Отговори на 4-те въпроса.</p>
+  <div id="clueQs"></div>
+
+  <h3 style="margin-top:20px">🔎 Допълнителни улики</h3>
+  <p style="font-size:.95rem;margin-top:0">Още два извора от учебника, по-накратко. Всеки носи по няколко XP.</p>
+  <div class="stage" style="margin:10px 0">
+    <p style="margin:0"><b>Юстиниановият кодекс (VI в.)</b> гласи по смисъл: справедливостта е постоянна воля всеки да получи своето право. Правата са: да живееш честно, да не вредиш на другите и всеки да отговаря лично за действията си. Свободата е естествената способност на всеки да прави каквото иска, ако не нарушава закона.</p>
+  </div>
+  <div id="kQs"></div>
+  <div class="stage" style="margin:14px 0 10px">
+    <p style="margin:0"><b>Ал-Динавари, „Обща история“ (IX в.)</b> предава думите на персийския цар Хосрой: Светият кръст е по-ценен от всичкото му злато. Той го взел и го заключил, за да получи с негова помощ послушанието на християните — така дървото имало голямо въздействие върху тях.</p>
+  </div>
+  <div id="dQs"></div>
+  <p class="note" style="margin-top:10px">Забележка: Ал-Динавари е арабски автор от IX в., т.е. не е съвременник на събитията. Той записва разказ, който се е предавал след VII в.</p>
+</section>
+
+<!-- ===== ДОСИЕТА НА ЛИЧНОСТИТЕ ===== -->
+<section class="card" id="people" data-tm="VI – VII в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Meister%20von%20San%20Vitale%20in%20Ravenna%20003.jpg?width=900" alt="Мозайка в църквата Сан Витале в Равена: император Юстиниан със свитата си">
+      <figcaption>Мозайка от църквата Сан Витале в Равена (до 547 г.): император Юстиниан със свитата си. Равена е един от градовете, които византийците отвоюват в Италия.<small>Автор и лиценз: на <a href="https://commons.wikimedia.org/wiki/File:Meister_von_San_Vitale_in_Ravenna_003.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Hagia%20Sophia%20Mars%202013.jpg?width=900" alt="Храмът „Света София“ в Истанбул, външен изглед">
+      <figcaption>„Света София“ в Истанбул, външен изглед: масивни стени, купол и минарета, добавени много по-късно, при османците.<small>Автор и лиценз: Arild Vågen, CC BY-SA 3.0, <a href="https://commons.wikimedia.org/wiki/File:Hagia_Sophia_Mars_2013.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="VI – VII в.|·|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="🔥">Преди днешния храм на същото място е имало църква, изгорена през 532 г. при големия бунт „Ника“ в Константинопол. Именно в онези дни Теодора убеждава Юстиниан да не бяга. Според Прокопий тя казва, че царската власт е хубав саван. Строежът на новия храм започва още същата година.</div>
+    <div data-i="📐">Архитекти на „Св. София“ са Антемий от Трал и Исидор от Милет. И двамата са учени, добри в геометрията и механиката. Строежът е завършен само за около пет години.</div>
+    <div data-i="🌍">След земетресение през 558 г. част от първия купол се срутва и е построен наново.</div>
+    <div data-i="💡">„София“ не е име на светица. Гръцката дума <i>sophia</i> значи „мъдрост“, а храмът е „Света мъдрост“, т.е. Божията мъдрост. От такъв храм носи името си и българската столица София.</div>
+    <div data-i="📖">Същият Прокопий, който възхвалява Юстиниан в „За строежите“, написва и „Тайната история“ — съчинение, в което рязко го критикува, а Теодора също не е пощадена. Затова нито един извор не бива да се чете сам.</div>
+    <div data-i="🪙">В учебника има византийска златна монета с лика на император Ираклий (VII в.). Такива монети са „подписът“ на империята: по тях се познава кой владее. Именно тази монета ти е вдъхновение за творческата задача.</div>
+    <div data-i="🛡️">На ковчег от слонова кост (X – XI в.) са изобразени византийски воини: с шлемове, кръгли щитове и ризници от метални люспи, някои с копия. Така художникът ни показва как е изглеждала армията векове след Юстиниан и Ираклий.</div>
+    <div data-i="🤝">Припомни си урок 4: по времевата линия в учебника през 635 г. Византия сключва мирен договор с хан Кубрат. По друг извор, византийския патриарх Никифор, Ираклий му дава титлата „патриций“.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="640|VII в.|канцеларията на императора">
+  <div class="dossier-tag">🎭 РОЛЯ</div>
+  <h2>Ти си писар в канцеларията на император Ираклий</h2>
+  <p class="note">⚠️ Разказът е <b>измислен</b>, но обстоятелствата са истински.</p>
+  <div data-story>
+    <p>Ти си млад писар в двореца в Константинопол. Императорът ти диктува писмо до управителя на една от темите. В кантората още стоят стари свитъци с латински текстове, но светът се е променил. Трябва да избереш как да започнеш писмото.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Как ще започнеш писмото?</h3>
+    <div class="opts" id="roleOpts"></div>
+    <div class="fb" id="roleFb"></div>
+  </div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="537|VI в.|освещаването на храма">
+  <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
+  <h2>Грешката в свитъка</h2>
+  <p>Един писар описва освещаването на „Св. София“ през 537 г., но в свитъка му се е промъкнала грешка — нещо, което още не е съществувало. Прочети внимателно и докосни реда с грешката.</p>
+  <div class="opts" id="witnesses"></div>
+  <div class="fb" id="witFb"></div>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Златна монета на василевса</h2>
+  <p>В учебника има византийска златна монета с лика на император Ираклий. Направи своя монета на лист:</p>
+  <ul>
+    <li>нарисувай голям кръг и в него лицето на император със златна корона;</li>
+    <li>по ръба напиши надпис — по желание на гръцки: <i>ΒΑΣΙΛΕΥΣ</i> („василевс“);</li>
+    <li>добави кръст или малък символ, който ти харесва.</li>
+  </ul>
+  <p><b>По желание:</b> нарисувай и купола на „Св. София“ с 40 малки прозорчета в основата.</p>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Бонус на испански</h3>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Чирак</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Хронист</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="VII в.|·|Константинопол">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>Как оцелява империята?</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 527 – 565</b> · Юстиниан I Велики</span>
+    <span><b>🔑 529</b> · Юстиниановият кодекс</span>
+    <span><b>🔑 537</b> · освещаване на „Св. София“</span>
+    <span><b>🔑 610 – 641</b> · император Ираклий</span>
+    <span><b>🔑 627</b> · победа над персите при Ниневия</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>Император Юстиниан I Велики иска да възстанови единството на Римската империя чрез отвоюване на Запада. Войските му, предвождани от Велизарий, воюват срещу варварските кралства в Италия, Испания и Северна Африка. През 540 г. (по учебника) отвоюват Рим, а Средиземно море става „Византийско езеро“.</li>
+    <li>Войните изтощават империята, а старите ѝ врагове (персите) и славяни, българи и авари се възползват. Византия разчита на дипломацията: преговори, съюзи, противопоставяне на враговете. Юстиниан назначава славянин за военен управител на Тракия и строи крепости, но славяните не са спрени.</li>
+    <li>Юстиниановият кодекс (529 г.) е сборник от близо 5000 римски закона, преработени в християнски дух. Всички са равни пред закона. Урежда брака, собствеността, правата на жените, престъпленията и наказанията. Влияе върху средновековното законодателство и до днес е основен извор за римските закони.</li>
+    <li>„Св. София“ е построена през 532 – 537 г. и е символ на единния християнски свят: купол с диаметър 31 м, 40 прозореца в основата му, над 100 колони с капители от всички краища на империята, два етажа (горният за жените). Отвън стените са от хоросан и камък, а отвътре — мрамор и златни мозайки. Юстиниан строи още водопроводи, мостове, манастири, църкви, дворци и крепости.</li>
+    <li>Ираклий (610 – 641) води „свещена война“ срещу Персия, която превзема Сирия, Месопотамия, Палестина, Йерусалим (614 г.) със Светия кръст, и Египет. През 626 г. Константинопол е обсаден от перси, авари и славяни. През 627 г. ромеите побеждават персите при Ниневия, а Ираклий връща Светия кръст в Йерусалим. Накрая се появяват арабите.</li>
+    <li>При Ираклий свършва римският период: Византия става гръцка държава. Гръцкият език замества латинския, владетелят е „василевс на ромеите“. Територията е разделена на теми с управители стратези (военна и гражданска власт), централното управление е с логотети (министри), а армията — от стратиоти (свободни селяни със земя срещу военна служба).</li>
+    <li>През 635 г. Византия сключва мирен договор с хан Кубрат (връзка с урок 4).</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 24 – 27. Извън учебника са добавени: бунтът „Ника“ (532 г.) и думите на Теодора (по Прокопий); архитектите Антемий от Трал и Исидор от Милет; срутването на купола през 558 г.; „Тайната история“ на Прокопий; Нарсес в Италия (552 г.); Хосрой II (590 – 628 г.); сегашният статут на „Св. София“ (джамия от юли 2020 г.; в учебника — музей); произходът на името на София; етимологиите на василевс, кодекс, стратег, дипломация и София. Резюмето на трите извора е преразказано със свои думи. Ролята и загадката са измислени. Схемата на храма и картата са опростени. Видео не е добавено, защото не можах да потвърдя подходящо.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/Hagia_Sophia" target="_blank" rel="noopener">Hagia Sophia</a> · <a href="https://orthodoxwiki.org/Hagia_Sophia_(Constantinople)" target="_blank" rel="noopener">Hagia Sophia (OrthodoxWiki)</a> · <a href="https://www.asianews.it/en/middle-east/turkey/turkey-s-council-of-state-rules-that-hagia-sophia-is-a-mosque" target="_blank" rel="noopener">Статут 2020 (AsiaNews)</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Battle_of_Nineveh_(627)" target="_blank" rel="noopener">Battle of Nineveh (627)</a> · <a href="https://www.britannica.com/biography/Khosrow-II" target="_blank" rel="noopener">Khosrow II</a> · <a href="https://www.worldhistory.org/Heraclius/" target="_blank" rel="noopener">Heraclius</a></li>
+      <li><a href="https://www.etymonline.com/word/diploma" target="_blank" rel="noopener">diploma</a> · <a href="https://www.etymonline.com/word/diplomacy" target="_blank" rel="noopener">diplomacy</a> · <a href="https://www.etymonline.com/word/strategy" target="_blank" rel="noopener">strategy</a> · <a href="https://www.etymonline.com/word/code" target="_blank" rel="noopener">code</a> · <a href="https://www.etymonline.com/word/basil" target="_blank" rel="noopener">basil / basileus</a> · <a href="https://www.etymonline.com/word/sophia" target="_blank" rel="noopener">sophia</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-05-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var EX=(SAVED&&SAVED.ex)||{};
+var booted=false;
+function tlOrderNow(){return (typeof sortl!=='undefined'&&sortl)?$$('.sitem',sortl).map(function(li){return +li.getAttribute('data-i')}):(EX.tlOrder||[])}
+function saveNow(){
+  if(!booted)return;
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:{
+      tSeen:tSeen,t2Seen:t2Seen,t3Seen:t3Seen,t4Seen:t4Seen,ribSeen:ribSeen,chainN:chainN,mapCur:mapCur,mapSeen:mapSeen,hsSeen:hsSeen,lit:lit,
+      heard:heard,ySeen:ySeen,fI:fI,jumped:jumped,duelDone:duelDone,
+      tlOrder:tlOrderNow(),tlSolved:sortl.classList.contains('sorted'),tlTries:tlTries,
+      roleI:roleI,witState:witState
+    }}))
+  }catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','s5','dyk'];
+var FLAGS=['jump','jt','faces','rib','codex','hs','light','cartograph','steps','chain','t5','s5q','duel','tl','clue','clue2','role','puzzle'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=EX.jumped||false;
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;var b=this;b.disabled=true;
+  var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $('#dY').textContent=Math.round(2026-(2026-527)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($('#dC'),'VI в.');setDial($('#dP'),'Константинопол, Византия');setTM('527','VI в.','Константинопол');
+      b.textContent='✓ Пристигна в 527 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
+      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички места на картата'},
+  {id:'strategist',ic:'🧭',n:'Стратег',d:'Мини през всички 10 стъпки на картата'},
+  {id:'architect',ic:'🏛️',n:'Архитект',d:'Разгледай всички части на „Св. София“'},
+  {id:'duelist',ic:'🎮',n:'Познавач',d:'Разпредели всички карти „римски или гръцки период“'},
+  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди линията на времето'},
+  {id:'corrector',ic:'🔎',n:'Разобличител',d:'Намери грешката в свитъка'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'justinian',n:'Юстиниан I Велики',y:'ок. 482 – 565',av:'👑',sp:'⚡ Мечтател за единна империя',how:'Обърни първите две плочки в досие №2',back:'Император на Византия (527 – 565). Роден в селско семейство, образован, чичо му Юстин го довежда в Константинопол. Иска да върне единството на Римската империя чрез отвоюване на Запада.<br><br>💡 Не е войник по призвание, но оставя Юстиниановия кодекс и „Св. София“.'},
+  {id:'theodora',n:'Теодора',y:'ок. 500 – 548',av:'👸',sp:'⚡ Решителност в най-тежкия час',how:'Обърни другите две плочки в досие №2',back:'Съпруга на Юстиниан, бедна танцьорка, която става императрица. При бунта в Константинопол му вдъхва сили да запази властта си. Приема посланици, пише на владетели, прокарва закони и строи храмове.<br><br>💡 След смъртта ѝ Юстиниан до края на управлението си не издава нов закон.'},
+  {id:'belisarius',n:'Велизарий',y:'ок. 505 – 565',av:'🛡️',sp:'⚡ Пълководец на Юстиниан',how:'Стигни до стъпка „540 Рим“ на картата',back:'Един от най-великите византийски пълководци — опитен стратег и смел военачалник. Ръководи походите срещу варварските кралства. Според учебника през 540 г. отвоюват Рим.<br><br>💡 Началото на походите: 533 г., Картаген.'},
+  {id:'heraclius',n:'Ираклий',y:'610 – 641 (владее)',av:'⚔️',sp:'⚡ Победител в „свещената война“',how:'Мини през всички стъпки в досие №4',back:'Император, при когото Византия е на ръба: персите вземат Сирия, Палестина, Египет и Йерусалим. С подкрепата на патриарха започва „свещена война“, побеждава при Ниневия (627 г.) и връща Светия кръст. Преобразява държавата.<br><br>💡 При него започва гръцкият период на Византия.'},
+  {id:'khosrow',n:'Хосрой II',y:'590 – 628 (владее)',av:'🦁',sp:'⚡ „Цар на царете“ на Персия',how:'Разпитай уликата на Ал-Динавари',back:'Цар на Персия от династията на Сасанидите. При него персите превземат Йерусалим (614 г.) и вземат Светия кръст. Според Ал-Динавари го е заключил, за да подчини християните.<br><br>💡 След поражението при Ниневия е свален от власт, а през 628 г. е убит.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'Юстиниан връща единството с войни на запад, но те изтощават империята, а враговете й нападат.',
+  2:'След 565 г. картата се променя: част от завоеванията се губят, а персите и славяните настъпват.',
+  3:'Ираклий води „свещена война“, побеждава персите при Ниневия (627 г.) и връща Светия кръст.',
+  4:'Империята се обновява: теми, стратези, стратиоти, гръцки език и титла „василевс“.'
+};
+var CLUE_FOR={s1:1,s4:3,s5:4};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  diplo:['Дипломация','Съвкупност от методи, средства и действия на управляващите за провеждане на външната политика на държавата.'],
+  codex:['Кодекс','Сборник от закони.'],
+  holy:['„Свещена война“','Война, която се води в името на дадена религия, Бог и ценности срещу народи, изповядващи друга религия.'],
+  vasileus:['Василевс','Гръцка дума за владетел. Използвана от владетелите на древногръцките полиси, а от VII в. — титла на византийския император.'],
+  tema:['Тема','Област във Византия след реформите на VII в. Всяка тема има свой управител — стратег.'],
+  strateg:['Стратег','Управител на тема, в чиито ръце са обединени военната и гражданската власт.'],
+  logo:['Логотет','Министър в институциите на централното управление във Византия.'],
+  stratiot:['Стратиот','Свободен селянин във Византия, който получава земя от държавата срещу военна служба.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+
+/* ================= плочки (общ помощник) ================= */
+function tilesInit(attr,TXT,seen,flagKey,bonusMsg){
+  $$('.tile['+attr+']').forEach(function(t){t.addEventListener('click',function(){
+    var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+    t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+    if(Object.keys(seen).length===TXT.length&&flag(flagKey))addXP(3,bonusMsg);
+  })});
+}
+function tilesRestore(attr,TXT,seen){
+  Object.keys(seen).forEach(function(i){var t=$('.tile['+attr+'="'+i+'"]');if(t&&!t.classList.contains('open')){t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open')}});
+}
+
+/* ================= ДОСИЕ 1: ПЛОЧКИ (ПОДХОДЪТ НА ЮСТИНИАН) ================= */
+var JT=['Византийски войски тръгват на големи походи срещу варварските кралства в Италия, Испания и Северна Африка. Начело е пълководецът Велизарий. През 540 г. (по учебника) отвоюват Рим.','Голяма част от земите на Западната римска империя са под властта на Юстиниан. Средиземно море се превръща във „Византийско езеро“.','Войните на запад изтощават империята. Старите врагове — персите, както и славяни, българи и авари — използват слабостта ѝ.','Византийците нямат равни в преговорите и съюзите. Юстиниан назначава славянин, свой доверен човек, за военен управител на Тракия. Строи и крепости, но славяните не са спрени.'];
+var tSeen=EX.tSeen||{};
+tilesInit('data-tile',JT,tSeen,'jt','Разбра политиката на Юстиниан!');
+
+/* ================= ДОСИЕ 2: ЛИЦАТА (ПЛОЧКИ + КАРТИ) ================= */
+var FACES=['Юстиниан е роден в селско семейство. Като млад заминава за Константинопол при чичо си Юстин, който след успешна кариера в армията става император.','Получава високо за времето си образование. Макар да не е войник по призвание, успява да възстанови единството на Римската империя.','Теодора е бедна танцьорка. Юстиниан се жени за нея преди да бъде коронясан. Тя приема чужди посланици, пише на владетели, прокарва закони и строи храмове.','В началото на управлението на Юстиниан константинополската тълпа се разбунтува. Теодора проявява решителност и му вдъхва сили да запази властта си. След смъртта ѝ той до края не издава нов закон.'];
+var t2Seen=EX.t2Seen||{};
+tilesInit('data-tile2',FACES,t2Seen,'faces','Опозна двамата владетели!');
+$$('.tile[data-tile2]').forEach(function(t){t.addEventListener('click',function(){
+  if(t2Seen[0]&&t2Seen[1])unlockCard('justinian');
+  if(t2Seen[2]&&t2Seen[3])unlockCard('theodora');
+})});
+
+/* ================= ДОСИЕ 3: СТРОЕЖИ (ribbon) + КОДЕКС (плочки) ================= */
+var RIB=[
+  {n:'Водопроводи',c:'#5B6270',t:'Водопроводи',d:'Доставят вода до големите градове на империята.'},
+  {n:'Мостове',c:'#9E1B32',t:'Мостове',d:'Свързват части на империята и помагат на търговията и армията.'},
+  {n:'Манастири · църкви',c:'#1B2A41',t:'Манастири и църкви',d:'Най-известният храм е „Св. София“ в Константинопол.'},
+  {n:'Дворци',c:'#7A5A10',t:'Дворци',d:'Домове на императора и неговата свита.'},
+  {n:'Крепости',c:'#1E8E4E',t:'Крепости',d:'Издигат се по обширните граници на империята за защита от нашествия.'}
+];
+$('#rib').innerHTML=RIB.map(function(e,i){return '<button data-e="'+i+'" style="flex:1;background:'+e.c+'">'+e.n+'</button>'}).join('');
+var ribSeen=EX.ribSeen||{};
+$$('#rib button').forEach(function(b){b.addEventListener('click',function(){
+  var i=+b.getAttribute('data-e'),e=RIB[i];
+  $$('#rib button').forEach(function(x){x.classList.toggle('active',x===b)});
+  $('#ribInfo').innerHTML='<h3>'+e.t+'</h3><p>'+e.d+'</p>';
+  if(!ribSeen[i]){ribSeen[i]=1;b.classList.add('seen');addXP(2);
+    if(Object.keys(ribSeen).length===RIB.length&&flag('rib'))addXP(5,'Велик строител!');}
+})});
+var CODE=['Специална комисия, назначена от Юстиниан, събира близо 5000 римски закона и ги преработва в духа на християнската вяра.','Както всички са равни пред Бога, така всички са равни и пред закона.','Решения по въпроси за брака, собствеността и правата на жените, а още за престъпленията и съответните им наказания.','Оказва голямо влияние върху средновековното законодателство и до днес остава основен извор за римските закони.'];
+var t3Seen=EX.t3Seen||{};
+tilesInit('data-tile3',CODE,t3Seen,'codex','Кодексът е разбран!');
+
+/* ================= „СВ. СОФИЯ“ ОТВЪТРЕ ================= */
+var HS=[
+  {id:'dome',n:'1 · Куполът',d:'Огромният купол е с диаметър 31 метра. Отвътре е покрит със златни мозайки и сякаш виси в небето. Той е символ на единния християнски свят, който Юстиниан иска да създаде.'},
+  {id:'win',n:'2 · 40 прозореца',d:'В основата на купола има 40 прозореца, от които навлиза светлина. Така куполът изглежда сякаш се носи над сградата, а златото вътре блести.'},
+  {id:'col',n:'3 · Колони и капители',d:'Над сто колони поддържат храма. Капителите им са донесени от всички краища на империята — като знак за нейното единство.'},
+  {id:'gal',n:'4 · Горният етаж',d:'Храмът е оформен на две нива. Долу се молят мъжете, а на горния етаж — само жените.'},
+  {id:'mos',n:'5 · Мрамор и мозайки',d:'Стените отвътре са облицовани с разноцветен мрамор и украсени със златни мозайки. Те създават свръхестествено усещане, което подтиква към молитва.'},
+  {id:'ext',n:'6 · Външните стени',d:'Отвън стените са от хоросан и камък: прости и масивни. Контрастът с блясъка вътре прави силно впечатление на вярващите — като влизане в друг, по-светъл свят.'}
+];
+(function(){
+  var w='',r='',c='',i,x;
+  for(i=0;i<21;i++){x=112+i*8.55;
+    w+='<rect x="'+x.toFixed(1)+'" y="108" width="5" height="12" rx="1.5" fill="#6B8DB8"/>';
+    if(i%2===0)r+='<path class="ray" style="animation-delay:'+(i*0.09).toFixed(2)+'s" d="M'+(x+2.5).toFixed(1)+',120 L'+(x-18+ (i-10)*4).toFixed(1)+',232 L'+(x+23+(i-10)*4).toFixed(1)+',232 Z" fill="#FFE29A"/>';
+  }
+  [52,66,80,318,332,346].forEach(function(cx){
+    c+='<rect x="'+(cx-2.5)+'" y="188" width="5" height="44" fill="#8C95A6"/><rect x="'+(cx-5)+'" y="183" width="10" height="6" rx="1.5" fill="#C9962B"/>';
+    c+='<rect x="'+(cx-2)+'" y="146" width="4" height="30" fill="#8C95A6"/><rect x="'+(cx-4)+'" y="141" width="8" height="5" rx="1.5" fill="#C9962B"/>';
+  });
+  c+='<rect x="44" y="176" width="56" height="4" fill="#7C8699"/><rect x="300" y="176" width="56" height="4" fill="#7C8699"/>';
+  c+='<text x="328" y="168" class="hslab" text-anchor="middle" style="font-size:13px">👩</text><text x="72" y="168" class="hslab" text-anchor="middle" style="font-size:13px;opacity:0">·</text>';
+  $('#hsWins').innerHTML=w;$('#hsRays').innerHTML=r;$('#hsCols').innerHTML=c;
+  $('#hsChips').innerHTML=HS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:var(--red)"></i>'+p.n+'</button>'}).join('');
+})();
+var hsSeen=EX.hsSeen||{};
+function showHs(id){
+  var p=HS.filter(function(x){return x.id===id})[0];
+  $$('#hs .hsm, #hs .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#hsInfo').innerHTML='<h3>🏛 '+p.n+'</h3><p>'+p.d+'</p>';
+  if(!hsSeen[id]){hsSeen[id]=1;$$('#hs [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(HS.every(function(x){return hsSeen[x.id]})&&flag('hs')){addXP(5,'Храмът е разгледан!');award('architect')}}
+  saveNow();
+}
+$$('#hs .hsm, #hs .chip').forEach(function(e){e.addEventListener('click',function(){showHs(e.getAttribute('data-id'))})});
+var lit=EX.lit||false;
+function setLight(on){var b=$('#lightBtn');$('#hsSvg').classList.toggle('lit',on);b.textContent=on?'🌑 Загаси светлината':'☀️ Пусни светлината'}
+$('#lightBtn').addEventListener('click',function(){
+  lit=!lit;setLight(lit);
+  if(lit&&flag('light'))addXP(3,'Светлината през 40-те прозореца!');
+  saveNow();
+});
+setLight(lit);
+
+/* ================= ДОСИЕ 4: ИРАКЛИЙ (chain) ================= */
+var CHAINN=['<b>610 г. — Ираклий</b> · на престола се възкачва Ираклий. Съдбата на империята зависи от войната с Персия.','<b>614 г. — Йерусалим</b> · персите превземат Сирия, Месопотамия и Палестина. В техни ръце попадат Йерусалим и Светият кръст, а после и Египет — житницата на империята.','<b>626 г. — обсадата</b> · Константинопол е обсаден от перси, авари и славяни. Положението е критично.','<b>627 г. — Ниневия</b> · с подкрепата на патриарха Ираклий започва „свещена война“. Ромеите нанасят съкрушително поражение на персите при Ниневия.','<b>След войната</b> · източните провинции са отново във Византия, а Светият кръст е върнат в Йерусалим. Според времевата линия през 635 г. има мирен договор с хан Кубрат. В края на управлението на Ираклий се появяват арабите.'];
+var chainN=EX.chainN||0;
+$$('#chain button').forEach(function(b){b.addEventListener('click',function(){
+  var n=+b.getAttribute('data-n');if(b.classList.contains('open'))return;
+  b.classList.add('open');b.innerHTML=CHAINN[n];addXP(2);chainN=Math.max(chainN,n+1);
+  var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}
+  else if(flag('chain')){addXP(3,'Войната е проследена!');unlockCard('heraclius')}
+})});
+
+/* ================= ДОСИЕ 5: ОБНОВЯВАНЕТО ================= */
+var RENEW=['Мнозинството от поданиците вече са гърци. Византия постепенно става гръцка държава, а римският период свършва.','Титлата на владетеля е променена: „василевс на ромеите“. В имперското управление и в Църквата гръцкият език замества латинския.','Територията е разделена на области — теми. Всяка има управител стратег, в чиито ръце са военната и гражданската власт.','Институциите на централното управление са оглавени от логотети — министри.','Наемните войници струват скъпо и по време на битка могат да изоставят своя пълководец. Затова армията е реформирана.','Стратиотите са свободни селяни. Срещу военната си служба получават от държавата земя, за да се издържат.'];
+var t4Seen=EX.t4Seen||{};
+tilesInit('data-tile4',RENEW,t4Seen,'t5','Новата империя е разбрана!');
+(function(){
+  var Q={q:'Какво се променя във Византия по време на Ираклий?',o:['Империята постепенно става гръцка държава, а гръцкият език заменя латинския в управлението и Църквата','Византия се връща към латинския като единствен език','Темите са премахнати и армията се състои само от наемници'],a:0,e:'Римският период свършва: Византия става гръцка държава, гръцкият заменя латинския, владетелят е „василевс на ромеите“, а управлението е по теми.'};
+  oneQ($('#s5q'),Q,'s5q',5);restoreOneQ($('#s5q'),Q,'s5q');
+})();
+
+var MK=8.565,COS=0.766;
+function P(lon,lat){return [((lon+11)*MK*COS).toFixed(1),((58-lat)*MK).toFixed(1)]}
+function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
+function linePath(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+var SEA={
+ med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
+ marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
+ black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]],
+ red:[[32.6,29.95],[33.3,28.6],[34.25,27.75],[34.6,28.4],[34.95,29.5],[34.9,28.2],[35.3,28.0],[36.6,25.8],[38.1,24.0],[39.2,21.5],[39.6,19.5],[37.5,19.5],[37.2,21.0],[36.9,22.0],[35.5,24.0],[34.0,26.3],[33.5,27.3],[32.6,29.6]],
+ atl:[[-12,20],[-12,28.3],[-10.2,29.4],[-9.7,30.5],[-9.8,31.5],[-9.2,32.5],[-8.5,33.3],[-7.6,33.6],[-6.8,34.0],[-6.2,35.2],[-5.9,35.8],[-5.6,36.0],[-6.3,36.5],[-7.4,37.2],[-7.9,37.0],[-8.95,37.0],[-8.8,38.4],[-9.5,38.7],[-9.0,40.0],[-8.7,41.2],[-8.9,42.5],[-9.3,42.9],[-8.4,43.4],[-7.0,43.6],[-5.7,43.6],[-3.8,43.5],[-1.8,43.4],[-1.5,43.5],[-1.2,44.6],[-1.2,46.0],[-2.2,47.2],[-3.0,47.5],[-4.4,47.8],[-4.7,48.4],[-3.0,48.8],[-1.6,48.7],[-1.9,49.7],[-1.3,49.7],[-0.2,49.3],[0.1,49.5],[1.5,50.1],[1.9,51.0],[3.6,51.4],[4.2,52.0],[4.7,52.9],[5.3,53.4],[7.0,53.6],[8.5,53.6],[8.9,54.0],[8.6,55.0],[8.1,55.5],[8.2,56.7],[9.5,57.1],[10.6,57.7],[10.5,57.2],[10.3,56.5],[10.2,56.0],[9.9,55.2],[10.0,54.8],[10.2,54.4],[10.9,54.0],[12.1,54.2],[13.4,54.6],[14.2,53.9],[16.0,54.3],[17.5,54.8],[18.7,54.4],[19.6,54.5],[20.0,54.9],[21.1,55.7],[21.0,56.5],[21.5,57.4],[22.5,57.7],[23.8,57.0],[24.4,57.3],[24.3,59],[16.7,59],[16.7,58.0],[16.6,57.8],[16.4,56.7],[15.9,56.1],[14.3,55.9],[13.9,55.4],[13.0,55.6],[12.7,56.0],[12.6,56.6],[11.9,57.7],[11.3,59],[7.5,59],[7.0,58.0],[6.0,58.3],[5.5,59],[-12,59]]
+};
+var ISL={
+ sic:{p:[[12.4,38.1],[13.4,38.2],[15.6,38.3],[15.1,37.1],[15.1,36.7],[14.3,37.0],[12.6,37.6]]},
+ cre:{p:[[23.5,35.6],[24.6,35.5],[26.3,35.3],[26.1,35.0],[24.6,35.1],[23.6,35.2]]},
+ cyp:{p:[[32.3,35.1],[33.0,35.4],[34.6,35.7],[33.9,35.0],[32.9,34.6],[32.3,34.8]]}
+};
+SEA.casp=[[47.0,45.0],[47.4,43.0],[48.4,41.9],[49.2,40.5],[49.0,39.2],[49.0,38.0],[50.3,37.0],[53,36.8],[54,37.5],[53.9,39.5],[53,40.5],[52.8,41.8],[53,42.5],[51,44.5],[51.2,45.5],[53,46.5],[53,47],[50,46.9],[48.5,46.5],[47.2,45.9]];
+/* ================= КАРТА: БАЗА ================= */
+var C={byz:'#B49AD9',conq:'#F2A9BD',lost:'#C23B4A',pers:'#8FCB98',frank:'#9DB0CF',ogb:'#F5C97A'};
+var TP={
+ byz:[[19,41.2],[19.4,44.5],[22.5,44.6],[28.5,44.2],[30,45.4],[31.6,44.2],[31.6,41.6],[36,42.3],[41.5,42.3],[44.2,40.8],[43.4,37.8],[41.2,37.2],[40.6,35.4],[38.5,33.8],[37.5,31.5],[36,29.5],[34,27],[33.2,24],[25,22],[25,31.6],[20,36],[18.5,38.5]],
+ pers:[[41.2,37.4],[43.4,37.8],[44.2,40.8],[50,41.5],[50,29],[47.5,29.2],[44,31],[40.6,35.4]],
+ pgain:[[25,22],[25,31.6],[29,32],[34.5,31.5],[35.5,33],[36,35.5],[36.8,36.6],[41.2,37.4],[40.6,35.4],[38.5,33.8],[37.5,31.5],[36,29.5],[34,27],[33.2,24]],
+ frank:[[-4.5,48.4],[-1.8,43.4],[3,42.5],[7.2,43.6],[7.6,46],[8.5,47.5],[9.5,49.5],[8,52],[7,53.4],[4,52],[2,51.2],[-1.8,49.7]],
+ ogb:[[29.5,46.5],[31.5,48.3],[34,50.2],[39,50.5],[44,49.5],[47.5,47.5],[47.5,44.5],[45,43],[41.5,43.3],[39.7,44],[38,45.2],[37.5,46],[35.5,45.5],[34,46.2],[32,46.1]],
+ ita:[[7.5,43.8],[10,46],[13.5,47.0],[14.2,45.5],[13.3,43.6],[18.6,40.2],[16.5,37.8],[15,38.5],[12,41.2],[9,43]],
+ nita:[[7.5,43.8],[10,46],[13.5,47.0],[14.2,45.9],[12.6,45.5],[11.5,44.2],[10.5,43.5],[9,43.6]],
+ dal:[[13.4,45.6],[16,46.2],[19.2,44.5],[19.2,41.8],[17,42.2],[14.5,44.4]],
+ afr:[[8,36.8],[11.2,37.5],[11.6,33.5],[15.3,32.5],[15.3,31.2],[8,31.2]],
+ spa:[[-6.5,36.9],[-4,38],[-1.2,38.8],[-0.2,37.8],[-1,36.3],[-6.5,35.5]],
+ blk:[[19.4,44.5],[22.5,44.6],[28.5,44.2],[30,45.4],[28.5,43.2],[22.5,42.8],[20,43.4]]
+};
+function terFor(st){
+  var L=[['ogb',C.ogb],['frank',C.frank],['pers',C.pers],['byz',C.byz]];
+  if(st>=1){L.push(['ita',C.conq],['dal',C.conq],['afr',C.conq],['spa',C.conq])}
+  if(st===2||st>=7){L.push(['nita',C.lost],['spa',C.lost],['blk',C.lost])}
+  if(st===7||st===8){L.push(['pgain',C.pers])}
+  return L;
+}
+function setTer(st){
+  var s='';terFor(st).forEach(function(t){s+='<path d="'+poly(TP[t[0]])+'" style="fill:'+t[1]+';stroke:#fff;stroke-width:.6"/>'});
+  $('#terG').innerHTML=s;
+  var sic=(st>=1)?C.conq:'var(--land)';
+  $('#islG').innerHTML='<path d="'+poly(ISL.sic.p)+'" style="fill:'+sic+';stroke:#8FAAC4;stroke-width:.8"/><path d="'+poly(ISL.cre.p)+'" style="fill:'+C.byz+';stroke:#8FAAC4;stroke-width:.8"/><path d="'+poly(ISL.cyp.p)+'" style="fill:'+C.byz+';stroke:#8FAAC4;stroke-width:.8"/>';
+}
+var TLAB=[['ФРАНКСКО',2,47.8],['КРАЛСТВО',2,46.6],['ВИЗАНТИЯ',26,39.6],['ПЕРСИЯ',46.5,34],['ЕГИПЕТ',29,26.5],['СТАРА ВЕЛИКА',40,48.6],['БЪЛГАРИЯ',40,47.7]];
+function buildBaseMap(id){
+  var s='<rect width="400" height="308" style="fill:var(--land)"/><g id="terG"></g>';
+  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea)"/>'});
+  Object.keys(ISL).forEach(function(k){s+='<path d="'+poly(ISL[k].p)+'" style="fill:var(--land)"/>'});
+  s+='<g id="islG"></g>';
+  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'"/>'});
+  s+='<path class="river" d="'+linePath([[31,31.4],[31.2,30],[32,27.5],[32.6,25.7],[32.9,24.1]])+'"/>';
+  s+='<path class="river" d="'+linePath([[10,48.4],[14,48.3],[17,48],[19,47.5],[19.1,46],[21,45],[22.5,44.2],[25,43.7],[27.5,44],[28.7,45]])+'"/>';
+  function T(txt,lon,lat,cls){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'">'+txt+'</text>'}
+  s+=T('СРЕДИЗЕМНО МОРЕ',8,34.6,'maplabel')+T('ЧЕРНО МОРЕ',34.5,43.2,'maplabel')+T('А Ф Р И К А',0,27.5,'contlabel')+T('р. Нил',33.6,27.4,'rivlabel')+T('р. Дунав',20.8,47.4,'rivlabel');
+  TLAB.forEach(function(l){s+=T(l[0],l[1],l[2],'tlabel')});
+  $('#'+id).innerHTML=s;
+}
+buildBaseMap('mapSvg');
+
+/* ================= ТОЧКИ ================= */
+var MCOL='#9E1B32';
+var PTS=[
+  {id:'cpl',n:'Константинопол',lon:28.98,lat:41.01,a:'end',dy:-9,d:'Столицата на Византия. Тук е „Св. София“. През 626 г. градът е обсаден от перси, авари и славяни, но устоява.'},
+  {id:'rome',n:'Рим',lon:12.5,lat:41.9,a:'end',dx:-8,d:'Градът, който Римската империя е превърнала в своя символ. Според учебника през 540 г. византийците го отвоюват.'},
+  {id:'rav',n:'Равена',lon:12.2,lat:44.4,a:'end',dx:-8,d:'Град в Северна Италия. По-късно е важен византийски център в Италия. В църквата Сан Витале е мозайката с Юстиниан.'},
+  {id:'carth',n:'Картаген',lon:10.3,lat:36.85,a:'end',dx:-8,dy:12,d:'Градът в Северна Африка, откъдето започват походите на Велизарий към Италия и Испания (533 г.).'},
+  {id:'jer',n:'Йерусалим',lon:35.2,lat:31.8,dy:-8,d:'Светият град на християните. През 614 г. персите го превземат и отнасят Светия кръст. Ираклий го връща след победата.'},
+  {id:'alex',n:'Александрия',lon:29.9,lat:31.2,a:'end',dx:-8,dy:12,d:'Голям град в Египет. Египет е житницата на империята — оттам идва зърното за Константинопол.'},
+  {id:'nin',n:'Ниневия',lon:43.15,lat:36.4,a:'end',dx:-8,dy:12,d:'Тук през 627 г. ромеите нанасят съкрушително поражение на персите. Победата е важен успех на Ираклий в „свещената война“.'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){var c=P(p.lon,p.lat);var a=p.a||'start',dx=(p.dx!==undefined?p.dx:(a==='end'?-8:8)),dy=(p.dy||0)+4;
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+c[0]+','+c[1]+')"><circle class="halo" r="6" stroke="'+MCOL+'"/><circle class="dot" r="6" fill="'+MCOL+'"/><text x="'+dx+'" y="'+dy+'" text-anchor="'+a+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+MCOL+'"></i>'+p.n+'</button>'}).join('');
+})();
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.n+'</h3><p>'+p.d+'</p>';
+  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('cartograph'))award('cartograph');}
+}
+$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+
+/* ================= ПОХОДИ ================= */
+var ROUTES=[
+  {step:3,cls:'bel',pts:[[28.98,41.0],[25.5,38],[20,36.3],[14,35.6],[10.4,36.8]]},
+  {step:4,cls:'bel',pts:[[10.4,36.8],[13,37.9],[15.3,38.0],[15.4,39.8],[13.7,41.0],[12.6,41.8]]},
+  {step:5,cls:'bel',pts:[[10.4,36.8],[6,37.5],[2,37.9],[-0.9,37.6]]},
+  {step:6,cls:'bel',pts:[[12.2,44.4],[12.3,43.1],[12.5,42.0]]},
+  {step:7,cls:'per',pts:[[44.6,33.1],[40.5,34.8],[37,34.2],[35.2,31.8],[29.9,31.2]]},
+  {step:8,cls:'per',pts:[[43.5,38],[38,39.5],[33,40],[30,40.6],[29.2,41.0]]},
+  {step:8,cls:'avar',pts:[[25,44.7],[27,43],[28.7,41.3]]},
+  {step:9,cls:'her',pts:[[28.98,41.0],[34,42],[39.7,41.0],[43.4,39.7],[44,38],[43.2,36.5]]}
+];
+(function(){
+  var g='<g class="routes" id="routesG">';
+  ROUTES.forEach(function(r,i){
+    g+='<path data-r="'+i+'" data-step="'+r.step+'" class="o" pathLength="1" d="'+linePath(r.pts)+'"/>';
+    g+='<path data-r="'+i+'" data-step="'+r.step+'" class="'+r.cls+'" pathLength="1" d="'+linePath(r.pts)+'"/>';
+    var a=P(r.pts[r.pts.length-2][0],r.pts[r.pts.length-2][1]),b=P(r.pts[r.pts.length-1][0],r.pts[r.pts.length-1][1]);
+    var ax=+a[0],ay=+a[1],bx=+b[0],by=+b[1],dx=bx-ax,dy=by-ay,L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var h=[[bx,by],[bx-dx*9+dy*4.5,by-dy*9-dx*4.5],[bx-dx*9-dy*4.5,by-dy*9+dx*4.5]].map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+    g+='<polygon data-r="'+i+'" data-step="'+r.step+'" class="head '+r.cls+'" points="'+h+'"/>';
+  });
+  g+='</g>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+})();
+var MSTEPS=[
+  {cap:'<b>527 г.</b> Юстиниан поема властта. Източната Римска империя (Византия) обхваща Балканите, Мала Азия, Сирия, Палестина и Египет. На изток е вековният враг — Персия.'},
+  {cap:'<b>565 г.</b> Край на управлението на Юстиниан. Той е завладял Северна Африка, Италия, част от Испания и острови. Средиземно море е почти „Византийско езеро“.'},
+  {cap:'<b>600 г.</b> Много от завоеванията са отнети: северна Италия, Испания и земите на север от Балканите. Това е цената на войните и на нападенията на врагове.'},
+  {cap:'<b>533 г. · Картаген.</b> Византийските войски с Велизарий тръгват по море от Константинопол и отвоюват Северна Африка.'},
+  {cap:'<b>540 г. · Рим.</b> От Африка походът преминава през Сицилия към Италия. Според учебника през 540 г. отвоюват Рим.'},
+  {cap:'<b>550 г. · Испания.</b> Византийски сили отвоюват част от Югоизточна Испания.'},
+  {cap:'<b>552 г. · Италия.</b> Борбите в Италия завършват с победа. В този последен етап начело е друг пълководец — Нарсес.'},
+  {cap:'<b>614 г. · Йерусалим.</b> Персите превземат Сирия, Месопотамия, Палестина и Йерусалим със Светия кръст, а после и Египет. На картата са означени със зелено.'},
+  {cap:'<b>626 г. · Обсада.</b> Константинопол е обсаден от перси, авари и славяни. Градът устоява.'},
+  {cap:'<b>627 г. · Ниневия.</b> Ираклий води походи на изток и нанася съкрушително поражение на персите при Ниневия. Източните провинции се връщат във Византия.'}
+];
+var mapCur=EX.mapCur||0, mapSeen=EX.mapSeen||{0:1};
+function mapStep(i,quiet){
+  mapCur=i;var st=MSTEPS[i];
+  setTer(i);
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',!!mapSeen[k]&&k!==i)});
+  $$('#routesG [data-step]').forEach(function(p){var s=+p.getAttribute('data-step');p.classList.toggle('show',i>=s&&((s<=6&&i<=6)||(s>=7&&i>=7)))});
+  $('#stepCap').innerHTML=st.cap;
+  $('#nextSon').textContent=i>=9?'↺ Отначало':'Следваща стъпка →';
+  var lg='<span><i style="background:'+C.byz+'"></i>Византия към 527 г.</span><span><i style="background:'+C.conq+'"></i>завоевания на Юстиниан</span><span><i style="background:'+C.lost+'"></i>отнети земи</span><span><i style="background:'+C.pers+'"></i>Персия</span><span><i style="background:'+C.ogb+'"></i>Стара Велика България</span><span><i style="background:'+C.frank+'"></i>Франкско кралство</span>';
+  if(i>=3&&i<=6)lg+='<span><i style="background:#1B2A41"></i>походи на Велизарий</span>';
+  if(i>=7)lg+='<span><i style="background:#17703F"></i>настъпление на персите</span>'+(i>=8?'<span><i style="background:#D1491F"></i>авари и славяни</span>':'')+(i>=9?'<span><i style="background:#C9962B"></i>поход на Ираклий</span>':'');
+  $('#mapLegend').innerHTML=lg;
+  if(!quiet&&!mapSeen[i]){
+    mapSeen[i]=1;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',!!mapSeen[k]&&k!==i)});
+    addXP(3);
+    if(i===2)setTimeout(function(){giveClue(2)},700);
+    if(i===4)unlockCard('belisarius');
+    if(Object.keys(mapSeen).length===MSTEPS.length&&flag('steps'))award('strategist');
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){mapStep(+b.getAttribute('data-st'))})});
+$('#nextSon').addEventListener('click',function(){mapStep(mapCur>=9?0:mapCur+1)});
+mapStep(mapCur,true);
+
+/* ================= ИГРА: РИМСКИ ИЛИ ГРЪЦКИ ПЕРИОД ================= */
+var DUEL=[
+  {t:'🇮🇹 Латинският е езикът на управлението',c:'B',e:'В римския период латинският е езикът на имперското управление и на Църквата.'},
+  {t:'🇬🇷 Гръцкият замества латинския в управлението и Църквата',c:'S',e:'При Ираклий гръцкият език замества латинския.'},
+  {t:'⚔️ Мечта да се възстанови Римската империя чрез отвоюване на Запада',c:'B',e:'Това е политиката на Юстиниан I Велики през VI в.'},
+  {t:'👑 Титла „василевс на ромеите“',c:'S',e:'Титлата на владетеля е променена на „василевс на ромеите“.'},
+  {t:'📜 Юстиниановият кодекс — римски закони',c:'B',e:'Кодексът събира близо 5000 римски закона.'},
+  {t:'🗺️ Теми с управител стратег',c:'S',e:'Територията е разделена на теми, всяка с управител стратег.'},
+  {t:'💰 Наемна войска, която струва скъпо',c:'B',e:'Наемните войници струват скъпо и могат да изоставят пълководеца си в битка.'},
+  {t:'🧑‍🌾 Армия от стратиоти със земя срещу служба',c:'S',e:'Реформираната армия е от стратиоти — свободни селяни със земя срещу военна служба.'},
+  {t:'🏛️ Логотети — министри в централното управление',c:'S',e:'Институциите на централното управление са оглавени от логотети.'},
+  {t:'🌊 Средиземно море като „Византийско езеро“',c:'B',e:'Това е резултат от завоеванията на Юстиниан на запад.'},
+  {t:'🇬🇷 Мнозинството от поданиците са гърци',c:'S',e:'При Ираклий вече повечето поданици на императора са гърци.'}
+];
+var duelDone=EX.duelDone||[], duelSel=null;
+function duelRender(){
+  var pool=$('#duelPool'),B=$('#dropB'),Sl=$('#dropS');pool.innerHTML='';B.innerHTML='';Sl.innerHTML='';
+  shuffle(DUEL.map(function(_,i){return i})).forEach(function(i){
+    if(duelDone.indexOf(i)>=0)return;
+    var b=document.createElement('button');b.className='duel-chip';b.setAttribute('data-i',i);b.textContent=DUEL[i].t;
+    b.addEventListener('click',function(){duelSel=(duelSel===i?null:i);$$('.duel-chip').forEach(function(x){x.classList.toggle('sel',+x.getAttribute('data-i')===duelSel)})});
+    pool.appendChild(b);
+  });
+  duelDone.forEach(function(i){var s=document.createElement('span');s.className='duel-tag';s.textContent='✓ '+DUEL[i].t;(DUEL[i].c==='B'?B:Sl).appendChild(s)});
+  $('#duelCnt').textContent='Разпределени: '+duelDone.length+' от '+DUEL.length;
+  if(duelDone.length===DUEL.length&&!pool.children.length)pool.innerHTML='<span style="color:var(--ok);font-weight:700">✓ Купчината е празна!</span>';
+}
+function duelPlace(col){
+  var fb=$('#duelFb');
+  if(duelSel===null){fb.className='fb bad';fb.innerHTML='<b>Първо избери карта.</b> Докосни карта от купчината, после колона.';return}
+  var it=DUEL[duelSel];
+  if(it.c===col){
+    duelDone.push(duelSel);duelSel=null;fb.className='fb ok';fb.innerHTML='<b>Вярно!</b> '+it.e;addXP(2);duelRender();
+    if(duelDone.length===DUEL.length&&flag('duel')){addXP(10,'Всичко е на мястото си!');award('duelist')}
+  }else{
+    fb.className='fb bad';fb.innerHTML='<b>Не е тази колона.</b> '+it.e+' Опитай пак.';duelSel=null;$$('.duel-chip').forEach(function(x){x.classList.remove('sel')});
+  }
+  saveNow();
+}
+$$('.duel-col').forEach(function(c){
+  c.addEventListener('click',function(){duelPlace(c.getAttribute('data-col'))});
+  c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();duelPlace(c.getAttribute('data-col'))}});
+});
+duelRender();
+
+
+/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
+var TL=[['529 г.','Издава се Юстиниановият кодекс'],['537 г.','Освещава се храмът „Св. София“'],['540 г.','Византийците завладяват Рим (по учебника)'],['614 г.','Персите превземат Йерусалим'],['626 г.','Обсада на Константинопол от перси, авари и славяни'],['627 г.','Победа над персите при Ниневия']];
+var sortl=$('#sortl');
+function tlRender(order){
+  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+' ·</span>'+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+  $$('.sitem',sortl).forEach(bindItem);
+}
+var order0=(EX.tlOrder&&EX.tlOrder.length===TL.length)?EX.tlOrder:(function(){var o;do{o=shuffle([0,1,2,3,4,5])}while(o.join()==='0,1,2,3,4,5');return o})();
+tlRender(order0);
+var TLOK='<b>Отлично, хронисте!</b> От кодекса на Юстиниан до победата на Ираклий минава около един век.';
+if(EX.tlSolved){
+  sortl.classList.add('sorted');
+  $$('.sitem',sortl).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});
+  $('#tlCheck').disabled=true;
+  $('#tlFb').className='fb ok';
+  $('#tlFb').innerHTML=TLOK;
+}
+function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb';saveNow()}
+function bindItem(li){
+  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+    if(sortl.classList.contains('sorted'))return;
+    var d=+b.getAttribute('data-mv');
+    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
+    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
+    clearMarks();
+  })});
+  var h=$('.handle',li),startY=0,dragging=false,pid=null;
+  h.addEventListener('pointerdown',function(ev){
+    if(sortl.classList.contains('sorted'))return;
+    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+    try{h.setPointerCapture(pid)}catch(e){}
+    ev.preventDefault();
+  });
+  h.addEventListener('pointermove',function(ev){
+    if(!dragging||ev.pointerId!==pid)return;
+    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+    var prev=li.previousElementSibling,next=li.nextElementSibling;
+    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+  });
+  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+}
+var tlTries=EX.tlTries||0;
+$('#tlCheck').addEventListener('click',function(){
+  if(sortl.classList.contains('sorted'))return;
+  tlTries++;saveNow();var items=$$('.sitem',sortl),ok=0;
+  items.forEach(function(li,pos){var good=+li.getAttribute('data-i')===pos;li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+  var fb=$('#tlFb');
+  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML=TLOK;
+    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
+  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: Юстиниан е преди Ираклий.'}
+});
+
+/* ================= УЛИКА: ИЗВОРИ ================= */
+var CQ=[
+  {q:'1. Кой е създал извора?',o:['Прокопий Кесарийски — византийски историк от VI в.','Император Ираклий','Хан Кубрат'],a:0,e:'Прокопий е историк, съвременник на Юстиниан, автор на „За строежите“.'},
+  {q:'2. Кога е написан?',o:['През VI в., по времето на Юстиниан','През XV в., при османците','През XX в.'],a:0,e:'Текстът е от VI в. — храмът е построен през 532 – 537 г.'},
+  {q:'3. С какво храмът предизвиква възхищението на автора?',o:['С блясъка на украсата, хармонията на размерите и купола, който като че ли виси от небето','С това, че е най-евтиният храм','С това, че е в селски район'],a:0,e:'Авторът възхвалява украсата, размерите и купола. А красотата според него е постигната с Божието одобрение, а не само с човешко изкуство.'},
+  {q:'4. Може ли да му се вярва напълно? Защо е писал така?',o:['Не напълно — пише възхвала за император, а красивите думи не са точно описание на факти','Да, историкът винаги пише само истината','Не, защото текстът е написан днес'],a:0,e:'Прокопий възхвалява Юстиниан и неговите строежи. В друго свое съчинение, „Тайната история“, той пише за императора много по-остро. Затова изворът е ценен, но го четем внимателно.'}
+];
+(function(){
+  var box=$('#clueQs'),n=0;
+  box.innerHTML=CQ.map(function(_,i){return '<div class="qblock stage" id="cq'+i+'"></div>'}).join('');
+  CQ.forEach(function(Q,i){Q.after=function(){n++;if(n===CQ.length){if(flag('clue'))addXP(5,'Уликата е разпитана!')}};oneQ($('#cq'+i),Q,'cq'+i,4);restoreOneQ($('#cq'+i),Q,'cq'+i)});
+})();
+var KQ=[
+  {q:'Кои основни човешки права са посочени в откъса от Кодекса?',o:['Да живееш честно, да не вредиш на другите и да отговаряш лично за действията си','Да имаш най-много земя','Да не плащаш данъци'],a:0,e:'Според кодекса правата са: да живееш честно, да не вредиш на другите и всеки да отговаря за действията си.'},
+  {q:'С какво задължение е свързана свободата?',o:['Да не нарушаваш закона','Да слушаш само императора','Да не излизаш от дома си'],a:0,e:'Свободата е способността да правиш каквото искаш, но без да нарушаваш закона.'}
+];
+var DQ=[
+  {q:'Какво самочувствие показва персийският владетел в откъса?',o:['Нарича се „цар на царете“, победител и умиротворител на страните','Смята се за слаб и победен','Моли византийците за помощ'],a:0,e:'Хосрой се нарича „цар на царете, побеждаващ и умиротворяващ страните“.',after:function(){unlockCard('khosrow')}},
+  {q:'Защо Светият кръст е особено ценен за него?',o:['Според него така християните ще му се подчиняват, защото дървото има голямо въздействие върху тях','Защото е изработен от злато','Защото е бил на персийски цар'],a:0,e:'Хосрой го взел и го заключил, за да получи послушанието на християните с негова помощ.'}
+];
+(function(){
+  var n=0,tot=KQ.length+DQ.length;
+  function mk(boxId,arr,pre){
+    $(boxId).innerHTML=arr.map(function(_,i){return '<div class="qblock stage" id="'+pre+i+'"></div>'}).join('');
+    arr.forEach(function(Q,i){var af=Q.after;Q.after=function(){if(af)af();n++;if(n===tot){if(flag('clue2'))addXP(4,'Допълнителните улики са разпитани!')}};oneQ($('#'+pre+i),Q,pre+i,3);restoreOneQ($('#'+pre+i),Q,pre+i)});
+  }
+  mk('#kQs',KQ,'kq');mk('#dQs',DQ,'dq');
+})();
+
+/* ================= РОЛЯ ================= */
+var ROLE=[
+  {t:'Пишеш на гръцки и титлата на императора е „василевс на ромеите“.',v:'Точно така! При Ираклий гръцкият замества латинския в управлението, а владетелят е „василевс на ромеите“.'},
+  {t:'Пишеш на латински, като започваш със старата римска титла.',v:'Хм… Латинският е заменен с гръцкия в управлението и Църквата. Писмото на императора ще е на гръцки.'},
+  {t:'Пишеш на персийски, защото така ще те разберат всички.',v:'Не. Персия е врагът, а езикът на управлението е гръцкият.'}
+];
+var roleI=EX.roleI;
+function renderRole(){
+  var box=$('#roleOpts');
+  box.innerHTML=ROLE.map(function(r,i){return '<button class="opt" data-r="'+i+'">'+r.t+'</button>'}).join('');
+  $$('[data-r]',box).forEach(function(b){b.addEventListener('click',function(){
+    if(roleI!==undefined)return;
+    var i=+b.getAttribute('data-r');roleI=i;saveNow();
+    $$('[data-r]',box).forEach(function(x){x.disabled=true});b.classList.add(i===0?'right':'wrong');
+    var fb=$('#roleFb');fb.className='fb '+(i===0?'ok':'bad');fb.innerHTML='<b>'+(i===0?'Точно така!':'Хм…')+'</b> '+ROLE[i].v;
+    if(flag('role'))addXP(5,'Влезе в ролята!');
+  })});
+}
+renderRole();
+if(roleI!==undefined){$$('[data-r]',$('#roleOpts'))[roleI].click()}
+
+/* ================= ЗАГАДКА: ГРЕШКАТА В СВИТЪКА ================= */
+var WIT=[
+  {t:'1. „На 27 декември 537 г. император Юстиниан влиза в новия храм „Света София“ в Константинопол.“',lie:0,e:'Вярно: храмът е освещаван през 537 г.'},
+  {t:'2. „Под огромния купол светлината се стича през прозорците в основата му, а вътре блестят златни мозайки.“',lie:0,e:'Вярно: 40 прозореца в основата на купола и златни мозайки.'},
+  {t:'3. „Отвън над покривите се издигат четири стройни минарета, които се виждат чак от залива.“',lie:1,e:'Грешката! Минаретата са добавени много по-късно, когато османците превземат Константинопол и превръщат храма в джамия. През 537 г. това е християнска църква.'},
+  {t:'4. „Мъжете се молят долу, а жените — на горния етаж.“',lie:0,e:'Вярно: храмът е на две нива и горният е за жените.'}
+];
+var witState=EX.witState;
+function renderWit(){
+  var box=$('#witnesses');
+  box.innerHTML=WIT.map(function(w,i){return '<button class="opt" data-w="'+i+'">'+w.t+'</button>'}).join('');
+  $$('[data-w]',box).forEach(function(b){b.addEventListener('click',function(){
+    if(witState!==undefined)return;
+    var i=+b.getAttribute('data-w');witState=i;saveNow();
+    $$('[data-w]',box).forEach(function(x,xi){x.disabled=true;x.classList.add(WIT[xi].lie?'wrong':'right')});
+    var fb=$('#witFb');
+    if(WIT[i].lie){fb.className='fb ok';fb.innerHTML='<b>Разобличен!</b> '+WIT[i].e;if(flag('puzzle')){addXP(8,'Грешката е намерена!');award('corrector')}}
+    else{fb.className='fb bad';fb.innerHTML='<b>Не е този ред.</b> '+WIT[i].e+' Потърси нещо, което още не е съществувало през 537 г.';witState=undefined}
+  })});
+}
+renderWit();
+if(witState!==undefined){var _wb=$$('[data-w]',$('#witnesses'));_wb.forEach(function(x,xi){x.disabled=true;x.classList.add(WIT[xi].lie?'wrong':'right')});
+  var _fb=$('#witFb');_fb.className='fb ok';_fb.innerHTML='<b>Разобличен!</b> '+WIT[witState].e;}
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['emperor','император','The emperor lives in a big palace.'],['law','закон','Everyone must follow the law.'],['church','църква','The church is very old.'],['dome','купол','The dome is round and high.'],['column','колона','A tall column stands in the hall.'],['army','армия','The army is ready for war.'],['capital','столица','Sofia is the capital of Bulgaria.'],['peace','мир','They sign a peace treaty.']];
+var ES=[['el emperador','императорът','El emperador es fuerte.'],['la ley','законът','La ley es para todos.'],['la iglesia','църквата','La iglesia es grande.'],['el ejército','армията','El ejército marcha.'],['la paz','мирът','Queremos la paz.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+var heard=EX.heard||{};
+function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'βασιλεύς',s:'гръцки „цар, владетел“',b:['василевс (визант.)','Васил (бълг. име)','Basil (англ. име)','Basilio (исп.)'],p:'Василевс е гръцката дума за владетел, а византийските императори я приемат за своя титла. От нея идва и името Васил (гръцки Basileios): то значи „царствен“.'},
+  {r:'caudex / codex',s:'латински „дънер, дъсчица за писане“',b:['кодекс','code (англ.)','código (исп.)','Kodex (нем.)'],p:'Латинската дума първо значи „дънер на дърво“, после дъсчици, върху които се пише, и книга от листове. Така „кодекс“ става сборник от закони, а и английското „code“ („закон, шифър“).'},
+  {r:'στρατηγός',s:'гръцки „водач на войска“',b:['стратег','strategy (англ.)','estrategia (исп.)','Strategie (нем.)'],p:'Съставена от „stratos“ (войска) и „agein“ (водя). Във Византия стратегът е управител на тема, а днес „стратегия“ значи план как да постигнеш голяма цел.'},
+  {r:'δίπλωμα',s:'гръцки „сгънат на две лист“',b:['дипломация','diplomacy (англ.)','diplomacia (исп.)','диплома'],p:'В древността държавни писма и документи са били сгъвани на две. Така „диплома“ е първо такъв сгънат документ. Оттам „дипломацията“ са официалните отношения между държавите.'},
+  {r:'σοφία',s:'гръцки „мъдрост“',b:['София (столицата)','Sofía (исп.)','Sophie (фр.)','философия'],p:'„Света София“ значи „Света мъдрост“. От тази църква носи името си столицата на България. А „философия“ значи „любов към мъдростта“.'}
+];
+$('#etym').innerHTML=ETY.map(function(e,i){return '<button class="ety" data-y="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('');
+var ySeen=EX.ySeen||{};
+$$('.ety').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'Каква е основната цел на Юстиниан във външната политика?',o:['Да възстанови единството на Римската империя чрез отвоюване на Запада','Да премести столицата в Рим','Да сключи мир с всички врагове'],a:0,e:'Юстиниан иска да върне единството на империята, като отвоюва Запада.'},
+  {q:'Кой пълководец води византийските походи на Запад?',o:['Велизарий','Ираклий','Теодора'],a:0,e:'Велизарий е един от най-великите византийски пълководци.'},
+  {q:'Какво е кодекс?',o:['Сборник от закони','Вид монета','Византийска крепост'],a:0,e:'Кодексът е сборник от закони. Юстиниановият кодекс събира близо 5000 римски закона.'}],
+ [{q:'През коя година е освещаван храмът „Св. София“?',o:['537 г.','529 г.','627 г.'],a:0,e:'Храмът е построен през 532 – 537 г. и е освещаван през 537 г.'},
+  {q:'Какъв е диаметърът на централния купол на „Св. София“?',o:['31 метра','3 метра','310 метра'],a:0,e:'Диаметърът е 31 метра, а в основата му има 40 прозореца.'},
+  {q:'Кой управлява византийска тема след реформите?',o:['Стратег','Логотет','Стратиот'],a:0,e:'Стратегът е управител на тема. Логотетите са министри, а стратиотите — войници със земя.'}],
+ [{q:'Къде ромеите нанасят съкрушително поражение на персите през 627 г.?',o:['При Ниневия','При Поатие','При Рим'],a:0,e:'Ниневия, 627 г. — победа на Ираклий в „свещената война“.'},
+  {q:'Какво се случва с титлата и езика във Византия при Ираклий?',o:['Владетелят е „василевс на ромеите“, а гръцкият замества латинския','Владетелят става „консул“, а езикът е латински','Всичко остава както при древен Рим'],a:0,e:'Византия става гръцка държава: гръцки език и титла „василевс на ромеите“.'},
+  {q:'Кои хора получават земя срещу военна служба?',o:['Стратиотите — свободни селяни','Логотетите','Наемниците'],a:0,e:'Стратиотите са свободни селяни, които срещу военна служба получават земя от държавата.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Чирак','Хронист','Главен детектив'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Дипломация','Съвкупност от методи и действия на управляващите за провеждане на външната политика.'],['Кодекс','Сборник от закони.'],['„Свещена война“','Война в името на дадена религия, Бог и ценности срещу народи с друга религия.'],['Василевс','Гръцка дума за владетел; от VII в. — титла на византийския император.'],['Стратег','Управител на тема с военна и гражданска власт.'],['Тема','Област във Византия след реформите на VII в.'],['Логотет','Министър в централното управление.'],['Стратиот','Свободен селянин със земя от държавата срещу военна служба.'],['Юстиниан I','Император 527 – 565. Иска да върне единството на Римската империя.'],['Велизарий','Велик византийски пълководец, повежда походите на Запад.'],['Ираклий','Император 610 – 641. „Свещена война“, победа при Ниневия (627).'],['537 г.','Освещава се „Св. София“.']];
+var fI=EX.fI||0,flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата и карта.';
+}
+var SUS=[
+ {t:'Византия остава непроменена: римска, латинска и без реформи',ok:0,e:'Не. Улика 4: при Ираклий империята става гръцка и се реформира.'},
+ {t:'Юстиниан изтощава империята с войни на запад, но Ираклий я спасява с победата над Персия и я обновява: теми, стратиоти, гръцки език и титла „василевс“. Така римската империя става византийска, гръцка държава',ok:1,e:'Точно! Войните на Юстиниан връщат слава, но изтощават силите (улики 1 и 2). Ираклий побеждава персите при Ниневия (улика 3) и обновява държавата (улика 4).'},
+ {t:'Персите превземат Константинопол през 626 г. и империята изчезва',ok:0,e:'Не. Константинопол устоява през 626 г., а през 627 г. Ираклий побеждава персите при Ниневия.'},
+ {t:'След Юстиниан империята не среща никакви врагове',ok:0,e:'Не. Улика 2: след 565 г. се губят земи, а враговете са персите, славяните, аварите и после арабите.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 5. Могъществото на Византийската империя (V – VII в.)\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nКлючови дати: 527 – 565 – Юстиниан I Велики; 529 – Юстиниановият кодекс; 537 – освещаване на „Св. София“; 610 – 641 – император Ираклий; 627 – победа над персите при Ниневия. Още: 540 – завладяване на Рим; 614 – превземане на Йерусалим от персите; 626 – обсада на Константинопол; 635 – мирен договор с хан Кубрат.\n\nПонятия: дипломация, кодекс, „свещена война“, василевс, стратег, тема, логотет, стратиот.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='527';$('#dC').textContent='VI в.';$('#dP').textContent='Константинопол, Византия';
+    setTM('527','VI в.','Константинопол');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 527 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  tilesRestore('data-tile',JT,tSeen);tilesRestore('data-tile2',FACES,t2Seen);tilesRestore('data-tile3',CODE,t3Seen);tilesRestore('data-tile4',RENEW,t4Seen);
+  Object.keys(ribSeen).forEach(function(i){var b=$('#rib button[data-e="'+i+'"]');if(b)b.classList.add('seen')});
+  for(var cn=0;cn<chainN;cn++){(function(n){var b=$('#chain button[data-n="'+n+'"]');if(b){b.classList.add('open');b.innerHTML=CHAINN[n]}var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;if(!nx.classList.contains('open'))nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}})(cn)}
+  Object.keys(S.seen).forEach(function(id){if(S.seen[id])$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(hsSeen).forEach(function(id){$$('#hs [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(ySeen).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>
