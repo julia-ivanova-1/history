@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 7 · Възникване и разпространение на исляма</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== добавки за урок 7 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.river{fill:none;stroke:#7FA9D1;stroke-width:1.6;stroke-linecap:round;pointer-events:none}
+.rivlabel{font:italic 700 7px var(--body);fill:#46617E;pointer-events:none}
+.steps.four{grid-template-columns:repeat(4,1fr)}
+.lyr{opacity:0;transform:scale(.55);transform-box:view-box;transition:opacity .9s ease,transform 1.1s ease}
+.lyr.on{opacity:1;transform:scale(1)}
+.routes path.o{stroke:#fff;stroke-width:5.4}
+.routes path.g1{stroke:#0E5A33}.routes path.g2{stroke:#1B2A41}.routes path.g3{stroke:#9E1B32}
+.routes polygon{opacity:0;transition:opacity .3s .7s}
+.routes polygon.show{opacity:1}
+.routes polygon.g1{fill:#0E5A33}.routes polygon.g2{fill:#1B2A41}.routes polygon.g3{fill:#9E1B32}
+.mosbox{margin:10px 0}
+.mosbox img{width:100%;display:block;border-radius:12px;cursor:zoom-in}
+blockquote{margin:0}
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/9</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 7</div>
+  <h1>Възникване и разпространение на исляма</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детективе, днес отиваме в Арабския полуостров в началото на VII век. Ще минеш с кервана през оазисите, ще видиш как се ражда нова религия и ще проследиш как за по-малко от век тя стига от пустинята до Испания. Натисни бутона и скочи!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 622 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„От оазиса до Испания“</h2>
+  <p>Началото на VII в. В пустинята на Арабския полуостров живеят племена, които непрестанно воюват и почитат различни богове. Едва сто години по-късно арабски войски стигат до Испания и до стените на Константинопол. Откъде идва такава сила? <b>Какво обединява враждуващите племена и как тяхната вяра обхваща огромни земи?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №1</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №2</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №3</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №4</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+  <p class="note" style="margin:10px 0 0">🤝 Този урок разказва за вярванията на мюсюлманите така, както ги описват учебникът и техните свещени текстове: „мюсюлманите вярват…“, „според Корана…“. Целта е да разберем историята, без да оценяваме вярата на никого.</p>
+</div>
+
+<!-- ===== ДОСИЕ 1: СВЕТЪТ НА АРАБИТЕ ===== -->
+<section class="card" id="s1" data-tm="началото на VII в.|·|Арабският полуостров">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Светът на арабите</h2>
+  <div data-story>
+    <p>През VII в. сред арабите, които от векове обитават Арабския полуостров, възниква нова религия. Но първо да видим как са живели те преди това.</p>
+    <p>В пустинята живеят <button class="term" data-t="bedui">бедуините</button> — номадски племена, които пасат стада от овце и кози и отглеждат камили и прекрасни коне. През земите им от хилядолетия минават пътища, които свързват Средиземно море с Индийския океан. По тях вървят търговци с <button class="term" data-t="kerv">кервани</button>, които преминават през <button class="term" data-t="oazis">оазиси</button>, а край оазисите възникват градове. Най-известен сред тях е <b>Мека</b>.</p>
+    <p>Арабите живеят на племена, които непрестанно воюват помежду си. Почитат различни богове. Имат обаче и общи неща: общо свято място — <b>Кааба</b> в Мека, собствена азбука и <b>лунен календар</b>.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Разгледай света на арабите</h3>
+    <div class="tiles" id="tiles1">
+      <button class="tile" data-tile="0"><b>🐪 Бедуините</b>Докосни…</button>
+      <button class="tile" data-tile="1"><b>🛣 Пътищата</b>Докосни…</button>
+      <button class="tile" data-tile="2"><b>🌴 Оазисът</b>Докосни…</button>
+      <button class="tile" data-tile="3"><b>🏙 Мека</b>Докосни…</button>
+      <button class="tile" data-tile="4"><b>⚔️ Племената</b>Докосни…</button>
+      <button class="tile" data-tile="5"><b>🌙 Календарът</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s1q"></div></div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2: МОХАМЕД ===== -->
+<section class="card" id="s2" data-tm="570 – 632|VI – VII в.|Мека и Медина">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>Начало на исляма: пророкът Мохамед <span class="key">🔑 570 – 632</span></h2>
+  <div data-story>
+    <p>Създател и пророк на новата религия е <b>Мохамед</b>. Писанията разказват, че той говорел как има един-единствен Бог — <b>Аллах</b>. Мюсюлманите вярват, че Аллах е създател на света и на хората, а в Деня на Страшния съд само вярващите в него ще отидат в рая.</p>
+    <p>Първите <button class="term" data-t="musl">мюсюлмани</button> са негови роднини и приятели. Скоро и други повярват в Аллах. Знатните в Мека виждат в новата вяра заплаха за властта си. За да не бъдат убити, пророкът и последователите му се преселват в град <b>Ясриб</b>, чиито жители им предлагат гостоприемство.</p>
+    <p>Денят на пристигането на Мохамед в града — според учебника <span class="key">🔑 26 юли 622 г.</span> — се нарича <button class="term" data-t="hidzhra">Хиджра</button> (преселение) и дава началото на <b>мюсюлманското летоброене</b>. Ясриб получава името <b>Медина</b> — градът на пророка.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Животът на Мохамед — докосни всяка стъпка</h3>
+    <p class="note" style="margin:0 0 8px">„Лицата на историята“: така го описва Коранът и преданието на мюсюлманите.</p>
+    <div class="ribbon" id="rib"></div>
+    <div class="ribticks"><span>570</span><span>622</span><span>632</span></div>
+    <div class="infobox" id="ribInfo"><h3>Избери стъпка</h3><p>Докосни цвят от лентата, за да видиш какво се случва.</p></div>
+  </div>
+  <div class="note" style="margin-top:12px">ℹ️ <b>Защо тук няма портрет на Мохамед?</b> В исляма по традиция пророкът не се изобразява, за да не се стига до поклонение пред образ вместо пред Бога. Затова в този урок няма негов лик, а само Кааба — мястото, което за мюсюлманите е най-свято.</div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s2q"></div></div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== КААБА ===== -->
+<section class="card" id="kaaba" data-tm="VII в.|·|Мека, Кааба">
+  <div class="dossier-tag gold">🕋 ОБЕКТ НА ДЕТЕКТИВА</div>
+  <h2>Кааба — най-святото място</h2>
+  <p>На снимката виждаш Кааба в Мека, около която е построена Голямата джамия. Думата „Кааба“ идва от арабското „куб“. Докосни плочките, за да разкриеш фактите.</p>
+  <div class="mosbox"><figure style="margin:0">
+    <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Kaaba,%20Masjid%20Al%20Haram,%20Mecca.jpg?width=800" alt="Кааба — кубовидна сграда, покрита с черен плат, в двора на Голямата джамия в Мека">
+    <figcaption>Кааба в двора на Голямата джамия в Мека (днес в Саудитска Арабия).<small>Автор: Shahin Olakara. Лиценз: CC BY 2.0, <a href="https://commons.wikimedia.org/wiki/File:Kaaba,_Masjid_Al_Haram,_Mecca.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+  </figure></div>
+  <div class="tiles" id="tilesK">
+    <button class="tile" data-tilek="0"><b>🧊 „Куб“</b>Докосни…</button>
+    <button class="tile" data-tilek="1"><b>🗿 Преди исляма</b>Докосни…</button>
+    <button class="tile" data-tilek="2"><b>⚫ Черният камък</b>Докосни…</button>
+    <button class="tile" data-tilek="3"><b>🧭 Посоката</b>Докосни…</button>
+  </div>
+</section>
+
+<!-- ===== ДОСИЕ 3: УТВЪРЖДАВАНЕТО ===== -->
+<section class="card" id="s3" data-tm="VII в.|·|Медина">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Утвърждаването на исляма</h2>
+  <div data-story>
+    <p>Посланията на пророка влизат във всекидневието на мюсюлманите. Те се молят пет пъти в денонощието, дават част от доходите си на бедните и през свещения месец <button class="term" data-t="ramazan">рамазан</button> не се хранят и не пият вода от изгрев до залез. Спазват и други забрани (ще ги видиш в извора по-долу).</p>
+    <p>Променят се и семейните отношения: мъжът има право на четири съпруги, а подчиненото положение на жените се подчертава със закриващото ги покривало. Мохамед построява и първата <button class="term" data-t="dzhamia">джамия</button>. След смъртта му неговите послания са събрани в една книга — <button class="term" data-t="koran">Коран</button>.</p>
+    <p>Вярата в Аллах обединява арабските племена в силен съюз. За да се разграничат от изповядващите други религии, мюсюлманите се наричат „правоверни“. Според Корана християните и евреите също са „хора на книгата“ — имат свещена книга и пророци, но не са спазили заповедите на Бог. Затова могат да запазят вярата си, но само ако признаят първенството на исляма.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Всекидневието на мюсюлманите</h3>
+    <div class="tiles" id="tiles3">
+      <button class="tile" data-tile3="0"><b>🕌 Молитвата</b>Докосни…</button>
+      <button class="tile" data-tile3="1"><b>🤲 Бедните</b>Докосни…</button>
+      <button class="tile" data-tile3="2"><b>🌙 Рамазан</b>Докосни…</button>
+      <button class="tile" data-tile3="3"><b>👪 Семейството</b>Докосни…</button>
+      <button class="tile" data-tile3="4"><b>📖 Коранът</b>Докосни…</button>
+      <button class="tile" data-tile3="5"><b>🤝 Съюзът</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s3q"></div></div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ИЗВОР ===== -->
+<section class="card" id="clue" data-tm="VII в.|·|свещената книга">
+  <div class="dossier-tag navy">📜 УЛИКАТА: ИЗВОР</div>
+  <h2>Забраните в Корана</h2>
+  <p>Коранът е свещена книга за мюсюлманите. В нея се разказва какви правила трябва да спазват вярващите. Ето един откъс, преразказан със свои думи (по сура 5 от Корана, записана през VII в.):</p>
+  <blockquote style="margin:10px 0;padding:10px 12px;border-left:4px solid var(--red);background:var(--soft);border-radius:0 12px 12px 0;font-style:italic">
+    На вярващите са забранени мършата, кръвта, свинското месо и месото на животно, заклано не в името на Аллах. Забранени са им още виното, хазартът и кумирите: те са „мръсотия от делото на сатаната“. Вярващите трябва да стоят далеч от тях. Иначе сатаната ще всее между тях вражда и ненавист и ще ги откъсне от молитвата и от споменаването на Аллах.
+  </blockquote>
+  <p class="note">Така учебникът представя този текст като извор за ранния ислям. Ние го четем, за да научим какви правила са имали мюсюлманите, а не за да го оценяваме.</p>
+  <div id="clueQs"></div>
+</section>
+
+<!-- ===== ДОСИЕ 4: РАЗПРОСТРАНЕНИЕТО ===== -->
+<section class="card" id="s4" data-tm="632 – 750|VII – VIII в.|от Арабия към света">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Разпространение на исляма</h2>
+  <div data-story>
+    <p>Мюсюлманите повеждат война срещу неверниците (виж „Любопитно“ долу). След много военни походи подчиняват арабските племена, които с договор приемат исляма. Арабският полуостров, наричан <b>Дом на исляма</b>, принадлежи само на мюсюлманската общност.</p>
+    <p>След смъртта на Мохамед (632 г.) мюсюлманите завладяват византийските земи в Източното Средиземноморие заедно със свещения град <b>Йерусалим</b>. Унищожават и истощената от войни Персия. Така се създава огромна държава — <button class="term" data-t="halif">Арабският халифат</button>.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Три завоевания — докосни плочките</h3>
+    <div class="tiles" id="tiles4">
+      <button class="tile" data-tile4="0"><b>🏜 Арабия</b>Докосни…</button>
+      <button class="tile" data-tile4="1"><b>🏛 Византия</b>Докосни…</button>
+      <button class="tile" data-tile4="2"><b>🔥 Персия</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="infobox" style="margin-top:14px;background:var(--ok-soft)">
+    <h3 style="color:#146638">💡 Любопитно: свещената война срещу неверниците</h3>
+    <p>Първата победа над кервана от Мека мюсюлманите приели като доказателство, че Аллах ги подкрепя. Повярвали, че са непобедими, и избрали войната за основно средство да налагат вярата си. Участието в битки с неверниците станало религиозно задължение. Нарекли го <button class="term" data-t="dzhihad">джихад</button> (свещена война). Вярвали, че загиналите в нея мюсюлмани веднага попадат в рая.</p>
+    <p class="note" style="margin-top:8px">Това е разказ за ранните мюсюлмани през VII в. Не описва днешните мюсюлмани — милиони хора с различни възгледи.</p>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s4q"></div></div>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== АКТИВНА КАРТА ===== -->
+<section class="card" id="map" data-tm="632 – 800|VII – VIII в.|картата на халифата">
+  <div class="dossier-tag navy">🗺 КАРТАТА НА ДЕТЕКТИВА</div>
+  <h2>Арабският свят и настъплението на исляма (VII – IX в.)</h2>
+  <p>Избери година с плъзгача или бутоните и гледай как нарастват мюсюлманските земи. Натисни ▶, за да пуснеш анимацията. После докосни точките.</p>
+  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на Арабския свят: мюсюлманските земи до 632, 661, 750 и към 800 г."></svg></div>
+  <input type="range" id="yrRange" min="0" max="3" step="1" value="0" aria-label="Година на картата">
+  <div class="ribticks"><span>632</span><span>661</span><span>750</span><span>800</span></div>
+  <div class="steps four" id="mapSteps">
+    <button data-st="0" class="active">до 632</button>
+    <button data-st="1">до 661</button>
+    <button data-st="2">до 750</button>
+    <button data-st="3">към 800</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="playBtn">▶ Пусни анимацията</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка</h3><p>Докосни град или битка на картата и тук ще се появи описание.</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Картата е опростена: границите са приблизителни, а Кайро е показан там, където по-късно е построен (през VII в. на това място е градът Фустат). Данните са по учебника и допълнителни източници.</p>
+</section>
+
+<!-- ===== МИНИ ВРЕМЕВА ЛИНИЯ ===== -->
+<section class="card" id="tl" data-tm="570 – 762|VI – VIII в.|по линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
+  <h2>Подреди събитията по време</h2>
+  <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+</section>
+
+<!-- ===== КОЙ ВЕК Е ===== -->
+<section class="card" id="cent" data-tm="VI – VIII в.|·|кой век е?">
+  <div class="dossier-tag gold">🔢 КОЙ ВЕК Е?</div>
+  <h2>От година към век</h2>
+  <p><b>Правило:</b> години 601 – 700 са VII век. Отрежи последните две цифри и прибави 1: 622 → 6 → <b>VII в.</b> Кръглата година (700, 800) е <i>краят</i> на века: 800 г. е в VIII в.</p>
+  <div id="centQs"></div>
+</section>
+
+<!-- ===== ДОСИЕТА НА ЛИЧНОСТИТЕ ===== -->
+<section class="card" id="people" data-tm="VI – VIII в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Caravan%20in%20the%20desert.jpg?width=900" alt="Керван от камили в пустинята">
+      <figcaption>Керван от камили в пустинята — така търговците прекосяват пясъците и от хилядолетия свързват оазисите. (Съвременна снимка.)<small>Автор: Sergey Pesterev. Лиценз: CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Caravan_in_the_desert.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Mezquita%20cordoba%20arcos%20flotantes.jpg?width=900" alt="Двуцветни подковообразни арки във вътрешността на Мескита в Кордоба">
+      <figcaption>Вътрешността на Голямата джамия в Кордоба (Мескита), Испания. Строи се от края на VIII в., когато Кордоба е столица на мюсюлманска Испания. По-късно сградата става и катедрала.<small>Автор: Alvaro.vinuela.carnicero. Лиценз: CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Mezquita_cordoba_arcos_flotantes.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="VII – VIII в.|·|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="🌙">Лунната година има 12 лунни месеца и е около 354 дни, т.е. с около 11 дни по-къса от слънчевата. Затова рамазан не пада в един и същи сезон, а с годините „обикаля“ през цялата година.</div>
+    <div data-i="🐪">Арабската камила (дромадер) има само една гърбица. В нея се съхранява мазнина, а не вода, както често си мислят. Заради издръжливостта си камилата е „корабът на пустинята“.</div>
+    <div data-i="🧭">По мюсюлманско предание първоначално вярващите се молили в посока Йерусалим, а после посоката сменена към Кааба.</div>
+    <div data-i="🔢">Цифрите 0 – 9 в днешния им вид стигат до Европа през арабския свят. Затова често ги наричат „арабски“, но по-старият им произход е от Индия.</div>
+    <div data-i="🏙">Багдад е основан през 762 г. от халиф ал-Мансур като кръгъл град със стени. Официалното му име е „Градът на мира“ (Мадинат ас-Салам).</div>
+    <div data-i="🕌">Мескитата в Кордоба започва като джамия в края на VIII в., а през XIII в. е превърната в катедрала. Затова днес официално се нарича Мескита-катедрала.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="началото на VII в.|·|керванният път">
+  <div class="dossier-tag">🎭 РОЛЯ</div>
+  <h2>Ти си търговец в керван</h2>
+  <p class="note">⚠️ Разказът е <b>измислен</b>. Фактите по пътя са от учебника.</p>
+  <div data-story>
+    <p>Ти си търговец от Йемен. Товариш камилите си с подправки и тамян и тръгваш на север — през Мека и Медина към Дамаск и пристанищата на Средиземно море. Реши как да постъпиш на всеки етап.</p>
+  </div>
+  <div id="roleQs"></div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="VII в.|·|писарската стая">
+  <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
+  <h2>Грешката в свитъка</h2>
+  <p>Един писар препрочита хроника за началото на исляма. В нея се е промъкнала <b>една</b> грешка — нещо, което не може да е било през онова време (анахронизъм). Докосни реда с грешката.</p>
+  <div class="opts" id="scroll"></div>
+  <div class="fb" id="scrollFb"></div>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Арабеска — украса само от форми</h2>
+  <p>В мюсюлманското изкуство хората и животните не се изобразяват в джамиите, затова майсторите украсяват със сложни геометрични и растителни шарки — арабески — и красиво писмо (калиграфия). Направи своя арабеска на лист:</p>
+  <ul>
+    <li>начертай голям кръг с пергел и го раздели на 8 равни части;</li>
+    <li>свържи точките през една, за да получиш осемлъчна звезда;</li>
+    <li>вплети в нея кръгове и дъги и оцвети с две-три цвята (синьо, зелено и златно).</li>
+  </ul>
+  <p><b>По желание:</b> нарисувай подковообразна арка като във вътрешността на Мескитата в Кордоба (виж снимката), с редуващи се светли и тъмни части.</p>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Испански думи с арабски произход</h3>
+    <p style="font-size:.9rem;margin-top:0">Арабите управляват големи части от Испания векове наред. Затова испанският е пълен с арабски думи, често започващи с <i>al-</i> или <i>a-</i>.</p>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+  <h3 style="margin-top:18px">🧳 Арабски думи в езиците</h3>
+  <p style="font-size:.95rem;margin-top:0">Много думи, които ползваме всеки ден, са стигнали до нас от арабски.</p>
+  <div class="etym" id="etym2"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Керванджия</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Книжовник</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="VIII в.|·|от Кордоба до Багдад">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>Откъде идва силата на арабите?</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 570 – 632</b> · Мохамед</span>
+    <span><b>🔑 622</b> · Хиджра</span>
+    <span><b>🔑 717 – 718</b> · обсада на Константинопол</span>
+    <span><b>🔑 732</b> · битката при Поатие</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>Арабите живеят на Арабския полуостров: бедуините са номади, които пасат овце и кози и отглеждат камили и коне. Търговските пътища свързват Средиземно море с Индийския океан, а край оазисите възникват градове, най-известен е Мека.</li>
+    <li>Племената непрестанно воюват и почитат различни богове. Общи са им светилището Кааба в Мека, азбуката и лунният календар.</li>
+    <li>Мохамед (570 – 632) е създател и пророк на исляма. Мюсюлманите вярват в един Бог — Аллах, в Деня на Страшния съд и в рая за вярващите. Знатните в Мека виждат заплаха за властта си, затова пророкът и последователите му се преселват в Ясриб.</li>
+    <li>Денят на пристигането му — според учебника 26 юли 622 г. — се нарича Хиджра (преселение) и дава началото на мюсюлманското летоброене. Ясриб става Медина — градът на пророка.</li>
+    <li>Мюсюлманите се молят пет пъти в денонощието, дават част от доходите си на бедните и през рамазан не се хранят и не пият от изгрев до залез. Мохамед построява първата джамия. Посланията му са събрани в Корана. Християните и евреите са „хора на книгата“ и могат да запазят вярата си, ако признаят първенството на исляма.</li>
+    <li>Вярата обединява арабските племена в силен съюз. Мюсюлманите повеждат война срещу неверниците (джихад), подчиняват племената (с договор) и Арабия става Дом на исляма. След смъртта на Мохамед завладяват византийските земи в Източното Средиземноморие с Йерусалим и унищожават Персия.</li>
+    <li>Кааба („куб“) е най-святото място за мюсюлманите и посоката на молитвата им. Арабският халифат достига до Испания, но е спрян при Константинопол (717 – 718 г., с помощта на хан Тервел) и при Поатие (732 г.).</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 30 – 31. Извън учебника са добавени: защо пророкът не се изобразява; веригата на пътя Йемен – Мека – Медина – Дамаск; лунната година (~354 дни); Ярмук (636) и ролята на Ираклий; основаването на Багдад (762); Мескитата в Кордоба; ролята на хан Тервел при Константинопол; етимологиите и арабските думи; цифрите. Хиджра е дадена по учебника (26 юли 622 г.); в други източници датите около преселението се сочат различно, а 16 юли 622 г. е началото на летоброенето. Миниатюрата с Мохамед от учебника умишлено не е показана. Няма видео и музика. Ролята и загадката са измислени. Картата е опростена.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/Siege_of_Constantinople_(717%E2%80%93718)" target="_blank" rel="noopener">Siege of Constantinople (717–718)</a> · <a href="https://en.wikipedia.org/wiki/Tervel_of_Bulgaria" target="_blank" rel="noopener">Tervel of Bulgaria</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Hijrah" target="_blank" rel="noopener">Hijrah</a> · <a href="https://en.wikipedia.org/wiki/Round_City_of_Baghdad" target="_blank" rel="noopener">Round City of Baghdad</a> · <a href="https://en.wikipedia.org/wiki/First_Muslim_conquest_of_Jerusalem" target="_blank" rel="noopener">First Muslim conquest of Jerusalem</a></li>
+      <li><a href="https://www.etymonline.com/word/mosque" target="_blank" rel="noopener">mosque</a> · <a href="https://www.thenationalnews.com/uae/quran-means-to-recite-1.500271" target="_blank" rel="noopener">Quran means to recite</a> · <a href="https://en.wiktionary.org/wiki/%D1%81%D0%B0%D1%85%D0%B0%D1%80" target="_blank" rel="noopener">сахар (Wiktionary)</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-07-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var EX=(SAVED&&SAVED.ex)||{};
+var booted=false;
+function tlOrderNow(){return (typeof sortl!=='undefined'&&sortl)?$$('.sitem',sortl).map(function(li){return +li.getAttribute('data-i')}):(EX.tlOrder||[])}
+function saveNow(){
+  if(!booted)return;
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:{
+      tSeen:tSeen,tkSeen:tkSeen,t3Seen:t3Seen,t4Seen:t4Seen,ribSeen:ribSeen,mapCur:mapCur,mapSeen:mapSeen,heard:heard,ySeen:ySeen,y2Seen:y2Seen,fI:fI,jumped:jumped,
+      tlOrder:tlOrderNow(),tlSolved:sortl.classList.contains('sorted'),tlTries:tlTries,scrollState:scrollState
+    }}))
+  }catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','dyk'];
+var FLAGS=['jump','tiles1','s1q','rib','s2q','kaaba','tiles3','s3q','clue','tiles4','s4q','steps','tl','century','role','puzzle'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=EX.jumped||false;
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;var b=this;b.disabled=true;
+  var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $('#dY').textContent=Math.round(2026-(2026-622)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($('#dC'),'VII в.');setDial($('#dP'),'Мека и Медина, Арабия');setTM('622','VII в.','Мека → Медина');
+      b.textContent='✓ Пристигна в 622 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
+      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички точки на картата на халифата'},
+  {id:'merchant',ic:'🐪',n:'Керванджия',d:'Мини през ролята на търговеца'},
+  {id:'kaaba',ic:'🕋',n:'Познавач на Кааба',d:'Разкрий всички факти за Кааба'},
+  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди събитията по време'},
+  {id:'scholar',ic:'🔢',n:'Книжовник',d:'Познай всички векове'},
+  {id:'corrector',ic:'🔎',n:'Разобличител',d:'Намери грешката в свитъка'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'muhammad',n:'Мохамед',y:'570 – 632',av:'🕋',sp:'⚡ Пророкът на исляма',how:'Мини през всички стъпки в досие №2',back:'Създател и пророк на исляма. Според Корана е от най-известния род в Мека, но от малък остава сирак. Не се научава да чете и да пише, става керванджия. Мюсюлманите вярват, че в пещера чува гласа на ангел Гавраил, който му говори от името на Аллах. През 622 г. се преселва в Ясриб, наречен после Медина.<br><br>💡 По традиция в исляма пророкът не се изобразява, затова картата е с Кааба, а не с портрет.'},
+  {id:'heraclius',n:'Ираклий (от урок 5)',y:'610 – 641 (владее)',av:'⚔️',sp:'⚡ Император, чиито земи падат',how:'Докосни Йерусалим на картата',back:'Византийският император от урок 5. Побеждава персите и връща Светия кръст в Йерусалим. В края на управлението му арабите разбиват ромеите при Ярмук (636 г.) и вземат Сирия, Палестина и Египет.<br><br>💡 Така същите земи, които той спасява от Персия, преминават под нова власт.'},
+  {id:'tervel',n:'Хан Тервел',y:'началото на VIII в.',av:'🛡️',sp:'⚡ Съюзникът на Византия',how:'Докосни Константинопол на картата',back:'Български владетел в началото на VIII в. По учебника през 718 г. с помощта на Тервел арабите са разбити край Константинопол. Византийският летописец Теофан разказва, че българите нападат арабската войска и избиват голяма част от нея.<br><br>💡 Историците спорят за точните подробности, но участието на българите е сигурно.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'Арабите са бедуини и търговци по кервански пътища. Племената воюват и почитат различни богове, но имат общо светилище Кааба.',
+  2:'Мохамед проповядва един Бог — Аллах. Хиджра през 622 г. е началото на мюсюлманското летоброене.',
+  3:'Молитвите, постът и правилата във всекидневието, както и Коранът, обединяват племената в силен съюз.',
+  4:'Вярата, войната и договорите подчиняват Арабия, Византийския изток и Персия, но Константинопол и франките спират настъплението.'
+};
+var CLUE_FOR={s1:1,s2:2,s3:3,s4:4};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  bedui:['Бедуини','Номадски племена в арабската пустиня. Пасат стада от овце и кози, отглеждат камили и коне.'],
+  kerv:['Керван','Група търговци с натоварени животни (най-често камили), които пътуват заедно през пустинята.'],
+  oazis:['Оазис','Място в пустинята с вода и зеленина. Край оазисите възникват градове.'],
+  musl:['Мюсюлмани','Вярващите, които изповядват исляма. Учебникът дава значение „правоверни“. На арабски думата е свързана с „предаване (на Бога)“.'],
+  hidzhra:['Хиджра','Арабска дума за „преселение“. Преселването на Мохамед и последователите му в Ясриб (Медина) през 622 г. дава началото на мюсюлманското летоброене.'],
+  ramazan:['Рамазан','Свещеният месец на мюсюлманите. През него вярващите не се хранят и не пият вода от изгрев до залез.'],
+  dzhamia:['Джамия','Молитвеният дом на мюсюлманите.'],
+  koran:['Коран','Свещената книга на мюсюлманите. В нея са събрани посланията на Мохамед, записани след смъртта му.'],
+  halif:['Арабски халифат','Огромната държава на мюсюлманите, която се разраства след смъртта на Мохамед. Начело стои халиф (на арабски „заместник, наследник“).'],
+  dzhihad:['Джихад','Арабска дума, която учебникът превежда като „свещена война“ — религиозното задължение на ранните мюсюлмани да воюват с неверниците.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+function qSet(boxSel,arr,pre,xp,done){
+  var n=0;
+  $(boxSel).innerHTML=arr.map(function(_,i){return '<div class="qblock stage" id="'+pre+i+'"></div>'}).join('');
+  arr.forEach(function(Q,i){Q.after=function(){n++;if(n===arr.length)done()};oneQ($('#'+pre+i),Q,pre+i,xp);restoreOneQ($('#'+pre+i),Q,pre+i)});
+}
+
+/* ================= плочки (общ помощник) ================= */
+function tilesInit(attr,TXT,seen,flagKey,bonusMsg,after){
+  $$('.tile['+attr+']').forEach(function(t){t.addEventListener('click',function(){
+    var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+    t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+    if(Object.keys(seen).length===TXT.length&&flag(flagKey)){addXP(3,bonusMsg);if(after)after()}
+  })});
+}
+function tilesRestore(attr,TXT,seen){
+  Object.keys(seen).forEach(function(i){var t=$('.tile['+attr+'="'+i+'"]');if(t&&!t.classList.contains('open')){t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open')}});
+}
+
+/* ================= ДОСИЕ 1: СВЕТЪТ НА АРАБИТЕ ================= */
+var T1=['Бедуините са номади: местят се из пустинята и пасат стада от овце и кози. Отглеждат камили и прекрасни коне.','През земите на арабите от хилядолетия минават пътища, които свързват Средиземно море с Индийския океан. Така арабските земи са кръстопът на търговията.','Търговците пътуват с кервани и спират в оазиси — места с вода. Около оазисите възникват градове.','Най-известният град е Мека. В нея е Кааба — общо свято място за много племена.','Арабите живеят на племена, които непрестанно воюват помежду си. Всяко племе почита свои богове.','Арабите имат собствена азбука и лунен календар: месеците им следват фазите на Луната.'];
+var tSeen=EX.tSeen||{};
+tilesInit('data-tile',T1,tSeen,'tiles1','Светът на арабите е разгледан!');
+(function(){
+  var Q={q:'С какво се занимават бедуините?',o:['Пасат овце и кози и отглеждат камили и коне','Строят кораби и плават до Индия','Обработват големи ниви в долината на река'],a:0,e:'Бедуините са номадски племена, чието богатство са стадата и камилите.'};
+  oneQ($('#s1q'),Q,'s1q',5);restoreOneQ($('#s1q'),Q,'s1q');
+})();
+
+/* ================= ДОСИЕ 2: МОХАМЕД (лента) ================= */
+var RIB=[
+  {n:'Мека',c:'#9E1B32',t:'Мека · 570 г.',d:'Според Корана Мохамед е от най-известния род в Мека, но от малък остава сирак. Не се научава да чете и да пише.'},
+  {n:'Керван',c:'#7A5A10',t:'Керванджията',d:'Става керванджия. При пътуванията си се среща с християни и евреи и научава, че вярват в един-единствен Бог. Жени се за богата жена и животът му се променя.'},
+  {n:'Пещерата',c:'#1B2A41',t:'Пещерата',d:'Вече заможен човек, той често се уединява в отдалечена пещера, за да размишлява. Мюсюлманите вярват, че там чува гласа на ангел Гавраил (Джабраил), който му говори от името на Аллах. Тогава започва да разпространява словата на Аллах.'},
+  {n:'Заплаха',c:'#5B6270',t:'Заплахата',d:'Първите мюсюлмани са негови роднини и приятели. Знатните в Мека виждат в новата вяра заплаха за властта си. За да не бъдат убити, пророкът и последователите му напускат града.'},
+  {n:'Хиджра',c:'#1E8E4E',t:'Хиджра · 622 г.',d:'Преселват се в град Ясриб, чиито жители им предлагат гостоприемство. Денят на пристигането — според учебника 26 юли 622 г. — се нарича Хиджра и дава началото на мюсюлманското летоброене. Ясриб получава името Медина.'},
+  {n:'След това',c:'#C9962B',t:'Медина · до 632 г.',d:'Мохамед построява първата джамия. След смъртта му през 632 г. неговите послания са събрани в една книга — Коран.'}
+];
+$('#rib').innerHTML=RIB.map(function(e,i){return '<button data-e="'+i+'" style="flex:1;background:'+e.c+'">'+e.n+'</button>'}).join('');
+var ribSeen=EX.ribSeen||{};
+$$('#rib button').forEach(function(b){b.addEventListener('click',function(){
+  var i=+b.getAttribute('data-e'),e=RIB[i];
+  $$('#rib button').forEach(function(x){x.classList.toggle('active',x===b)});
+  $('#ribInfo').innerHTML='<h3>'+e.t+'</h3><p>'+e.d+'</p>';
+  if(!ribSeen[i]){ribSeen[i]=1;b.classList.add('seen');addXP(2);
+    if(Object.keys(ribSeen).length===RIB.length&&flag('rib')){addXP(5,'Животът на Мохамед е проследен!');unlockCard('muhammad')}}
+})});
+(function(){
+  var Q={q:'Какво е Хиджра?',o:['Преселването на Мохамед и последователите му от Мека в Ясриб (Медина), от което започва мюсюлманското летоброене','Първата голяма битка на мюсюлманите срещу Византия','Свещената книга на мюсюлманите'],a:0,e:'Хиджра означава „преселение“. Градът Ясриб получава името Медина — градът на пророка.'};
+  oneQ($('#s2q'),Q,'s2q',5);restoreOneQ($('#s2q'),Q,'s2q');
+})();
+
+/* ================= КААБА ================= */
+var TK=['Думата „Кааба“ идва от арабското „куб“: сградата е кубовидна. Била е построена от сив камък. Днес около нея е изградена Голямата джамия в Мека.','Преди исляма Кааба е светилище, общо за много арабски племена. Техните идоли са наредени около нея.','В източния ъгъл е вграден „Черният камък“. Според мюсюлманите той е изпратен на земята от Бог. Според учебника учените го смятат за метеорит — твърдо тяло, паднало от Космоса.','Мохамед превръща Кааба в най-святото място за мюсюлманите. Те отправят молитвите си в нейна посока от всяка точка на земята.'];
+var tkSeen=EX.tkSeen||{};
+tilesInit('data-tilek',TK,tkSeen,'kaaba','Кааба е разкрита!',function(){award('kaaba')});
+
+/* ================= ДОСИЕ 3: УТВЪРЖДАВАНЕТО ================= */
+var T3=['Мюсюлманите се молят пет пъти в денонощието.','Те дават част от доходите си на бедните.','През свещения месец рамазан не се хранят и не пият вода от изгрев до залез.','Семейните отношения се променят: мъжът има право на четири съпруги, а подчиненото положение на жените се подчертава със закриващото ги покривало.','Посланията на пророка са събрани в една книга — Коран, след смъртта му. Той е свещена книга за мюсюлманите.','Вярата в Аллах обединява арабските племена в силен съюз. За да се разграничат от изповядващите други религии, мюсюлманите се наричат „правоверни“.'];
+var t3Seen=EX.t3Seen||{};
+tilesInit('data-tile3',T3,t3Seen,'tiles3','Всекидневието е разгледано!');
+(function(){
+  var Q={q:'Кого Коранът нарича „хора на книгата“ и какво им позволява?',o:['Християните и евреите: могат да запазят вярата си, ако признаят първенството на исляма','Всички араби: те трябва да напуснат Мека','Само мюсюлманите: те не плащат никакви данъци'],a:0,e:'Според Корана християните и евреите също имат свещена книга и пророци, но не са спазили заповедите на Бог. Затова могат да запазят вярата си, но само ако признаят първенството на исляма.'};
+  oneQ($('#s3q'),Q,'s3q',5);restoreOneQ($('#s3q'),Q,'s3q');
+})();
+
+/* ================= УЛИКА: ИЗВОР ================= */
+var CQ=[
+  {q:'1. Кой е създал извора?',o:['Той е част от Корана, свещената книга на мюсюлманите, записана след смъртта на Мохамед','Византийски император','Бедуин-търговец от Мека, който пише писмо'],a:0,e:'Откъсът е от Корана — свещената книга, в която са събрани посланията на Мохамед.'},
+  {q:'2. Кога е възникнал?',o:['През VII в., когато се оформя ислямът','През XV в., по времето на османците','Преди 1000 години пр. Хр.'],a:0,e:'Посланията на Мохамед са от VII в.; Коранът е събран след смъртта му през 632 г.'},
+  {q:'3. За кои области на живота са правилата в текста?',o:['За храната и питието, за хазарта и за идолите','За ловуването и за корабите','За данъците и за армията'],a:0,e:'Забранени са мършата, кръвта, свинското месо, виното, хазартът и кумирите: всички те са част от всекидневния живот.'},
+  {q:'4. Какво ни казва текстът за живота на мюсюлманите и как го разбираме?',o:['Вярата определя всекидневието им: какво ядат и пият, с какво се забавляват. Така научаваме какви правила следват','Че мюсюлманите са по-добри или по-лоши от другите хора','Нищо — текстът няма връзка с историята'],a:0,e:'За историка този извор показва как вярата влиза във всекидневието. Ние описваме правилата и не оценяваме вярата.'},
+  {q:'5. Каква опасност от изкушенията вижда текстът?',o:['Те всяват вражда и ненавист между хората и отдалечават от молитвата','Те правят хората твърде богати','Те водят до загуба на камилите'],a:0,e:'Според текста изкушенията разделят хората и ги отклоняват от молитвата и споменаването на Аллах.'}
+];
+qSet('#clueQs',CQ,'cq',3,function(){if(flag('clue'))addXP(5,'Изворът е разчетен!')});
+
+/* ================= ДОСИЕ 4: РАЗПРОСТРАНЕНИЕТО ================= */
+var T4=['След много военни походи мюсюлманите подчиняват арабските племена, които с договор приемат исляма. Арабският полуостров се нарича Дом на исляма и принадлежи само на мюсюлманската общност.','След смъртта на Мохамед мюсюлманите завладяват византийските земи в Източното Средиземноморие заедно със свещения град Йерусалим.','Мюсюлманите унищожават и Персия, истощена от дългите войни.'];
+var t4Seen=EX.t4Seen||{};
+tilesInit('data-tile4',T4,t4Seen,'tiles4','Трите завоевания!');
+(function(){
+  var Q={q:'Кои земи завладяват мюсюлманите след смъртта на Мохамед?',o:['Византийските земи в Източното Средиземноморие (с Йерусалим) и Персия','Само Мека и Медина','Земите на франките и Англия'],a:0,e:'След 632 г. арабите завладяват византийските земи на изток (Сирия, Палестина, Египет, с Йерусалим) и унищожават Персия.'};
+  oneQ($('#s4q'),Q,'s4q',5);restoreOneQ($('#s4q'),Q,'s4q');
+})();
+
+/* ================= КАРТА ================= */
+var MK=8.565,COS=0.766,LAT0=50.5;
+function P(lon,lat){return [((lon+11)*MK*COS).toFixed(1),((LAT0-lat)*MK).toFixed(1)]}
+function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
+function linePath(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+var SEA={
+ med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
+ marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
+ black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]],
+ red:[[32.6,29.95],[33.3,28.6],[34.25,27.75],[34.6,28.4],[34.95,29.5],[34.9,28.2],[35.3,28.0],[36.6,25.8],[38.1,24.0],[39.2,21.5],[39.6,19.5],[40.8,17.5],[42.5,15.5],[43.2,13.3],[43.5,12.4],[43.0,12.4],[42.4,14.0],[41.0,15.4],[39.4,15.6],[38.5,17.5],[37.5,19.5],[37.2,21.0],[36.9,22.0],[35.5,24.0],[34.0,26.3],[33.5,27.3],[32.6,29.6]],
+ gulf:[[48.0,30.0],[49.0,30.2],[50.2,29.4],[51.3,28.0],[52.7,27.0],[54.5,26.6],[56.2,27.1],[56.4,26.2],[55.3,25.5],[54.4,24.4],[52.5,24.2],[51.6,24.5],[51.5,25.9],[50.8,25.0],[50.0,26.0],[49.7,27.0],[48.6,28.4],[48.0,29.4]],
+ asea:[[43.5,12.4],[45.0,12.8],[48.8,14.1],[52.0,15.8],[54.0,17.0],[55.6,17.8],[57.0,18.8],[58.7,20.4],[59.9,22.5],[64,22.5],[64,10],[43.5,10]],
+ atl:[[-12,20],[-12,28.3],[-10.2,29.4],[-9.7,30.5],[-9.8,31.5],[-9.2,32.5],[-8.5,33.3],[-7.6,33.6],[-6.8,34.0],[-6.2,35.2],[-5.9,35.8],[-5.6,36.0],[-6.3,36.5],[-7.4,37.2],[-7.9,37.0],[-8.95,37.0],[-8.8,38.4],[-9.5,38.7],[-9.0,40.0],[-8.7,41.2],[-8.9,42.5],[-9.3,42.9],[-8.4,43.4],[-7.0,43.6],[-5.7,43.6],[-3.8,43.5],[-1.8,43.4],[-1.5,43.5],[-1.2,44.6],[-1.2,46.0],[-2.2,47.2],[-3.0,47.5],[-4.4,47.8],[-4.7,48.4],[-3.0,48.8],[-1.6,48.7],[-1.9,49.7],[-1.3,49.7],[-0.2,49.3],[0.1,49.5],[1.5,50.1],[1.9,51.0],[3.6,51.4],[4.2,52.0],[4.7,52.9],[5.3,53.4],[7.0,53.6],[8.5,53.6],[8.9,54.0],[8.6,55.0],[8.1,55.5],[8.2,56.7],[9.5,57.1],[10.6,57.7],[10.5,57.2],[10.3,56.5],[10.2,56.0],[9.9,55.2],[10.0,54.8],[10.2,54.4],[10.9,54.0],[12.1,54.2],[13.4,54.6],[14.2,53.9],[16.0,54.3],[17.5,54.8],[18.7,54.4],[19.6,54.5],[20.0,54.9],[21.1,55.7],[21.0,56.5],[21.5,57.4],[22.5,57.7],[23.8,57.0],[24.4,57.3],[24.3,59],[16.7,59],[16.7,58.0],[16.6,57.8],[16.4,56.7],[15.9,56.1],[14.3,55.9],[13.9,55.4],[13.0,55.6],[12.7,56.0],[12.6,56.6],[11.9,57.7],[11.3,59],[7.5,59],[7.0,58.0],[6.0,58.3],[5.5,59],[-12,59]]
+};
+var ISL={
+ sic:{p:[[12.4,38.1],[13.4,38.2],[15.6,38.3],[15.1,37.1],[15.1,36.7],[14.3,37.0],[12.6,37.6]]},
+ cre:{p:[[23.5,35.6],[24.6,35.5],[26.3,35.3],[26.1,35.0],[24.6,35.1],[23.6,35.2]]},
+ cyp:{p:[[32.3,35.1],[33.0,35.4],[34.6,35.7],[33.9,35.0],[32.9,34.6],[32.3,34.8]]}
+};
+/* територии (приблизителни; морето се рисува отгоре и скрива излишното) */
+var TER={
+ A:[[34.95,29.5],[36.0,30.5],[38.5,31.8],[41.0,32.2],[43.5,31.5],[46.5,30.5],[48.0,30.0],[52,30],[52,10],[44,10],[43.5,12.4],[43.2,13.3],[42.5,15.5],[40.8,17.5],[39.6,19.5],[39.2,21.5],[38.1,24.0],[36.6,25.8],[35.3,28.0]],
+ B:[[13,22],[13,34.5],[34.5,34.5],[35.8,36.0],[36.5,36.9],[38,37.2],[41,37.6],[43.5,38.5],[44.5,40.6],[50,41.5],[50,29.8],[48,30],[44.5,31],[41,32.2],[38.5,31.8],[36,30.5],[34.95,29.5],[34.0,27.5],[34.0,26.3],[35.5,24.0],[36.9,22.0]],
+ C:[[-11,22],[13,22],[13,38],[3,38],[3.2,42.4],[-1.8,42.9],[-9.5,42.0],[-11,42.0]],
+ W:[[-11,22],[5,22],[5,38],[3.2,42.4],[-1.8,42.9],[-9.5,42.0],[-11,42.0]],
+ bul:[[22.5,44.1],[25.0,43.8],[27.5,44.1],[28.6,44.2],[29.6,45.2],[28.5,43.4],[28.0,42.3],[26.5,42.0],[25,42.6],[23,43.2]],
+ frank:[[-4.5,48.4],[-1.8,43.4],[3,42.5],[7.2,43.6],[7.6,46],[8.5,47.5],[9.5,49.5],[8,52],[7,53.4],[4,52],[2,51.2],[-1.8,49.7]],
+ ana:[[26,36.5],[26,41],[28.5,41.2],[31.5,41.2],[35,42.0],[41.7,42.0],[44.5,40.6],[43.5,38.5],[41,37.6],[38,37.2],[36.5,36.9],[35.5,36.5]],
+ gre:[[19.3,39.5],[19.7,41.8],[21.5,42.2],[23.0,42.0],[25,42.0],[26.5,42.0],[28.0,42.3],[28.8,41.2],[26.2,40.8],[24.5,40.6],[23.8,40.0],[23.5,38.5],[22.5,36.3],[21.5,36.5],[20.7,38.5]],
+ sit:[[15.3,38.0],[16.5,38.5],[18.6,40.1],[17.0,41.2],[15.5,41.0],[15.2,40.0]]
+};
+var COL={A:'#2F7D4F',B:'#5CAA6E',C:'#A9D69A',W:'#D6D890',byz:'#B49AD9',bul:'#F5C97A',frank:'#9DB0CF'};
+function org(lon,lat){var p=P(lon,lat);return 'transform-origin:'+p[0]+'px '+p[1]+'px'}
+function terPath(k,col){return '<path d="'+poly(TER[k])+'" style="fill:'+col+';stroke:#fff;stroke-width:.6"/>'}
+(function buildBaseMap(){
+  var s='<rect width="400" height="308" style="fill:var(--land)"/><g id="terG">';
+  s+=terPath('frank',COL.frank)+terPath('ana',COL.byz)+terPath('gre',COL.byz)+terPath('sit',COL.byz)+terPath('bul',COL.bul);
+  s+='<g class="lyr" id="lyrC" style="'+org(-4.8,37.9)+'">'+terPath('C',COL.C)+'</g>';
+  s+='<g class="lyr" id="lyrW" style="'+org(-4.8,37.9)+'">'+terPath('W',COL.W)+'</g>';
+  s+='<g class="lyr" id="lyrB" style="'+org(36.3,33.5)+'">'+terPath('B',COL.B)+'</g>';
+  s+='<g id="lyrA">'+terPath('A',COL.A)+'</g></g>';
+  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea)"/>'});
+  Object.keys(ISL).forEach(function(k){s+='<path d="'+poly(ISL[k].p)+'" style="fill:var(--land)"/>'});
+  s+='<path d="'+poly(ISL.sic.p)+'" style="fill:'+COL.byz+';stroke:#8FAAC4;stroke-width:.8"/><path d="'+poly(ISL.cre.p)+'" style="fill:'+COL.byz+';stroke:#8FAAC4;stroke-width:.8"/><path d="'+poly(ISL.cyp.p)+'" style="fill:'+COL.byz+';stroke:#8FAAC4;stroke-width:.8"/>';
+  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'"/>'});
+  s+='<path class="river" d="'+linePath([[31,31.4],[31.2,30],[32,27.5],[32.6,25.7],[32.9,24.1],[32.9,22.5]])+'"/>';
+  s+='<path class="river" d="'+linePath([[38,36.5],[40.5,35],[42.5,33.5],[44.5,32],[47,31]])+'"/>';
+  s+='<path class="river" d="'+linePath([[41,38],[43.5,36],[44.4,33.3],[45.5,32],[47,31]])+'"/>';
+  s+='<path class="river" d="'+linePath([[10,48.4],[14,48.3],[17,48],[19,47.5],[19.1,46],[21,45],[22.5,44.2],[25,43.7],[27.5,44],[28.7,45]])+'"/>';
+  function T(txt,lon,lat,cls){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'">'+txt+'</text>'}
+  s+=T('СРЕДИЗЕМНО МОРЕ',16,34.2,'maplabel')+T('ЧЕРНО МОРЕ',33.5,43.9,'maplabel');
+  s+=T('А Ф Р И К А',2,26,'contlabel')+T('р. Нил',33.5,26.3,'rivlabel')+T('Ефрат',41.2,34.6,'rivlabel')+T('Тигър',44.8,36.0,'rivlabel')+T('р. Дунав',20.2,47.5,'rivlabel');
+  s+=T('ВИЗАНТИЯ',34,39.4,'tlabel')+T('ФРАНКСКО',4.5,49.2,'tlabel')+T('КРАЛСТВО',4.5,48.3,'tlabel')+T('БЪЛГАРИЯ',25.5,45.2,'tlabel')+T('АРАБИЯ',44.5,25.2,'tlabel')+T('ЕГИПЕТ',26.5,27,'tlabel')+T('ПЕРСИЯ',47,36.6,'tlabel')+T('ИСПАНИЯ',-5.2,40.4,'tlabel');
+  s+='<g id="borderG" style="opacity:0;transition:opacity .6s"><path d="'+linePath([[5,38.3],[5,22]])+'" style="fill:none;stroke:#1B2A41;stroke-width:1.6;stroke-dasharray:5 3"/>'+T('граница на халифата към 800 г.',5.6,23.2,'tlabel')+'</g>';
+  $('#mapSvg').innerHTML=s;
+})();
+
+/* стрелки на настъплението */
+var ROUTES=[
+  {step:1,cls:'g1',pts:[[39.6,24.5],[37.6,29],[36.3,33.5]]},
+  {step:1,cls:'g1',pts:[[36.3,33.5],[40,33.8],[44.4,33.3],[49,32]]},
+  {step:1,cls:'g1',pts:[[39.6,24.5],[35,28.4],[32,30.4],[29.9,31.2]]},
+  {step:1,cls:'g1',pts:[[29.9,31.2],[25,31.4],[20,32.2],[14.5,32.8]]},
+  {step:2,cls:'g2',pts:[[14.5,32.8],[10,34.6],[5,35.6],[-2,35.3],[-5.4,35.9]]},
+  {step:2,cls:'g2',pts:[[-5.4,35.9],[-4.8,37.9],[-2,40.5],[0,44],[0.35,46.6]]},
+  {step:2,cls:'g3',pts:[[36.3,33.5],[36.5,37],[32,38.8],[28.98,41.0]]}
+];
+(function(){
+  function lp(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+  var g='<g class="routes" id="routesG">';
+  ROUTES.forEach(function(r){
+    g+='<path data-step="'+r.step+'" class="o" pathLength="1" d="'+lp(r.pts)+'"/><path data-step="'+r.step+'" class="'+r.cls+'" pathLength="1" d="'+lp(r.pts)+'"/>';
+    var A=P(r.pts[r.pts.length-2][0],r.pts[r.pts.length-2][1]),Bp=P(r.pts[r.pts.length-1][0],r.pts[r.pts.length-1][1]);
+    var ax=+A[0],ay=+A[1],bx=+Bp[0],by=+Bp[1],dx=bx-ax,dy=by-ay,L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var h=[[bx,by],[bx-dx*9+dy*4.5,by-dy*9-dx*4.5],[bx-dx*9-dy*4.5,by-dy*9+dx*4.5]].map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+    g+='<polygon data-step="'+r.step+'" class="head '+r.cls+'" points="'+h+'"/>';
+  });
+  g+='</g>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+})();
+
+/* точки */
+var PTS=[
+  {id:'mecca',n:'Мека',lon:39.8,lat:21.4,col:'#9E1B32',t:'Мека',d:'Най-известният град на Арабия, на кервански път от Йемен към Сирия. Тук е Кааба. Според учебника е свещен град за исляма и част от мюсюлманските земи още преди 632 г.'},
+  {id:'medina',n:'Медина',lon:39.6,lat:24.5,col:'#9E1B32',t:'Медина (Ясриб)',d:'Градът, в който се преселват Мохамед и последователите му през 622 г. (Хиджра). Дотогава се нарича Ясриб, а после — Медина, „градът на пророка“.'},
+  {id:'jer',n:'Йерусалим',lon:35.2,lat:31.8,col:'#9E1B32',dy:12,t:'Йерусалим',d:'Свещеният град, завладян от мюсюлманите след смъртта на Мохамед (по-често се сочи 637 – 638 г.). Спомни си урок 5: Ираклий връща в Йерусалим Светия кръст след победата над Персия — а малко по-късно градът минава под арабска власт.',card:'heraclius',link:'🔗 Връзка с урок 5: Ираклий. Арабите разбиват ромеите при Ярмук (636 г.) и вземат Сирия и Палестина.'},
+  {id:'dam',n:'Дамаск',lon:36.3,lat:33.5,col:'#9E1B32',dy:-6,t:'Дамаск (661 – 750)',d:'Столицата на халифата при династията на Омаядите (661 – 750 г.). Оттук се управляват огромните завладени земи.'},
+  {id:'bagh',n:'Багдад',lon:44.4,lat:33.3,col:'#9E1B32',a:'middle',dx:0,dy:14,t:'Багдад (от 762 г.)',d:'Основан през 762 г. от халиф ал-Мансур като нова столица на халифата — след като властта минава от Омаядите към Абасидите (750 г.). Наричат го „Градът на мира“.'},
+  {id:'alex',n:'Александрия',lon:29.9,lat:31.2,col:'#9E1B32',a:'end',dx:-8,dy:-2,t:'Александрия',d:'Голямото пристанище в Египет, дотогава византийско. Египет е завладян около 640 – 642 г.'},
+  {id:'cairo',n:'Кайро',lon:31.2,lat:30.0,col:'#9E1B32',dy:12,t:'Кайро',d:'Мястото на съвременния Кайро. През VII в. тук мюсюлманите основават град Фустат; Кайро се изгражда по-късно. Учебникът отбелязва мястото на картата.'},
+  {id:'cord',n:'Кордоба',lon:-4.8,lat:37.9,col:'#9E1B32',t:'Кордоба',d:'Град в Южна Испания, завладяна от арабите. През 756 г. тук се установява независим мюсюлмански владетел от рода на Омаядите. По-късно градът става един от най-големите в Европа, а Мескитата е негова гордост.'},
+  {id:'cpl',n:'Константинопол',lon:28.98,lat:41.0,col:'#1B2A41',star:1,a:'end',dx:-8,dy:-8,t:'Константинопол 717 – 718',d:'Арабите обсаждат столицата на Византия, но градът устоява. Според учебника през 718 г. с помощта на хан Тервел арабите са разбити. Българите нападат арабската войска (по летописеца Теофан избиват голяма част от нея). Така България спасява Византия и Европа от арабско настъпление.',card:'tervel',link:'🔗 Връзка с България: хан Тервел и българите помагат на Византия.'},
+  {id:'poit',n:'Поатие',lon:0.35,lat:46.6,col:'#1B2A41',star:1,t:'Поатие 732',d:'Битка в Западна Европа: франките спират арабската войска, която е навлязла в земите им от Испания. Така настъплението на запад завършва.'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){var p0=P(p.lon,p.lat);
+    var shape=p.star?'<path class="dot" d="M0,-8 L2.4,-2.5 L8,-2.5 L3.5,1.2 L5,7 L0,3.6 L-5,7 L-3.5,1.2 L-8,-2.5 L-2.4,-2.5Z" fill="'+p.col+'"/>':'<circle class="dot" r="5.5" fill="'+p.col+'"/>';
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+p0[0]+','+p0[1]+')"><circle class="halo" r="6" stroke="'+p.col+'"/>'+shape+'<text x="'+(p.dx===undefined?8:p.dx)+'" y="'+((p.dy||0)+3)+'" text-anchor="'+(p.a||'start')+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+p.col+'"></i>'+p.t+'</button>'}).join('');
+})();
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.t+'</h3><p>'+p.d+'</p>'+(p.link?'<p class="note" style="margin-top:8px">'+p.link+'</p>':'');
+  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('cartograph'))award('cartograph');}
+  if(p.card)unlockCard(p.card);
+}
+$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+
+/* стъпки: 632 → 661 → 750 → 800 */
+var MSTEPS=[
+  {cap:'<b>До 632 г.</b> Към смъртта на Мохамед ислямът обединява Арабския полуостров. Тъмнозеленото са мюсюлманските земи. Центровете са Мека и Медина.'},
+  {cap:'<b>До 661 г.</b> Мюсюлманите завладяват византийските земи в Източното Средиземноморие (Сирия, Палестина с Йерусалим, Египет) и унищожават Персия. Стрелките показват посоките на походите.'},
+  {cap:'<b>До 750 г.</b> Халифатът достига до Испания през Северна Африка. Две спирания: при Константинопол (717 – 718 г.) и при Поатие (732 г.). Столица е Дамаск (661 – 750 г.).'},
+  {cap:'<b>Към 800 г.</b> Халифатът вече не е едно цяло. Столицата е Багдад (от 762 г.), а в Испания с център Кордоба управлява отделен владетел. Пунктираната линия е приблизителната граница на халифата.'}
+];
+var mapCur=EX.mapCur||0, mapSeen=EX.mapSeen||{0:1}, playing=null;
+function mapStep(i,quiet){
+  mapCur=i;
+  $('#lyrB').classList.toggle('on',i>=1);$('#lyrC').classList.toggle('on',i>=2);$('#lyrW').classList.toggle('on',i>=3);
+  $('#borderG').style.opacity=i>=3?1:0;
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',!!mapSeen[k]&&k!==i)});
+  $$('#routesG [data-step]').forEach(function(p){var st=+p.getAttribute('data-step');p.classList.toggle('show',st===i)});
+  $('#yrRange').value=i;
+  $('#stepCap').innerHTML=MSTEPS[i].cap;
+  var lg='<span><i style="background:'+COL.A+'"></i>до 632 г.</span>';
+  if(i>=1)lg+='<span><i style="background:'+COL.B+'"></i>до 661 г.</span>';
+  if(i>=2)lg+='<span><i style="background:'+COL.C+'"></i>до 750 г.</span>';
+  if(i>=3)lg+='<span><i style="background:'+COL.W+'"></i>Испания и Запад (отделен владетел)</span>';
+  lg+='<span><i style="background:'+COL.bul+'"></i>България ок. 720 г.</span><span><i style="background:'+COL.frank+'"></i>Франкско кралство ок. 740 г.</span><span><i style="background:'+COL.byz+'"></i>Византия</span><span>★ важна битка</span>';
+  $('#mapLegend').innerHTML=lg;
+  if(!quiet&&!mapSeen[i]){
+    mapSeen[i]=1;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',!!mapSeen[k]&&k!==i)});
+    addXP(3);
+    if(Object.keys(mapSeen).length===MSTEPS.length&&flag('steps'))addXP(5,'Халифатът е проследен!');
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){stopPlay();mapStep(+b.getAttribute('data-st'))})});
+$('#yrRange').addEventListener('input',function(){stopPlay();mapStep(+this.value)});
+function stopPlay(){if(playing){clearTimeout(playing);playing=null;$('#playBtn').textContent='▶ Пусни анимацията'}}
+$('#playBtn').addEventListener('click',function(){
+  if(playing){stopPlay();return}
+  var i=0;this.textContent='⏸ Спри';
+  (function tick(){mapStep(i);i++;if(i<4)playing=setTimeout(tick,2800);else{playing=setTimeout(function(){stopPlay()},2800)}})();
+});
+mapStep(mapCur,true);
+
+/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
+var TL=[['570 г. ·','Ражда се Мохамед',0],['622 г. ·','Хиджра: преселването в Ясриб (Медина) и начало на мюсюлманското летоброене',1],['632 г. ·','Смъртта на Мохамед',2],['717 – 718 г. ·','Арабите обсаждат Константинопол и са разбити',3],['732 г. ·','Битката при Поатие: франките спират арабите',4],['762 г. ·','Основан е Багдад — столица на халифата',5]];
+var TLR=TL.map(function(t){return t[2]}).sort(function(a,b){return a-b});
+var sortl=$('#sortl');
+function tlRender(order){
+  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+'</span> '+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+  $$('.sitem',sortl).forEach(bindItem);
+}
+function tlIsSolved(order){return order.every(function(i,pos){return TL[i][2]===TLR[pos]})}
+var order0=(EX.tlOrder&&EX.tlOrder.length===TL.length)?EX.tlOrder:(function(){var o;do{o=shuffle([0,1,2,3,4,5])}while(tlIsSolved(o));return o})();
+tlRender(order0);
+var TLOK='<b>Отлично, хронисте!</b> От раждането на Мохамед до основаването на Багдад минават около 190 години. А битките при Константинопол (718) и Поатие (732) са само на 14 години една от друга.';
+if(EX.tlSolved){
+  sortl.classList.add('sorted');
+  $$('.sitem',sortl).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});
+  $('#tlCheck').disabled=true;
+  $('#tlFb').className='fb ok';
+  $('#tlFb').innerHTML=TLOK;
+}
+function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb';saveNow()}
+function bindItem(li){
+  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+    if(sortl.classList.contains('sorted'))return;
+    var d=+b.getAttribute('data-mv');
+    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
+    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
+    clearMarks();
+  })});
+  var h=$('.handle',li),startY=0,dragging=false,pid=null;
+  h.addEventListener('pointerdown',function(ev){
+    if(sortl.classList.contains('sorted'))return;
+    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+    try{h.setPointerCapture(pid)}catch(e){}
+    ev.preventDefault();
+  });
+  h.addEventListener('pointermove',function(ev){
+    if(!dragging||ev.pointerId!==pid)return;
+    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+    var prev=li.previousElementSibling,next=li.nextElementSibling;
+    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+  });
+  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+}
+var tlTries=EX.tlTries||0;
+$('#tlCheck').addEventListener('click',function(){
+  if(sortl.classList.contains('sorted'))return;
+  tlTries++;saveNow();var items=$$('.sitem',sortl),ok=0;
+  items.forEach(function(li,pos){var good=TL[+li.getAttribute('data-i')][2]===TLR[pos];li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+  var fb=$('#tlFb');
+  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML=TLOK;
+    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
+  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: Мохамед се ражда първи, а Багдад е последен.'}
+});
+
+/* ================= КОЙ ВЕК Е ================= */
+var CNT=[
+  {q:'570 г. (раждането на Мохамед) е в…',o:['VI в.','VII в.','V в.'],a:0,e:'570 → 5 + 1 = VI век.'},
+  {q:'622 г. (Хиджра) е в…',o:['VII в.','VI в.','VIII в.'],a:0,e:'622 → 6 + 1 = VII век.'},
+  {q:'632 г. (смъртта на Мохамед) е в…',o:['VII в.','VIII в.','VI в.'],a:0,e:'632 → 6 + 1 = VII век.'},
+  {q:'718 г. (обсадата на Константинопол) е в…',o:['VIII в.','VII в.','IX в.'],a:0,e:'718 → 7 + 1 = VIII век.'},
+  {q:'762 г. (основаването на Багдад) е в…',o:['VIII в.','VII в.','IX в.'],a:0,e:'762 → 7 + 1 = VIII век.'},
+  {q:'800 г. е в…',o:['VIII в.','IX в.','VII в.'],a:0,e:'Кръглата година е краят на века: 800 г. е последната година на VIII в.'}
+];
+qSet('#centQs',CNT,'cn',2,function(){if(flag('century')){addXP(5,'Всички векове са познати!');award('scholar')}});
+
+/* ================= РОЛЯ ================= */
+var RQ=[
+  {q:'1. Тръгваш от Йемен към Дамаск. Как избираш пътя?',o:['По веригата от оазиси: там има вода и градове за почивка','Право през най-безводната пустиня, без спирки','Скачаш на кораб и плаваш по сушата'],a:0,e:'Керваните минават през оазиси, около които възникват градове. Така се пътува през пустинята — от оазис до оазис.'},
+  {q:'2. Стигаш Мека. Виждаш Кааба и идолите около нея. Как постъпваш?',o:['Спираш в най-известния град по пътя, продаваш стока и разглеждаш общото свято място','Изобщо не спираш в града','Започваш да се караш с жителите за боговете им'],a:0,e:'Мека е най-известният град по пътя на керваните, а Кааба е общо свято място за много племена.'},
+  {q:'3. Вечерта спиш при бедуини. С какво живеят те?',o:['Пасат овце и кози, отглеждат камили и коне','Лови риба в Индийския океан','Обработват ориз'],a:0,e:'Бедуините са номадски племена: стадата и камилите са тяхното богатство.'},
+  {q:'4. Научаваш, че племената често воюват помежду си. Какво правиш?',o:['Пътуваш внимателно в голям керван, защото племената непрестанно воюват','Мислиш, че всички араби са един народ и нищо не те застрашава','Продаваш камилите си и се връщаш'],a:0,e:'Арабите живеят на племена, които непрестанно воюват. Затова обединението под една вяра по-късно е толкова важна промяна.'}
+];
+qSet('#roleQs',RQ,'rq',4,function(){if(flag('role')){addXP(5,'Керванът пристигна!');award('merchant')}});
+
+/* ================= ЗАГАДКА: ГРЕШКАТА В СВИТЪКА ================= */
+var SCR=[
+  {t:'1. През 570 г. в Мека се ражда Мохамед.',bad:0},
+  {t:'2. През 622 г. пророкът и последователите му се преселват в Ясриб, който получава името Медина.',bad:0},
+  {t:'3. От това преселване, наречено Хиджра, започва мюсюлманското летоброене.',bad:0},
+  {t:'4. След смъртта му посланията са събрани в Коран, а още на следващия ден хиляди екземпляри са отпечатани в печатница с подвижни букви.',bad:1,e:'Грешката е анахронизъм: печатането с подвижни букви в Европа се появява чак през XV в. През VII в. книгите се преписват на ръка.'},
+  {t:'5. Керваните минават през оазиси, около които възникват градове.',bad:0}
+];
+var scrollState=EX.scrollState;
+(function(){
+  var box=$('#scroll');
+  box.innerHTML=SCR.map(function(w,i){return '<button class="opt" data-w="'+i+'">'+w.t+'</button>'}).join('');
+  function solved(i){
+    $$('[data-w]',box).forEach(function(x,xi){x.disabled=true;if(SCR[xi].bad)x.classList.add('wrong');else x.classList.add('right')});
+    var fb=$('#scrollFb');fb.className='fb ok';fb.innerHTML='<b>Намерена е!</b> '+SCR[i].e;
+  }
+  $$('[data-w]',box).forEach(function(b){b.addEventListener('click',function(){
+    if(scrollState!==undefined)return;
+    var i=+b.getAttribute('data-w'),fb=$('#scrollFb');
+    if(SCR[i].bad){scrollState=i;saveNow();solved(i);if(flag('puzzle')){addXP(8,'Грешката е намерена!');award('corrector')}}
+    else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е този ред.</b> Всичко в него е вярно за VII в. Потърси нещо, което още не съществува.'}
+  })});
+  if(scrollState!==undefined)solved(scrollState);
+})();
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['desert','пустиня','The desert is hot and dry.'],['camel','камила','The camel carries water.'],['caravan','керван','The caravan crosses the desert.'],['merchant','търговец','The merchant sells spices.'],['trade','търговия','Trade connects many cities.'],['holy','свещен','Mecca is a holy city.'],['book','книга','The Quran is a holy book.'],['to pray','моля се','They pray five times a day.']];
+var ES=[['el aceite','олиото','Quiero aceite de oliva.'],['el azúcar','захарта','El azúcar es dulce.'],['ojalá','дано, дай боже','¡Ojalá llueva mañana!'],['la almohada','възглавницата','La almohada es suave.'],['el arroz','оризът','Me gusta el arroz.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+var heard=EX.heard||{};
+function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'قرأ (qaraʾa)',s:'арабски „чета, рецитирам“',b:['Коран (бълг.)','Quran / Koran (англ.)','Corán (исп.)'],p:'„Коран“ идва от арабския глагол „четене, рецитиране“: свещеният текст се чете на глас. Затова думата е като „четиво“ или „рецитация“.'},
+  {r:'كعبة (kaʿba)',s:'арабски „куб“',b:['Кааба (бълг.)','Kaaba (англ.)','Caaba (исп.)'],p:'Кааба е „кубът“ — така е наречена кубовидната сграда в Мека. Не я свързвай с английското „cube“: то идва от гръцки „kýbos“ — друга история.'},
+  {r:'مسلم (muslim)',s:'арабски „който се предава (на Бога)“',b:['мюсюлманин (бълг.)','Muslim (англ.)','musulmán (исп.)'],p:'Думата е от същия корен като „ислям“ — „предаване, подчинение“. Учебникът дава значение „правоверен“. В български думата „мюсюлманин“ стига през турски.'},
+  {r:'مسجد (masjid) / جامع (jāmiʿ)',s:'два различни арабски корена',b:['mosque (англ.) ← masjid','mezquita (исп.) ← masjid','джамия (бълг.) ← jāmiʿ'],p:'„Масджид“ значи „място за покланяне (земен поклон)“. От него идват „mosque“ (през италиански и френски) и „mezquita“ (от арабския на Испания). Българската „джамия“ е от друга арабска дума — „джамиʿ“, събирателна джамия, и стига през турски.'}
+];
+var ETY2=[
+  {r:'سكّر (sukkar)',s:'арабски → „захар“',b:['sugar (англ.)','azúcar (исп.)','sucre (фр.)','zucchero (итал.)'],p:'Думата тръгва от санскрит, минава през персийски и арабски и от там стига до повечето западноевропейски езици. Българската „захар“ идва по друг път (през гръцки), но от същия далечен корен.'},
+  {r:'الجبر (al-jabr)',s:'арабски „събиране на разкъсани части“',b:['алгебра (бълг.)','algebra (англ.)','álgebra (исп.)'],p:'„Ал-джабр“ е название на научен труд от около 820 г. на учения ал-Хорезми, от когото идва и думата „алгоритъм“. От книгата идва името на науката алгебра.'},
+  {r:'قهوة (qahwa)',s:'арабски „кафе“',b:['кафе (бълг.)','coffee (англ.)','café (исп.)','caffè (итал.)'],p:'Арабската „кахва“ стига през турски и италиански до повечето европейски езици. Самото кафе се разпространява през Йемен.'},
+  {r:'صفر (sifr)',s:'арабски „празно, нула“',b:['цифра (бълг.)','cipher (англ.)','zero (англ.)','cifra (исп.)'],p:'Арабското „сифр“ е „нулата“. От него идват „zero“ и „cipher“, а българската „цифра“ идва по сходен път. Така нулата, дошла от Индия, стига до нас през арабите.'}
+];
+function etyHTML(arr,pre){return arr.map(function(e,i){return '<button class="ety" data-'+pre+'="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('')}
+$('#etym').innerHTML=etyHTML(ETY,'y');$('#etym2').innerHTML=etyHTML(ETY2,'y2');
+var ySeen=EX.ySeen||{},y2Seen=EX.y2Seen||{};
+$$('.ety[data-y]').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
+$$('.ety[data-y2]').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y2');if(!y2Seen[i]){y2Seen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'Как живеят бедуините?',o:['Номади са: пасат овце и кози и отглеждат камили и коне','Живеят в големи градове край морето','Строят крепости по границите'],a:0,e:'Бедуините са номадски племена в пустинята.'},
+  {q:'Кое е общото свято място на арабските племена преди исляма?',o:['Кааба в Мека','Йерусалим','Константинопол'],a:0,e:'Кааба в Мека е светилище, общо за много арабски племена, а после става най-святото място за мюсюлманите.'},
+  {q:'Какво дава началото на мюсюлманското летоброене?',o:['Хиджра — преселването на Мохамед в Ясриб (Медина) през 622 г.','Смъртта на Мохамед през 632 г.','Битката при Поатие'],a:0,e:'Денят на пристигането на Мохамед в Ясриб (Медина) през 622 г. е началото на мюсюлманското летоброене.'}],
+ [{q:'Колко пъти в денонощието се молят мюсюлманите?',o:['Пет пъти','Веднъж','Седем пъти'],a:0,e:'Мюсюлманите се молят пет пъти в денонощието.'},
+  {q:'Какво правят вярващите през месец рамазан?',o:['Не се хранят и не пият вода от изгрев до залез','Пътуват до Йерусалим','Строят джамии'],a:0,e:'През свещения месец рамазан вярващите не се хранят и не пият вода от изгрев до залез.'},
+  {q:'Какво е Коранът?',o:['Свещената книга на мюсюлманите, в която след смъртта на Мохамед са събрани посланията му','Първата джамия','Градът на пророка'],a:0,e:'Коранът е свещената книга на мюсюлманите.'}],
+ [{q:'Кои земи завладяват мюсюлманите след смъртта на Мохамед?',o:['Византийските земи в Източното Средиземноморие с Йерусалим и Персия','Земите на хуните','Само Мека'],a:0,e:'Арабите завладяват византийските земи на изток (с Йерусалим) и унищожават Персия.'},
+  {q:'Какво става при Константинопол през 717 – 718 г.?',o:['Градът устоява, а арабите са разбити — според учебника с помощта на хан Тервел','Арабите превземат града','Градът се предава без бой'],a:0,e:'Константинопол устоява. С помощта на хан Тервел арабите са разбити през 718 г.'},
+  {q:'Какво става при Поатие през 732 г.?',o:['Франките спират арабската войска','Арабите превземат Рим','Тук се основава Багдад'],a:0,e:'При Поатие франките нанасят поражение на арабите и настъплението на запад спира.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Керванджия','Книжовник','Главен детектив'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Бедуини','Номадски племена в пустинята: пасат овце и кози, отглеждат камили и коне.'],['Оазис','Място в пустинята с вода; около него възникват градове.'],['Кааба','„Куб“: общо свято място в Мека; за мюсюлманите — най-святото място и посока на молитвата.'],['Мохамед','570 – 632. Създател и пророк на исляма.'],['Хиджра','Преселението в Ясриб (Медина) през 622 г. — начало на мюсюлманското летоброене.'],['Мюсюлмани','Вярващите, които изповядват исляма („правоверни“).'],['Джамия','Молитвеният дом на мюсюлманите.'],['Коран','Свещената книга на мюсюлманите, събрана след смъртта на Мохамед.'],['Рамазан','Свещеният месец: без храна и вода от изгрев до залез.'],['Джихад','Свещена война: религиозно задължение на ранните мюсюлмани да воюват с неверниците.'],['717 – 718 г.','Обсада на Константинопол; арабите са разбити (с помощта на хан Тервел).'],['732 г.','Битката при Поатие: франките спират арабите.']];
+var fI=EX.fI||0,flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата.';
+}
+var SUS=[
+ {t:'Арабите са били разединени и затова не са стигнали по-далеч от пустинята',ok:0,e:'Не. Улика 3: именно вярата обединява племената в силен съюз.'},
+ {t:'Вярата в Аллах обединява враждуващите племена в силен съюз. Затова за около век те завладяват огромни земи — Арабия, византийския изток, Персия и Испания — но са спрени при Константинопол (717 – 718) и при Поатие (732)',ok:1,e:'Точно! Улика 1: племената воюват помежду си. Улика 2: Мохамед проповядва един Бог, а Хиджра дава началото на нова ера. Улика 3: вярата обединява племената. Улика 4: войната и договорите разширяват земите, докато Константинопол и франките не ги спират.'},
+ {t:'Арабите завладяват земите само с мирни договори, без нито една битка',ok:0,e:'Не. Улика 4: мюсюлманите повеждат война; с договор приемат исляма само част от арабските племена.'},
+ {t:'Ислямът възниква в Западна Европа и после се разпространява на изток',ok:0,e:'Не. Улика 2: ислямът възниква в Мека и Медина, на Арабския полуостров.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 7. Възникване и разпространение на исляма\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nКлючови дати: 570 – 632 – Мохамед; 622 – Хиджра; 717 – 718 – обсада на Константинопол; 732 – битката при Поатие.\n\nПонятия: бедуини, оазис, кервани, Кааба, ислям, мюсюлмани, Хиджра, Медина, рамазан, джамия, Коран, джихад, Арабски халифат.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='622';$('#dC').textContent='VII в.';$('#dP').textContent='Мека и Медина, Арабия';
+    setTM('622','VII в.','Мека → Медина');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 622 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  tilesRestore('data-tile',T1,tSeen);tilesRestore('data-tilek',TK,tkSeen);tilesRestore('data-tile3',T3,t3Seen);tilesRestore('data-tile4',T4,t4Seen);
+  Object.keys(ribSeen).forEach(function(i){var b=$('#rib button[data-e="'+i+'"]');if(b)b.classList.add('seen')});
+  Object.keys(S.seen).forEach(function(id){if(S.seen[id])$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(ySeen).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  Object.keys(y2Seen).forEach(function(i){var b=$('.ety[data-y2="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>

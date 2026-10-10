@@ -41,6 +41,7 @@
 | 04 | `istoriya-6-urok-04-drevnite-balgari-i-slavyani.html` | 4. Древните българи и славяни във Великото преселение на народите | 22 – 23 | II. Средновековна Европа (V – XI в.) |
 | 05 | `istoriya-6-urok-05-mogushtestvoto-na-vizantiyskata-imperiya.html` | 5. Могъществото на Византийската империя (V – VII в.) | 24 – 27 | II. Средновековна Европа (V – XI в.) |
 | 06 | `istoriya-6-urok-06-vladetel-i-obshtestvo-vav-vizantiya.html` | 6. Владетел и общество във Византия (IV – XI в.) | 28 – 29 | II. Средновековна Европа (V – XI в.) |
+| 07 | `istoriya-6-urok-07-vaznikvane-i-razprostranenie-na-islyama.html` | 7. Възникване и разпространение на исляма | 30 – 31 | II. Средновековна Европа (V – XI в.) |
 | — | `istoriya-6-pregovor-02-…` (предстои) | Преговор на Раздел II, по страницата с времевата линия в началото на раздела (с. 18 – 19) | предстои | II |
 
 Следващите уроци се добавят, когато родителят прикачи снимките им.
