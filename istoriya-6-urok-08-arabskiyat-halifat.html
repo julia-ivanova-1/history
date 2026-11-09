@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 8 · Арабският халифат (VII – XI в.)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+/* ===== добавки за урок 8 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.river{fill:none;stroke:#7FA9D1;stroke-width:1.6;stroke-linecap:round;pointer-events:none}
+.rivlabel{font:italic 700 7px var(--body);fill:#46617E;pointer-events:none}
+.steps.three{grid-template-columns:repeat(3,1fr)}
+.lyr{opacity:0;transform:scale(.55);transform-box:view-box;transition:opacity .9s ease,transform 1.1s ease}
+.lyr.on{opacity:1;transform:scale(1)}
+.routes path.o{stroke:#fff;stroke-width:5.4}
+.routes path.g1{stroke:#0E5A33}.routes path.g2{stroke:#1B2A41}.routes path.g3{stroke:#9E1B32}
+.routes polygon{opacity:0;transition:opacity .3s .7s}
+.routes polygon.show{opacity:1}
+.routes polygon.g1{fill:#0E5A33}.routes polygon.g2{fill:#1B2A41}.routes polygon.g3{fill:#9E1B32}
+blockquote{margin:0}
+#capG{transition:transform 1.8s ease-in-out;pointer-events:none}
+.trail{fill:none;stroke:var(--gold-ink);stroke-width:2;stroke-dasharray:5 4;opacity:0;transition:opacity .6s}
+.trail.show{opacity:1}
+/* обсада */
+.sg{opacity:0;transition:opacity .7s}
+.sg.show{opacity:1}
+.sg.pulse{animation:pop .6s}
+.sglabel{font:800 9px var(--body);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.sgdots{background:#fff;border-radius:999px;height:10px;overflow:hidden;margin:8px 0 0;border:1px solid var(--line)}
+.sgdots i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s}
+/* план на Багдад */
+.planbox{background:#DDE6F0;border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.planbox svg{display:block;width:100%;height:auto}
+.planbox .mk text{font-size:9.5px}
+.wh{transform-box:fill-box;transform-origin:center}
+/* анимация на водното колело */
+.wheelbox{background:var(--soft);border-radius:14px;padding:10px;margin-top:10px}
+.wheelbox svg{display:block;width:100%;height:auto}
+.wheelrot{transform-origin:130px 100px;animation:wspin 9s linear infinite;animation-play-state:paused}
+.wheelbox.run .wheelrot,.wheelbox.run .bk{animation-play-state:running}
+.bk{transform-box:fill-box;transform-origin:center;animation:wspin 9s linear infinite reverse;animation-play-state:paused}
+@keyframes wspin{to{transform:rotate(360deg)}}
+.flow{stroke-dasharray:6 6;animation:wflow 1.2s linear infinite;animation-play-state:paused}
+.wheelbox.run .flow{animation-play-state:running}
+@keyframes wflow{to{stroke-dashoffset:-12}}
+/* свидетели */
+.wit{display:grid;gap:10px;margin-top:10px}
+.wit .opt b{display:block;font-family:var(--head);color:var(--red-2);margin-bottom:2px}
+/* линия от учебника */
+.tbl{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.tbl .yr{font-family:var(--head);font-weight:700;font-size:1.6rem;color:var(--red-2);line-height:1.1}
+.tbl .tag{display:inline-block;font-size:.75rem;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle;color:#fff}
+.tag.ar{background:#2F7D4F}.tag.bg{background:var(--red)}.tag.eu{background:var(--navy)}
+.tbl p{margin:.3em 0 0}
+.tbdots{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.tbdots span{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);background:#fff;font-size:.7rem;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+.tbdots span.on{background:var(--gold);border-color:var(--gold);color:#2E2000}
+.tbdots span.cur{outline:3px solid var(--navy);outline-offset:1px}
+.fix{border-left:5px solid var(--gold);background:var(--gold-soft);border-radius:0 12px 12px 0;padding:10px 12px;margin:12px 0;font-size:.95rem}
+.fix b{color:var(--gold-ink)}
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/10</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 8</div>
+  <h1>Арабският халифат (VII – XI в.)</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детективе, днес скачаме в 762 г. — в Месопотамия, на брега на река Тигър. Халиф ал-Мансур тъкмо строи нова столица. По-късно ще видиш как се променя мюсюлманският свят, как се спира армията при Константинопол и защо този град става един от най-богатите на света. Натисни бутона и скочи!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 762 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„Градът, който дошъл от пустинята“</h2>
+  <p>След смъртта на Мохамед мюсюлманската общност няма водач, а племената се карат. Само сто години по-късно арабска държава се простира от Атлантическия до Индийския океан, а в нейната столица живеят около 700 000 души. Но армиите ѝ са спрени пред стените на Константинопол и във Франция. <b>Как племенният съюз става огромна империя, къде е границата ѝ и откъде идва богатството на Багдад?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №1</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №2</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №3</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №4</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+  <p class="note" style="margin:10px 0 0">🤝 Урокът разказва за спора между сунити и шиити и за вярванията на мюсюлманите така, както ги описват учебникът и самите общности: „според сунитите…“, „според шиитите…“. Целта е да разберем историята, без да оценяваме вярата на никого.</p>
+</div>
+
+<!-- ===== ДОСИЕ 1 ===== -->
+<section class="card" id="s1" data-tm="632 – 661|VII в.|Медина">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Промененият „Дом на исляма“ <span class="key">🔑 632 – 661</span></h2>
+  <div data-story>
+    <p>След смъртта на Мохамед мюсюлманите трябва да изберат наследник на пророка. Избират го в <b>Медина</b> измежду роднините и приятелите му. Той се нарича <button class="term" data-t="halif">халиф</button>. Такива са първите четирима халифи — те управляват от 632 до 661 г.</p>
+    <p>Границите на света на исляма все повече се отдалечават от неговия център (виж картата по-долу). В новозавладените земи се заселват много <button class="term" data-t="bedui">бедуински</button> племена. Там те строят военни лагери, от които продължават настъплението и държат властта над завладяното население. Бързо забогатяват от военната плячка и от данъците, които събират.</p>
+    <p>Скоро възниква остър спор за избора на халиф. Едни искат той да бъде избиран от цялата мюсюлманска общност — наричат се <button class="term" data-t="sunit">сунити</button>. Според техните противници, <button class="term" data-t="shiit">шиитите</button>, халифът трябва да произхожда от семейството на пророка. Споровете прерастват в продължителна война.</p>
+  </div>
+  <div class="note" style="margin-top:10px">🤝 Сунити и шиити има и днес — това са два големи клона на исляма. И двата вярват в един Бог и в Корана. Тук ги описваме така, както са се разделили тогава: по въпроса кой да води общността.</div>
+  <div class="task">
+    <h3>👆 Разгледай как се променя светът на исляма</h3>
+    <div class="tiles" id="tiles1">
+      <button class="tile" data-tile="0"><b>🗳 Изборът</b>Докосни…</button>
+      <button class="tile" data-tile="1"><b>🧭 Границите</b>Докосни…</button>
+      <button class="tile" data-tile="2"><b>⛺ Лагерите</b>Докосни…</button>
+      <button class="tile" data-tile="3"><b>💰 Богатството</b>Докосни…</button>
+      <button class="tile" data-tile="4"><b>🤲 Сунитите</b>Докосни…</button>
+      <button class="tile" data-tile="5"><b>👪 Шиитите</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s1q"></div></div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2: ОМАЯДИТЕ ===== -->
+<section class="card" id="s2" data-tm="661 – 750|VII – VIII в.|Дамаск">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>Халифатът на Омаядите <span class="key">🔑 661 – 750</span></h2>
+  <div data-story>
+    <p>През 661 г. <b>Моавия</b> се обявява за халиф и със силата на оръжието слага край на междуособиците. Столица на държавата става <b>Дамаск</b>. Племенното обединение се превръща в централизирана държава — <button class="term" data-t="halifat">халифат</button>. При династията на Омаядите светът на исляма става арабска империя.</p>
+    <p>Халифите създават мощен флот и насочват свещената си война срещу Европа. Завладяват Пиренейския полуостров и няколко пъти обсаждат Константинопол. През <span class="key">🔑 717 – 718 г.</span> арабите са разгромени по суша от войските на български хан Тервел, а по море — от ромеите. Бити са и през <span class="key">🔑 732 г.</span>, когато настъпват в земите на франките. Тогава завоевателният стремеж на мюсюлманите в Европа е спрян и те обръщат посоката на нашествията на изток. Светът на исляма се разпростира от Атлантическия до Индийския океан.</p>
+  </div>
+  <div class="fix">📚 <b>В учебника пише:</b> Моавия е „военният управител на Египет“. По стандартните източници той е управител на <b>Сирия</b> (около две десетилетия при халифите Умар и Осман). Египет по това време се управлява от друг пълководец. За контролна в клас помни и двете: „Моавия — управител (на Сирия)“.</div>
+  <div class="task">
+    <h3>👆 Омаядите стъпка по стъпка</h3>
+    <div class="ribbon" id="rib"></div>
+    <div class="ribticks"><span>661</span><span>→</span><span>750</span></div>
+    <div class="infobox" id="ribInfo"><h3>Избери стъпка</h3><p>Докосни цвят от лентата.</p></div>
+  </div>
+  <div class="infobox" style="margin-top:14px">
+    <h3>📖 Страницата от Корана (IX – X в.)</h3>
+    <p>На илюстрацията в учебника виждаш лист от Корана, преписан с красиво писмо. Посланията на Мохамед са събрани в свещената книга на мюсюлманите. Според учебника халифите забранили да се променя дори една буква.</p>
+    <div class="fix" style="margin:8px 0 0">📚 <b>В учебника пише:</b> посланията са събрани „по времето на Омаядите, към средата на VII в.“. По преданието това става при <b>третия халиф Осман</b> (644 – 656 г.), който е от рода Омая, но управлява преди династията на Омаядите, която започва от 661 г. Учените спорят точно кога и как е завършила работата по текста. Затова най-точно е: „към средата на VII в., при халиф Осман“.</div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s2q"></div></div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ОБСАДА ===== -->
+<section class="card" id="siege" data-tm="717 – 718|VIII в.|пред стените на Константинопол">
+  <div class="dossier-tag navy">⚔️ ВОЕННА КАРТА</div>
+  <h2>Обсадата на Константинопол (717 – 718)</h2>
+  <p>Натискай „Следващ ход“ и гледай как се развива събитието. Движенията са опростени, а войната е показана без подробности.</p>
+  <div class="mapbox"><svg id="siegeSvg" viewBox="0 0 360 250" role="img" aria-label="Схема на обсадата на Константинопол: арабска армия отзад, флот в Мраморно море и българите от север">
+    <rect width="360" height="250" fill="#E6E8EC"/>
+    <path d="M190,0 L360,0 L360,62 L300,72 L262,52 L225,28 Z" fill="#CFE0EE"/>
+    <path d="M262,52 L236,128" stroke="#CFE0EE" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <path d="M236,120 L162,112" stroke="#CFE0EE" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <path d="M110,250 L110,190 L170,165 L215,152 L240,135 L300,150 L360,170 L360,250 Z" fill="#CFE0EE"/>
+    <path d="M130,112 L236,124 L242,136 L215,152 L170,165 L130,152 Z" fill="#B49AD9" stroke="#8C6FB8" stroke-width="1"/>
+    <path d="M130,108 L130,156" stroke="#7A1426" stroke-width="5" stroke-linecap="round"/>
+    <text x="186" y="142" class="tlabel">КОНСТАНТИНОПОЛ</text>
+    <text x="300" y="104" class="maplabel" style="font-size:9px">БОСФОР</text>
+    <text x="268" y="20" class="maplabel" style="font-size:9px">ЧЕРНО МОРЕ</text>
+    <text x="150" y="244" class="maplabel" style="font-size:9px">МРАМОРНО МОРЕ</text>
+    <text x="24" y="238" class="maplabel" style="font-size:9px">ТРАКИЯ (суша)</text>
+        <g class="sg" id="sg1"><text x="68" y="140" text-anchor="middle" font-size="22">⛺</text><text x="68" y="158" text-anchor="middle" class="sglabel" fill="#2F7D4F">арабска армия</text>
+      <path d="M96,134 L124,132" stroke="#2F7D4F" stroke-width="3" fill="none" stroke-dasharray="4 3"/></g>
+    <g class="sg" id="sg2"><text x="190" y="190" text-anchor="middle" font-size="18">⛵ ⛵ ⛵</text><text x="190" y="206" text-anchor="middle" class="sglabel" fill="#2F7D4F">арабски флот</text></g>
+    <g class="sg" id="sg3"><rect x="246" y="206" width="106" height="30" rx="8" fill="#fff" stroke="#2F7D4F"/><text x="299" y="219" text-anchor="middle" class="sglabel" style="stroke:none" fill="#1D1F24">30 000 пазят</text><text x="299" y="231" text-anchor="middle" class="sglabel" style="stroke:none" fill="#1D1F24">корабите</text>
+      <rect x="56" y="44" width="104" height="30" rx="8" fill="#fff" stroke="#9E1B32"/><text x="108" y="57" text-anchor="middle" class="sglabel" style="stroke:none" fill="#1D1F24">20 000 пазят</text><text x="108" y="69" text-anchor="middle" class="sglabel" style="stroke:none" fill="#1D1F24">към българите</text></g>
+    <g class="sg" id="sg4"><text x="172" y="84" text-anchor="middle" font-size="26">❄️</text><text x="172" y="102" text-anchor="middle" class="sglabel" fill="#1B2A41">лютата зима · глад</text></g>
+    <g class="sg" id="sg5"><path d="M38,26 L38,104" stroke="#9E1B32" stroke-width="3.5" fill="none" stroke-linecap="round"/><polygon points="38,118 31,102 45,102" fill="#9E1B32"/><text x="12" y="16" class="sglabel" fill="#9E1B32">българите на хан Тервел</text></g>
+    <g class="sg" id="sg6"><path d="M200,176 L224,168" stroke="#7A1426" stroke-width="3" fill="none"/><text x="236" y="172" text-anchor="middle" font-size="18">🔥</text><text x="256" y="190" class="sglabel" fill="#7A1426">флотът на ромеите</text></g>
+    <g class="sg" id="sg7"><path d="M60,166 L26,196" stroke="#2F7D4F" stroke-width="3.5" fill="none" stroke-linecap="round"/><polygon points="20,201 27,187 36,198" fill="#2F7D4F"/><text x="44" y="206" class="sglabel" fill="#2F7D4F">оттегляне</text></g>
+  </svg></div>
+  <div class="sgdots"><i id="sgBar"></i></div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="sgNext">▶ Следващ ход</button><button class="btn ghost small" id="sgReset">↺ Отначало</button></div>
+  <div class="infobox" id="sgInfo"><h3>Ход 0 от 7</h3><p>През лятото на 717 г. арабска армия и флот тръгват към столицата на ромеите. Натисни „Следващ ход“.</p></div>
+  <p class="note">Схемата е опростена и не е в мащаб. Числата 30 000 и 20 000 са от извора по-долу — те са оценка на летописеца, а не точно преброяване.</p>
+</section>
+
+<!-- ===== ИЗВОР ===== -->
+<section class="card" id="clue" data-tm="XII в.|·|Хрониката на Михаил Сирийски">
+  <div class="dossier-tag navy">📜 УЛИКАТА: ИЗВОР</div>
+  <h2>Разгромът на арабите при Константинопол</h2>
+  <p>Откъс от „Хроника“ на Михаил Сирийски (XII в.), преразказан със свои думи — по учебника:</p>
+  <blockquote style="margin:10px 0;padding:10px 12px;border-left:4px solid var(--red);background:var(--soft);border-radius:0 12px 12px 0;font-style:italic">
+    Тридесет хиляди арабски войници пазели откъм Мраморно море корабите, а други двадесет хиляди охранявали българската страна. Тогава българите се надигнали и унищожили много араби. Арабите били ужасени: зимата наближавала и ги обзел страх от морето, от българите и от самия град. Настанал глад.
+  </blockquote>
+  <p class="note">Кой е Михаил Сирийски? Той е християнин от сирийската църква, патриарх на Антиохия (1166 – 1199 г.). Пише на сирийски език. Хрониката му започва от Сътворението на света и стига до края на неговия век.</p>
+  <div id="clueQs"></div>
+</section>
+
+<!-- ===== ДОСИЕ 3: АБАСИДИТЕ ===== -->
+<section class="card" id="s3" data-tm="750 – XI в.|VIII – XI в.|Багдад">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Династията на Абасидите <span class="key">🔑 750 – ср. на XI в.</span></h2>
+  <div data-story>
+    <p>През 750 г. нова династия завзема властта в Арабския халифат. Столицата е преместена от Дамаск в <b>Багдад</b>, който става един от най-богатите и бляскави градове в света. По суша и по море търговци пренасят стоките си от Индия до Мароко.</p>
+    <p>При Абасидите военизираната арабска държава бързо се превръща в <button class="term" data-t="teokr">теократична монархия</button>. Халифът е абсолютен владетел — „сянка на Аллах на земята“. Въведени са общи мюсюлмански закони, <button class="term" data-t="sheriat">шериатът</button>, основани на Корана, и по тях отсъжда <button class="term" data-t="kadia">кадията</button> в съда.</p>
+    <p>Постепенно арабите губят привилегированото си положение. В армията и в управлението ги заменят хора от други народи, приели исляма. Общ религиозен език в този огромен свят е арабският. Някои халифи са прочути като мъдри и справедливи държавници. Най-бляскавото време за халифата настъпва при управлението на <b>Харун ал Рашид</b> <span class="key">786 – 809</span>.</p>
+    <p>Стабилността му обаче е нетрайна. В средата на XI в. халифатът е сломен от нахлулите от степите на Централна Азия тюркски племена, наречени <button class="term" data-t="seldzh">селджуци</button>.</p>
+  </div>
+  <div class="fix">📚 <b>В учебника пише:</b> халифатът е „унищожен“ от селджуците. По-точно: през 1055 г. селджукският водач Тугрул влиза в Багдад. Халифът го признава за султан и от тук нататък реалната власт е в ръцете на селджуците. Халифът остава като религиозен водач, а Абасидската династия е прекратена от монголите чак през 1258 г. И двата факта са верни: в средата на XI в. арабската държава е загубила властта си.</div>
+  <div class="task">
+    <h3>👆 Устройството на държавата — докосни плочките</h3>
+    <div class="tiles" id="tiles3">
+      <button class="tile" data-tile3="0"><b>👑 Халифът</b>Докосни…</button>
+      <button class="tile" data-tile3="1"><b>⚖️ Шериатът</b>Докосни…</button>
+      <button class="tile" data-tile3="2"><b>🧑‍⚖️ Кадията</b>Докосни…</button>
+      <button class="tile" data-tile3="3"><b>🌍 Нови народи</b>Докосни…</button>
+      <button class="tile" data-tile3="4"><b>🗣 Арабският</b>Докосни…</button>
+      <button class="tile" data-tile3="5"><b>🏹 Селджуците</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s3q"></div></div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 4: БАГДАД ===== -->
+<section class="card" id="s4" data-tm="IX в.|·|Багдад">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Животът в Багдад (реконструкция)</h2>
+  <div data-story>
+    <p>Багдад е обграден от два реда защитни стени с четири главни входа. Вътре има красиви джамии и множество каменни сгради. Улиците му са пълни със занаятчии, търговци и ученици. През IX в. Багдад е с население около 700 000 души — един от най-големите градове в света.</p>
+    <p>В града се пресичат важни търговски пътища: от Китай и Индия на изток до Византия, Русия и Скандинавския полуостров на север и Африка на запад. Арабите търгуват с корал и слонова кост от Африка, а Китай предлага порцелан, коприна и хартия. Европейските благородници ценят предмети, изработени от арабски занаятчии.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Реконструкцията от учебника — отговори на въпросите</h3>
+    <div class="tiles" id="tilesB">
+      <button class="tile" data-tileb="0"><b>🎬 Дейностите</b>Докосни…</button>
+      <button class="tile" data-tileb="1"><b>💧 Водата</b>Докосни…</button>
+      <button class="tile" data-tileb="2"><b>🌊 Реката</b>Докосни…</button>
+      <button class="tile" data-tileb="3"><b>👘 Облеклото</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Защо Багдад се издига? Условията за възхода</h3><div id="s4q"></div></div>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ПЛАН НА БАГДАД ===== -->
+<section class="card" id="plan" data-tm="762|VIII в.|Кръглият град на ал-Мансур">
+  <div class="dossier-tag navy">🧭 ПЛАНЪТ НА ДЕТЕКТИВА</div>
+  <h2>Кръглият Багдад (762 г.)</h2>
+  <p>Първоначалният Багдад на ал-Мансур е кръгъл град. Докосни точките, за да го разгледаш.</p>
+  <div class="planbox"><svg id="planSvg" viewBox="0 0 360 300" role="img" aria-label="Схема на кръглия град Багдад с две стени, четири порти, дворец, джамия и река Тигър"></svg></div>
+  <div class="infobox" id="plInfo"><h3>Избери точка</h3><p>Докосни порта, стена, центъра или реката.</p></div>
+  <div class="chips" id="plChips"></div>
+  <p class="note">Схемата не е в мащаб и показва кръглия град от 762 г. През IX в. Багдад е много по-голям: расте и извън стените си. Затова реконструкцията в учебника показва по-късна картина на градския живот. От Кръглия град днес не е останало нищо — последните следи са разрушени през 1870-те години.</p>
+</section>
+
+<!-- ===== ИГРА: СТОКАТА ===== -->
+<section class="card" id="trade" data-tm="IX в.|·|пазарът на Багдад">
+  <div class="dossier-tag gold">🛍 ИГРА НА ПАЗАРА</div>
+  <h2>Откъде идва стоката?</h2>
+  <p>Тези стоки се продават на багдадския пазар. Реши откъде идва всяка. Първите пет са от учебника, а при последните две се разчита на допълнителни източници.</p>
+  <div class="sorter" id="tradeBox"></div>
+</section>
+
+<!-- ===== АКТИВНА КАРТА ===== -->
+<section class="card" id="map" data-tm="661 – 800|VII – VIII в.|картата на халифата">
+  <div class="dossier-tag navy">🗺 КАРТАТА НА ДЕТЕКТИВА</div>
+  <h2>Столицата се мести: Медина → Дамаск → Багдад</h2>
+  <p>Избери период с бутоните или със ▶ и гледай как короната прескача от град на град, а земите растат. После докосни точките.</p>
+  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на халифата: столицата се мести от Медина в Дамаск и после в Багдад"></svg></div>
+  <div class="steps three" id="mapSteps">
+    <button data-st="0" class="active">До 661 · Медина</button>
+    <button data-st="1">Омаяди · Дамаск</button>
+    <button data-st="2">Абасиди · Багдад</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="playBtn">▶ Премести столицата</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка</h3><p>Докосни град или битка на картата.</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Картата е опростена: границите са приблизителни. Данните са по учебника и допълнителни източници.</p>
+</section>
+
+<!-- ===== МИНИ ВРЕМЕВА ЛИНИЯ ===== -->
+<section class="card" id="tl" data-tm="622 – 762|VII – VIII в.|по линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
+  <h2>Подреди събитията по време</h2>
+  <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+
+  <h3 style="margin-top:22px">🧵 Времевата линия от учебника (550 – 1050)</h3>
+  <p style="margin:0">Плъзни надясно и гледай събитията едно след друго. <span class="tag ar" style="display:inline-block;color:#fff;font-size:.75rem;border-radius:6px;padding:1px 8px">арабски свят</span> <span class="tag eu" style="display:inline-block;color:#fff;font-size:.75rem;border-radius:6px;padding:1px 8px">Европа</span> <span class="tag bg" style="display:inline-block;color:#fff;font-size:.75rem;border-radius:6px;padding:1px 8px">България</span></p>
+  <div class="tbl" id="tbl"></div>
+  <input type="range" id="tbRange" min="0" max="12" step="1" value="0" aria-label="Събитие от линията на времето">
+  <div class="tbdots" id="tbDots"></div>
+</section>
+
+<!-- ===== КОЙ ВЕК Е ===== -->
+<section class="card" id="cent" data-tm="VII – XI в.|·|кой век е?">
+  <div class="dossier-tag gold">🔢 КОЙ ВЕК Е?</div>
+  <h2>От година към век</h2>
+  <p><b>Правило:</b> отрежи последните две цифри и прибави 1: 661 → 6 → <b>VII в.</b> Кръглата година (700, 800) е <i>краят</i> на века.</p>
+  <div id="centQs"></div>
+</section>
+
+<!-- ===== ДОСИЕТА НА ЛИЧНОСТИТЕ ===== -->
+<section class="card" id="people" data-tm="VII – IX в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Folio%20Blue%20Quran%20Met%202004.88.jpg?width=900" alt="Лист от ръкописен Коран със златно куфическо писмо върху тъмносин пергамент">
+      <figcaption>Лист от Корана с куфическо писмо — така се преписва свещената книга. Подобна страница виждаш и в учебника (IX – X в.). Това не е същата страница.<small>Автор: неизвестен. Лиценз: CC BY 2.5, <a href="https://commons.wikimedia.org/wiki/File:Folio_Blue_Quran_Met_2004.88.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dish%20with%20stylised%20bird%20Earthenware%20with%20glaze%20and%20lustre%20painting%20Samarra%209th%20century%208352.jpg?width=900" alt="Керамична чиния с блестяща глазура и стилизирани птици от Самара, IX в.">
+      <figcaption>Керамична чиния с блестяща глазура и птици, Самара, IX в. — от времето на Абасидите, като чинията в учебника. Това не е същата чиния.<small>Автор: Dosseman. Лиценз: CC BY-SA 4.0, <a href="https://commons.wikimedia.org/wiki/File:Dish_with_stylised_bird_Earthenware_with_glaze_and_lustre_painting_Samarra_9th_century_8352.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Noria%20of%20Hama,%20Hama,%20Syria.jpg?width=900" alt="Огромно дървено водно колело на река Оронт в Хама, Сирия">
+      <figcaption>Водно колело (нория) на река Оронт в Хама, Сирия. Такива колела вдигат вода от реката. Колелата в Хама са едни от най-известните в света, а не са от Багдад.<small>Автор: Vyacheslav Argenberg. Лиценз: CC BY 4.0, <a href="https://commons.wikimedia.org/wiki/File:Noria_of_Hama,_Hama,_Syria.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="VIII – IX в.|·|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="📜">Хартията стига до арабския свят от Китай. Учените посочват първите хартиени работилници в Багдад около 794 – 795 г. — при Харун ал Рашид. Така книгите стават по-евтини от пергамента.</div>
+    <div data-i="🌙">Харун ал Рашид е герой на много истории от „Хиляда и една нощ“. Някои от тях се развиват в неговия двор. Самите приказки обаче са събрани по-късно и са измислени.</div>
+    <div data-i="🏛">Династията на Омаядите носи името на рода Омая. От него е и третият халиф Осман — само че той управлява преди Моавия, затова не е „Омаяд“ като династия.</div>
+    <div data-i="❄️">Според византийски и по-късни сведения зимата 717 – 718 г. е необичайно люта: снегът лежал над три месеца. Затова в извора арабите се страхуват от зимата.</div>
+    <div data-i="🕌">Последните следи от Кръглия град на Багдад са разрушени през 1870-те години. Днес за него знаем най-вече от старите описания на историци.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== АНИМАЦИЯ ===== -->
+<section class="card" id="anim" data-tm="IX в.|·|на брега на река">
+  <div class="dossier-tag navy">🎞 АНИМАЦИЯ</div>
+  <h2>Как водното колело вдига вода</h2>
+  <p>Реконструкцията в учебника показва големи водни колела. Течението на реката върти колелото, а кофите му загребват вода долу и я изсипват горе в улей. Натисни бутона!</p>
+  <div class="wheelbox" id="wheelBox">
+    <svg viewBox="0 0 300 190" role="img" aria-label="Водно колело с кофи на река: течението го върти и кофите изсипват вода в улей">
+      <rect width="300" height="190" fill="#EEF1F5" rx="8"/>
+      <rect x="0" y="142" width="300" height="48" fill="#CFE0EE"/>
+      <path class="flow" d="M10,152 H110 M150,152 H290 M10,170 H290" stroke="#7FA9D1" stroke-width="2" fill="none"/>
+      <rect x="116" y="22" width="150" height="10" fill="#8A909B" rx="3"/>
+      <rect x="116" y="22" width="150" height="4" fill="#7FA9D1" rx="2"/>
+      <rect x="250" y="32" width="10" height="60" fill="#8A909B"/>
+      <path d="M266,92 H290" stroke="#7FA9D1" stroke-width="5" class="flow" fill="none"/>
+      <rect x="254" y="92" width="36" height="6" fill="#8A909B"/>
+      <g class="wheelrot">
+        <circle cx="130" cy="100" r="58" fill="none" stroke="#7A5A10" stroke-width="4"/>
+        <path d="M130,42 V158 M72,100 H188 M89,59 L171,141 M171,59 L89,141" stroke="#7A5A10" stroke-width="3"/>
+        <circle cx="130" cy="100" r="7" fill="#1B2A41"/>
+        <g transform="translate(130,42)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(171,59)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(188,100)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(171,141)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(130,158)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(89,141)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(72,100)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+        <g transform="translate(89,59)"><g class="bk"><rect x="-8" y="-5" width="16" height="10" rx="2" fill="#9E1B32"/></g></g>
+      </g>
+      <text x="20" y="186" font-size="10" font-weight="700" fill="#46617E">река (течението върти колелото)</text>
+      <text x="124" y="16" font-size="9" font-weight="700" fill="#2c3440">улей към града</text>
+    </svg>
+    <div class="row" style="margin-top:8px"><button class="btn gold" id="wheelBtn">▶ Завърти колелото</button></div>
+    <p class="note" id="wheelCap" style="margin:8px 0 0">Колелото е спряно. Натисни бутона.</p>
+  </div>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="IX в.|·|базарът в Багдад">
+  <div class="dossier-tag">🎭 РОЛЯ</div>
+  <h2>Ти си търговец на пазара в Багдад</h2>
+  <p class="note">⚠️ Разказът е <b>измислен</b>. Фактите са от учебника и от проверените допълнителни източници.</p>
+  <div data-story>
+    <p>Откриваш сергия на оживения пазар на Багдад. Около теб шумят занаятчии, търговци и ученици. По стоките и по пътищата им ще научиш как работи градът. Реши как да постъпиш.</p>
+  </div>
+  <div id="roleQs"></div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="IX в.|·|съдебната зала">
+  <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
+  <h2>Кой лъже?</h2>
+  <p>Трима свидетели описват Багдад от времето на Абасидите. <b>Един</b> от тях казва нещо невярно. Докосни свидетеля, който лъже.</p>
+  <div class="wit opts" id="wit"></div>
+  <div class="fb" id="witFb"></div>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Начертай Кръглия град</h2>
+  <p>Архитектите на ал-Мансур са чертаели града с кръг. Направи своя план на лист:</p>
+  <ul>
+    <li>начертай голям кръг с пергел, а после втори, по-малък кръг в него — това са двата реда стени;</li>
+    <li>отбележи четирите порти и ги надпиши (Куфа, Сирия, Хорасан, Басра);</li>
+    <li>в средата нарисувай двореца на халифа и джамията;</li>
+    <li>отстрани начертай река Тигър и водно колело.</li>
+  </ul>
+  <p><b>По желание:</b> измисли своя монета на халиф, с красив надпис и орнамент, без образ на човек.</p>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Думи за халифата</h3>
+    <p style="font-size:.9rem;margin-top:0">Испанският пази следи от арабския. Две от думите по-долу са стигнали до него именно оттам.</p>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Багдадски ученик</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Търговец</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="VIII – IX в.|·|от Багдад до Константинопол">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>Градът, който дошъл от пустинята</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 632 – 661</b> · първите четирима халифи</span>
+    <span><b>🔑 661 – 750</b> · Омаяди</span>
+    <span><b>🔑 717 – 718</b> · обсада на Константинопол</span>
+    <span><b>🔑 732</b> · битката при Поатие</span>
+    <span><b>🔑 750 – ср. на XI в.</b> · Абасиди</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>След смъртта на Мохамед наследникът му (халиф) се избира в Медина измежду роднините и приятелите му. Първите четирима халифи управляват 632 – 661 г. Границите на исляма се отдалечават от центъра, а бедуините се заселват в новите земи, строят военни лагери и забогатяват от плячка и данъци.</li>
+    <li>Възниква спор за избора на халиф: сунитите искат той да се избира от цялата общност, а шиитите — да е от семейството на пророка. Споровете прерастват във война.</li>
+    <li>През 661 г. Моавия (управител на Сирия; учебникът пише „на Египет“) се обявява за халиф. Започва династията на Омаядите (661 – 750 г.) със столица Дамаск, а държавата става централизиран халифат и арабска империя.</li>
+    <li>Халифите създават мощен флот, завладяват Пиренейския полуостров и обсаждат Константинопол. През 717 – 718 г. арабите са разгромени по суша от войските на хан Тервел и по море от ромеите. През 732 г. са бити и от франките. Светът на исляма се простира от Атлантическия до Индийския океан.</li>
+    <li>През 750 г. властта минава у Абасидите (до средата на XI в.). Столицата е Багдад, един от най-богатите градове. Държавата е теократична монархия: халифът е абсолютен владетел („сянка на Аллах на земята“). Законите са шериатът, основан на Корана, и кадията съди по тях.</li>
+    <li>Арабите губят привилегиите си: в армията и управлението идват хора от други народи, приели исляма. Общ религиозен език е арабският. Най-бляскаво е времето на Харун ал Рашид (786 – 809 г.).</li>
+    <li>Багдад има два реда стени и четири входа. През IX в. в него живеят около 700 000 души. Тук се пресичат пътища от Китай, Индия, Византия, Русия, Скандинавия и Африка. В средата на XI в. халифатът губи властта си заради селджуците — тюркски племена от Централна Азия.</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 34 – 35. Извън учебника: имената на градовете при портите на Кръглия Багдад и основаването му през 762 г.; хартията и свързаното с нея; Харун ал Рашид и „Хиляда и една нощ“; сведението за три месеца сняг през 717 – 718 г.; селджуците в Багдад през 1055 г. и краят на династията през 1258 г.; Осман и събирането на Корана; индийските стоки в играта (памучен плат, подправки); етимологиите. <b>Разминавания с учебника:</b> (1) Моавия е управител на Сирия, а не на Египет; (2) Коранът е събран при халиф Осман (644 – 656 г.), преди Омаядите, а не „по времето на Омаядите“; (3) селджуците поемат реалната власт в Багдад през 1055 г., а халифи остават формално до 1258 г. Числата от извора (30 000 и 20 000) са оценка на летописеца. Няма видео и музика. Ролята и загадката са измислени. Картата и схемите са опростени.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/Mu%27awiya_I" target="_blank" rel="noopener">Mu'awiya I</a> · <a href="https://en.wikipedia.org/wiki/Uthman" target="_blank" rel="noopener">Uthman</a> · <a href="https://en.wikipedia.org/wiki/Succession_to_Muhammad" target="_blank" rel="noopener">Succession to Muhammad</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Siege_of_Constantinople_(717%E2%80%93718)" target="_blank" rel="noopener">Siege of Constantinople (717–718)</a> · <a href="https://en.wikipedia.org/wiki/Michael_the_Syrian" target="_blank" rel="noopener">Michael the Syrian</a> · <a href="https://en.wikipedia.org/wiki/Tervel_of_Bulgaria" target="_blank" rel="noopener">Tervel of Bulgaria</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Round_City_of_Baghdad" target="_blank" rel="noopener">Round City of Baghdad</a> · <a href="https://en.wikipedia.org/wiki/Gates_of_Baghdad" target="_blank" rel="noopener">Gates of Baghdad</a> · <a href="https://en.wikipedia.org/wiki/Siege_of_Baghdad_(1055)" target="_blank" rel="noopener">Siege of Baghdad (1055)</a></li>
+      <li><a href="https://www.etymonline.com/word/caliph" target="_blank" rel="noopener">caliph</a> · <a href="https://www.etymonline.com/word/magazine" target="_blank" rel="noopener">magazine</a> · <a href="https://en.wiktionary.org/wiki/alcalde" target="_blank" rel="noopener">alcalde</a> · <a href="https://en.wikipedia.org/wiki/Sharia" target="_blank" rel="noopener">Sharia</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-08-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var EX=(SAVED&&SAVED.ex)||{};
+var booted=false;
+function tlOrderNow(){return (typeof sortl!=='undefined'&&sortl)?$$('.sitem',sortl).map(function(li){return +li.getAttribute('data-i')}):(EX.tlOrder||[])}
+function saveNow(){
+  if(!booted)return;
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:{
+      tSeen:tSeen,t3Seen:t3Seen,tbSeen:tbSeen,ribSeen:ribSeen,sgK:sgK,sgMax:sgMax,mapCur:mapCur,mapSeen:mapSeen,heard:heard,ySeen:ySeen,fI:fI,jumped:jumped,
+      tlOrder:tlOrderNow(),tlSolved:sortl.classList.contains('sorted'),tlTries:tlTries,witState:witState,tI:tI,tMiss:tMiss,tDone:tDone,tbSeenE:tbSeenE,tbCur:tbCur
+    }}))
+  }catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','dyk'];
+var FLAGS=['jump','tiles1','s1q','rib','s2q','siege','clue','tiles3','s3q','tilesB','s4q','plan','trade','steps','tl','tbl','century','wheel','role','puzzle'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=EX.jumped||false;
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;var b=this;b.disabled=true;
+  var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $('#dY').textContent=Math.round(2026-(2026-762)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($('#dC'),'VIII в.');setDial($('#dP'),'Багдад, на река Тигър');setTM('762','VIII в.','Багдад · Тигър');
+      b.textContent='✓ Пристигна в 762 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
+      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички точки на картата'},
+  {id:'defender',ic:'🛡️',n:'Защитник на града',d:'Проследи обсадата на Константинопол'},
+  {id:'architect',ic:'🧭',n:'Архитект',d:'Разгледай целия Кръгъл Багдад'},
+  {id:'trader',ic:'🛍',n:'Пазарджия',d:'Разпредели всички стоки'},
+  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди събитията по време'},
+  {id:'scholar',ic:'🔢',n:'Книжовник',d:'Познай всички векове'},
+  {id:'unmasker',ic:'🔎',n:'Разобличител',d:'Разкрий кой лъже'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'muawiya',n:'Моавия',y:'халиф 661 – 680',av:'🏛️',sp:'⚡ Първият омаядски халиф',how:'Мини през стъпките на Омаядите в досие №2',back:'Управител на Сирия около две десетилетия при халифите Умар и Осман. През 661 г. се обявява за халиф, слага край на междуособиците и основава династията на Омаядите. Столица става Дамаск.<br><br>💡 В учебника пише „управител на Египет“, но по източниците е управител на Сирия.'},
+  {id:'harun',n:'Харун ал Рашид',y:'халиф 786 – 809',av:'🌙',sp:'⚡ Най-бляскавото време на халифата',how:'Докосни Багдад на картата',back:'Абасидски халиф. По учебника халифатът преживява най-бляскавото си време при неговото управление. Столицата му е Багдад.<br><br>💡 Той е герой на много истории от „Хиляда и една нощ“ — приказки, събрани по-късно и измислени.'},
+  {id:'tervel',n:'Хан Тервел (от уроци 4 и 7)',y:'хан 701 – 721',av:'🛡️',sp:'⚡ Защитникът на Константинопол',how:'Проследи обсадата на Константинопол',back:'Български владетел. По учебника през 717 – 718 г. арабите са разгромени по суша от войските на хан Тервел, а по море — от ромеите.<br><br>💡 Историците спорят за точните подробности, но участието на българите е сигурно.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'След смъртта на Мохамед спорът кой да води общността (сунити и шиити) разделя мюсюлманите. Бедуините се заселват в новите земи и забогатяват от плячка и данъци.',
+  2:'Моавия слага край на междуособиците (661 г.), столица е Дамаск, а държавата става централизиран халифат. Спират я при Константинопол (717 – 718) и при франките (732).',
+  3:'При Абасидите халифът е абсолютен владетел, законите са шериатът, а кадията съди. В армията и управлението идват хора от други народи, а арабският е общ език.',
+  4:'Багдад е кръстопът на пътища от Китай и Индия до Византия и Африка. С около 700 000 жители през IX в. е един от най-големите градове в света.'
+};
+var CLUE_FOR={s1:1,s2:2,s3:3,s4:4};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  halif:['Халиф','Наследник на пророка Мохамед; титла на политическия и религиозен водач на мюсюлманската общност. На арабски „khalīfa“ значи „наследник, заместник“.'],
+  halifat:['Халифат','Държавата, начело на която стои халиф. Арабският халифат се разраства след смъртта на Мохамед.'],
+  bedui:['Бедуини','Номадски арабски племена, които пасат стада и отглеждат камили и коне.'],
+  sunit:['Сунити','Мюсюлманите, които смятат, че халифът трябва да бъде избиран от цялата мюсюлманска общност. Днес са най-голямата част от мюсюлманите.'],
+  shiit:['Шиити','Мюсюлманите, които смятат, че халифът трябва да произхожда от семейството на пророка. Особено почитат Али, братовчед и зет на Мохамед.'],
+  teokr:['Теократична монархия','Управление, при което религиозната и политическата власт са в ръцете на владетеля, а законите следват религиозното право.'],
+  sheriat:['Шериат','Общите мюсюлмански закони, основани на Корана. Въведени са при Абасидите.'],
+  kadia:['Кадия','Мюсюлмански съдия. Отсъжда в съда по шериата.'],
+  seldzh:['Селджуци','Тюркски племена от степите на Централна Азия. В средата на XI в. нахлуват в земите на халифата и поемат властта.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+function qSet(boxSel,arr,pre,xp,done){
+  var n=0;
+  $(boxSel).innerHTML=arr.map(function(_,i){return '<div class="qblock stage" id="'+pre+i+'"></div>'}).join('');
+  arr.forEach(function(Q,i){Q.after=function(){n++;if(n===arr.length)done()};oneQ($('#'+pre+i),Q,pre+i,xp);restoreOneQ($('#'+pre+i),Q,pre+i)});
+}
+
+/* ================= плочки (общ помощник) ================= */
+function tilesInit(attr,TXT,seen,flagKey,bonusMsg,after){
+  $$('.tile['+attr+']').forEach(function(t){t.addEventListener('click',function(){
+    var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+    t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+    if(Object.keys(seen).length===TXT.length&&flag(flagKey)){addXP(3,bonusMsg);if(after)after()}
+  })});
+}
+function tilesRestore(attr,TXT,seen){
+  Object.keys(seen).forEach(function(i){var t=$('.tile['+attr+'="'+i+'"]');if(t&&!t.classList.contains('open')){t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open')}});
+}
+
+/* ================= ДОСИЕ 1: ДОМЪТ НА ИСЛЯМА ================= */
+var T1=['Наследникът на Мохамед е избран в Медина измежду неговите роднини и приятели. Такива са първите четирима халифи (632 – 661 г.).','Границите на света на исляма все повече се отдалечават от неговия център — Медина. Виж картата по-долу.','В новозавладените земи се заселват много бедуински племена. Те строят военни лагери, от които продължават настъплението и поддържат властта си над завладяното население.','Бедуините бързо забогатяват от военната плячка и от данъците, които събират от завладяното население.','Сунитите искат халифът да бъде избиран от цялата мюсюлманска общност.','Шиитите смятат, че халифът трябва да произхожда от семейството на пророка. Особено важен за тях е Али — братовчед и зет на Мохамед. Споровете прерастват в продължителна война.'];
+var tSeen=EX.tSeen||{};
+tilesInit('data-tile',T1,tSeen,'tiles1','Домът на исляма е разгледан!');
+(function(){
+  var Q={q:'Какво твърдят сунитите и какво шиитите за избора на халиф?',o:['Сунитите: халифът се избира от цялата общност. Шиитите: той трябва да е от семейството на пророка','Сунитите: халифът е от семейството на пророка. Шиитите: избира го цялата общност','И двете страни искат халифът да бъде римски император'],a:0,e:'Така учебникът описва двете страни. Спорът за избора на халиф прераства във война.'};
+  oneQ($('#s1q'),Q,'s1q',5);restoreOneQ($('#s1q'),Q,'s1q');
+})();
+
+/* ================= ДОСИЕ 2: ОМАЯДИТЕ (лента) ================= */
+var RIB=[
+  {n:'661',c:'#9E1B32',t:'661 г. · Моавия',d:'Моавия се обявява за халиф и със силата на оръжието слага край на междуособиците. Столица става Дамаск. (Учебникът го нарича управител на Египет, но по източниците е управител на Сирия.)'},
+  {n:'Халифат',c:'#7A5A10',t:'Централизирана държава',d:'Племенното обединение се превръща в централизирана държава — халифат. При Омаядите светът на исляма става арабска империя.'},
+  {n:'Флот',c:'#1B2A41',t:'Мощен флот',d:'Халифите създават мощен флот и насочват свещената си война срещу Европа.'},
+  {n:'Испания',c:'#1E8E4E',t:'Пиренейският полуостров',d:'Арабите завладяват Пиренейския полуостров.'},
+  {n:'717',c:'#5B6270',t:'717 – 718 г. · Константинопол',d:'Няколко пъти обсаждат Константинопол. През 717 – 718 г. са разгромени по суша от войските на хан Тервел, а по море — от ромеите.'},
+  {n:'732',c:'#8A6414',t:'732 г. · При франките',d:'Бити са и през 732 г., когато настъпват в земите на франките. Завоевателният им стремеж в Европа е спрян и те обръщат посоката на нашествията на изток. Светът на исляма се простира от Атлантическия до Индийския океан.'}
+];
+$('#rib').innerHTML=RIB.map(function(e,i){return '<button data-e="'+i+'" style="flex:1;background:'+e.c+'">'+e.n+'</button>'}).join('');
+var ribSeen=EX.ribSeen||{};
+$$('#rib button').forEach(function(b){b.addEventListener('click',function(){
+  var i=+b.getAttribute('data-e'),e=RIB[i];
+  $$('#rib button').forEach(function(x){x.classList.toggle('active',x===b)});
+  $('#ribInfo').innerHTML='<h3>'+e.t+'</h3><p>'+e.d+'</p>';
+  if(!ribSeen[i]){ribSeen[i]=1;b.classList.add('seen');addXP(2);
+    if(Object.keys(ribSeen).length===RIB.length&&flag('rib')){addXP(5,'Омаядите са проследени!');unlockCard('muawiya')}}
+})});
+(function(){
+  var Q={q:'Кой слага край на междуособиците през 661 г. и става първият омаядски халиф?',o:['Моавия — управител на Сирия, със столица Дамаск','Харун ал Рашид — със столица Багдад','Хан Тервел — със столица Плиска'],a:0,e:'Моавия основава династията на Омаядите (661 – 750 г.). В учебника е написан като управител на Египет, но по източниците е управител на Сирия.'};
+  oneQ($('#s2q'),Q,'s2q',5);restoreOneQ($('#s2q'),Q,'s2q');
+})();
+
+/* ================= ОБСАДА НА КОНСТАНТИНОПОЛ ================= */
+var SG=[
+ 'През лятото на 717 г. арабска армия и флот тръгват към Константинопол. Натисни „Следващ ход“.',
+ '<b>Ход 1.</b> Арабската армия обсажда Константинопол откъм сушата, пред могъщите му стени.',
+ '<b>Ход 2.</b> Арабският флот затваря града откъм морето.',
+ '<b>Ход 3.</b> По извора: 30 000 арабски войници пазят корабите откъм Мраморно море, а други 20 000 охраняват „българската страна“. Това е две пети от споменатите войници — арабите явно се страхуват от българите.',
+ '<b>Ход 4.</b> Настъпва зимата. Арабите са далеч от дома си, в чужда земя, а храната свършва. „Настана глад.“',
+ '<b>Ход 5.</b> Българите на хан Тервел нападат арабите и унищожават мнозина (по учебника и извора).',
+ '<b>Ход 6.</b> Ромейският флот разбива арабския по море. Византийците ползват и тайно огнено оръжие — „гръцки огън“.',
+ '<b>Ход 7.</b> През август 718 г. арабите вдигат обсадата и се оттеглят. Константинопол устоява, а настъплението на арабите към Европа през този град е спряно.'
+];
+var sgK=EX.sgK||0, sgMax=EX.sgMax||0;
+function sgShow(k,quiet){
+  sgK=k;
+  for(var i=1;i<=7;i++){var g=$('#sg'+i);g.classList.toggle('show',i<=k);if(!quiet&&i===k){g.classList.remove('pulse');void g.getBoundingClientRect();g.classList.add('pulse')}}
+  $('#sgBar').style.width=Math.round(k/7*100)+'%';
+  $('#sgInfo').innerHTML='<h3>Ход '+k+' от 7</h3><p>'+SG[k]+'</p>';
+  $('#sgNext').disabled=(k>=7);
+  $('#sgNext').textContent=k>=7?'✓ Готово':'▶ Следващ ход';
+}
+$('#sgNext').addEventListener('click',function(){
+  if(sgK>=7)return;
+  var k=sgK+1;sgShow(k);
+  if(k>sgMax){sgMax=k;addXP(2)}
+  if(k===7&&flag('siege')){addXP(5,'Константинопол устоява!');award('defender');unlockCard('tervel')}
+  saveNow();
+});
+$('#sgReset').addEventListener('click',function(){sgShow(0,true);saveNow()});
+sgShow(sgK,true);
+
+/* ================= УЛИКА: ИЗВОР ================= */
+var CQ=[
+  {q:'1. Кой е създал извора и кога?',o:['Михаил Сирийски — християнин, патриарх на Антиохия, през XII в.','Арабски халиф през VIII в.','Български хан през VIII в.'],a:0,e:'Михаил Сирийски е патриарх на Антиохия (1166 – 1199 г.) и пише „Хроника“ на сирийски език.'},
+  {q:'2. Каква част от споменатите войници охраняват „българската страна“?',o:['20 000 от 50 000 — две пети (40%)','Половината','Една десета'],a:0,e:'30 000 + 20 000 = 50 000. Две пети от войниците са заети да пазят от българите — значи българите са сериозна заплаха за арабите.'},
+  {q:'3. Защо зимата се отразява тежко на арабските войски?',o:['Далеч от дома си, на открито и в чужда земя, те имат недостиг на храна и ги заплашват студът, морето и враговете','Защото зимата носи топло време и много плячка','Защото прекарват зимата в Багдад'],a:0,e:'Арабите са в чужда земя, лагерът им е пред стените на града, а храната свършва: „Настана глад“.'},
+  {q:'4. Хрониката е писана през XII в. — около 450 години след събитията. Какво значи това за детектива?',o:['Авторът не е очевидец и разчита на по-стари разкази — нужно е да сравним с други извори, например с византийския летописец Теофан','Нищо — щом е стара, всичко в нея е вярно','Хрониката е измислена и не бива да се ползва'],a:0,e:'Късен извор може да пази ценни сведения, но няма как да му вярваме напълно. Числата (30 000, 20 000) са оценка и може да са преувеличени.'}
+];
+qSet('#clueQs',CQ,'cq',3,function(){if(flag('clue'))addXP(5,'Изворът е разчетен!')});
+
+/* ================= ДОСИЕ 3: АБАСИДИТЕ ================= */
+var T3=['Халифът е абсолютен владетел — „сянка на Аллах на земята“. Той притежава не само светската, но и духовната власт над поданиците си.','Шериатът са общите мюсюлмански закони, основани на Корана. Въведени са при Абасидите.','Кадията е мюсюлманският съдия: той отсъжда в съда по шериата.','Арабите постепенно губят привилегированото си положение. В армията и управлението ги заменят хора от други народи, приели исляма.','Общ религиозен език в този огромен свят е арабският.','Селджуците са тюркски племена от степите на Централна Азия. В средата на XI в. нахлуват в земите на халифата и го сломяват. През 1055 г. влизат в Багдад (виж бележката по-горе).'];
+var t3Seen=EX.t3Seen||{};
+tilesInit('data-tile3',T3,t3Seen,'tiles3','Устройството на държавата!');
+(function(){
+  var Q={q:'Какво е теократична монархия?',o:['Управление, при което религиозната и политическата власт са в ръцете на владетеля, а законите следват религиозното право','Управление, при което владетелят се избира всяка година от народа','Управление на търговците в града'],a:0,e:'При Абасидите халифът е абсолютен владетел и държи светската и духовната власт.'};
+  oneQ($('#s3q'),Q,'s3q',5);restoreOneQ($('#s3q'),Q,'s3q');
+})();
+
+/* ================= ДОСИЕ 4: БАГДАД ================= */
+var TB=['На реконструкцията хора носят чували и кошници, магаре превозва товар, търговец показва плат, двама мъже разговарят на терасата, а на брега плуват гъски. Градът е пълен със занаятчии, търговци и ученици.','Водата за града е осигурена с големи водни колела. Те вдигат речна вода нагоре (виж анимацията по-долу).','Река Тигър. Багдад е разположен на Тигър, която дава вода и е важен път за стоките.','Дълги, широки роби и чалми или забрадки на главата, които пазят от слънцето и жегата.'];
+var tbSeen=EX.tbSeen||{};
+tilesInit('data-tileb',TB,tbSeen,'tilesB','Реконструкцията е разгледана!');
+(function(){
+  var Q={q:'Кои са условията за възхода и блясъка на Багдад?',o:['Столица на огромна държава, защитена със стени, на река и на кръстопът на пътища от Китай и Индия до Византия и Африка, с търговци, занаятчии и ученици','Само това, че е на морски бряг','Само бедуинските стада наоколо'],a:0,e:'Багдад е столица, има вода от реката, а през него минават важни търговски пътища. Заради богатството му към него се стичат търговци и майстори.'};
+  oneQ($('#s4q'),Q,'s4q',5);restoreOneQ($('#s4q'),Q,'s4q');
+})();
+
+/* ================= ПЛАН НА БАГДАД ================= */
+var PL=[
+ {id:'wallOut',n:'Външна стена',x:150,y:40,a:'middle',dx:0,dy:-10,t:'Външният ред стени',d:'Багдад е обграден от два реда защитни стени (по учебника). Така градът е добре защитен.'},
+ {id:'wallIn',n:'Втора стена',x:150,y:242,a:'middle',dx:0,dy:-9,t:'Вторият ред стени',d:'Втората стена е още по-навътре — зад нея е вътрешният кръг на града.'},
+ {id:'khur',n:'Хорасан',x:227.8,y:72.2,a:'start',dx:8,dy:-4,t:'Порта Хорасан',d:'Портите са наречени по градовете или областите, към които водят. Тази води на изток — към Хорасан (област в Персия и Централна Азия).'},
+ {id:'basra',n:'Басра',x:227.8,y:227.8,a:'start',dx:8,dy:6,t:'Порта Басра',d:'Води на юг към Басра — пристанището, откъдето корабите плават към Индийския океан.'},
+ {id:'kufa',n:'Куфа',x:72.2,y:227.8,a:'end',dx:-8,dy:6,t:'Порта Куфа',d:'Води на югозапад към град Куфа в Месопотамия.'},
+ {id:'sham',n:'Сирия',x:72.2,y:72.2,a:'end',dx:-8,dy:-4,t:'Порта Сирия (Шам)',d:'Води на северозапад към Сирия и Дамаск — старата столица на Омаядите.'},
+ {id:'center',n:'Дворец и джамия',x:150,y:150,a:'middle',dx:0,dy:30,t:'Центърът на града',d:'В средата са дворецът на халифа и главната джамия. Около тях са домовете на придворните и службите. От центъра към четирите порти водят четири прави пътя.'},
+ {id:'tigris',n:'р. Тигър',x:322,y:200,a:'end',dx:-8,dy:0,t:'Река Тигър',d:'Багдад е разположен на Тигър. Реката дава вода и е път за стоките.'},
+ {id:'wheel',n:'Колело',x:306,y:105,a:'end',dx:-8,dy:0,t:'Водно колело',d:'Големите водни колела вдигат вода от реката за нуждите на града (виж анимацията по-долу).'}
+];
+(function(){
+  var s='<rect width="360" height="300" fill="#E6E8EC"/>';
+  s+='<path d="M326,0 C300,70 350,150 322,225 S334,290 330,300 L360,300 L360,0 Z" fill="#CFE0EE"/><path class="river" d="M326,0 C300,70 350,150 322,225 S334,290 330,300"/>';
+  s+='<circle cx="150" cy="150" r="110" fill="#F6E1E5" stroke="#7A1426" stroke-width="5"/>';
+  s+='<circle cx="150" cy="150" r="92" fill="#fff" stroke="#1B2A41" stroke-width="5"/>';
+  s+='<circle cx="150" cy="150" r="38" fill="#FFF4DA" stroke="#C9962B" stroke-width="2"/>';
+  [[227.8,72.2],[227.8,227.8],[72.2,227.8],[72.2,72.2]].forEach(function(g){s+='<line x1="150" y1="150" x2="'+g[0]+'" y2="'+g[1]+'" stroke="#7A5A10" stroke-width="2" stroke-dasharray="5 4"/>'});
+  s+='<text x="150" y="146" text-anchor="middle" font-size="16">🏛️</text><text x="150" y="168" text-anchor="middle" font-size="16">🕌</text>';
+  s+='<circle cx="306" cy="105" r="11" fill="none" stroke="#7A5A10" stroke-width="3"/><path d="M295,105 H317 M306,94 V116 M298,97 L314,113 M314,97 L298,113" stroke="#7A5A10" stroke-width="2"/>';
+  s+='<text x="12" y="22" font-size="11" font-weight="700" fill="#46617E">↑ север</text>';
+  PL.forEach(function(p){
+    s+='<g class="mk" data-pl="'+p.id+'" transform="translate('+p.x+','+p.y+')"><circle class="halo" r="6" stroke="#9E1B32"/><circle class="dot" r="5.5" fill="#9E1B32"/><text x="'+p.dx+'" y="'+(p.dy+3)+'" text-anchor="'+p.a+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>';
+  });
+  $('#planSvg').innerHTML=s;
+  $('#plChips').innerHTML=PL.map(function(p){return '<button class="chip" data-pl="'+p.id+'"><i style="background:#9E1B32"></i>'+p.t+'</button>'}).join('');
+})();
+function showPl(id){
+  var p=PL.filter(function(x){return x.id===id})[0];
+  $$('#plan [data-pl]').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-pl')===id)});
+  $('#plInfo').innerHTML='<h3>📍 '+p.t+'</h3><p>'+p.d+'</p>';
+  if(!S.seen['pl_'+id]){S.seen['pl_'+id]=true;$$('#plan [data-pl="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PL.every(function(x){return S.seen['pl_'+x.id]})&&flag('plan')){addXP(5,'Кръглият град е разгледан!');award('architect')}}
+}
+$$('#plan [data-pl]').forEach(function(e){e.addEventListener('click',function(){showPl(e.getAttribute('data-pl'))})});
+
+/* ================= ИГРА: ОТКЪДЕ ИДВА СТОКАТА ================= */
+var TR=[
+ ['🧵 Коприна',0,'Китай предлага коприна (учебникът).'],
+ ['🏺 Порцелан',0,'Китай предлага порцелан (учебникът).'],
+ ['📜 Хартия',0,'Китай предлага хартия (учебникът).'],
+ ['🪸 Корал',1,'Арабите търгуват с корал от Африка (учебникът).'],
+ ['🐘 Слонова кост',1,'Арабите търгуват със слонова кост от Африка (учебникът).'],
+ ['👘 Памучен плат',2,'Извън учебника: индийски памучни тъкани стигат до Багдад през IX в.'],
+ ['🌶 Подправки',2,'Извън учебника: подправките идват по морските пътища от Индия и по-далечни земи.']
+];
+var TRN=['Китай','Африка','Индия'];
+var tI=EX.tI||0,tMiss=EX.tMiss||0,tDone=EX.tDone||false,tradeBox=$('#tradeBox');
+function renderTrade(){
+  var cols=function(){var c=['','',''];for(var i=0;i<tI;i++)c[TR[i][1]]+='<div>'+TR[i][0]+'</div>';return '<div class="cols" style="grid-template-columns:repeat(3,1fr)">'+TRN.map(function(n,k){return '<div class="col '+(k===0?'w':'e')+'"><h4>'+n+'</h4>'+c[k]+'</div>'}).join('')+'</div>'}();
+  if(tI>=TR.length){
+    tradeBox.innerHTML='<p style="margin:0;font-weight:700;color:var(--ok)">✓ Всички стоки са разпределени!'+(tMiss?' (грешки: '+tMiss+')':' Без нито една грешка!')+'</p>'+cols;
+    if(!tDone){tDone=true;if(flag('trade')){addXP(tMiss?5:10,'Пазарът е подреден!');award('trader')}}
+    return;
+  }
+  tradeBox.innerHTML='<div style="font-size:.85rem;color:var(--muted);margin-bottom:6px">Стока '+(tI+1)+' от '+TR.length+'</div><div class="sortcard">'+TR[tI][0]+'</div>'+
+    '<div class="sortbtns" style="grid-template-columns:repeat(3,1fr)"><button class="btn" data-o="0">Китай</button><button class="btn navy" data-o="1">Африка</button><button class="btn gold" data-o="2">Индия</button></div><div class="fb" id="trFb"></div>'+cols;
+  $$('[data-o]',tradeBox).forEach(function(b){b.addEventListener('click',function(){
+    var o=+b.getAttribute('data-o'),fb=$('#trFb',tradeBox);
+    if(o===TR[tI][1]){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+TR[tI][2]+' <div style="margin-top:8px"><button class="btn small done" id="trNext">Следваща →</button></div>';
+      $$('[data-o]',tradeBox).forEach(function(x){x.disabled=true});addXP(2);
+      $('#trNext').addEventListener('click',function(){tI++;saveNow();renderTrade()});}
+    else{tMiss++;b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е '+TRN[o]+'.</b> Опитай пак.';saveNow()}
+  })});
+}
+renderTrade();
+
+var MK=8.565,COS=0.766,LAT0=50.5;
+function P(lon,lat){return [((lon+11)*MK*COS).toFixed(1),((LAT0-lat)*MK).toFixed(1)]}
+function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
+function linePath(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+var SEA={
+ med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
+ marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
+ black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]],
+ red:[[32.6,29.95],[33.3,28.6],[34.25,27.75],[34.6,28.4],[34.95,29.5],[34.9,28.2],[35.3,28.0],[36.6,25.8],[38.1,24.0],[39.2,21.5],[39.6,19.5],[40.8,17.5],[42.5,15.5],[43.2,13.3],[43.5,12.4],[43.0,12.4],[42.4,14.0],[41.0,15.4],[39.4,15.6],[38.5,17.5],[37.5,19.5],[37.2,21.0],[36.9,22.0],[35.5,24.0],[34.0,26.3],[33.5,27.3],[32.6,29.6]],
+ gulf:[[48.0,30.0],[49.0,30.2],[50.2,29.4],[51.3,28.0],[52.7,27.0],[54.5,26.6],[56.2,27.1],[56.4,26.2],[55.3,25.5],[54.4,24.4],[52.5,24.2],[51.6,24.5],[51.5,25.9],[50.8,25.0],[50.0,26.0],[49.7,27.0],[48.6,28.4],[48.0,29.4]],
+ asea:[[43.5,12.4],[45.0,12.8],[48.8,14.1],[52.0,15.8],[54.0,17.0],[55.6,17.8],[57.0,18.8],[58.7,20.4],[59.9,22.5],[64,22.5],[64,10],[43.5,10]],
+ atl:[[-12,20],[-12,28.3],[-10.2,29.4],[-9.7,30.5],[-9.8,31.5],[-9.2,32.5],[-8.5,33.3],[-7.6,33.6],[-6.8,34.0],[-6.2,35.2],[-5.9,35.8],[-5.6,36.0],[-6.3,36.5],[-7.4,37.2],[-7.9,37.0],[-8.95,37.0],[-8.8,38.4],[-9.5,38.7],[-9.0,40.0],[-8.7,41.2],[-8.9,42.5],[-9.3,42.9],[-8.4,43.4],[-7.0,43.6],[-5.7,43.6],[-3.8,43.5],[-1.8,43.4],[-1.5,43.5],[-1.2,44.6],[-1.2,46.0],[-2.2,47.2],[-3.0,47.5],[-4.4,47.8],[-4.7,48.4],[-3.0,48.8],[-1.6,48.7],[-1.9,49.7],[-1.3,49.7],[-0.2,49.3],[0.1,49.5],[1.5,50.1],[1.9,51.0],[3.6,51.4],[4.2,52.0],[4.7,52.9],[5.3,53.4],[7.0,53.6],[8.5,53.6],[8.9,54.0],[8.6,55.0],[8.1,55.5],[8.2,56.7],[9.5,57.1],[10.6,57.7],[10.5,57.2],[10.3,56.5],[10.2,56.0],[9.9,55.2],[10.0,54.8],[10.2,54.4],[10.9,54.0],[12.1,54.2],[13.4,54.6],[14.2,53.9],[16.0,54.3],[17.5,54.8],[18.7,54.4],[19.6,54.5],[20.0,54.9],[21.1,55.7],[21.0,56.5],[21.5,57.4],[22.5,57.7],[23.8,57.0],[24.4,57.3],[24.3,59],[16.7,59],[16.7,58.0],[16.6,57.8],[16.4,56.7],[15.9,56.1],[14.3,55.9],[13.9,55.4],[13.0,55.6],[12.7,56.0],[12.6,56.6],[11.9,57.7],[11.3,59],[7.5,59],[7.0,58.0],[6.0,58.3],[5.5,59],[-12,59]]
+};
+var ISL={
+ sic:{p:[[12.4,38.1],[13.4,38.2],[15.6,38.3],[15.1,37.1],[15.1,36.7],[14.3,37.0],[12.6,37.6]]},
+ cre:{p:[[23.5,35.6],[24.6,35.5],[26.3,35.3],[26.1,35.0],[24.6,35.1],[23.6,35.2]]},
+ cyp:{p:[[32.3,35.1],[33.0,35.4],[34.6,35.7],[33.9,35.0],[32.9,34.6],[32.3,34.8]]}
+};
+/* територии (приблизителни; морето се рисува отгоре и скрива излишното) */
+var TER={
+ A:[[34.95,29.5],[36.0,30.5],[38.5,31.8],[41.0,32.2],[43.5,31.5],[46.5,30.5],[48.0,30.0],[52,30],[52,10],[44,10],[43.5,12.4],[43.2,13.3],[42.5,15.5],[40.8,17.5],[39.6,19.5],[39.2,21.5],[38.1,24.0],[36.6,25.8],[35.3,28.0]],
+ B:[[13,22],[13,34.5],[34.5,34.5],[35.8,36.0],[36.5,36.9],[38,37.2],[41,37.6],[43.5,38.5],[44.5,40.6],[50,41.5],[50,29.8],[48,30],[44.5,31],[41,32.2],[38.5,31.8],[36,30.5],[34.95,29.5],[34.0,27.5],[34.0,26.3],[35.5,24.0],[36.9,22.0]],
+ C:[[-11,22],[13,22],[13,38],[3,38],[3.2,42.4],[-1.8,42.9],[-9.5,42.0],[-11,42.0]],
+ W:[[-11,22],[5,22],[5,38],[3.2,42.4],[-1.8,42.9],[-9.5,42.0],[-11,42.0]],
+ bul:[[22.5,44.1],[25.0,43.8],[27.5,44.1],[28.6,44.2],[29.6,45.2],[28.5,43.4],[28.0,42.3],[26.5,42.0],[25,42.6],[23,43.2]],
+ frank:[[-4.5,48.4],[-1.8,43.4],[3,42.5],[7.2,43.6],[7.6,46],[8.5,47.5],[9.5,49.5],[8,52],[7,53.4],[4,52],[2,51.2],[-1.8,49.7]],
+ ana:[[26,36.5],[26,41],[28.5,41.2],[31.5,41.2],[35,42.0],[41.7,42.0],[44.5,40.6],[43.5,38.5],[41,37.6],[38,37.2],[36.5,36.9],[35.5,36.5]],
+ gre:[[19.3,39.5],[19.7,41.8],[21.5,42.2],[23.0,42.0],[25,42.0],[26.5,42.0],[28.0,42.3],[28.8,41.2],[26.2,40.8],[24.5,40.6],[23.8,40.0],[23.5,38.5],[22.5,36.3],[21.5,36.5],[20.7,38.5]],
+ sit:[[15.3,38.0],[16.5,38.5],[18.6,40.1],[17.0,41.2],[15.5,41.0],[15.2,40.0]]
+};
+var COL={A:'#2F7D4F',B:'#5CAA6E',C:'#A9D69A',W:'#D6D890',byz:'#B49AD9',bul:'#F5C97A',frank:'#9DB0CF'};
+function org(lon,lat){var p=P(lon,lat);return 'transform-origin:'+p[0]+'px '+p[1]+'px'}
+function terPath(k,col){return '<path d="'+poly(TER[k])+'" style="fill:'+col+';stroke:#fff;stroke-width:.6"/>'}
+(function buildBaseMap(){
+  var s='<rect width="400" height="308" style="fill:var(--land)"/><g id="terG">';
+  s+=terPath('frank',COL.frank)+terPath('ana',COL.byz)+terPath('gre',COL.byz)+terPath('sit',COL.byz)+terPath('bul',COL.bul);
+  s+='<g class="lyr" id="lyrC" style="'+org(-4.8,37.9)+'">'+terPath('C',COL.C)+'</g>';
+  s+='<g class="lyr" id="lyrW" style="'+org(-4.8,37.9)+'">'+terPath('W',COL.W)+'</g>';
+  s+='<g class="lyr" id="lyrB" style="'+org(36.3,33.5)+'">'+terPath('B',COL.B)+'</g>';
+  s+='<g id="lyrA">'+terPath('A',COL.A)+'</g></g>';
+  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea)"/>'});
+  Object.keys(ISL).forEach(function(k){s+='<path d="'+poly(ISL[k].p)+'" style="fill:var(--land)"/>'});
+  s+='<path d="'+poly(ISL.sic.p)+'" style="fill:'+COL.byz+';stroke:#8FAAC4;stroke-width:.8"/><path d="'+poly(ISL.cre.p)+'" style="fill:'+COL.byz+';stroke:#8FAAC4;stroke-width:.8"/><path d="'+poly(ISL.cyp.p)+'" style="fill:'+COL.byz+';stroke:#8FAAC4;stroke-width:.8"/>';
+  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'"/>'});
+  s+='<path class="river" d="'+linePath([[31,31.4],[31.2,30],[32,27.5],[32.6,25.7],[32.9,24.1],[32.9,22.5]])+'"/>';
+  s+='<path class="river" d="'+linePath([[38,36.5],[40.5,35],[42.5,33.5],[44.5,32],[47,31]])+'"/>';
+  s+='<path class="river" d="'+linePath([[41,38],[43.5,36],[44.4,33.3],[45.5,32],[47,31]])+'"/>';
+  s+='<path class="river" d="'+linePath([[10,48.4],[14,48.3],[17,48],[19,47.5],[19.1,46],[21,45],[22.5,44.2],[25,43.7],[27.5,44],[28.7,45]])+'"/>';
+  function T(txt,lon,lat,cls){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'">'+txt+'</text>'}
+  s+=T('СРЕДИЗЕМНО МОРЕ',16,34.2,'maplabel')+T('ЧЕРНО МОРЕ',33.5,43.9,'maplabel');
+  s+=T('А Ф Р И К А',2,26,'contlabel')+T('р. Нил',33.5,26.3,'rivlabel')+T('Ефрат',41.2,34.6,'rivlabel')+T('Тигър',44.8,36.0,'rivlabel')+T('р. Дунав',20.2,47.5,'rivlabel');
+  s+=T('ВИЗАНТИЯ',34,39.4,'tlabel')+T('ФРАНКСКО',4.5,49.2,'tlabel')+T('КРАЛСТВО',4.5,48.3,'tlabel')+T('БЪЛГАРИЯ',25.5,45.2,'tlabel')+T('АРАБИЯ',44.5,25.2,'tlabel')+T('ЕГИПЕТ',26.5,27,'tlabel')+T('ПЕРСИЯ',47,36.6,'tlabel')+T('ИСПАНИЯ',-5.2,42.0,'tlabel');
+  s+='<g id="borderG" style="opacity:0;transition:opacity .6s"><path d="'+linePath([[5,38.3],[5,22]])+'" style="fill:none;stroke:#1B2A41;stroke-width:1.6;stroke-dasharray:5 3"/>'+T('граница на халифата към 800 г.',5.6,23.2,'tlabel')+'</g>';
+  $('#mapSvg').innerHTML=s;
+})();
+
+/* стрелки на настъплението (стъпка 0 — до 661; стъпка 1 — Омаяди) */
+var ROUTES=[
+  {step:0,cls:'g1',pts:[[39.6,24.5],[37.6,29],[36.3,33.5]]},
+  {step:0,cls:'g1',pts:[[36.3,33.5],[40,33.8],[44.4,33.3],[49,32]]},
+  {step:0,cls:'g1',pts:[[39.6,24.5],[35,28.4],[32,30.4],[29.9,31.2]]},
+  {step:0,cls:'g1',pts:[[29.9,31.2],[25,31.4],[20,32.2],[14.5,32.8]]},
+  {step:1,cls:'g2',pts:[[14.5,32.8],[10,34.6],[5,35.6],[-2,35.3],[-5.4,35.9]]},
+  {step:1,cls:'g2',pts:[[-5.4,35.9],[-4.8,37.9],[-2,40.5],[0,44],[0.35,46.6]]},
+  {step:1,cls:'g3',pts:[[36.3,33.5],[36.5,37],[32,38.8],[28.98,41.0]]}
+];
+(function(){
+  function lp(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+  var g='<g class="routes" id="routesG">';
+  ROUTES.forEach(function(r){
+    g+='<path data-step="'+r.step+'" class="o" pathLength="1" d="'+lp(r.pts)+'"/><path data-step="'+r.step+'" class="'+r.cls+'" pathLength="1" d="'+lp(r.pts)+'"/>';
+    var A=P(r.pts[r.pts.length-2][0],r.pts[r.pts.length-2][1]),Bp=P(r.pts[r.pts.length-1][0],r.pts[r.pts.length-1][1]);
+    var ax=+A[0],ay=+A[1],bx=+Bp[0],by=+Bp[1],dx=bx-ax,dy=by-ay,L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var h=[[bx,by],[bx-dx*9+dy*4.5,by-dy*9-dx*4.5],[bx-dx*9-dy*4.5,by-dy*9+dx*4.5]].map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+    g+='<polygon data-step="'+r.step+'" class="head '+r.cls+'" points="'+h+'"/>';
+  });
+  g+='</g>';
+  g+='<path class="trail" id="trail1" d="'+linePath([[39.6,24.5],[37.5,29],[36.3,33.5]])+'"/><path class="trail" id="trail2" d="'+linePath([[36.3,33.5],[40.5,34.4],[44.4,33.3]])+'"/>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+})();
+
+/* точки */
+var PTS=[
+  {id:'mecca',n:'Мека',lon:39.8,lat:21.4,col:'#9E1B32',t:'Мека',d:'Свещеният град на мюсюлманите, мястото на Кааба. Още преди 632 г. е в границите на мюсюлманските земи.'},
+  {id:'medina',n:'Медина',lon:39.6,lat:24.5,col:'#9E1B32',t:'Медина',d:'Първата столица на халифите — центърът на мюсюлманския свят до 661 г. Тук е избран наследникът на Мохамед. После границите на исляма се отдалечават от Медина.'},
+  {id:'dam',n:'Дамаск',lon:36.3,lat:33.5,col:'#9E1B32',dy:-6,t:'Дамаск (661 – 750)',d:'Столицата на халифата при Омаядите. Оттук Моавия управлява огромната държава. Той е бил управител на Сирия (в учебника е написано „на Египет“).',card:'muawiya'},
+  {id:'bagh',n:'Багдад',lon:44.4,lat:33.3,col:'#9E1B32',a:'middle',dx:0,dy:14,t:'Багдад (от 762 г.)',d:'Основан през 762 г. от халиф ал-Мансур — столица на Абасидите. Един от най-богатите градове на света, с около 700 000 жители през IX в.',card:'harun',link:'🔗 Най-бляскаво е времето на Харун ал Рашид (786 – 809 г.).'},
+  {id:'cord',n:'Кордоба',lon:-4.8,lat:37.9,col:'#9E1B32',t:'Кордоба',d:'Град в Южна Испания. От 756 г. тук управлява отделен мюсюлмански владетел от рода на Омаядите, който не е подчинен на Абасидите в Багдад.'},
+  {id:'iber',n:'Пиренейски п-ов',lon:-3.8,lat:39.9,col:'#9E1B32',dy:-3,t:'Пиренейският полуостров',d:'Днешните Испания и Португалия. Арабите го завладяват при династията на Омаядите.'},
+  {id:'cpl',n:'Константинопол',lon:28.98,lat:41.0,col:'#1B2A41',star:1,a:'end',dx:-8,dy:-8,t:'Константинопол 717 – 718',d:'Арабите обсаждат столицата на Византия, но градът устоява. По учебника арабите са разгромени по суша от войските на хан Тервел, а по море — от ромеите.',card:'tervel',link:'🔗 Виж обсадата стъпка по стъпка по-горе.'},
+  {id:'poit',n:'Поатие',lon:0.35,lat:46.6,col:'#1B2A41',star:1,t:'Поатие 732',d:'Арабите настъпват в земите на франките и са разбити през 732 г. Завоевателният им стремеж в Европа е спрян.'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){var p0=P(p.lon,p.lat);
+    var shape=p.star?'<path class="dot" d="M0,-8 L2.4,-2.5 L8,-2.5 L3.5,1.2 L5,7 L0,3.6 L-5,7 L-3.5,1.2 L-8,-2.5 L-2.4,-2.5Z" fill="'+p.col+'"/>':'<circle class="dot" r="5.5" fill="'+p.col+'"/>';
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+p0[0]+','+p0[1]+')"><circle class="halo" r="6" stroke="'+p.col+'"/>'+shape+'<text x="'+(p.dx===undefined?8:p.dx)+'" y="'+((p.dy||0)+3)+'" text-anchor="'+(p.a||'start')+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  g+='<g id="capG"><circle cx="0" cy="-17" r="10" fill="#C9962B" stroke="#fff" stroke-width="2"/><text x="0" y="-12.5" text-anchor="middle" style="font-size:12px;fill:#000;stroke:none;paint-order:normal">👑</text></g>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+p.col+'"></i>'+p.t+'</button>'}).join('');
+})();
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.t+'</h3><p>'+p.d+'</p>'+(p.link?'<p class="note" style="margin-top:8px">'+p.link+'</p>':'');
+  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('cartograph'))award('cartograph');}
+  if(p.card)unlockCard(p.card);
+}
+$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+
+/* стъпки: до 661 → Омаяди → Абасиди */
+var MSTEPS=[
+  {cap:'<b>До 661 г. · Медина.</b> Столицата на първите четирима халифи е Медина. Мюсюлманските земи включват Арабия, Сирия, Палестина, Египет и Персия. Стрелките показват посоките на походите.'},
+  {cap:'<b>Омаяди (661 – 750 г.) · Дамаск.</b> Столицата се мести в Дамаск. Държавата стига до Испания през Северна Африка, но е спряна при Константинопол (717 – 718) и при Поатие (732).'},
+  {cap:'<b>Абасиди (от 750 г.) · Багдад.</b> Новата династия мести столицата в Багдад (762 г.). Държавата вече не е едно цяло: в Испания с център Кордоба управлява отделен владетел. Пунктираната линия е приблизителната граница.'}
+];
+var CAPPOS=[[39.6,24.5],[36.3,33.5],[44.4,33.3]];
+var mapCur=EX.mapCur||0, mapSeen=EX.mapSeen||{0:1}, playing=null;
+function mapStep(i,quiet){
+  mapCur=i;
+  $('#lyrB').classList.add('on');$('#lyrC').classList.toggle('on',i>=1);$('#lyrW').classList.toggle('on',i>=2);
+  $('#borderG').style.opacity=i>=2?1:0;
+  var cp=P(CAPPOS[i][0],CAPPOS[i][1]);$('#capG').style.transform='translate('+cp[0]+'px,'+cp[1]+'px)';
+  $('#trail1').classList.toggle('show',i>=1);$('#trail2').classList.toggle('show',i>=2);
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',!!mapSeen[k]&&k!==i)});
+  $$('#routesG [data-step]').forEach(function(p){var st=+p.getAttribute('data-step');p.classList.toggle('show',st===i)});
+  $('#stepCap').innerHTML=MSTEPS[i].cap;
+  var lg='<span><i style="background:'+COL.A+'"></i>Арабия до 632 г.</span><span><i style="background:'+COL.B+'"></i>до 661 г.</span>';
+  if(i>=1)lg+='<span><i style="background:'+COL.C+'"></i>Омаяди до 750 г.</span>';
+  if(i>=2)lg+='<span><i style="background:'+COL.W+'"></i>Испания и Запад (отделен владетел)</span>';
+  lg+='<span><i style="background:'+COL.bul+'"></i>България</span><span><i style="background:'+COL.frank+'"></i>Франкско кралство</span><span><i style="background:'+COL.byz+'"></i>Византия</span><span>👑 столица · ★ важна битка</span>';
+  $('#mapLegend').innerHTML=lg;
+  if(!quiet&&!mapSeen[i]){
+    mapSeen[i]=1;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',!!mapSeen[k]&&k!==i)});
+    addXP(3);
+    if(Object.keys(mapSeen).length===MSTEPS.length&&flag('steps'))addXP(5,'Столицата е проследена!');
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){stopPlay();mapStep(+b.getAttribute('data-st'))})});
+function stopPlay(){if(playing){clearTimeout(playing);playing=null;$('#playBtn').textContent='▶ Премести столицата'}}
+$('#playBtn').addEventListener('click',function(){
+  if(playing){stopPlay();return}
+  var i=0;this.textContent='⏸ Спри';
+  (function tick(){mapStep(i);i++;if(i<3)playing=setTimeout(tick,3000);else{playing=setTimeout(function(){stopPlay()},3000)}})();
+});
+mapStep(mapCur,true);
+
+/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
+var TL=[['622 г. ·','Хиджра: преселването на Мохамед в Ясриб (Медина), начало на мюсюлманското летоброене',0],['632 г. ·','Смъртта на Мохамед; започва управлението на първите четирима халифи',1],['661 г. ·','Моавия се обявява за халиф: започва династията на Омаядите',2],['717 – 718 г. ·','Арабите обсаждат Константинопол и са разгромени (с помощта на хан Тервел)',3],['732 г. ·','Битката при Поатие: франките спират арабите',4],['750 г. ·','Абасидите завземат властта',5],['762 г. ·','Основан е Багдад — новата столица',6]];
+var TLR=TL.map(function(t){return t[2]}).sort(function(a,b){return a-b});
+var sortl=$('#sortl');
+function tlRender(order){
+  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+'</span> '+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+  $$('.sitem',sortl).forEach(bindItem);
+}
+function tlIsSolved(order){return order.every(function(i,pos){return TL[i][2]===TLR[pos]})}
+var order0=(EX.tlOrder&&EX.tlOrder.length===TL.length)?EX.tlOrder:(function(){var o;do{o=shuffle([0,1,2,3,4,5,6])}while(tlIsSolved(o));return o})();
+tlRender(order0);
+var TLOK='<b>Отлично, хронисте!</b> От Хиджра до основаването на Багдад минават 140 години. А между обсадата на Константинопол (718 г.) и битката при Поатие (732 г.) са само 14 години.';
+if(EX.tlSolved){
+  sortl.classList.add('sorted');
+  $$('.sitem',sortl).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});
+  $('#tlCheck').disabled=true;
+  $('#tlFb').className='fb ok';
+  $('#tlFb').innerHTML=TLOK;
+}
+function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb';saveNow()}
+function bindItem(li){
+  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+    if(sortl.classList.contains('sorted'))return;
+    var d=+b.getAttribute('data-mv');
+    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
+    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
+    clearMarks();
+  })});
+  var h=$('.handle',li),startY=0,dragging=false,pid=null;
+  h.addEventListener('pointerdown',function(ev){
+    if(sortl.classList.contains('sorted'))return;
+    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+    try{h.setPointerCapture(pid)}catch(e){}
+    ev.preventDefault();
+  });
+  h.addEventListener('pointermove',function(ev){
+    if(!dragging||ev.pointerId!==pid)return;
+    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+    var prev=li.previousElementSibling,next=li.nextElementSibling;
+    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+  });
+  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+}
+var tlTries=EX.tlTries||0;
+$('#tlCheck').addEventListener('click',function(){
+  if(sortl.classList.contains('sorted'))return;
+  tlTries++;saveNow();var items=$$('.sitem',sortl),ok=0;
+  items.forEach(function(li,pos){var good=TL[+li.getAttribute('data-i')][2]===TLR[pos];li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+  var fb=$('#tlFb');
+  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML=TLOK;
+    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
+  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: Хиджра е първа, а Багдад — последен.'}
+});
+
+/* линия от учебника (плъзгач) */
+var TBE=[
+ [570,'ar','Ражда се Мохамед (живее 570 – 632 г.).'],
+ [622,'ar','Начало на мюсюлманското летоброене.'],
+ [632,'ar','Започва управлението на първите четирима халифи (632 – 661 г.).'],
+ [638,'ar','Завладяване на Йерусалим.'],
+ [651,'ar','Завладяване на Персия.'],
+ [661,'ar','Започва династията на Омаядите (661 – 750 г.).'],
+ [701,'bg','Хан Тервел управлява България (701 – 721 г.).'],
+ [717,'bg','Разгром на арабите при Константинопол (717 – 718 г.) — с помощта на хан Тервел.'],
+ [732,'eu','Битката при Поатие: франките разбиват арабите.'],
+ [750,'ar','Започва династията на Абасидите (750 г. – средата на XI в.).'],
+ [768,'eu','Карл Велики (768 – 814 г.) управлява франките.'],
+ [786,'ar','Харун ал Рашид (786 – 809 г.): най-бляскавото време на халифата.'],
+ [803,'bg','Хан Крум (803 – 814 г.) управлява България.']
+];
+var TBTAG={ar:'арабски свят',bg:'България',eu:'Европа'};
+var tbSeenE=EX.tbSeenE||{}, tbCur=EX.tbCur||0;
+$('#tbDots').innerHTML=TBE.map(function(e,i){return '<span data-d="'+i+'">'+(i+1)+'</span>'}).join('');
+function tbShow(i,quiet){
+  tbCur=i;var e=TBE[i];
+  $('#tbl').innerHTML='<div class="yr">'+e[0]+(i===7?' – 718':'')+' г. <span class="tag '+e[1]+'">'+TBTAG[e[1]]+'</span></div><p>'+e[2]+'</p>';
+  $('#tbRange').value=i;
+  if(!quiet&&!tbSeenE[i]){tbSeenE[i]=1;addXP(1);if(Object.keys(tbSeenE).length===TBE.length&&flag('tbl'))addXP(5,'Линията от учебника е измината!')}
+  $$('#tbDots span').forEach(function(s){var k=+s.getAttribute('data-d');s.classList.toggle('on',!!tbSeenE[k]);s.classList.toggle('cur',k===i)});
+  saveNow();
+}
+$('#tbRange').addEventListener('input',function(){tbShow(+this.value)});
+$$('#tbDots span').forEach(function(s){s.addEventListener('click',function(){tbShow(+s.getAttribute('data-d'))})});
+tbShow(tbCur,true);
+
+/* ================= КОЙ ВЕК Е ================= */
+var CNT=[
+  {q:'661 г. (Моавия става халиф) е в…',o:['VII в.','VI в.','VIII в.'],a:0,e:'661 → 6 + 1 = VII век.'},
+  {q:'718 г. (обсадата на Константинопол) е в…',o:['VIII в.','VII в.','IX в.'],a:0,e:'718 → 7 + 1 = VIII век.'},
+  {q:'750 г. (Абасидите завземат властта) е в…',o:['VIII в.','VII в.','IX в.'],a:0,e:'750 → 7 + 1 = VIII век.'},
+  {q:'809 г. (краят на управлението на Харун ал Рашид) е в…',o:['IX в.','VIII в.','X в.'],a:0,e:'809 → 8 + 1 = IX век.'},
+  {q:'1055 г. (селджуците влизат в Багдад) е в…',o:['XI в.','X в.','XII в.'],a:0,e:'1055 → 10 + 1 = XI век.'},
+  {q:'800 г. е в…',o:['VIII в.','IX в.','VII в.'],a:0,e:'Кръглата година е краят на века: 800 г. е последната година на VIII в.'}
+];
+qSet('#centQs',CNT,'cn',2,function(){if(flag('century')){addXP(5,'Всички векове са познати!');award('scholar')}});
+
+/* ================= АНИМАЦИЯ: ВОДНО КОЛЕЛО ================= */
+$('#wheelBtn').addEventListener('click',function(){
+  var box=$('#wheelBox'),on=box.classList.toggle('run');
+  this.textContent=on?'⏸ Спри колелото':'▶ Завърти колелото';
+  $('#wheelCap').textContent=on?'Течението върти колелото. Кофите загребват вода долу и я изсипват в улея горе.':'Колелото е спряно.';
+  if(on&&flag('wheel'))addXP(3,'Колелото се върти!');
+});
+
+/* ================= РОЛЯ ================= */
+var RQ=[
+  {q:'1. Търгуваш с коприна и порцелан. Откъде идват те?',o:['От Китай — по сухопътните и морските пътища до Багдад','От Скандинавския полуостров','От Пиренейския полуостров'],a:0,e:'Китай предлага порцелан, коприна и хартия.'},
+  {q:'2. Благородник от Европа пита за изделията на арабските майстори. Какво му казваш?',o:['Че европейските благородници високо ценят предмети, изработени от арабски занаятчии','Че никой в Европа не ги купува','Че са забранени навсякъде'],a:0,e:'Предметите на арабските занаятчии са много ценени от европейските благородници.'},
+  {q:'3. Двама търговци се карат за сделка и отиват на съд. Кой отсъжда и по какви закони?',o:['Кадията — по шериата, основан на Корана','Моавия — по римското право','Хан Тервел — по българските обичаи'],a:0,e:'Кадията е мюсюлманският съдия и отсъжда по шериата.'},
+  {q:'4. Колко души живеят в града около теб през IX в.?',o:['Около 700 000','Около 7 000','Около 700'],a:0,e:'През IX в. Багдад е с население около 700 000 души — един от най-големите градове в света.'}
+];
+qSet('#roleQs',RQ,'rq',4,function(){if(flag('role'))addXP(5,'Сделката е сключена!')});
+
+/* ================= ЗАГАДКА: КОЙ ЛЪЖЕ? ================= */
+var WIT=[
+  {n:'🛠 Занаятчията',t:'„Работя в Багдад. Градът е обграден от два реда стени с четири главни входа.“',bad:0,e:'Това е вярно: градът има два реда защитни стени и четири главни входа.'},
+  {n:'🧳 Търговецът',t:'„Карам стока от Китай и Индия. Столицата на халифа е Дамаск — там е дворецът му.“',bad:1,e:'Той лъже! След 750 г. столицата е Багдад. Дамаск е столица само при Омаядите (661 – 750 г.).'},
+  {n:'⚖️ Кадията',t:'„Съдя по шериата, основан на Корана. В армията служат и хора от други народи, приели исляма.“',bad:0,e:'Това е вярно: кадията съди по шериата, а при Абасидите в армията и управлението идват хора от други народи.'}
+];
+var witState=EX.witState;
+(function(){
+  var box=$('#wit');
+  box.innerHTML=WIT.map(function(w,i){return '<button class="opt" data-w="'+i+'"><b>'+w.n+'</b>'+w.t+'</button>'}).join('');
+  function solved(i){
+    $$('[data-w]',box).forEach(function(x,xi){x.disabled=true;if(WIT[xi].bad)x.classList.add('right');else x.classList.add('wrong')});
+    var fb=$('#witFb');fb.className='fb ok';fb.innerHTML='<b>Разобличен!</b> '+WIT[i].e;
+  }
+  $$('[data-w]',box).forEach(function(b){b.addEventListener('click',function(){
+    if(witState!==undefined)return;
+    var i=+b.getAttribute('data-w'),fb=$('#witFb');
+    if(WIT[i].bad){witState=i;saveNow();solved(i);if(flag('puzzle')){addXP(8,'Лъжецът е разкрит!');award('unmasker')}}
+    else{b.disabled=true;b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Този казва вярното.</b> '+WIT[i].e+' Потърси друг свидетел.'}
+  })});
+  if(witState!==undefined)solved(witState);
+})();
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['capital','столица','Baghdad is the capital.'],['empire','империя','The empire is very big.'],['silk','коприна','Silk comes from China.'],['paper','хартия','I write on paper.'],['river','река','The river is wide.'],['winter','зима','The winter is cold.'],['wheel','колело','The wheel turns in the water.'],['judge','съдия','The judge listens.']];
+var ES=[['el califa','халифът','El califa vive en Bagdad.'],['el alcalde','кметът (от арабски „съдията“)','El alcalde habla hoy.'],['el almacén','складът (от арабски)','El almacén está cerca.'],['la ciudad','градът','La ciudad es grande.'],['el río','реката','El río es largo.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+var heard=EX.heard||{};
+function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'خليفة (khalīfa)',s:'арабски „наследник, заместник“',b:['халиф (бълг.)','caliph (англ.)','califa (исп.)','calife (фр.)'],p:'„Халифа“ е „наследникът“ на пророка — точно както в учебника. От същата дума е и „халифат“. В европейските езици стига през средновековна латиница и старофренски.'},
+  {r:'قاضي (qāḍī)',s:'арабски „съдия“',b:['кадия (бълг.)','cadi / qadi (англ.)','alcalde (исп.)'],p:'В Испания арабското „ал-кади“ („съдията“) става „alcalde“: „ал-“ е арабският определителен член. Така днес испанският кмет носи име, което някога значи „съдия“.'},
+  {r:'مخزن (makhzan)',s:'арабски „склад, хранилище“',b:['almacén (исп.)','magazzino (итал.)','magasin (фр.)','magazine (англ.)','магазин (бълг.)'],p:'Множественото „махазин“ стига през италиански и френски до английското „magazine“, а испанският „almacén“ е същата дума с арабския член „ал-“. Първоначално думата значи „склад“. Така и списанието е нещо като „склад“ от статии.'},
+  {r:'شريعة (sharīʿa)',s:'арабски „път“',b:['шериат (бълг.)','sharia (англ.)','sharía (исп.)','charia (фр.)'],p:'Думата значи „път“. Според много учени първоначално е „път към водопой“ — важна пътека в пустинята. Учените обаче не са съгласни кое е първото значение. В исляма така наричат законите, основани на Корана.'}
+];
+function etyHTML(arr,pre){return arr.map(function(e,i){return '<button class="ety" data-'+pre+'="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('')}
+$('#etym').innerHTML=etyHTML(ETY,'y');
+var ySeen=EX.ySeen||{};
+$$('.ety[data-y]').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'Кой слага край на междуособиците през 661 г. и става халиф?',o:['Моавия','Харун ал Рашид','Хан Тервел'],a:0,e:'Моавия основава династията на Омаядите със столица Дамаск.'},
+  {q:'Какво става при Константинопол през 717 – 718 г.?',o:['Градът устоява, а арабите са разгромени по суша от войските на хан Тервел и по море — от ромеите','Арабите превземат Константинопол','Българите и арабите сключват съюз'],a:0,e:'Константинопол устоява, а арабите са разгромени — по суша от българите на хан Тервел, по море — от ромеите.'},
+  {q:'Какъв е спорът между сунити и шиити?',o:['Сунитите искат халифът да се избира от цялата общност, а шиитите — да е от семейството на пророка','Те спорят къде да бъде построена столицата','Те спорят кой език да е общ'],a:0,e:'Спорът е за избора на халиф и прераства във война.'}],
+ [{q:'Къде мести столицата си династията на Абасидите?',o:['От Дамаск в Багдад','От Багдад в Дамаск','От Медина в Мека'],a:0,e:'През 750 г. Абасидите завземат властта и столицата е преместена от Дамаск в Багдад.'},
+  {q:'Какво е теократична монархия?',o:['Владетелят държи религиозната и политическата власт, а законите следват религиозното право','Владетелят се избира от търговците','Страна без владетел'],a:0,e:'При Абасидите халифът е абсолютен владетел — „сянка на Аллах на земята“.'},
+  {q:'Какво прави кадията?',o:['Отсъжда в съда по шериата','Командва флота','Събира данъците'],a:0,e:'Кадията е мюсюлмански съдия: съди по шериата, основан на Корана.'}],
+ [{q:'Кой спира арабите през 732 г. при настъплението им в земите на франките?',o:['Франките, при Поатие','Ромеите, при Константинопол','Българите, при Плиска'],a:0,e:'При Поатие франките спират арабите; завоевателният им стремеж в Европа е спрян.'},
+  {q:'Кое е вярно за Харун ал Рашид?',o:['Управлява 786 – 809 г., когато халифатът преживява най-бляскавото си време','Той е първият омаядски халиф','Той основава Багдад през 762 г.'],a:0,e:'Харун ал Рашид е абасидски халиф; при него халифатът е най-бляскав.'},
+  {q:'Какво става в средата на XI в. с халифата?',o:['Селджуците — тюркски племена от Централна Азия — го сломяват и поемат реалната власт','Византия го присъединява към империята си','Франките завладяват Багдад'],a:0,e:'Селджуците влизат в Багдад през 1055 г. По учебника това е краят на силата на халифата.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Багдадски ученик','Търговец','Главен детектив'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Халиф','Наследник на пророка Мохамед; политически и религиозен водач на мюсюлманската общност.'],['Теократична монархия','Религиозната и политическата власт са в ръцете на владетеля; законите следват религиозното право.'],['Кадия','Мюсюлмански съдия.'],['Сунити','Искат халифът да се избира от цялата мюсюлманска общност.'],['Шиити','Смятат, че халифът трябва да е от семейството на пророка.'],['Шериат','Мюсюлмански закони, основани на Корана.'],['Селджуци','Тюркски племена от степите на Централна Азия, сломили халифата в средата на XI в.'],['632 – 661','Първите четирима халифи.'],['661 – 750','Династията на Омаядите; столица Дамаск.'],['717 – 718','Обсада на Константинопол; арабите са разгромени (хан Тервел и ромеите).'],['732','Битката при Поатие: франките спират арабите.'],['750 – ср. на XI в.','Династията на Абасидите; столица Багдад (762 г.). Най-бляскаво е времето на Харун ал Рашид (786 – 809).']];
+var fI=EX.fI||0,flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата.';
+}
+var SUS=[
+ {t:'Халифатът успява само защото арабите са богати от самото начало и нямат никакви врагове',ok:0,e:'Не. Улика 1: бедуините забогатяват чак от плячката и данъците в новите земи. А врагове има — Константинопол и франките ги спират (улика 2).'},
+ {t:'Племенният съюз става централизирана държава със столица Дамаск, а после Багдад. Тя завладява огромни земи, но е спряна при Константинопол и от франките. Багдад процъфтява като кръстопът на търговията от Китай и Индия до Византия и Африка',ok:1,e:'Точно! Улика 1: бедуините забогатяват, а спорът сунити – шиити води до война. Улика 2: Моавия създава централизиран халифат, но го спират при Константинопол и Поатие. Улика 3: халифът е абсолютен владетел и законите са шериатът. Улика 4: Багдад е на кръстопът на търговски пътища.'},
+ {t:'Халифатът се управлява като република, в която всеки гласува за законите',ok:0,e:'Не. Улика 3: халифът е абсолютен владетел (теократична монархия), а законите са шериатът.'},
+ {t:'Багдад е малко селище в пустинята без търговия',ok:0,e:'Не. Улика 4: около 700 000 жители през IX в. и пътища от Китай и Индия до Византия и Африка.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 8. Арабският халифат (VII – XI в.)\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nКлючови дати: 632 – 661 – първите четирима халифи; 661 – 750 – Омаяди; 717 – 718 – обсада на Константинопол; 732 – битката при Поатие; 750 – ср. на XI в. – Абасиди.\n\nПонятия: халиф, халифат, сунити, шиити, теократична монархия, шериат, кадия, селджуци.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='762';$('#dC').textContent='VIII в.';$('#dP').textContent='Багдад, на река Тигър';
+    setTM('762','VIII в.','Багдад · Тигър');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 762 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  tilesRestore('data-tile',T1,tSeen);tilesRestore('data-tile3',T3,t3Seen);tilesRestore('data-tileb',TB,tbSeen);
+  Object.keys(ribSeen).forEach(function(i){var b=$('#rib button[data-e="'+i+'"]');if(b)b.classList.add('seen')});
+  Object.keys(S.seen).forEach(function(id){if(!S.seen[id])return;if(id.indexOf('pl_')===0)$$('#plan [data-pl="'+id.slice(3)+'"]').forEach(function(e){e.classList.add('seen')});else $$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(ySeen).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>
