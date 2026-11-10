@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 10 · Обществото в средновековния Запад (VI – X в.)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+/* ===== добавки за урок 9 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.river{fill:none;stroke:#7FA9D1;stroke-width:1.6;stroke-linecap:round;pointer-events:none}
+.rivlabel{font:italic 700 7px var(--body);fill:#46617E;pointer-events:none}
+.lyr2{opacity:0;transition:opacity .8s ease}
+.lyr2.on{opacity:1}
+.steps.six{grid-template-columns:repeat(3,1fr)}
+.tdl{font:800 8.5px var(--body);fill:#1B2A41;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:2.6px;stroke-linejoin:round;pointer-events:none}
+#mapSvg.today .tlabel{display:none!important}
+#todayG{opacity:0;transition:opacity .5s;pointer-events:none}
+#todayG.on{opacity:1}
+.todaylist{display:none;flex-wrap:wrap;gap:6px;margin-top:8px}
+.todaylist.on{display:flex}
+.todaylist span{background:#E6ECF5;border-radius:999px;padding:4px 10px;font-size:.85rem;font-weight:700;color:var(--navy)}
+.todaylist span.part{background:var(--gold-soft);color:var(--gold-ink)}
+.pulse{animation:pop .7s}
+blockquote{margin:0}
+/* две коронации */
+.crowns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.crown{border-radius:14px;padding:12px 10px;text-align:center;color:#fff;font-size:.9rem;line-height:1.3}
+.crown .big{font-size:2.2rem;line-height:1.1}
+.crown b{display:block;font-family:var(--head);font-size:1.02rem;margin:4px 0}
+.crown.bz{background:#5B3A8C}.crown.fr{background:var(--navy)}
+.cgame .sortcard{font-size:1rem;line-height:1.35}
+.cbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.cbtns .btn{min-height:52px}
+.btn.purple{background:#5B3A8C;border-color:#43296A;color:#fff}
+.ccols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ccols .col{border-radius:12px;padding:8px;font-size:.82rem;min-height:40px}
+.ccols .col h4{margin:0 0 4px;font-size:.9rem}
+.ccols .col.w{background:#ECE6F5}.ccols .col.e{background:#E6ECF5}
+.ccols .col div{margin-top:3px}
+/* схема на управлението */
+.org{display:grid;gap:6px;margin-top:10px}
+.orgrow{display:grid;gap:6px}
+.orgrow.c4{grid-template-columns:repeat(2,1fr)}
+.orgrow.c3{grid-template-columns:repeat(3,1fr)}
+.orgrow.c1{grid-template-columns:1fr}
+.orgb{border:2px solid var(--navy);background:#fff;border-radius:12px;min-height:52px;padding:6px 6px;font-weight:700;font-size:.88rem;color:var(--navy);text-align:center;line-height:1.2;position:relative}
+.orgb.top{background:var(--red);border-color:var(--red-2);color:#fff;font-size:1rem}
+.orgb.mis{background:var(--navy);color:#FFE6A8}
+.orgb.seen{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-ink)}
+.orgb.seen:after{content:"✓";position:absolute;top:1px;right:5px;font-size:.7rem}
+.orgb.active{outline:3px solid var(--gold);outline-offset:1px}
+.orgarrow{text-align:center;color:var(--muted);font-size:.78rem;line-height:1.1}
+/* свързване */
+.match{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.mcol{display:grid;gap:8px;align-content:start}
+.mbtn{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:12px;min-height:56px;padding:8px;font-size:.86rem;text-align:left;color:var(--ink);line-height:1.25}
+.mbtn.sel{border-color:var(--navy);background:#E6ECF5}
+.mbtn.ok{border-color:var(--ok);background:var(--ok-soft)}
+.mbtn.ok:before{content:"✓ ";color:var(--ok);font-weight:800}
+.mbtn.no{border-color:var(--bad);background:var(--bad-soft);animation:shk .35s}
+.mbtn.no:before{content:"✗ ";color:var(--bad);font-weight:800}
+@keyframes shk{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+/* слон */
+.elbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;margin-top:10px}
+.elbox svg{display:block;width:100%;height:auto}
+.elcap{min-height:52px;margin-top:8px;font-size:.95rem}
+/* линия от учебника */
+.tbl{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.tbl .yr{font-family:var(--head);font-weight:700;font-size:1.5rem;color:var(--red-2);line-height:1.1}
+.tbl .tag{display:inline-block;font-size:.75rem;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle;color:#fff}
+.tag.eu{background:var(--navy)}.tag.bg{background:var(--red)}
+.tbl p{margin:.3em 0 0}
+.tbdots{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px}
+.tbdots span{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);background:#fff;font-size:.7rem;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+.tbdots span.on{background:var(--gold);border-color:var(--gold);color:#2E2000}
+.tbdots span.cur{outline:3px solid var(--navy);outline-offset:1px}
+.fix{border-left:5px solid var(--gold);background:var(--gold-soft);border-radius:0 12px 12px 0;padding:10px 12px;margin:12px 0;font-size:.95rem}
+.fix b{color:var(--gold-ink)}
+.scroll{display:grid;gap:8px;margin-top:10px}
+.scroll .opt{font-size:.95rem}
+/* ===== добавки за урок 10 ===== */
+.ccols.three{grid-template-columns:1fr 1fr 1fr}
+.ccols .col.c0{background:#ECE6F5}.ccols .col.c1{background:#E6ECF5}.ccols .col.c2{background:var(--gold-soft)}
+.cbtns.three{grid-template-columns:repeat(3,1fr)}
+.cbtns.three .btn{font-size:.82rem;padding:8px 2px;min-height:56px;line-height:1.2}
+.btn.purple{background:#5B3A8C;border-color:#43296A;color:#fff}
+.btn.green{background:#2E7D4F;box-shadow:0 4px 0 #1C5A35;color:#fff}
+.orgb.lord{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-ink)}
+.orgb.vas{background:#E6ECF5}
+.orgb.dim{opacity:.4}
+.orgrow.c2{grid-template-columns:repeat(2,1fr)}
+.opt.sel{border-color:var(--navy);background:#E6ECF5}
+.opt.sel:before{content:"● ";color:var(--navy)}
+.pyr{display:grid;gap:4px;justify-items:center;margin-top:10px}
+.pyr button{border:0;min-height:58px;font-weight:800;font-size:.92rem;color:#fff;line-height:1.15;position:relative;transition:transform .15s,filter .15s}
+.pyr button:nth-child(1){width:42%;clip-path:polygon(50% 0,100% 100%,0 100%);background:var(--red);padding-top:22px;min-height:70px}
+.pyr button:nth-child(2){width:64%;clip-path:polygon(10% 0,90% 0,100% 100%,0 100%);background:#6B7280}
+.pyr button:nth-child(3){width:84%;clip-path:polygon(6% 0,94% 0,100% 100%,0 100%);background:#2F6FB0}
+.pyr button:nth-child(4){width:100%;clip-path:polygon(4% 0,96% 0,100% 100%,0 100%);background:var(--gold);color:#2E2000}
+.pyr button.active{filter:brightness(1.18) saturate(1.2);transform:scale(1.03)}
+.pyr button.seen:after{content:"✓";position:absolute;right:14%;top:8px;font-size:.9rem}
+.cer{background:#EEF0F5;border-color:var(--line)}
+.cl{opacity:0;transition:opacity .5s}.cl.on{opacity:1}
+.cglow{animation:ring 1.2s infinite}
+.manor{background:#D6E6C4;border-color:#B5CC9C}
+.arr{pointer-events:none}
+.arrlab{font:800 8px var(--body);text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:2.6px;stroke-linejoin:round;pointer-events:none}
+.shieldbox{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.shieldbox svg{width:150px;height:auto;flex:none}
+.swl{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 10px}
+.sw{width:44px;height:44px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--line);padding:0}
+.sw.on{box-shadow:0 0 0 4px var(--navy)}
+.chg{border:2px solid var(--line);background:#fff;border-radius:12px;min-width:48px;min-height:48px;font-size:1.4rem}
+.chg.on{border-color:var(--navy);background:#E6ECF5}
+.mottoin{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;min-height:46px}
+.estbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.estbtns .btn{font-size:.82rem;padding:8px 2px;min-height:56px;line-height:1.2}
+.estbtns .btn.on{outline:3px solid var(--gold);outline-offset:2px}
+.argl{display:grid;gap:8px;margin-top:10px}
+</style>
+
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/11</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 10</div>
+  <h1>Обществото в средновековния Запад (VI – X в.)</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детективе, днес скачаме в Брюж, във Фландрия, през 1127 г. Новият граф Гийом приема клетвите на благородниците, а един писар, Галберт, записва всичко. Този откъс е в учебника ти. Макар че е от по-късно време (XII в.), показва обичай, който се оформя много по-рано, през VI – X в. Натисни бутона и скочи!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 1127 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„Кой на кого дължи?“</h2>
+  <p>В Запада няма ред като в наши дни: държавата е слаба, войните са често, а най-сигурното богатство е земята. Въпреки това хората знаят кой на кого се подчинява, кой воюва, кой се моли и кой храни всички. <b>Как се държи обществото, когато го свързват не закони и чиновници, а клетви и земя?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №1</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №2</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №3</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №4</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+</div>
+
+<!-- ===== ДОСИЕ 1 ===== -->
+<section class="card" id="s1" data-tm="VI – X в.|·|земята и феодът">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Земята и феодът</h2>
+  <div data-story>
+    <p>В Запада, разкъсван от войни и грабежи, най-сигурният начин да преживееш е земеделието. Затова <b>земята</b> става най-голямата ценност. И точно върху собствеността на земята хората изграждат отношенията си.</p>
+    <p>Благородниците с много земя са <button class="term" data-t="senyor">сеньори</button>. Те се нуждаят от опитни воини, за да защитят или разширят владенията си. Затова дават на дребни аристократи, наречени <button class="term" data-t="vasal">васали</button>, част от земята си заедно със селяните, които живеят на нея. Тази земя е <button class="term" data-t="feod">феод</button>.</p>
+    <p>Феодът изхранва и въоръжава васала. В него васалът събира данъци и такси, управлява и съди селяните. С времето феодът става наследствен.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Четири ключа към феода</h3>
+    <div class="tiles" id="tiles1">
+      <button class="tile" data-t1="0"><b>🏰 Сеньорът</b>Докосни…</button>
+      <button class="tile" data-t1="1"><b>⚔ Васалът</b>Докосни…</button>
+      <button class="tile" data-t1="2"><b>🌾 Феодът</b>Докосни…</button>
+      <button class="tile" data-t1="3"><b>⚖ Във феода</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s1q"></div></div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2 ===== -->
+<section class="card" id="s2" data-tm="VI – X в.|·|общество на личната връзка">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>Общество на личната връзка</h2>
+  <div data-story>
+    <p>Между сеньора и васала връзката е <b>пряка и лична</b>. Васалът полага <b>клетва за вярност</b> пред сеньора си. Той участва във войската му, помага му с пари и се обръща към него при съдебен спор. Сеньорът го покровителства, а ако васалът умре, поема грижата за семейството му.</p>
+    <p>Над всички стои <b>кралят</b> — върховен сеньор. Негови васали са херцозите и графовете, а те имат свои васали. Така от херцога до обикновения рицар всеки е свързан лично само със своя собствен сеньор. Важи правилото: <b>„Васалът на моя васал не е мой васал“</b>.</p>
+  </div>
+  <div class="task">
+    <h3>🔗 Веригата на васалите</h3>
+    <p style="margin:0 0 6px;font-size:.92rem">Докосни кутия. Ще видиш кой е нейният сеньор (златно) и кои са нейните васали (синьо).</p>
+    <div class="org" id="org"></div>
+    <div class="infobox" id="orgInfo"><h3>Избери кутия</h3><p>Започни от краля или от някой рицар.</p></div>
+  </div>
+  <div class="task">
+    <h3>🎮 Кой какво дължи?</h3>
+    <div class="cgame" id="dutyBox"></div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s2q"></div></div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 3 ===== -->
+<section class="card" id="s3" data-tm="VI – X в.|·|три съсловия">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Общество, разделено на съсловия</h2>
+  <div data-story>
+    <p>Средновековното общество е разделено на три <button class="term" data-t="saslovie">съсловия</button>: <b>духовенство</b>, <b>аристокрация</b> и всички останали — селяни, занаятчии, търговци. Всяко върши важна работа, без която другите не биха съществували. Духовниците се молят за спасението на душите. Благородниците воюват и защитават свещениците и селяните. Третото съсловие работи и осигурява всичко необходимо за живота на другите. Над всички стои кралят.</p>
+    <p>Според средновековната представа за света най-важната мисия е на духовниците — спасението на човешката душа. Църквата насърчава <b>благотворителността</b> и се опитва да ограничи насилието чрез т.нар. <button class="term" data-t="bozhi">Божи мир</button>. Това е договор с благородниците, който забранява войната в определени дни и периоди и защитава невъоръжените хора.</p>
+  </div>
+  <div class="task">
+    <h3>🎮 Кой се моли, кой воюва, кой работи?</h3>
+    <p style="margin:0 0 6px;font-size:.92rem">Разпредели девет души по трите съсловия.</p>
+    <div class="cgame" id="estBox"></div>
+  </div>
+  <div class="task">
+    <h3>🔺 Пирамидата на обществото</h3>
+    <p style="margin:0 0 6px;font-size:.92rem">Схемата от учебника. Докосни всяко ниво.</p>
+    <div class="pyr" id="pyr">
+      <button data-p="0">крал</button>
+      <button data-p="1">духовници</button>
+      <button data-p="2">благородници</button>
+      <button data-p="3">селяни, занаятчии и търговци</button>
+    </div>
+    <div class="infobox" id="pyrInfo"><h3>Избери ниво</h3><p>Докосни част от пирамидата.</p></div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s3q"></div></div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 4 ===== -->
+<section class="card" id="s4" data-tm="VI – X в.|·|рицари и селяни">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Рицарят и селянинът</h2>
+  <div data-story>
+    <p>Символ на аристокрацията стават <b>рицарите</b>. За да станат такива, синовете на благородниците минават през дълго обучение. Под влияние на Църквата се оформя специален модел на поведение: рицарят трябва да е храбър, силен и издръжлив, но и галантен с дамите. Приема се като <b>Христов воин</b> и покровител на слабите.</p>
+    <p>В третото съсловие влизат всички, които издържат другите две. <b>Селяните са мнозинството.</b> Някои имат собствена земя, която могат да напуснат или продадат. Те дължат данъци само на краля и Църквата. Повечето обаче са <button class="term" data-t="serv">серви</button> — в лична зависимост от феодали и духовници. Нямат право да напускат земята, на която са родени. Всички работят от сутрин до вечер, за да изпълнят задълженията си към господарите.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Рицарят — четири неща</h3>
+    <div class="tiles" id="tilesK">
+      <button class="tile" data-tk="0"><b>📚 Обучение</b>Докосни…</button>
+      <button class="tile" data-tk="1"><b>🛡 Модел</b>Докосни…</button>
+      <button class="tile" data-tk="2"><b>🏇 Турнир</b>Докосни…</button>
+      <button class="tile" data-tk="3"><b>🏴 Герб</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task">
+    <h3>👆 Селяните — две групи</h3>
+    <div class="tiles" id="tilesP">
+      <button class="tile" data-tp="0"><b>🌱 Със земя</b>Докосни…</button>
+      <button class="tile" data-tp="1"><b>⛓ Серви</b>Докосни…</button>
+    </div>
+  </div>
+  <div class="task"><h3>🧠 Провери се</h3><div id="s4q"></div></div>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== АКТИВНА КАРТА НА ФЕОДА ===== -->
+<section class="card" id="map" data-tm="VI – X в.|·|картата на феода">
+  <div class="dossier-tag navy">🗺 КАРТАТА НА ДЕТЕКТИВА</div>
+  <h2>Един феод отгоре</h2>
+  <p>Нарисувано е типично имение. Избери стъпка и гледай как си вървят задълженията. После докосни точките, за да видиш кой живее и работи там и какво дължи.</p>
+  <div class="mapbox manor"><svg id="mapSvg" viewBox="0 0 400 280" role="img" aria-label="Схема на средновековно имение със замък, село, ниви, пасище, гора, река, мелница и църква"></svg></div>
+  <div class="steps six" id="mapSteps">
+    <button data-st="0" class="active">Имението</button>
+    <button data-st="1">Феодът</button>
+    <button data-st="2">Кой работи</button>
+    <button data-st="3">Какво дължат</button>
+    <button data-st="4">Васалът → сеньор</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="playBtn">▶ Покажи стъпките</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка</h3><p>Докосни замъка, селото, нивите…</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Схемата е опростена и не е на конкретно място. Всяко имение е изглеждало малко по-различно. Бележките „извън учебника“ са отбелязани.</p>
+</section>
+
+<!-- ===== ПЪТЯТ НА РИЦАРЯ ===== -->
+<section class="card" id="tl" data-tm="VI – X в.|·|пътят на рицаря">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО · БЕЗ ДАТИ</div>
+  <h2>Пътят на рицаря</h2>
+  <p>Подреди етапите от живота на един млад аристократ. Хвани ☰ и плъзни надолу или нагоре. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+</section>
+
+<!-- ===== ЦЕРЕМОНИЯТА ===== -->
+<section class="card" id="anim" data-tm="1127|XII в.|Брюж, Фландрия">
+  <div class="dossier-tag navy">🎞 АНИМАЦИЯ · ЦЕРЕМОНИЯТА НА КЛЕТВАТА</div>
+  <h2>Как се полага клетва</h2>
+  <p>Следвай четирите стъпки на церемонията пред граф Гийом. Натисни стъпка или ▶ за всички.</p>
+  <div class="elbox cer"><svg id="cerSvg" viewBox="0 0 400 220" role="img" aria-label="Анимирана схема: васал полага клетва пред сеньор"></svg></div>
+  <div class="steps" id="cerSteps">
+    <button data-c="0">1 · Ръцете</button>
+    <button data-c="1">2 · Клетвата</button>
+    <button data-c="2">3 · Мощите</button>
+    <button data-c="3">4 · Жезълът</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="cerPlay">▶ Пусни церемонията</button></div>
+  <p class="elcap" id="cerCap">Докосни стъпка 1.</p>
+</section>
+
+<!-- ===== ИЗВОР-УЛИКА ===== -->
+<section class="card" id="clue" data-tm="1127|XII в.|„Хроника“ на Галберт от Брюж">
+  <div class="dossier-tag navy">📜 УЛИКАТА: ИЗВОР</div>
+  <h2>Клетва за вярност</h2>
+  <p>Откъс от „Хроника“ на Галберт от Брюж (XII в.), преразказан със свои думи:</p>
+  <blockquote style="margin:10px 0;padding:10px 12px;border-left:4px solid var(--red);background:var(--soft);border-radius:0 12px 12px 0;font-style:italic">
+    Васалът започвал клетвата си със словата: „Заклевам се във вярата си, че от този момент ще бъда верен на граф Гийом и ще спазвам клетвата си неотклонно.“ Той се заклевал в това над мощите на светците. После сеньорът със жезъла, който държал, посвещавал всички, които му били дали клетва за вярност.
+  </blockquote>
+  <div class="task"><h3>1. Кой е сеньорът, пред когото се полага клетвата?</h3><div id="c1"></div></div>
+  <div class="task"><h3>2. Кой елемент в клетвата е много важен?</h3><div id="c2"></div></div>
+  <div class="task"><h3>3. С какво се задължава васалът?</h3><div id="c3"></div></div>
+  <div class="task"><h3>🔎 Детективска задача: Галберт свидетел ли е бил? Може ли да му се вярва?</h3>
+    <p style="margin:0 0 6px">Галберт е духовник и служител в канцеларията на фландърските графове в Брюж. Описва събитията ден след ден, докато стават.</p>
+    <div id="c4"></div>
+  </div>
+</section>
+
+<!-- ===== ГОДИНАТА НА СЕЛЯНИНА ===== -->
+<section class="card" id="year" data-tm="XIV в.|·|годината на селянина">
+  <div class="dossier-tag navy">🌾 ИЗОБРАЖЕНИЕ · МИНИАТЮРИ</div>
+  <h2>Годината на селянина</h2>
+  <p>В учебника има четири миниатюри (XIV в.) с основните трудови дейности на селяните. Докосни всяка, за да видиш уреда и работата.</p>
+  <div class="tiles" id="tilesY">
+    <button class="tile" data-ty="0"><b>🌿 Косене</b>Докосни…</button>
+    <button class="tile" data-ty="1"><b>🐑 Пасене</b>Докосни…</button>
+    <button class="tile" data-ty="2"><b>🌾 Жътва</b>Докосни…</button>
+    <button class="tile" data-ty="3"><b>🥁 Вършитба</b>Докосни…</button>
+  </div>
+  <div class="task">
+    <h3>⏳ Какво след какво?</h3>
+    <p style="margin:0 0 6px;font-size:.92rem">Подреди три от работите според реда им в земеделската година. Овчарят е зает по различно време, затова не е в играта. Месеци няма — важи само редът.</p>
+    <ol class="sortl" id="sortl2"></ol>
+    <div class="row"><button class="btn gold" id="yrCheck">Провери подредбата</button></div>
+    <div class="fb" id="yrFb"></div>
+  </div>
+</section>
+
+<!-- ===== ДОСИЕТА НА ЛИЧНОСТИТЕ ===== -->
+<section class="card" id="people" data-tm="VI – XII в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Les%20Tr%C3%A8s%20Riches%20Heures%20du%20duc%20de%20Berry%20juin.jpg?width=800" alt="Миниатюра за месец юни: селяни косят ливада, на заден план е замък">
+      <figcaption>„Юни“ от „Много богатите часове на херцог дьо Бери“ (началото на XV в.): селяни косят ливада, а зад тях се вижда замъкът. Това не е миниатюрата от учебника.<small>Автор: братя Лимбург. Лиценз: обществено достояние, <a href="https://commons.wikimedia.org/wiki/File:Les_Tr%C3%A8s_Riches_Heures_du_duc_de_Berry_juin.jpg" target="_blank" rel="noopener">страницата в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+  <div class="task">
+    <h3>🔎 Детективски въпрос: кой за кого работи?</h3>
+    <p style="margin:0 0 6px">На миниатюрата селяни косят на фона на замък. Какво подсказва тази картина за обществото?</p>
+    <div id="photoQ"></div>
+  </div>
+  <div class="task">
+    <h3>👀 Сравни изображенията от учебника</h3>
+    <p style="margin:0">Миниатюрата от XI в. показва васали, които потвърждават верността си: те слагат ръце в ръцете на сеньора. Миниатюрата от XIII – XIV в. е с рицарски двубой и герб. Рицарят от „Лицата на историята“ е с шлем, броня и знаме. Коя от всички картини показва кой работи и кой воюва?</p>
+  </div>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="1127|XII в.|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="📜">Галберт пише по-голямата част от хрониката си ден след ден. Тя е за убийството на граф Карл Добрия на 2 март 1127 г. във Фландрия и за последвалите смутове. Поставянето на Гийом за нов граф е част от тези събития.</div>
+    <div data-i="👑">Гийом е френската форма на името Уилям. Граф Гийом е внук на Уилям Завоевателя, когото срещна на линията на времето в началото на раздела. Той е граф на Фландрия само около година: от 1127 до 1128 г.</div>
+    <div data-i="💋">В по-пълния текст на Галберт клетвата на верността се предшества от още един жест: васалът поставя ръцете си между ръцете на сеньора, а съюзът се скрепва и с целувка. Така ръцете и думите са двете половини на церемонията.</div>
+    <div data-i="🧒">Думата „васал“ идва от латинското <i>vassus</i>. В най-ранните франкски закони (VI в.) тя означава „слуга“. Едва по-късно получава благородния смисъл на „човек на сеньора“.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="XI в.|·|заседание на съсловията">
+  <div class="dossier-tag">🎭 РОЛЯ · ВЪПРОС 5 ОТ УЧЕБНИКА</div>
+  <h2>Ти си защитник на едно съсловие</h2>
+  <p class="note">⚠️ Ситуацията е <b>измислена</b>. Фактите са от учебника.</p>
+  <p>Хората от трите съсловия спорят кое е най-важно. Избери съсловие, което ще защитаваш, и докосни доказателствата, които наистина работят <b>от гледна точка на средновековния човек</b>. После смени съсловието и защити и другите две.</p>
+  <div class="estbtns" id="estPick">
+    <button class="btn purple" data-e="0">🙏 Духовници</button>
+    <button class="btn navy" data-e="1">⚔ Благородници</button>
+    <button class="btn green" data-e="2">🛠 Селяни, занаятчии, търговци</button>
+  </div>
+  <div id="roleBox" style="margin-top:12px"></div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="XI в.|·|двор на херцога">
+  <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
+  <h2>Кой на кого заповядва?</h2>
+  <p>Върни се към веригата в Досие №2. Кралят има два васала: херцог и граф. Рицарите са васали на херцога или на графа. Отговори по правилото <b>„Васалът на моя васал не е мой васал“</b>.</p>
+  <div id="puzQs"></div>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Герб и девиз</h2>
+  <p>Гербът е най-важният отличителен знак на рицаря. Носел го е на турнир или поход, а в него е вписан <b>девиз</b> — кратко изречение за най-важното от характера на носителя или рода му. Първо го сглоби тук, после го нарисувай на лист.</p>
+  <div class="shieldbox">
+    <svg id="shieldSvg" viewBox="0 0 120 150" role="img" aria-label="Щит с избран цвят и символ"></svg>
+    <div style="flex:1;min-width:160px">
+      <b style="font-size:.9rem">Цвят на щита</b>
+      <div class="swl" id="swl"></div>
+      <b style="font-size:.9rem">Символ</b>
+      <div class="swl" id="chgl"></div>
+    </div>
+  </div>
+  <p style="margin:10px 0 4px"><b>Девиз</b> (до 40 знака):</p>
+  <input class="mottoin" id="motto" maxlength="40" placeholder="напр. Смело напред" autocomplete="off">
+  <p id="mottoOut" style="font-family:var(--head);font-weight:700;text-align:center;font-size:1.1rem;margin:10px 0 0"></p>
+  <h3 style="margin-top:18px">✏️ На хартия</h3>
+  <ul>
+    <li>нарисувай голям щит и го раздели на части или го остави цял;</li>
+    <li>избери 1 – 2 символа за нещо, което ценяш (лъв, кула, звезда, кръст, дърво…);</li>
+    <li>под щита напиши девиза върху лента;</li>
+    <li>оцвети с 2 – 3 ярки цвята.</li>
+  </ul>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Думи за селото и замъка</h3>
+    <p style="font-size:.9rem;margin-top:0">„Señor“ е дума, която ще чуеш и в наше време.</p>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Слуга</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Оръженосец</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Рицар</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="1127|XII в.|Брюж, Фландрия">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>„Кой на кого дължи?“</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 VI – X в.</b> · оформя се феодалният ред на Запада</span>
+    <span><b>🔑 1127</b> · клетвата пред граф Гийом (по Галберт от Брюж, XII в.)</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>В разкъсвания от войни Запад земеделието е най-сигурното препитание, а земята — най-голямата ценност. Отношенията между хората се изграждат върху собствеността на земята.</li>
+    <li>Сеньорът е земевладелец, който дава на васал част от земята си заедно със селяните — феод. Феодът изхранва и въоръжава васала. Васалът събира данъци и такси, управлява и съди селяните. С времето феодът става наследствен.</li>
+    <li>Западното общество е „общество на личната връзка“. Васалът полага клетва за вярност, служи във войската, помага с пари и се обръща към сеньора при съдебен спор. Сеньорът го покровителства и поема грижата за семейството му след смъртта му.</li>
+    <li>Кралят е върховен сеньор. Негови васали са херцозите и графовете, а те имат свои васали. Всеки е свързан лично само със своя сеньор: „Васалът на моя васал не е мой васал“.</li>
+    <li>Обществото е разделено на три съсловия: духовници (молят се за спасението на душите), благородници (воюват и защитават) и селяни, занаятчии и търговци (работят и осигуряват всичко необходимо). Над всички е кралят. Църквата насърчава благотворителността и чрез Божия мир забранява войната в определени дни и защитава невъоръжените.</li>
+    <li>Рицарят е символ на аристокрацията. Момче в дома на сеньор → слуга → оръженосец → посвещаване в рицарство при пълнолетие. Той е храбър, силен, издръжлив, галантен с дамите, Христов воин и покровител на слабите. Тренира на турнири, има герб с девиз. Рицарите без феод търсят приключения или сеньор.</li>
+    <li>Селяните са мнозинството. Свободните имат собствена земя, могат да я напуснат или продадат и дължат данъци само на краля и Църквата. Повечето са серви — в лична зависимост от феодали и духовници, без право да напускат земята, на която са родени. Работят от сутрин до вечер.</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 40 – 41. Извън учебника: годината и мястото на клетвата (Брюж, 1127 г.), кой е граф Гийом (Уилям Клитон), кой е Галберт, жестът с ръцете и целувката, десятъкът и мелницата на сеньора в картата на феода (отбелязани като „извън учебника“), миниатюрата „Юни“ (XV в.), етимологиите. <b>Разминавания и уточнения:</b> (1) „Божи мир“ и „Божие примирие“ са свързани, но различни неща: Pax Dei (от 989 г.) защитава невъоръжените и църковните имоти, а Treuga Dei (от 1027 г.) забранява боя в определени дни и периоди. Учебникът ги обединява в „Божи мир“ и урокът следва учебника; (2) изворът е от XII в., а темата на урока е VI – X в.; (3) месеци на миниатюрите няма, защото не са дадени в учебника. Няма видео и музика. Ролята е измислена. Картата е схематична.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/William_Clito" target="_blank" rel="noopener">William Clito</a> · <a href="https://en.wikipedia.org/wiki/Galbert_of_Bruges" target="_blank" rel="noopener">Galbert of Bruges</a> · <a href="https://sourcebooks.web.fordham.edu/source/feud-fief1.asp" target="_blank" rel="noopener">Fordham: Fief ceremonies (Galbert)</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Peace_and_Truce_of_God" target="_blank" rel="noopener">Peace and Truce of God</a></li>
+      <li><a href="https://www.etymonline.com/word/seignior" target="_blank" rel="noopener">seignior</a> · <a href="https://www.etymonline.com/word/vassal" target="_blank" rel="noopener">vassal</a> · <a href="https://www.etymonline.com/word/serf" target="_blank" rel="noopener">serf</a> · <a href="https://en.wiktionary.org/wiki/vassallus" target="_blank" rel="noopener">vassallus</a> · <a href="https://en.wiktionary.org/wiki/герб" target="_blank" rel="noopener">герб</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-10-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var X=(SAVED&&SAVED.ex)||{};   /* всички допълнителни състояния на блоковете */
+var booted=false;
+function saveNow(){
+  if(!booted)return;
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:X}))}catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','dyk'];
+var FLAGS=['jump','tiles1','s1q','duty','chain','s2q','est','pyr','s3q','tk','tp','s4q','steps','map','tl','cer','c1','c2','c3','c4','ty','year','photoQ','role','puzzle','shield'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=X.jumped||false;
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;X.jumped=true;var b=this;b.disabled=true;
+  var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $('#dY').textContent=Math.round(2026-(2026-1127)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($('#dC'),'XII в.');setDial($('#dP'),'Брюж, Фландрия');setTM('1127','XII в.','Брюж · Фландрия');
+      b.textContent='✓ Пристигна в 1127 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
+      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички точки на феода'},
+  {id:'oath',ic:'🤝',n:'Верен васал',d:'Мини през церемонията на клетвата'},
+  {id:'chain',ic:'⛓',n:'Верига на васалите',d:'Разгледай всички кутии във веригата'},
+  {id:'estates',ic:'🔺',n:'Три съсловия',d:'Разпредели всички хора по съсловия'},
+  {id:'advocate',ic:'🎭',n:'Защитник',d:'Защити и трите съсловия'},
+  {id:'chrono',ic:'🛡',n:'Пътят на рицаря',d:'Подреди етапите от живота на рицаря'},
+  {id:'farmer',ic:'🌾',n:'Годината на селянина',d:'Подреди селскостопанските работи'},
+  {id:'logic',ic:'🧩',n:'Логик на васалите',d:'Реши загадката за веригата'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'🎓',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'senyor',n:'Сеньорът',y:'земевладелец',av:'🏰',sp:'⚡ Господарят на земята',how:'Докосни замъка на картата на феода',back:'Благородник с много земя. Нуждае се от опитни воини, затова дава част от земята на васали — феод. Покровителства васала си и поема грижата за семейството му, ако той загине.<br><br>💡 Думата идва от латинското <i>senior</i> — „по-старият“.'},
+  {id:'knight',n:'Средновековният рицар',y:'тип · по „Лицата на историята“',av:'🛡',sp:'⚡ Христов воин и покровител на слабите',how:'Подреди „Пътят на рицаря“',back:'Синовете на благородниците учат при сеньор да воюват, да яздят, да ловуват и да се отнасят добре с дамите. Слуга → оръженосец → рицар при пълнолетие. Тренира на турнири, има герб с девиз.<br><br>💡 Рицарите без феод търсят приключения или сеньор, пред когото да положат клетва.'},
+  {id:'serf',n:'Серв',y:'тип · зависим селянин',av:'🌾',sp:'⚡ Изхранва всички, но не може да си тръгне',how:'Докосни „Серви“ в Досие №4',back:'Селянин в лична зависимост от феодал или духовник. Няма право да напуска земята, на която е роден. Работи от сутрин до вечер, за да изпълни задълженията си към господаря.<br><br>💡 Свободните селяни, които имат своя земя, могат да я напуснат или продадат.'},
+  {id:'galbert',n:'Галберт от Брюж',y:'XII в. · хронист',av:'📜',sp:'⚡ Очевидецът от Брюж',how:'Разпитай изворa докрай',back:'Духовник и служител в канцеларията на фландърските графове в Брюж. Описва ден след ден убийството на граф Карл Добрия (2 март 1127 г.) и последвалите събития. Разказът му за клетвата пред граф Гийом се цитира като образец за феодален обичай.<br><br>💡 Пише със своя гледна точка, затова изворът се чете внимателно.'},
+  {id:'clito',n:'Граф Гийом (Уилям Клитон)',y:'граф на Фландрия 1127 – 1128',av:'👑',sp:'⚡ Графът, пред когото се кълнат',how:'Мини през церемонията на клетвата',back:'Гийом е френската форма на името Уилям. Внук на Уилям Завоевателя. След убийството на граф Карл Добрия през 1127 г. френският крал Луи VI го поставя за граф на Фландрия. Управлява около година и умира през юли 1128 г.<br><br>💡 Според учебника васалите му се заклеват във вярност именно на него.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'Земята е най-голямата ценност. Сеньорът дава на васала феод — земя със селяните — срещу военна служба. Васалът събира данъци и такси, управлява и съди селяните.',
+  2:'Васалът се заклева във вярност пред сеньора. Кралят е върховен сеньор. Всеки е обвързан само със своя сеньор: „Васалът на моя васал не е мой васал“.',
+  3:'Обществото е от три съсловия: молят се (духовници), воюват (благородници), работят (селяни, занаятчии, търговци). Над всички е кралят.',
+  4:'Рицарят е символ на аристокрацията. Селяните са мнозинството: свободни със собствена земя и серви — в лична зависимост, без право да напуснат земята.'
+};
+var CLUE_FOR={s1:1,s2:2,s3:3,s4:4};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  senyor:['Сеньор','(господар) Земевладелец, който предоставя част от земите си срещу военни и други задължения. От латинското senior — „по-старият“.'],
+  vasal:['Васал','Благородник, който се поставя под закрилата на сеньора и получава от него феод. От него идва понятието „васалитет“ — цялата система от лични отношения между васал и сеньор.'],
+  feod:['Феод (феодал)','Земя, която сеньорът дава на своя васал, за да се въоръжи. Предава се по наследство заедно със задълженията към сеньора. Притежателят на феод се нарича феодал.'],
+  saslovie:['Съсловие','Голяма група хора с определени права и задължения в обществото. В средновековния Запад са три: духовници, аристокрация и всички останали.'],
+  bozhi:['Божи мир','Договор на Църквата с благородниците, който забранява войната в определени дни и периоди и защитава невъоръжените хора.'],
+  serv:['Серв','Селянин в лична зависимост от феодал или духовник. Няма право да напуска земята, на която е роден. От латинското servus.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+function qSet(boxSel,arr,pre,xp,done){
+  var n=0;
+  $(boxSel).innerHTML=arr.map(function(_,i){return '<div class="qblock stage" id="'+pre+i+'"></div>'}).join('');
+  arr.forEach(function(Q,i){Q.after=function(){n++;if(n===arr.length)done()};oneQ($('#'+pre+i),Q,pre+i,xp);restoreOneQ($('#'+pre+i),Q,pre+i)});
+}
+
+/* ================= плочки (общ помощник) ================= */
+function tilesInit(attr,TXT,key,flagKey,bonusMsg,after){
+  X[key]=X[key]||{};var seen=X[key];
+  $$('.tile['+attr+']').forEach(function(t){
+    var i0=t.getAttribute(attr);
+    if(seen[i0]){t.innerHTML=t.querySelector('b').outerHTML+TXT[+i0];t.classList.add('open')}
+    t.addEventListener('click',function(){
+      var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+      t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+      if(Object.keys(seen).length===TXT.length&&flag(flagKey)){addXP(3,bonusMsg);if(after)after()}
+      else saveNow();
+    });
+  });
+}
+
+/* ================= разпределяне (общ помощник) ================= */
+function assign(key,box,ITEMS,OPTS,doneCb){
+  X.asg=X.asg||{};var st=X.asg[key]=X.asg[key]||{i:0,miss:0,done:false};
+  function render(){
+    var c=OPTS.map(function(){return ''});
+    for(var k=0;k<st.i;k++)c[ITEMS[k][1]]+='<div>• '+ITEMS[k][0]+'</div>';
+    var cols='<div class="ccols'+(OPTS.length===3?' three':'')+'">'+OPTS.map(function(o,j){return '<div class="col c'+j+'"><h4>'+o.h+'</h4>'+c[j]+'</div>'}).join('')+'</div>';
+    if(st.i>=ITEMS.length){
+      box.innerHTML='<p style="margin:0;font-weight:700;color:var(--ok)">✓ Всичко е разпределено!'+(st.miss?' (грешки: '+st.miss+')':' Без нито една грешка!')+'</p>'+cols;
+      if(!st.done){st.done=true;doneCb(st.miss)}
+      return;
+    }
+    box.innerHTML='<div style="font-size:.85rem;color:var(--muted);margin-bottom:6px">'+(st.i+1)+' от '+ITEMS.length+'</div><div class="sortcard">'+ITEMS[st.i][0]+'</div>'+
+      '<div class="cbtns'+(OPTS.length===3?' three':'')+'">'+OPTS.map(function(o,j){return '<button class="btn '+o.cls+'" data-o="'+j+'">'+o.b+'</button>'}).join('')+'</div><div class="fb"></div>'+cols;
+    $$('[data-o]',box).forEach(function(b){b.addEventListener('click',function(){
+      var o=+b.getAttribute('data-o'),fb=$('.fb',box);
+      if(o===ITEMS[st.i][1]){
+        fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+ITEMS[st.i][2]+' <div style="margin-top:8px"><button class="btn small done" data-nx="1">Следващо →</button></div>';
+        $$('[data-o]',box).forEach(function(x){x.disabled=true});addXP(2);
+        $('[data-nx]',box).addEventListener('click',function(){st.i++;saveNow();render()});
+      }else{st.miss++;b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>✗ Не е това.</b> Опитай друго.';saveNow()}
+    })});
+  }
+  render();
+}
+
+/* ================= ДОСИЕ 1 ================= */
+var T1=['Благородник с много земя. Има нужда от опитни воини, за да защити или увеличи владенията си. Затова дава част от земята си на васали.','Дребен аристократ. Получава от сеньора част от земята заедно със селяните и му служи като воин.','Земя + живеещите на нея селяни. Изхранва и въоръжава васала. Постепенно става наследствена.','Васалът събира данъци и такси, управлява и съди селяните.'];
+tilesInit('data-t1',T1,'t1','tiles1','Ключовете са събрани!');
+(function(){
+  var Q={q:'Какво получава васалът от сеньора?',o:['Феод — земя заедно с живеещите на нея селяни','Короната на кралството','Само пари за всеки поход'],a:0,e:'Феодът изхранва и въоръжава васала.'};
+  oneQ($('#s1q'),Q,'s1q',5);restoreOneQ($('#s1q'),Q,'s1q');
+})();
+
+/* ================= ДОСИЕ 2: ВЕРИГАТА ================= */
+var ORG={
+  k:{n:'Крал',up:null,dn:['d','c'],t:'Крал — върховен сеньор',d:'Негови васали са херцозите и графовете. Над всички е той, но рицарите на херцога и на графа не са негови васали. Правилото: „Васалът на моя васал не е мой васал“.',cls:'top'},
+  d:{n:'Херцог',up:'k',dn:['r1','r2'],t:'Херцогът',d:'Васал на краля, сеньор на Рицар 1 и Рицар 2. Дължи вярност на краля, а на рицарите си — покровителство.'},
+  c:{n:'Граф',up:'k',dn:['r3'],t:'Графът',d:'Васал на краля, сеньор на Рицар 3. Рицарите на херцога не са негови васали.'},
+  r1:{n:'Рицар 1',up:'d',dn:[],t:'Рицар 1',d:'Васал на херцога. Верен е лично само на своя сеньор — херцога. Кралят и графът не са негови сеньори.'},
+  r2:{n:'Рицар 2',up:'d',dn:[],t:'Рицар 2',d:'Васал на херцога, както Рицар 1. Двамата са васали на един и същи сеньор.'},
+  r3:{n:'Рицар 3',up:'c',dn:[],t:'Рицар 3',d:'Васал на графа. Херцогът и кралят не са негови пряко сеньори.'}
+};
+(function(){
+  function b(id){return '<button class="orgb'+(ORG[id].cls?' '+ORG[id].cls:'')+'" data-o="'+id+'">'+ORG[id].n+'</button>'}
+  $('#org').innerHTML='<div class="orgrow c1">'+b('k')+'</div><div class="orgarrow">▼ васали на краля ▼</div><div class="orgrow c2">'+b('d')+b('c')+'</div><div class="orgarrow">▼ васали на херцога и на графа ▼</div><div class="orgrow c3">'+b('r1')+b('r2')+b('r3')+'</div>';
+  X.orgSeen=X.orgSeen||{};
+  function paint(id){
+    $$('#org .orgb').forEach(function(x){var k=x.getAttribute('data-o');
+      x.classList.remove('lord','vas','dim','active');
+      if(id){
+        if(k===id)x.classList.add('active');
+        else if(ORG[id].up===k)x.classList.add('lord');
+        else if(ORG[id].dn.indexOf(k)>=0)x.classList.add('vas');
+        else x.classList.add('dim');
+      }
+      if(X.orgSeen[k])x.classList.add('seen');
+    });
+  }
+  $$('#org .orgb').forEach(function(bt){bt.addEventListener('click',function(){
+    var id=bt.getAttribute('data-o'),o=ORG[id];
+    paint(id);
+    var up=o.up?'Сеньор: <b>'+ORG[o.up].n+'</b>. ':'Няма сеньор над себе си (освен Бог, според представата на времето). ';
+    var dn=o.dn.length?'Васали: <b>'+o.dn.map(function(k){return ORG[k].n}).join(', ')+'</b>.':'Няма свои васали.';
+    $('#orgInfo').innerHTML='<h3>'+o.t+'</h3><p>'+o.d+'</p><p style="margin-top:6px">'+up+dn+'</p>';
+    if(!X.orgSeen[id]){X.orgSeen[id]=1;bt.classList.add('seen');addXP(2);
+      if(Object.keys(X.orgSeen).length===Object.keys(ORG).length&&flag('chain')){addXP(4,'Веригата е проследена!');award('chain')}
+      else saveNow();}
+  })});
+  paint(null);
+})();
+(function(){
+  var ITEMS=[['Служи във войската на сеньора',0,'Васалът се явява във войската на сеньора си.'],['Покровителства васала',1,'Сеньорът закриля своя васал.'],['Оказва му парична помощ',0,'Васалът помага на сеньора с пари.'],['Поема грижите за семейството на васала при смъртта му',1,'Сеньорът се грижи за семейството на починалия васал.'],['Полага клетва за вярност',0,'Клетвата се полага от васала пред сеньора.'],['Обръща се към него при съдебен спор',0,'Васалът търси съд и справедливост при своя сеньор.']];
+  var OPTS=[{h:'🛡 Васалът дължи',b:'🛡 Васалът',cls:'navy'},{h:'🏰 Сеньорът дължи',b:'🏰 Сеньорът',cls:'purple'}];
+  assign('duty',$('#dutyBox'),ITEMS,OPTS,function(miss){if(flag('duty'))addXP(miss?5:10,'Задълженията са ясни!')});
+})();
+(function(){
+  var Q={q:'Кой е върховният сеньор в средновековния Запад?',o:['Кралят','Рицарят','Селянинът'],a:0,e:'Негови васали са херцозите и графовете, а те имат свои васали.'};
+  oneQ($('#s2q'),Q,'s2q',5);restoreOneQ($('#s2q'),Q,'s2q');
+})();
+
+/* ================= ДОСИЕ 3: СЪСЛОВИЯ ================= */
+(function(){
+  var ITEMS=[['🧑‍🌾 Свободен селянин',2,'Работи и осигурява храна. Третото съсловие.'],['⛪ Монах',0,'Духовниците се молят за спасението на душите.'],['🛡 Рицар',1,'Благородниците воюват и защитават.'],['🔨 Занаятчия',2,'Третото съсловие осигурява всичко необходимо.'],['👑 Херцог',1,'Херцогът е благородник и васал на краля.'],['🕊 Епископ',0,'Висш духовник — първо съсловие.'],['⛓ Серв',2,'Зависим селянин — третото съсловие.'],['🏰 Граф',1,'Графът е благородник и сеньор или васал.'],['🧳 Търговец',2,'Търговците са в третото съсловие.']];
+  var OPTS=[{h:'🙏 Молят се',b:'🙏 Моли се',cls:'purple'},{h:'⚔ Воюват',b:'⚔ Воюва',cls:'navy'},{h:'🛠 Работят',b:'🛠 Работи',cls:'green'}];
+  assign('est',$('#estBox'),ITEMS,OPTS,function(miss){if(flag('est')){addXP(miss?5:10,'Съсловията са подредени!');award('estates')}});
+})();
+var PYR=[
+  {t:'Крал',d:'Над всички. Върховен сеньор: негови васали са херцозите и графовете. Дължи им покровителство.'},
+  {t:'Духовници (първо съсловие)',d:'Молят се за спасението на душите. Църквата насърчава благотворителността и с Божия мир защитава невъоръжените.'},
+  {t:'Благородници (второ съсловие)',d:'Воюват и защитават свещениците и селяните. Васалите служат във войската на сеньора, помагат му с пари и се обръщат към него при съдебен спор.'},
+  {t:'Селяни, занаятчии и търговци (трето съсловие)',d:'Работят и осигуряват всичко необходимо за живота на другите две съсловия. Селяните са мнозинството. Повечето са серви, а работят от сутрин до вечер.'}
+];
+(function(){
+  X.pyrSeen=X.pyrSeen||{};
+  function mark(){$$('#pyr button').forEach(function(b){b.classList.toggle('seen',!!X.pyrSeen[b.getAttribute('data-p')])})}
+  $$('#pyr button').forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-p');
+    $$('#pyr button').forEach(function(x){x.classList.toggle('active',x===b)});
+    $('#pyrInfo').innerHTML='<h3>'+PYR[i].t+'</h3><p>'+PYR[i].d+'</p>';
+    if(!X.pyrSeen[i]){X.pyrSeen[i]=1;addXP(2);mark();
+      if(Object.keys(X.pyrSeen).length===PYR.length&&flag('pyr'))addXP(4,'Пирамидата е разгледана!');else saveNow()}
+  })});
+  mark();
+})();
+(function(){
+  var Q={q:'Какво прави третото съсловие?',o:['Работи и осигурява всичко необходимо на другите две съсловия','Воюва и защитава свещениците','Само се моли за душите'],a:0,e:'Селяните, занаятчиите и търговците издържат цялото общество.'};
+  oneQ($('#s3q'),Q,'s3q',5);restoreOneQ($('#s3q'),Q,'s3q');
+})();
+
+/* ================= ДОСИЕ 4 ================= */
+var TK=['Още от малки синовете на благородниците са изпращани при някой сеньор. Там се учат да воюват, да яздят, да ловуват и да се отнасят добре с дамите.','Под влияние на Църквата рицарят трябва да е храбър, силен, издръжлив, но и галантен с дамите. Приема се като Христов воин и покровител на слабите.','Когато не воюват, рицарите тренират бойните си умения на турнири. Там печелят слава и вниманието на благородните дами.','Гербът е най-важният отличителен знак на рицаря. Появява се на турнир или военен поход. В него се вписва девиз — кратко изречение за най-важното от характера на носителя или рода му.'];
+tilesInit('data-tk',TK,'tk','tk','Рицарят е разгледан!');
+var TP=['Част от селяните притежават земя, която могат да напуснат или продадат. Дължат данъци само на краля и Църквата.','Повечето селяни са серви: в лична зависимост от феодалите и духовниците. Нямат право да напускат земята, на която са родени. Всички се трудят от сутрин до вечер.'];
+tilesInit('data-tp',TP,'tp','tp','Селяните са разгледани!');
+$('.tile[data-tp="1"]').addEventListener('click',function(){unlockCard('serf')});
+(function(){
+  var Q={q:'Какво означава „сервът е в лична зависимост“?',o:['Не може да напусне земята, на която е роден','Може да я продава, когато поиска','Дължи данъци само на краля'],a:0,e:'Сервите са в лична зависимост от феодалите и духовниците. Свободните селяни могат да напуснат земята си.'};
+  oneQ($('#s4q'),Q,'s4q',5);restoreOneQ($('#s4q'),Q,'s4q');
+})();
+
+/* ================= КАРТА НА ФЕОДА ================= */
+var NS='http://www.w3.org/2000/svg';
+function arrow(x1,y1,x2,y2,col,lab,lx,ly){
+  var a=Math.atan2(y2-y1,x2-x1),h=8,w=4.2;
+  var hx=x2-Math.cos(a)*h,hy=y2-Math.sin(a)*h;
+  var px=-Math.sin(a)*w,py=Math.cos(a)*w;
+  return '<line class="arr" x1="'+x1+'" y1="'+y1+'" x2="'+hx.toFixed(1)+'" y2="'+hy.toFixed(1)+'" stroke="'+col+'" stroke-width="2.6" stroke-linecap="round"/><polygon class="arr" points="'+x2+','+y2+' '+(hx+px).toFixed(1)+','+(hy+py).toFixed(1)+' '+(hx-px).toFixed(1)+','+(hy-py).toFixed(1)+'" fill="'+col+'"/>'+(lab?'<text class="arrlab" x="'+lx+'" y="'+ly+'" fill="'+col+'">'+lab+'</text>':'');
+}
+function house(x,y){return '<rect x="'+x+'" y="'+(y+7)+'" width="16" height="11" fill="#F3F4F6" stroke="#8A93A6" stroke-width=".8"/><polygon points="'+(x-2)+','+(y+7)+' '+(x+8)+','+y+' '+(x+18)+','+(y+7)+'" fill="#9E1B32"/>'}
+function tree(x,y){return '<polygon points="'+x+','+(y-13)+' '+(x+7)+','+y+' '+(x-7)+','+y+'" fill="#2F6B3A"/><polygon points="'+x+','+(y-19)+' '+(x+6)+','+(y-8)+' '+(x-6)+','+(y-8)+'" fill="#3C8048"/>'}
+(function buildManor(){
+  var s='<rect width="400" height="280" fill="#D6E6C4"/>';
+  /* река */
+  s+='<path d="M350,0 C330,60 372,110 330,160 S300,230 325,280" fill="none" stroke="#7FA9D1" stroke-width="13" stroke-linecap="round"/>';
+  s+='<text x="372" y="40" class="rivlabel" style="font:italic 700 8px var(--body);fill:#46617E">река</text>';
+  /* ниви */
+  [[130,30,'#E6D27A'],[130,68,'#B9D77E'],[130,106,'#E6D27A']].forEach(function(f){
+    s+='<rect x="'+f[0]+'" y="'+f[1]+'" width="150" height="30" rx="3" fill="'+f[2]+'" stroke="#9FB27A" stroke-width=".8"/>';
+    for(var k=0;k<7;k++)s+='<line x1="'+(f[0]+10+k*21)+'" y1="'+(f[1]+4)+'" x2="'+(f[0]+10+k*21)+'" y2="'+(f[1]+26)+'" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/>';
+  });
+  /* пасище */
+  s+='<ellipse cx="190" cy="243" rx="78" ry="30" fill="#C5E0A5"/>';
+  [[150,238],[185,252],[215,236],[235,252],[170,230]].forEach(function(p){s+='<ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="8" ry="5" fill="#fff" stroke="#8A93A6" stroke-width=".6"/><circle cx="'+(p[0]+7)+'" cy="'+(p[1]-2)+'" r="2.6" fill="#4A5160"/>'});
+  /* гора */
+  [[20,230],[40,250],[60,226],[30,200],[75,256],[16,262],[56,206],[85,235],[100,260],[96,205],[12,188],[78,186]].forEach(function(p){s+=tree(p[0],p[1])});
+  /* път */
+  s+='<path d="M72,100 C95,130 110,150 130,172 L235,176" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="5 4" stroke-opacity=".8"/>';
+  /* село */
+  [[128,160],[150,164],[172,160],[194,164],[140,184],[168,186]].forEach(function(p){s+=house(p[0],p[1])});
+  /* църква */
+  s+='<rect x="238" y="168" width="30" height="22" fill="#F3F4F6" stroke="#8A93A6"/><rect x="262" y="150" width="9" height="40" fill="#F3F4F6" stroke="#8A93A6"/><polygon points="260,150 266.5,138 273,150" fill="#1B2A41"/><path d="M266.5,126 V138 M262,131 H271" stroke="#C9962B" stroke-width="2"/>';
+  /* мелница */
+  s+='<rect x="296" y="136" width="20" height="18" fill="#F3F4F6" stroke="#8A93A6"/><polygon points="294,136 306,126 318,136" fill="#9E1B32"/><circle cx="324" cy="148" r="9" fill="none" stroke="#46617E" stroke-width="2"/><path d="M324,139 V157 M315,148 H333" stroke="#46617E" stroke-width="2"/>';
+  /* замък на хълм */
+  s+='<ellipse cx="68" cy="82" rx="46" ry="20" fill="#B7C99F"/><rect x="42" y="42" width="52" height="38" fill="#8A93A6" stroke="#4A5160" stroke-width="1"/><rect x="36" y="32" width="14" height="48" fill="#9AA2B4" stroke="#4A5160" stroke-width="1"/><rect x="86" y="32" width="14" height="48" fill="#9AA2B4" stroke="#4A5160" stroke-width="1"/><path d="M36,32 h14 M86,32 h14 M42,42 h8 M56,42 h8 M70,42 h8" stroke="#4A5160" stroke-width="3" stroke-dasharray="4 3"/><rect x="62" y="60" width="12" height="20" rx="6" fill="#4A5160"/><path d="M93,32 V16" stroke="#4A5160" stroke-width="1.5"/><polygon points="93,16 106,20 93,25" fill="#9E1B32"/>';
+  /* граница на феода */
+  s+='<g class="lyr2" id="lyrB"><rect x="5" y="5" width="390" height="270" rx="10" fill="none" stroke="#9E1B32" stroke-width="2.4" stroke-dasharray="7 5"/><text class="arrlab" x="200" y="272" fill="#9E1B32" style="font-size:9px">ГРАНИЦА НА ФЕОДА</text></g>';
+  s+='<g class="lyr2" id="lyr1">'+arrow(14,24,42,46,'#9A6D00','',0,0)+'<text class="arrlab" x="44" y="18" fill="#7A5A10">от сеньора: феод</text></g>';
+  s+='<g class="lyr2" id="lyr2">'+arrow(160,156,170,100,'#1E8E4E','',0,0)+arrow(180,196,190,224,'#1E8E4E','',0,0)+arrow(212,170,290,150,'#1E8E4E','',0,0)+'<text class="arrlab" x="226" y="140" fill="#146638">работят</text></g>';
+  s+='<g class="lyr2" id="lyr3">'+arrow(128,70,98,66,'#9A6D00','',0,0)+arrow(132,166,92,98,'#9A6D00','',0,0)+arrow(208,178,236,180,'#2F6FB0','',0,0)+'<text class="arrlab" x="104" y="126" fill="#7A5A10">данъци, такси, труд</text><text class="arrlab" x="222" y="206" fill="#1F4F82">към Църквата</text></g>';
+  s+='<g class="lyr2" id="lyr4">'+arrow(96,36,170,14,'#9E1B32','',0,0)+'<text class="arrlab" x="212" y="12" fill="#7A1426">войска, пари, вярност → сеньор</text>'+arrow(176,20,100,40,'#1B2A41','',0,0)+'<text class="arrlab" x="150" y="38" fill="#1B2A41">закрила</text></g>';
+  $('#mapSvg').innerHTML=s;
+})();
+var PTS=[
+  {id:'castle',n:'Замък',x:68,y:95,col:'#9E1B32',dx:10,dy:2,t:'Замъкът',d:'Тук живее благородникът — сеньор или негов васал. Воюва, управлява феода, събира данъци и такси от селяните и ги съди. На своя сеньор дължи вярност (клетва), войска и парична помощ; обръща се към него при съдебен спор.',card:'senyor'},
+  {id:'fields',n:'Ниви',x:205,y:83,col:'#C9962B',a:'middle',dx:0,dy:6,t:'Нивите',d:'Тук селяните работят от сутрин до вечер: косят, жънат, вършеят. Реколтата изхранва всички — и селяните, и благородниците, и духовниците. Серв работи, за да изпълни задълженията си към господаря.'},
+  {id:'village',n:'Село',x:172,y:208,col:'#1E8E4E',a:'middle',dx:0,dy:-3,t:'Селото',d:'Тук живеят селяните — мнозинството от хората. Свободните, които притежават земя, могат да я напуснат или продадат и дължат данъци само на краля и Църквата. Сервите са в лична зависимост от господаря и не могат да напускат земята, на която са родени.'},
+  {id:'church',n:'Църква',x:252,y:166,col:'#2F6FB0',a:'middle',dx:0,dy:28,t:'Църквата или манастирът',d:'Духовниците се молят за спасението на душите. Църквата насърчава благотворителността и с Божия мир защитава невъоръжените. Част от селяните са в зависимост от духовници. <i>Извън учебника:</i> селяните често плащали на Църквата и десятък — около една десета от реколтата.'},
+  {id:'mill',n:'Мелница',x:306,y:166,col:'#46617E',a:'middle',dx:0,dy:14,t:'Мелницата на реката',d:'Тук се мели житото на селяните — брашно за хляба. <i>Извън учебника:</i> мелницата често е била на сеньора и селяните му плащали част от брашното за мелене.'},
+  {id:'pasture',n:'Пасище',x:190,y:262,col:'#6FA84B',a:'middle',dx:0,dy:0,t:'Пасището',d:'Тук пасат овцете и добитъкът на селяните — миниатюра №4 в учебника показва овчар. Добитъкът дава мляко, вълна и месо.'},
+  {id:'forest',n:'Гора',x:55,y:240,col:'#2F6B3A',a:'middle',dx:0,dy:22,t:'Гората',d:'Обучението на благородника включва лов. Селяните обикновено са ползвали гората за дърва за огрев и за паша на прасета (извън учебника).'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){
+    var shape='<circle class="dot" r="5.5" fill="'+p.col+'"/>';
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+p.x+','+p.y+')"><circle class="halo" r="6" stroke="'+p.col+'"/>'+shape+'<text x="'+(p.dx===undefined?8:p.dx)+'" y="'+((p.dy||0)+3)+'" text-anchor="'+(p.a||'start')+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+p.col+'"></i>'+p.t+'</button>'}).join('');
+})();
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.t+'</h3><p>'+p.d+'</p>';
+  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('map')){addXP(4,'Всички точки са открити!');award('cartograph')}}
+  if(p.card)unlockCard(p.card);
+}
+$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+$('#mapLegend').innerHTML='<span><i style="background:#9E1B32"></i>Власт: замък</span><span><i style="background:#1E8E4E"></i>Селяни: труд и живот</span><span><i style="background:#2F6FB0"></i>Църква</span><span><i style="background:#9A6D00"></i>▶ към господаря</span>';
+
+var MSTEPS=[
+  {cap:'<b>Имението.</b> Замък на сеньора или васала, село на селяните, ниви, пасище, гора, река с мелница и църква. Всичко това е част от един свят, в който земята е най-голямата ценност.'},
+  {cap:'<b>Феодът.</b> Сеньорът дава земята на своя васал заедно с живеещите на нея селяни. Червената пунктирана линия показва границата на феода. Той изхранва и въоръжава васала.'},
+  {cap:'<b>Кой работи.</b> Селяните работят на нивите, пасищата и мелницата от сутрин до вечер. Те осигуряват всичко необходимо на другите две съсловия.'},
+  {cap:'<b>Какво дължат.</b> Селяните плащат данъци и такси и работят за господаря. Свободните селяни дължат данъци само на краля и Църквата, а сервите са в лична зависимост от феодала или духовника.'},
+  {cap:'<b>Васалът към сеньора.</b> Васалът му дължи вярност: войска, парична помощ, обръща се към него при съдебен спор. Сеньорът го закриля и се грижи за семейството му при смъртта му.'}
+];
+X.mapCur=X.mapCur||0;X.mapSeen=X.mapSeen||{0:1};var playing=null;
+function mapStep(i,quiet){
+  X.mapCur=i;
+  $('#lyrB').classList.toggle('on',i>=1);
+  [1,2,3,4].forEach(function(k){$('#lyr'+k).classList.toggle('on',i===k)});
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',!!X.mapSeen[k]&&k!==i)});
+  $('#stepCap').innerHTML=MSTEPS[i].cap;
+  if(!quiet&&!X.mapSeen[i]){
+    X.mapSeen[i]=1;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',!!X.mapSeen[k]&&k!==i)});
+    addXP(3);
+    if(Object.keys(X.mapSeen).length===MSTEPS.length&&flag('steps'))addXP(5,'Всички стъпки са разгледани!');
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){stopPlay();mapStep(+b.getAttribute('data-st'))})});
+function stopPlay(){if(playing){clearTimeout(playing);playing=null;$('#playBtn').textContent='▶ Покажи стъпките'}}
+$('#playBtn').addEventListener('click',function(){
+  if(playing){stopPlay();return}
+  var i=0;this.textContent='⏸ Спри';
+  (function tick(){mapStep(i);i++;if(i<MSTEPS.length)playing=setTimeout(tick,3400);else{playing=setTimeout(function(){stopPlay()},3000)}})();
+});
+mapStep(X.mapCur,true);
+
+/* ================= ПОДРЕЖДАНЕ (общ помощник) ================= */
+function makeSorter(key,ol,ITEMS,btn,fb,okHtml,hintHtml,xpFirst,xpNext,onSolve){
+  X.srt=X.srt||{};var st=X.srt[key]=X.srt[key]||{};
+  var RK=ITEMS.map(function(t){return t[2]}).sort(function(a,b){return a-b});
+  function isSolved(o){return o.every(function(i,p){return ITEMS[i][2]===RK[p]})}
+  function cur(){return $$('.sitem',ol).map(function(li){return +li.getAttribute('data-i')})}
+  function sync(){st.order=cur();saveNow()}
+  function clearMarks(){if(ol.classList.contains('sorted'))return;$$('.sitem',ol).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});fb.className='fb';sync()}
+  function bindItem(li){
+    $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+      if(ol.classList.contains('sorted'))return;
+      var d=+b.getAttribute('data-mv');
+      if(d<0&&li.previousElementSibling)ol.insertBefore(li,li.previousElementSibling);
+      else if(d>0&&li.nextElementSibling)ol.insertBefore(li.nextElementSibling,li);
+      clearMarks();
+    })});
+    var h=$('.handle',li),startY=0,dragging=false,pid=null;
+    h.addEventListener('pointerdown',function(ev){
+      if(ol.classList.contains('sorted'))return;
+      dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+      try{h.setPointerCapture(pid)}catch(e){}
+      ev.preventDefault();
+    });
+    h.addEventListener('pointermove',function(ev){
+      if(!dragging||ev.pointerId!==pid)return;
+      var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+      var prev=li.previousElementSibling,next=li.nextElementSibling;
+      if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;ol.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+      else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;ol.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+    });
+    function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+    h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+  }
+  function render(order){
+    ol.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt">'+ITEMS[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+    $$('.sitem',ol).forEach(bindItem);
+  }
+  var order=(st.order&&st.order.length===ITEMS.length)?st.order:(function(){var o;do{o=shuffle(ITEMS.map(function(_,i){return i}))}while(isSolved(o));return o})();
+  render(order);
+  function showSolved(){ol.classList.add('sorted');$$('.sitem',ol).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});btn.disabled=true;fb.className='fb ok';fb.innerHTML=okHtml}
+  if(st.solved)showSolved();
+  btn.addEventListener('click',function(){
+    if(ol.classList.contains('sorted'))return;
+    st.tries=(st.tries||0)+1;saveNow();var items=$$('.sitem',ol),ok=0;
+    items.forEach(function(li,pos){var good=ITEMS[+li.getAttribute('data-i')][2]===RK[pos];li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+    if(ok===items.length){st.solved=true;showSolved();onSolve(st.tries===1?xpFirst:xpNext)}
+    else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести етапите с ✗ и провери пак. '+hintHtml}
+  });
+}
+
+/* ================= ПЪТЯТ НА РИЦАРЯ ================= */
+makeSorter('knight',$('#sortl'),[
+  [0,'Момче в дома на сеньор: учи се да воюва, да язди, да ловува и да се държи с дамите',0],
+  [0,'Слуга в дома на сеньора',1],
+  [0,'Оръженосец',2],
+  [0,'Посвещаване в рицарство при пълнолетие',3],
+  [0,'Турнири или търсене на сеньор, пред когото да положи клетва',4]
+],$('#tlCheck'),$('#tlFb'),
+ '<b>Отлично, хронисте!</b> Момче → слуга → оръженосец → посвещаване при пълнолетие → турнири (слава и вниманието на дамите) или търсене на сеньор, ако рицарят няма феод.',
+ 'Подсказка: първо е момчето в дома на сеньора, а последно — турнирите и търсенето на сеньор.',15,8,
+ function(xp){if(flag('tl')){addXP(xp,'Пътят е подреден!');award('chrono');unlockCard('knight')}});
+
+/* ================= ЦЕРЕМОНИЯТА ================= */
+(function buildCer(){
+  var s='<rect width="400" height="220" fill="#EEF0F5"/><rect y="190" width="400" height="30" fill="#D9DDE6"/>';
+  /* сеньор вляво */
+  s+='<rect x="84" y="95" width="44" height="95" rx="10" fill="#1B2A41"/><circle cx="106" cy="75" r="17" fill="#F2D3B3"/><path d="M92,62 l5,-10 5,8 5,-8 5,10 z" fill="#C9962B"/><text x="106" y="210" text-anchor="middle" style="font:700 10px var(--body)" fill="#1B2A41">сеньорът (граф Гийом)</text>';
+  /* васал вдясно (на коляно) */
+  s+='<rect x="278" y="128" width="46" height="62" rx="10" fill="#9E1B32"/><circle cx="301" cy="108" r="16" fill="#F2D3B3"/><text x="301" y="210" text-anchor="middle" style="font:700 10px var(--body)" fill="#7A1426">васалът</text>';
+  /* стъпка 0: ръце */
+  s+='<g class="cl" id="cl0"><path d="M128,125 L188,140" stroke="#F2D3B3" stroke-width="9" stroke-linecap="round"/><path d="M278,145 L212,140" stroke="#F2D3B3" stroke-width="9" stroke-linecap="round"/><circle cx="200" cy="140" r="12" fill="#C9962B" opacity=".9"/><text x="200" y="118" text-anchor="middle" style="font:700 10px var(--body)" fill="#1B2A41">ръце в ръце</text></g>';
+  /* стъпка 1: клетва */
+  s+='<g class="cl" id="cl1"><rect x="146" y="22" width="206" height="54" rx="12" fill="#fff" stroke="#9E1B32" stroke-width="2"/><path d="M290,76 l8,18 l-20,-18z" fill="#fff" stroke="#9E1B32" stroke-width="2"/><text x="249" y="42" text-anchor="middle" style="font:700 10px var(--body)" fill="#1D1F24">„Заклевам се във вярата си,</text><text x="249" y="56" text-anchor="middle" style="font:700 10px var(--body)" fill="#1D1F24">че ще бъда верен на граф Гийом</text><text x="249" y="70" text-anchor="middle" style="font:700 10px var(--body)" fill="#1D1F24">и ще спазвам клетвата си.“</text></g>';
+  /* стъпка 2: мощи */
+  s+='<g class="cl" id="cl2"><rect x="176" y="146" width="48" height="32" rx="4" fill="#C9962B" stroke="#7A5A10" stroke-width="2"/><polygon points="172,146 200,126 228,146" fill="#E3B23C" stroke="#7A5A10" stroke-width="2"/><path d="M200,134 V146 M194,139 H206" stroke="#7A1426" stroke-width="2.4"/><path d="M278,150 L226,160" stroke="#F2D3B3" stroke-width="9" stroke-linecap="round"/><text x="200" y="196" text-anchor="middle" style="font:700 10px var(--body)" fill="#7A5A10">мощите на светците</text></g>';
+  /* стъпка 3: жезъл */
+  s+='<g class="cl" id="cl3"><path d="M128,118 L262,92" stroke="#C9962B" stroke-width="5" stroke-linecap="round"/><circle cx="268" cy="91" r="9" fill="#FFF4DA" stroke="#C9962B" stroke-width="2" class="cglow"/><text x="200" y="76" text-anchor="middle" style="font:700 10px var(--body)" fill="#7A5A10">жезълът на сеньора</text></g>';
+  $('#cerSvg').innerHTML=s;
+})();
+var CER=[
+  '<b>1 · Ръцете</b> <i>(извън учебника, по пълния текст на Галберт)</i>: васалът поставя ръцете си между ръцете на сеньора — знак, че му се доверява и му служи.',
+  '<b>2 · Клетвата</b> (по учебника): „Заклевам се във вярата си от този момент да бъда верен на граф Гийом и да спазвам клетвата си неотклонно.“ Думите свързват васала.',
+  '<b>3 · Мощите</b> (по учебника): васалът се заклева над мощите на светците. Ако наруши клетвата, нарушава и светото. Затова тя е много важна.',
+  '<b>4 · Жезълът</b> (по учебника): сеньорът със жезъла, който държи, посвещава всички, които му са дали клетва за вярност.'
+];
+X.cerSeen=X.cerSeen||{};var cerPlaying=null;
+function cerStep(i,quiet){
+  [0,1,2,3].forEach(function(k){$('#cl'+k).classList.toggle('on',k===i)});
+  $$('#cerSteps button').forEach(function(b){var k=+b.getAttribute('data-c');b.classList.toggle('active',k===i);b.classList.toggle('seen',!!X.cerSeen[k]&&k!==i)});
+  $('#cerCap').innerHTML=CER[i];
+  if(!quiet&&!X.cerSeen[i]){X.cerSeen[i]=1;addXP(2);
+    if(Object.keys(X.cerSeen).length===4&&flag('cer')){addXP(5,'Церемонията е проследена!');award('oath');unlockCard('clito')}else saveNow()}
+}
+function cerStop(){if(cerPlaying){clearTimeout(cerPlaying);cerPlaying=null;$('#cerPlay').textContent='▶ Пусни церемонията'}}
+$$('#cerSteps button').forEach(function(b){b.addEventListener('click',function(){cerStop();cerStep(+b.getAttribute('data-c'))})});
+$('#cerPlay').addEventListener('click',function(){
+  if(cerPlaying){cerStop();return}
+  var i=0;this.textContent='⏸ Спри';
+  (function tick(){cerStep(i);i++;if(i<4)cerPlaying=setTimeout(tick,3800);else cerPlaying=setTimeout(cerStop,3000)})();
+});
+(function(){var last=-1;$$('#cerSteps button').forEach(function(b){if(X.cerSeen[b.getAttribute('data-c')])b.classList.add('seen')})})();
+
+/* ================= УЛИКА: ГАЛБЕРТ ================= */
+(function(){
+  var Q1={q:'Пред кого се полага клетвата?',o:['Пред граф Гийом','Пред краля на Франция','Пред Галберт'],a:0,e:'В текста васалът се заклева да бъде верен на граф Гийом.'};
+  var Q2={q:'Кой елемент е много важен?',o:['Заклеването над мощите на светците — то прави клетвата свещена','Подаръкът за сеньора','Музиката в залата'],a:0,e:'Клетвата е свързана с религията: нарушаването ѝ би било грях.'};
+  var Q3={q:'С какво се задължава васалът?',o:['Да бъде верен на сеньора и да спазва клетвата си неотклонно','Да стане крал','Да плаща данък на Византия'],a:0,e:'Вярност към сеньора — основата на отношенията в Запада.'};
+  var Q4={q:'Свидетел ли е Галберт и може ли да му се вярва напълно?',o:['Бил е свидетел и пише ден след ден, но има своя гледна точка — вярваме внимателно','Не е бил там, измислил е всичко','Всичко е точно, защото е духовник'],a:0,e:'Галберт е очевидец в Брюж, затова изворът е ценен. Той е близо до двора на графовете и пише със собствено мнение, затова го сравняваме с други извори.',after:function(){unlockCard('galbert')}};
+  oneQ($('#c1'),Q1,'c1',4);restoreOneQ($('#c1'),Q1,'c1');
+  oneQ($('#c2'),Q2,'c2',4);restoreOneQ($('#c2'),Q2,'c2');
+  oneQ($('#c3'),Q3,'c3',4);restoreOneQ($('#c3'),Q3,'c3');
+  oneQ($('#c4'),Q4,'c4',5);restoreOneQ($('#c4'),Q4,'c4');
+})();
+
+/* ================= ГОДИНАТА НА СЕЛЯНИНА ================= */
+var TY=['Косенето се прави с <b>коса</b> — дълго извито острие на дръжка. С нея селянинът обира тревата за сено на ливадата. (Миниатюра №4, горе вляво.)','Овчарят пасе стадото. Той е зает по различно време на годината, затова не влиза в подреждането. (Горе вдясно.)','Жътвата е прибирането на узрялото зърно. Жътварят реже стъблата със <b>сърп</b> — малко извито острие. (Долу вляво.)','Вършитбата е отделянето на зърното от класовете. Селянинът удря снопите с <b>цеп</b> — две пръчки, свързани с връзка. (Долу вдясно.)'];
+tilesInit('data-ty',TY,'ty','ty','Миниатюрите са разгледани!');
+makeSorter('year',$('#sortl2'),[
+  [0,'Косене на тревата за сено',0],
+  [0,'Жътва на узрялото зърно със сърп',1],
+  [0,'Вършитба на зърното с цеп',2]
+],$('#yrCheck'),$('#yrFb'),
+ '<b>Точно!</b> Първо сено от ливадата, после жътва на зърното, накрая вършитба. Миниатюрите в учебника не дават месеци, затова тук няма и дати: важи само редът на работата.',
+ 'Подсказка: зърното трябва първо да се пожъне, преди да се вършее.',10,5,
+ function(xp){if(flag('year')){addXP(xp,'Годината е подредена!');award('farmer')}});
+
+/* ================= СНИМКА ================= */
+(function(){
+  var Q={q:'Какво подсказва картината?',o:['Селяните работят, а благородниците живеят в замък и ги закрилят и управляват','Селяните са богати благородници','Замъкът е построен от рицарите, докато косят'],a:0,e:'Трите съсловия работят заедно: селяните осигуряват храна, благородниците защитават.'};
+  oneQ($('#photoQ'),Q,'photoQ',3);restoreOneQ($('#photoQ'),Q,'photoQ');
+})();
+
+/* ================= РОЛЯ: ЗАЩИТНИК НА СЪСЛОВИЕ ================= */
+var EST=[
+  {n:'духовниците',args:[['Молим се за спасението на душите — според средновековната представа това е най-важната мисия',1],['Църквата насърчава благотворителността — грижа за бедните',1],['С Божия мир защитаваме невъоръжените и ограничаваме насилието',1],['Ние косим ливадите и жънем нивите',0],['Ние водим войската на краля в битка',0]]},
+  {n:'благородниците',args:[['Воюваме и защитаваме свещениците и селяните',1],['Васалите служат във войската на сеньора, а сеньорът ги закриля и поема грижата за семействата им',1],['Рицарите са обучени от малки — храбри, силни и покровители на слабите',1],['Ние пишем молитвите и пазим мощите',0],['Ние произвеждаме хляба и тъчем платовете',0]]},
+  {n:'третото съсловие',args:[['Осигуряваме всичко необходимо за живота на другите две съсловия',1],['Ние сме мнозинството от хората',1],['Нашият труд от сутрин до вечер изхранва и благородниците, и духовниците',1],['Ние се молим за спасението на душите',0],['Ние даваме клетва пред краля като негови васали',0]]}
+];
+X.roleDone=X.roleDone||{};
+function renderRole(e){
+  var E=EST[e],box=$('#roleBox');
+  $$('#estPick .btn').forEach(function(b){b.classList.toggle('on',+b.getAttribute('data-e')===e)});
+  box.innerHTML='<p style="margin:0 0 6px"><b>Ти защитаваш '+E.n+'.</b> Докосни доказателствата, които наистина са силни, после провери.</p><div class="argl">'+E.args.map(function(a,i){return '<button class="opt" data-a="'+i+'">'+a[0]+'</button>'}).join('')+'</div><div class="row" style="margin-top:10px"><button class="btn gold" id="roleChk">Провери</button></div><div class="fb" id="roleFb"></div>';
+  $$('#roleBox [data-a]').forEach(function(b){b.addEventListener('click',function(){if(!b.disabled)b.classList.toggle('sel')})});
+  function lock(){
+    $$('#roleBox [data-a]').forEach(function(b,i){b.disabled=true;b.classList.remove('sel');b.classList.add(E.args[i][1]?'right':'wrong')});
+    $('#roleChk').disabled=true;
+    var fb=$('#roleFb');fb.className='fb ok';fb.innerHTML='<b>Силните доказателства са отбелязани с ✓.</b> Другите описват работата на друго съсловие. Смени съсловието и защити и другите две.';
+  }
+  if(X.roleDone[e]){lock();return}
+  $('#roleChk').addEventListener('click',function(){
+    var ok=true;$$('#roleBox [data-a]').forEach(function(b,i){var on=b.classList.contains('sel');if(on!==!!E.args[i][1])ok=false});
+    var fb=$('#roleFb');
+    if(ok){X.roleDone[e]=1;lock();addXP(5,'Силни доказателства!');
+      if(Object.keys(X.roleDone).length===3&&flag('role')){addXP(5,'Защитил си и трите съсловия!');award('advocate')}else saveNow()}
+    else{fb.className='fb bad';fb.innerHTML='<b>✗ Още не.</b> Избери само доказателствата, които са от гледна точка на тези хора и са верни за тях. Погледни пак какво работи всяко съсловие.'}
+  });
+}
+$$('#estPick .btn').forEach(function(b){b.addEventListener('click',function(){renderRole(+b.getAttribute('data-e'))})});
+
+/* ================= ЗАГАДКА: КОЙ НА КОГО ЗАПОВЯДВА ================= */
+var PZ=[
+  {q:'1. Рицар 1 е васал на херцога. Може ли кралят да му заповяда направо?',o:['Не направо — Рицар 1 е обвързан лично само с херцога','Да, защото кралят е над всички','Да, но само в мирно време'],a:0,e:'„Васалът на моя васал не е мой васал“: кралят е сеньор на херцога, а не на рицаря на херцога.'},
+  {q:'2. Може ли графът да заповяда на Рицар 1?',o:['Не — Рицар 1 не е негов васал','Да, защото и двамата са благородници','Да, ако херцогът е далеч'],a:0,e:'Само херцогът е сеньор на Рицар 1.'},
+  {q:'3. При съдебен спор Рицар 3 се обръща към…',o:['графа — своя сеньор','краля, защото е най-силен','херцога, защото е най-богат'],a:0,e:'Васалът се обръща към своя сеньор. Рицар 3 е васал на графа.'},
+  {q:'4. Кои са васали на краля във веригата?',o:['Херцогът и графът','Само рицарите','Селяните'],a:0,e:'Херцозите и графовете са васали на краля, а те имат свои васали — рицарите.'},
+  {q:'5. Рицар 3 дава клетва за вярност на…',o:['графа — своя сеньор','краля, защото е най-висок','всички три по реда'],a:0,e:'Клетвата свързва васала само със собствения му сеньор.'}
+];
+qSet('#puzQs',PZ,'pz',4,function(){if(flag('puzzle')){addXP(6,'Загадката е решена!');award('logic')}});
+
+/* ================= ТВОРЧЕСКА ЗАДАЧА: ГЕРБ ================= */
+var SH_COL=['#9E1B32','#1B2A41','#1E8E4E','#C9962B','#5B3A8C'];
+var SH_CHG=['🦁','🏰','⭐','✚','🌳'];
+X.sh=X.sh||{c:0,g:0,m:''};
+function drawShield(){
+  var col=SH_COL[X.sh.c];
+  $('#shieldSvg').innerHTML='<path d="M10,10 H110 V70 C110,110 80,135 60,145 C40,135 10,110 10,70 Z" fill="'+col+'" stroke="#1D1F24" stroke-width="4"/><path d="M10,10 H110 V70 C110,110 80,135 60,145 C40,135 10,110 10,70 Z" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 3" transform="translate(0,0)" opacity=".7"/><text x="60" y="88" text-anchor="middle" font-size="48">'+SH_CHG[X.sh.g]+'</text>';
+  $('#mottoOut').textContent=X.sh.m?'„'+X.sh.m+'“':'';
+  $$('#swl .sw').forEach(function(b,i){b.classList.toggle('on',i===X.sh.c)});
+  $$('#chgl .chg').forEach(function(b,i){b.classList.toggle('on',i===X.sh.g)});
+}
+function shTouch(){if(flag('shield'))addXP(5,'Гербът е сглобен!');else saveNow()}
+$('#swl').innerHTML=SH_COL.map(function(c,i){return '<button class="sw" style="background:'+c+'" data-s="'+i+'" aria-label="Цвят '+(i+1)+'"></button>'}).join('');
+$('#chgl').innerHTML=SH_CHG.map(function(c,i){return '<button class="chg" data-g="'+i+'" aria-label="Символ '+(i+1)+'">'+c+'</button>'}).join('');
+$$('#swl .sw').forEach(function(b){b.addEventListener('click',function(){X.sh.c=+b.getAttribute('data-s');drawShield();shTouch()})});
+$$('#chgl .chg').forEach(function(b){b.addEventListener('click',function(){X.sh.g=+b.getAttribute('data-g');drawShield();shTouch()})});
+$('#motto').value=X.sh.m;
+$('#motto').addEventListener('input',function(){X.sh.m=this.value.slice(0,40);drawShield();if(X.sh.m.length>2)shTouch()});
+drawShield();
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['lord','господар, лорд','The lord lives in a big castle.'],['vassal','васал','The vassal serves his lord.'],['oath','клетва','He makes an oath to the count.'],['land','земя','The land is very important.'],['field','нива, поле','The farmer works in the field.'],['village','село','The village is near the river.'],['priest','свещеник','The priest prays for the village.'],['tax','данък','The farmers pay a tax.']];
+var ES=[['el señor','господарят; господинът','El señor vive en el castillo.'],['el campo','нивата, полето','El campo es verde.'],['el pueblo','селото','El pueblo es pequeño.'],['la tierra','земята','La tierra es importante.'],['el escudo','щитът, гербът','El escudo es rojo.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+X.heard=X.heard||{};
+function heardOne(k){if(X.heard[k])return;X.heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'senior (лат.)',s:'„по-стар“',b:['сеньор (бълг.)','seigneur (фр.)','señor (исп.)','signore (ит.)','sir и sire (англ.)'],p:'Латинското senior значи „по-стар“. От него идват уважителните обръщения и титлите в много езици. Английските sir и sire са от същия корен — просто са се променили по различен път.'},
+  {r:'vassus (лат.)',s:'от келтска дума за „млад мъж, слуга“',b:['васал (бълг.)','vassal (англ., фр.)','vasallo (исп.)','Vasall (нем.)'],p:'Първоначално думата значи „слуга“ — в най-ранните франкски закони от VI в. По-късно се превръща в „човек на сеньора“, благородник с феод.'},
+  {r:'servus (лат.)',s:'„роб, слуга“',b:['серв (бълг.)','serf (англ., фр.)','siervo (исп.)'],p:'От латинското servus идва и „servant“ (слуга). В средновековието сервът не е роб на пазара, а селянин, обвързан със земята.'},
+  {r:'Erbe (нем.)',s:'„наследство“',b:['герб (бълг., рус.)','herb (пол.)','erb (чеш.)'],p:'В славянските езици думата „герб“ идва от немското Erbe — „наследство“, през чешки и полски. Гербът се предава от баща на син, като наследство на рода.'}
+];
+function etyHTML(arr,pre){return arr.map(function(e,i){return '<button class="ety" data-'+pre+'="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('')}
+$('#etym').innerHTML=etyHTML(ETY,'y');
+X.ySeen=X.ySeen||{};
+$$('.ety[data-y]').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!X.ySeen[i]){X.ySeen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'Какво е феод?',o:['Земя, която сеньорът дава на васала заедно с живеещите на нея селяни','Титла на краля','Вид клетва'],a:0,e:'Феодът изхранва и въоръжава васала.'},
+  {q:'Кой е васал?',o:['Дребен аристократ, който получава земя от сеньора и му служи като воин','Селянин, който работи в нивата','Монах в манастира'],a:0,e:'Васалът е благородник, който се поставя под закрилата на сеньора.'},
+  {q:'Към кое съсловие принадлежат занаятчиите и търговците?',o:['Към третото — заедно със селяните','Към благородниците','Към духовенството'],a:0,e:'Третото съсловие е всички останали: селяни, занаятчии и търговци.'}],
+ [{q:'Какво прави сеньорът за своя васал?',o:['Покровителства го и поема грижата за семейството му след смъртта му','Взема феода му веднага след клетвата','Плаща му заплата всеки месец'],a:0,e:'Връзката е взаимна: вярност срещу закрила.'},
+  {q:'Какво значи „Васалът на моя васал не е мой васал“?',o:['Всеки е обвързан лично само със своя сеньор','Кралят командва всички рицари направо','Васалите нямат сеньор'],a:0,e:'Кралят е сеньор на херцозите и графовете, а те на своите рицари.'},
+  {q:'Какво представлява Божият мир (по учебника)?',o:['Договор на Църквата с благородниците, който забранява войната в определени дни и защитава невъоръжените','Награда за най-смелия рицар','Заповед на краля за нов поход'],a:0,e:'Така Църквата ограничава насилието.'}],
+ [{q:'Какъв е пътят на рицаря?',o:['Момче при сеньор → слуга → оръженосец → посвещаване при пълнолетие','Селянин → търговец → крал','Монах → епископ → рицар'],a:0,e:'Обучението е дълго и започва от малък.'},
+  {q:'Кои са серви?',o:['Селяни в лична зависимост от феодали и духовници, без право да напускат земята си','Рицари без феод','Богати търговци'],a:0,e:'Свободните селяни, които притежават земя, могат да я напуснат или продадат.'},
+  {q:'Що е девиз?',o:['Кратко изречение в герба за най-важното от характера на носителя или рода му','Вид оръжие','Името на турнира'],a:0,e:'Гербът е отличителен знак на рицаря.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Слуга','Оръженосец','Рицар'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Сеньор','Земевладелец, който предоставя част от земите си срещу военни и други задължения.'],['Васал','Благородник, който се поставя под закрилата на сеньора и получава от него феод.'],['Васалитет','Цялата система от лични отношения между васал и сеньор.'],['Феод','Земя, която сеньорът дава на васала си, за да се въоръжи. Става наследствена.'],['Феодал','Притежател на феод.'],['Съсловие','Голяма група хора с определени права и задължения в обществото.'],['Божи мир','Договор на Църквата с благородниците: забранява войната в определени дни и защитава невъоръжените.'],['Серв','Селянин в лична зависимост от господаря, без право да напуска земята.'],['Рицар','Символ на аристокрацията: Христов воин и покровител на слабите.'],['Герб и девиз','Отличителен знак на рицаря и кратко изречение за характера на рода му.'],['„Васалът на моя васал не е мой васал“','Всеки е лично обвързан само със своя сеньор.']];
+X.fI=X.fI||0;var flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[X.fI][0];$('#fBack').textContent=FC[X.fI][1];$('#fNum').textContent=(X.fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){X.fI=(X.fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){X.fI=(X.fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата.';
+}
+var SUS=[
+ {t:'Всички хора са равни и всеки свободно напуска земята си, когато иска',ok:0,e:'Не. Улика 4: серви не могат да напускат земята, на която са родени.'},
+ {t:'Земята е най-голямата ценност. Сеньорът дава феод на васала срещу военна служба и клетва за вярност, а васалът управлява селяните. Всеки е обвързан лично само със своя сеньор. Обществото е от три съсловия: едни се молят, други воюват, а трети работят и изхранват всички',ok:1,e:'Точно! Улика 1: феодът. Улика 2: клетвата и веригата на васалите. Улика 3: трите съсловия. Улика 4: рицарите и селяните.'},
+ {t:'Кралят командва пряко всеки рицар в държавата',ok:0,e:'Не. Улика 2: „Васалът на моя васал не е мой васал“ — рицарят е обвързан със своя сеньор.'},
+ {t:'Селяните воюват и управляват, а благородниците орат нивите',ok:0,e:'Не. Улика 3: благородниците воюват, а селяните работят.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 10. Обществото в средновековния Запад (VI – X в.)\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nПериод: VI – X в. Извор: Галберт от Брюж, „Хроника“ (XII в.) — клетвата пред граф Гийом, 1127 г.\n\nПонятия: сеньор, васал (васалитет), феод (феодал), съсловие, Божи мир, серв, рицар, герб, девиз.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='1127';$('#dC').textContent='XII в.';$('#dP').textContent='Брюж, Фландрия';
+    setTM('1127','XII в.','Брюж · Фландрия');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 1127 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  Object.keys(X.orgSeen||{}).forEach(function(id){var b=$('#org .orgb[data-o="'+id+'"]');if(b)b.classList.add('seen')});
+  Object.keys(X.pyrSeen||{}).forEach(function(i){var b=$('#pyr button[data-p="'+i+'"]');if(b)b.classList.add('seen')});
+  Object.keys(S.seen).forEach(function(id){if(!S.seen[id])return;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(X.ySeen||{}).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+  var re=Object.keys(X.roleDone||{});if(re.length)renderRole(+re[re.length-1]);
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>
