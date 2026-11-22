@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 14 · Възходът на християнска България</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+
+/* ===== добавки за урок 11 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.routes path{stroke:#9E1B32}
+.routes polygon{opacity:0;transition:opacity .3s .7s;fill:#9E1B32}
+.routes polygon.show{opacity:1}
+.ter{transition:opacity .6s}
+.ter.hid{opacity:0}
+.steps.s4{grid-template-columns:repeat(2,1fr)}
+.bbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.bbox svg{width:100%;height:auto;display:block}
+.bbox .bl{font:700 9px var(--body);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.8);stroke-width:2.5px}
+.bdots{display:flex;gap:6px;justify-content:center;margin:8px 0 0}
+.bdots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block}
+.bdots i.on{background:var(--red)}
+@keyframes dirline{to{stroke-dashoffset:0}}
+.tv-list{display:grid;gap:8px;margin-top:10px}
+.tv-chip{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;min-height:52px;padding:10px 12px;text-align:left;font-size:.95rem;color:var(--ink);touch-action:manipulation}
+.tv-chip.placed{border-color:var(--ok);background:var(--ok-soft)}
+.tv-chip.placed:before{content:"✓ ";color:var(--ok);font-weight:800}
+.tv-gain{display:block;margin-top:6px;font-size:.88rem;color:#146638}
+.tv-order{display:inline-block;background:var(--navy);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-right:6px}
+.cyc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.cyc span{background:#fff;border:2px solid var(--line);border-radius:10px;padding:4px 8px;font-size:.85rem}
+.cyc span.snake{border-color:var(--gold);background:var(--gold-soft);font-weight:700}
+.quote{border-left:4px solid var(--gold);background:#fff;border-radius:0 12px 12px 0;padding:10px 12px;margin:10px 0;font-size:.95rem;font-style:italic}
+.quote small{display:block;font-style:normal;color:var(--muted);margin-top:4px}
+.mad-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.mad-btns button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:48px;font-size:.85rem;font-weight:700;color:var(--ink);padding:4px}
+.mad-btns button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.mad-btns button.seen:not(.active){border-color:var(--gold)}
+.twocol{display:grid;gap:10px}
+@media (min-width:600px){.twocol{grid-template-columns:1fr 1fr}}
+/* ===== добавки за урок 12 ===== */
+.vbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.vbox svg{width:100%;height:auto;display:block}
+.vbox .bl{font:700 9px var(--body);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.8);stroke-width:2.5px}
+#vArmy,#vBg,#vBar,#vArr,#vFire{opacity:0;transition:transform 1.1s ease,opacity .7s}
+.v1 #vArmy,.v1 #vFire{opacity:1}
+.v2 #vArmy{opacity:1;transform:translate(0,48px)}
+.v2 #vFire{opacity:1}
+.v3 #vArmy{opacity:1;transform:translate(0,48px)}
+.v3 #vFire{opacity:1}
+.v3 #vBg,.v3 #vBar{opacity:1}
+.v4 #vArmy,.v4 #vFire,.v4 #vBg,.v4 #vBar,.v4 #vArr{opacity:1}
+.v4 #vArmy{transform:translate(0,58px)}
+.v5 #vFire,.v5 #vBg,.v5 #vBar{opacity:1}
+.v5 #vArmy{opacity:.3;transform:translate(0,70px)}
+.v5 #vCrown{opacity:.25}
+#vArr line{stroke-dasharray:90;stroke-dashoffset:90}
+.v4 #vArr line,.v5 #vArr line{animation:dirline .9s ease forwards}
+.v5 #vArr{opacity:.4}
+.gov{display:grid;gap:8px;margin-top:10px}
+.gov .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gov .arr{text-align:center;color:var(--muted);line-height:1}
+.gov button{border:0;border-bottom:4px solid rgba(0,0,0,.25);border-radius:12px;min-height:52px;padding:8px 10px;color:#fff;font-weight:700;font-size:.95rem;line-height:1.25;touch-action:manipulation}
+.gov button small{display:block;font-weight:400;font-size:.78rem;opacity:.9}
+.gov button.g-khan{background:#9E1B32}
+.gov button.g-sal{background:#C25E4E}
+.gov button.g-sov{background:#2F7FAE}
+.gov button.g-kom{background:#2E8B57}
+.gov button.seen:after{content:" ✓"}
+.gov button.on{outline:3px solid var(--gold);outline-offset:1px}
+#plSvg [data-b]{transition:opacity .6s,filter .6s}
+#plSvg [data-b]:not(.on){opacity:.22;filter:grayscale(1)}
+#plSvg #wallIn{stroke-dasharray:7 6;transition:stroke-dasharray .6s}
+#plSvg #wallIn.on{stroke-dasharray:none}
+#plFire{transition:opacity .6s}
+#plFire.out{opacity:0}
+.plbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.plbox svg{width:100%;height:auto;display:block;touch-action:manipulation}
+.plbox [data-zone]{cursor:pointer}
+.plbox .zl{font:700 9px var(--body);fill:#5B6270;text-anchor:middle;pointer-events:none;letter-spacing:.06em}
+/* Noto Sans Glagolitic (SIL OFL 1.1), само блокът U+2C00–2C5F, вграден, за да се виждат буквите и без интернет */
+@font-face{font-family:"GlagEmb";src:url(data:font/woff2;base64,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) format("woff2");unicode-range:U+2C00-2C5F;font-display:swap}
+/* ===== добавки за урок 13 ===== */
+.gl{font-family:"GlagEmb","Noto Sans Glagolitic","Segoe UI Historic","Noto Sans",sans-serif;font-weight:400;font-style:normal;line-height:1.2}
+.gtab{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.gtab button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:64px;padding:4px 2px;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;touch-action:manipulation}
+.gtab button .gl{font-size:1.7rem;color:var(--red-2)}
+.gtab button b{font-size:.95rem;line-height:1}
+.gtab button small{font-size:.62rem;color:var(--muted);line-height:1.1}
+.gtab button.on{border-color:var(--gold);background:var(--gold-soft)}
+.gword{font-size:2.2rem;text-align:center;letter-spacing:.12em;color:var(--red-2);background:#fff;border-radius:12px;padding:8px 6px;margin:8px 0;border:2px solid var(--line);word-break:break-all}
+.ginp{width:100%;min-height:48px;border:2px solid var(--line);border-radius:12px;padding:8px 12px;font:inherit;font-size:1.05rem;text-transform:uppercase}
+.gout{font-size:2.1rem;text-align:center;color:var(--red-2);min-height:3rem;margin-top:8px;word-break:break-all;letter-spacing:.1em}
+.abox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.abox svg{width:100%;height:auto;display:block}
+.abox .al{font:700 10px var(--body);fill:var(--ink);text-anchor:middle}
+#aCircle,#aCross,#aTri,#aGl{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:opacity .7s,transform .7s}
+.a1 #aCircle,.a2 #aCircle,.a3 #aCircle,.a4 #aCircle{opacity:1;transform:none}
+.a2 #aCross,.a3 #aCross,.a4 #aCross{opacity:1;transform:none}
+.a3 #aTri,.a4 #aTri{opacity:1;transform:none}
+.a4 #aGl{opacity:1;transform:none}
+.steps.s5{grid-template-columns:repeat(3,1fr)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.modes button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:6px;font-weight:700;font-size:.9rem;color:var(--ink);touch-action:manipulation}
+.modes button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.rseg{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.1s ease}
+.rseg.show{stroke-dashoffset:0}
+.rhead{opacity:0;transition:opacity .3s .9s}
+.rhead.show{opacity:1}
+#mapSvg [data-ter]{cursor:pointer;transition:fill .6s,opacity .6s}
+#mapSvg .rc-line{fill:none;stroke:#1B2A41;stroke-width:3;stroke-dasharray:7 4;opacity:0;transition:opacity .6s}
+#mapSvg.rc .rc-line{opacity:1}
+#mapSvg.rc [data-ter]:not(.rc-r):not(.rc-c){opacity:.35}
+#mapSvg.rc .rc-r{fill:#3A6FB5!important}
+#mapSvg.rc .rc-c{fill:#E39A1C!important}
+.lg-rc{display:none}
+.rcmode .lg-rc{display:inline-flex}
+.rcmode .lg-nrm{display:none}
+.rcbar{display:none;margin-top:10px}
+.rcmode .rcbar{display:flex}
+.routebar{margin-top:10px}
+.rcmode .routebar{display:none}
+.game{display:grid;gap:10px;margin-top:10px}
+.grow{background:var(--soft);border-radius:14px;padding:10px 12px}
+.grow b{font-family:var(--head);color:var(--red-2);font-size:1.05rem}
+.gbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
+.gbtns button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:48px;padding:4px;font-weight:700;font-size:.82rem;color:var(--ink);line-height:1.15;touch-action:manipulation}
+.gbtns button.right{border-color:var(--ok);background:var(--ok-soft)}
+.gbtns button.right:before{content:"✓ "}
+.gbtns button.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.gbtns button.wrong:before{content:"✗ "}
+.grow .fb{margin-top:8px}
+.rm{color:#2A5A9A}.cp{color:#8A5A00}
+.gtab+.gword{margin-top:12px}
+@media (max-width:370px){.gtab{grid-template-columns:repeat(4,1fr)}.gbtns button{font-size:.74rem}}
+.rcmode #routesG{display:none}
+/* ===== добавки за урок 14 ===== */
+.chapter{background:var(--navy);color:#fff;border-radius:16px;padding:14px 16px;margin:20px 0 12px;display:flex;gap:12px;align-items:center}
+.chapter b{font-family:var(--head);font-size:1.15rem;display:block;line-height:1.2}
+.chapter small{opacity:.85;font-size:.9rem}
+.chapter .num{background:var(--gold);color:var(--navy);border-radius:12px;font-weight:800;font-size:1.3rem;min-width:44px;height:44px;display:grid;place-items:center}
+.stp{opacity:0;pointer-events:none;transition:opacity .8s}
+.stp.show{opacity:1}
+#mapSvg [data-ter].stp.show{pointer-events:auto}
+#seaHl{opacity:0;transition:opacity .8s;pointer-events:none}
+#mapSvg.seas #seaHl{opacity:.6}
+.mvdots{display:flex;gap:6px;margin:8px 0;flex-wrap:wrap}
+.mvdots span{flex:1;min-width:46px;text-align:center;border:2px solid var(--line);border-radius:10px;padding:6px 2px;font-size:.72rem;font-weight:700;color:var(--muted);background:#fff}
+.mvdots span.on{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.mvdots span.cur{border-color:var(--navy);color:var(--navy)}
+.cmove{margin-top:10px}
+.cmove h4{margin:0 0 6px;font-family:var(--head);color:var(--red-2);font-size:1.05rem}
+.tile.gold.open{background:var(--gold-soft);border-color:var(--gold)}
+.pairs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.pairs button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:76px;padding:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink);touch-action:manipulation}
+.pairs button .gl{font-size:2rem;color:var(--red-2);line-height:1.1}
+.pairs button .cy{font-size:1.9rem;font-weight:700;font-family:var(--head);color:var(--navy)}
+.pairs button small{font-size:.62rem;color:var(--muted)}
+.pairs button.open{border-color:var(--gold);background:var(--gold-soft)}
+#gRom rect{fill:#7C5DA8}#gBul rect{fill:#9E1B32}#gRes rect{fill:#1B2A41}
+#gRom,#gBul,#gRes{transition:transform 1.3s ease,opacity .6s}
+#gRes,#gSign,#gFlee{opacity:0;transition:opacity .6s}
+.b3 #gSign,.b4 #gSign{opacity:1}
+.b3 #gRes,.b4 #gRes,.b5 #gRes{opacity:1}
+.b5 #gFlee{opacity:1}
+.b1 #gRom{transform:translateX(-80px)}
+.b2 #gRom{transform:translateX(-60px)}.b2 #gBul{transform:translateX(-30px)}
+.b3 #gRom{transform:translateX(-60px)}.b3 #gBul{transform:translateX(-30px)}
+.b4 #gRom{transform:translateX(-60px)}.b4 #gBul{transform:translateX(40px)}.b4 #gRes{transform:translateX(70px)}
+.b5 #gRom{transform:translateX(30px)}.b5 #gBul{transform:translateX(80px)}.b5 #gRes{transform:translateX(120px)}
+.bdots{display:flex;gap:6px;justify-content:center;margin-top:6px}
+.bdots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.bdots i.on{background:var(--gold)}
+.mapbox svg{max-height:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/9</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 14</div>
+  <h1>Възходът на християнска България</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детективе, през 852 г. на българския престол се качва Борис I — поредният хан от Крумовата династия. Той ще покръсти българите и ще започне възхода на християнска България. Урокът има <b>две глави</b> и <b>два скока във времето</b>. Първият те отвежда в Плиска. Натисни бутона!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 865 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„От езическо ханство до „Златен век““</h2>
+  <p>През 852 г. България е ханство, а християнските държави гледат с недоверие на нейния езически владетел. Само седем десетилетия по-късно неговият син носи титла „цар“, ромеите треперят пред войските му, а българските книжовници преписват книги на роден език. <b>Какво се случва между двете дати?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №2</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №3</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №4</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №6</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+</div>
+
+<!-- ================= ГЛАВА 1 ================= -->
+<div class="chapter"><span class="num">1</span><span><b>Борис I и Покръстването</b><small>865 г. · Плиска</small></span></div>
+
+<!-- ===== ДОСИЕ 1 ===== -->
+<section class="card" id="s1" data-tm="852 – 865|IX в.|Плиска">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Княз Борис I и Покръстването</h2>
+  <div data-story>
+    <p><span class="key">🔑 852 – 889 г.</span> Княз <b>Борис I</b> е прозорлив държавник. Той разбира, че бъдещето на България е в приемането на християнството. Решението е тежко — трябва да се скъса със старите богове, но причините са важни.</p>
+    <p>През <b>863 г.</b> българите търпят поражение във война с ромеите. Между двете държави се сключва <b>30-годишен мирен договор</b>. Най-важното му условие: българите да приемат християнството от Константинопол.</p>
+    <p>През <span class="key">🔑 865 г.</span> византийски духовници <button class="term" data-t="pokrastvane">покръстват</button> Борис I заедно със семейството му в Плиска. Вместо титлата хан владетелят приема славянската титла <b>княз</b>.</p>
+    <p>Новата вяра се разпространява от духовници на гръцки език и е неразбираема за българите. Страхът от засилване на византийското влияние предизвиква недоволство и <b>открит бунт</b> — той е потушен.</p>
+    <p class="note">ℹ️ Учебникът дава 865 г. В някои издания се среща и 864 г. — датировката не е напълно сигурна. Ние следваме учебника.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Защо Борис избира християнството? Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles">
+      <button class="tile" data-tile="0"><b>🎯 Причините</b>Докосни…</button>
+      <button class="tile" data-tile="1"><b>⚔️ 863 г.</b>Докосни…</button>
+      <button class="tile" data-tile="2"><b>🔑 865 г.</b>Докосни…</button>
+      <button class="tile" data-tile="3"><b>🔥 Бунтът</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2 + ШАХМАТ ===== -->
+<section class="card" id="s2" data-tm="863 – 879|IX в.|Плиска · Константинопол · Рим">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>България между Рим и Константинопол</h2>
+  <div data-story>
+    <p>Борис иска <button class="term" data-t="tsarkva">Църква</button>, подчинена на волята на владетеля — по примера на Византия. Но патриарх <b>Фотий</b> в Константинопол не иска да допусне духовна самостоятелност на българите.</p>
+    <p>Тогава Борис, ловък дипломат, се възползва от противоречията между Рим и Константинопол. През <b>866 г.</b> той се обръща към папа <b>Николай I</b>. В България пристигат римски духовници, които започват наново да покръстват народа — този път на латински език. Това обърква хората и сериозно смущава Константинопол.</p>
+    <p>Византия отстъпва пред опасността най-голямата по това време славянска държава да попадне под властта на Римския папа. През <span class="key">🔑 870 г.</span> църковен събор във византийската столица решава да се създаде <b>Българска църква начело с архиепископ</b> — под върховната власт на Константинополския патриарх. През <b>879 г.</b> с ново решение Българската архиепископия получава <b>пълна самостоятелност</b>.</p>
+    <p>Нейният духовен глава се избира от българското духовенство по препоръка на владетеля. Християнска България заема авторитетно място в европейския Изток.</p>
+  </div>
+  <div class="task">
+    <h3>♟ Шахматът на Борис — ти си Борис!</h3>
+    <p style="margin-top:0">Шест хода: 863 → 865 → бунтът → 866 → 870 → 879. На всеки ход избери и виж какво печели България.</p>
+    <div class="mvdots" id="mvdots"></div>
+    <div id="chess"></div>
+    <div class="fb" id="chessFb"></div>
+  </div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 3 ===== -->
+<section class="card" id="s3" data-tm="886|IX в.|Плиска и Охрид">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Просветителската мисия на учениците</h2>
+  <div data-story>
+    <p>Княз Борис I Покръстител спасява и делото на св. св. Кирил и Методий. Той приема <span class="key">🔑 886 г.</span> техните ученици и става техен покровител. Сред тях се открояват <b>Климент</b> и <b>Наум</b>. Те създават <button class="term" data-t="shkola">книжовни школи</button> в Македония с център <b>Охрид</b> и в столицата <b>Плиска</b>.</p>
+    <p>В школите се обучават бъдещи духовници, превеждат се и се преписват най-важните богослужебни книги. Под ръководството на Наум в Плиска творят изтъкнати книжовници, сред които и Борисовият син <b>Симеон</b>. В Охрид Климент обучава за седем години, по житието му, <b>3500 ученици</b>.</p>
+    <p>Кирило-Методиевите ученици създават и нова славянска азбука — <b>кирилицата</b>. Тя постепенно заменя глаголицата.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Пътят на буквите. Докосвай стъпка по стъпка</h3>
+    <div class="chain" id="chain">
+      <button data-n="0"><b>886 · Приемането</b> · докосни</button>
+      <div class="arrow">↓</div>
+      <button data-n="1" disabled><b>Охрид</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="2" disabled><b>Плиска</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="3" disabled><b>Кирилицата</b> · 🔒</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДВЕ АЗБУКИ ===== -->
+<section class="card" id="abc" data-tm="IX – X в.|·|Плиска и Охрид">
+  <div class="dossier-tag navy">🔤 ДВЕ АЗБУКИ</div>
+  <h2>Глаголица и кирилица</h2>
+  <p>В урок 13 видя <b>глаголицата</b> — азбуката на Кирил и Методий, пълна с кръгове и извивки. Нейната наследница <b>кирилицата</b> се пише с <b>прави линии</b> — лесна е за изписване. По учебника основният елемент при писането на кирилицата е правата линия.</p>
+  <div class="stage">
+    <h3 style="margin-top:0">👆 Обърни плочките: глаголица → кирилица</h3>
+    <div class="pairs" id="pairs"></div>
+  </div>
+  <div class="stage">
+    <h3 style="margin-top:0">🎮 Глаголица или кирилица?</h3>
+    <p style="margin-top:0;font-size:.92rem">Погледни знака и познай. Подсказка: кръгове и извивки или прави линии?</p>
+    <div id="abcQs"></div>
+  </div>
+  <div class="stage">
+    <h3 style="margin-top:0">🌍 Кирилицата днес</h3>
+    <div class="tiles" id="tilesCyr">
+      <button class="tile" data-tilec="0"><b>🇧🇬 България</b>Докосни…</button>
+      <button class="tile" data-tilec="1"><b>🇷🇸 Сърбия</b>Докосни…</button>
+      <button class="tile" data-tilec="2"><b>🇷🇺 Русия</b>Докосни…</button>
+      <button class="tile" data-tilec="3"><b>🇺🇦 Украйна · 🇧🇾 Беларус</b>Докосни…</button>
+      <button class="tile" data-tilec="4"><b>🇪🇺 2007 г.</b>Докосни…</button>
+      <button class="tile" data-tilec="5"><b>🔢 Колко букви?</b>Докосни…</button>
+    </div>
+  </div>
+  <p class="note">Кирилицата е използвана в средновековните държави на южните и източните славяни. Благодарение на българските книжовници тя става азбука на много народи.</p>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="X в.|·|Охрид">
+  <div class="dossier-tag">🎭 РОЛЯ</div>
+  <h2>Ти си ученик в школата на Климент</h2>
+  <p class="note">⚠️ Разговорът е <b>измислен</b>. Фактите са по учебника и по житието на Климент.</p>
+  <div data-story>
+    <p>Намираш се в Охрид. Учителят Климент ти подава таблица с новите букви. Отговори като добър ученик.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Първа задача</h3>
+    <div id="roleQ1" class="qblock"></div>
+    <h3 style="margin-top:14px">👆 Втора задача</h3>
+    <div id="roleQ2" class="qblock"></div>
+  </div>
+</section>
+
+<!-- ===== ДВЕ УЛИКИ ===== -->
+<section class="card" id="src" data-tm="IX – X в.|·|архивът на детектива">
+  <div class="dossier-tag">🔎 УЛИКИТЕ: ДВА ИЗВОРА</div>
+  <h2>Два погледа към едно събитие</h2>
+  <p>Ето откъси от два извора — преразказани кратко. Единият е от Запад, другият — от Византия. Прочети и разпитай и двата.</p>
+  <div class="stage">
+    <b>📜 „Бертински летописи“, IX в. · бунтът на болярите</b>
+    <div class="quote">Владетелят на българите приел светото кръщение, защото Бог го вдъхновил чрез знамения и бедствия сред народа и царството му. Недоволни от това, неговите боляри вдигнали народа срещу него и се събрали около двореца му. Но князът призовал името на Христос и потеглил срещу тълпата. Той наказал със смърт само петдесет и двама от болярите, които най-много бунтували, а на останалите позволил да си отидат невредими.</div>
+    <div id="srcQa1" class="qblock"></div>
+    <div id="srcQa2" class="qblock"></div>
+  </div>
+  <div class="stage">
+    <b>📜 Йосиф Генезий, „Царе“, X в. · покръстването</b>
+    <div class="quote">Владетелят на българите Борис се съгласил на мир. Освен това хората му били измъчвани от глад. Затова всички лесно се съгласили да приемат християнското кръщение, а техният владетел приел да се нарича Михаил — по името на императора. Там били изпратени избрани духовници, които да укрепят християнската вяра.</div>
+    <div id="srcQb1" class="qblock"></div>
+  </div>
+  <div class="stage">
+    <h3 style="margin-top:0">🕵️ Кой пише и откъде?</h3>
+    <div id="srcQc1" class="qblock"></div>
+  </div>
+  <p class="note">Откъсите са преразказани със свои думи по цитатите от учебника — важното е смисълът.</p>
+</section>
+
+<!-- ================= ГЛАВА 2 ================= -->
+<div class="chapter"><span class="num">2</span><span><b>Симеон и Златният век</b><small>917 г. · р. Ахелой</small></span></div>
+
+<section class="board" id="machine2" data-tm="865|IX в.|Плиска">
+  <h2>🕰 Втори скок</h2>
+  <p>Борис остарява. Той се оттегля от престола и става монах. Машината те отвежда напред — към най-великата битка на синовете на Покръстването. Скочи към <b>917 г.</b>, при река Ахелой!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY2">865</b></div>
+    <div class="dial"><small>Век</small><b id="dC2">IX в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP2">Плиска</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn2">🚀 Скочи в 917 г.</button>
+</section>
+
+<!-- ===== ДОСИЕ 4 ===== -->
+<section class="card" id="s4" data-tm="893|IX в.|Преслав">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Цар Симеон Велики</h2>
+  <div data-story>
+    <p><span class="key">🔑 893 – 927 г.</span> След дълго управление Борис доброволно се оттегля от престола и става монах. Наследява го първородният му син <b>Владимир-Расате</b>. По негово време е направен опит за връщане към езичеството. За пореден път Борис защитава своето дело и сваля сина си от престола.</p>
+    <p>През <span class="key">🔑 893 г.</span> на народен събор в <b>Преслав</b> за княз е провъзгласен третият Борисов син <b>Симеон</b>. Съборът решава Преслав да бъде новата християнска столица. Старобългарският език се утвърждава като <b>богослужебен и държавен</b> — третият официален език в християнска Европа.</p>
+    <p>Симеон е един от най-образованите владетели в тогавашна Европа, далновиден държавник и умел дипломат, а и талантлив пълководец. Той не допуска Византия да накърни българските интереси. Насочва походите си на юг към Тракия и на югозапад към Адриатическото крайбрежие. В началото на X в. владее по-голямата част от Балканския полуостров. Границите на България опират на <b>три морета</b> — Черно, Егейско и Адриатическо.</p>
+    <p>Симеон има план България да стане нов християнски център на мястото на Византия. През <b>913 г.</b> той стига с армията си до Константинопол. Пред българската заплаха ромеите признават титлата <button class="term" data-t="tsar">цар</button> на българския владетел. Скоро империята нарушава мира, а на <span class="key">🔑 20 август 917 г.</span> при р. Ахелой (до гр. Поморие) Симеон нанася съкрушителен удар на ромеите.</p>
+    <p>Победата утвърждава славата му на велик владетел и му дава основание да носи титлата <b>„василевс на ромеите“</b>. Смъртта му прекъсва изпълнението на плана. Учените наричат времето му <button class="term" data-t="zlaten">„Златен век“</button> в историята на България.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Пътят на Симеон. Докосвай стъпка по стъпка</h3>
+    <div class="chain" id="chain4">
+      <button data-n="0"><b>893 · Събор в Преслав</b> · докосни</button>
+      <div class="arrow">↓</div>
+      <button data-n="1" disabled><b>Образованият владетел</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="2" disabled><b>Три морета</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="3" disabled><b>913 · Пред Константинопол</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="4" disabled><b>917 · Ахелой</b> · 🔒</button>
+    </div>
+  </div>
+  <p class="note">ℹ️ Учебникът казва, че победата дава основание за титлата „василевс на ромеите“. Историците обаче отбелязват, че Византия не признава тази титла по това време — Симеон я претендира. Затова пишем „основание“.</p>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== КАРТАТА ===== -->
+<section class="card" id="map" data-tm="852 – 927|IX – X в.|България на картата">
+  <div class="dossier-tag navy">🗺 КАРТА НА ДЕТЕКТИВА</div>
+  <h2>България при Борис и Симеон (852 – 927)</h2>
+  <p>Първо докосни точките и областите. После натискай „Следваща стъпка“ и гледай как расте България. Накрая пробвай бутона „Три морета“.</p>
+  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 300" role="img" aria-label="Карта на Балканите 852 – 927 г.: България при Борис I, завоеванията на Симеон, земите, завзети от маджарите след 896 г., походите на българските войски и градовете Плиска, Преслав, Охрид, Константинопол, Адрианопол, Солун, Средец, Пловдив"></svg></div>
+  <div class="steps s5" id="mapSteps">
+    <button data-st="0" class="active">Борис</button>
+    <button data-st="1">896 г.</button>
+    <button data-st="2">Тракия</button>
+    <button data-st="3">Юг и запад</button>
+    <button data-st="4">Ахелой</button>
+    <button data-st="5">926 г.</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="nextMove">Следваща стъпка →</button><button class="btn ghost" id="seasBtn">🌊 Три морета</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка или област</h3><p>Тук ще се появи описание.</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Картата е опростена, а границите са приблизителни; позициите на градовете са по съвременни координати. Походите са показани схематично с прави линии. По карта 8 в учебника (България по времето на княз Борис I и цар Симеон Велики).</p>
+</section>
+
+<!-- ===== АНИМАЦИЯ: АХЕЛОЙ ===== -->
+<section class="card" id="battle" data-tm="917|X в.|р. Ахелой">
+  <div class="dossier-tag navy">🎞 АНИМАЦИЯ · ЛЮБОПИТНО</div>
+  <h2>Битката при Ахелой</h2>
+  <p>На 20 август 917 г. се състои една от най-кървавите битки в историята на средновековна България. Какво е направил Симеон? Натискай „Следваща стъпка“.</p>
+  <div class="abox">
+    <svg id="bSvg" class="b0" viewBox="0 0 320 190" role="img" aria-label="Схема на битката при Ахелой: ромеите атакуват, българите привидно отстъпват, по знак на Симеон се обръщат и ромеите бягат">
+      <rect width="320" height="190" fill="#E9ECF1" rx="8"/>
+      <rect x="282" y="0" width="38" height="190" fill="#BFD6EE" rx="8"/>
+      <path d="M282 0 Q290 45 282 95 T282 190" fill="none" stroke="#6FA3D4" stroke-width="5"/>
+      <text x="300" y="100" class="al" style="font-size:8px">Ахелой</text>
+      <g id="gRom"></g>
+      <g id="gBul"></g>
+      <g id="gRes"></g>
+      <g id="gSign"><circle cx="40" cy="22" r="13" fill="#C9962B"/><text x="40" y="27" text-anchor="middle" style="font:700 14px sans-serif;fill:#1B2A41">★</text><text x="40" y="44" class="al" style="font-size:8px">знак на Симеон</text></g>
+      <g id="gFlee"><text x="236" y="30" style="font:700 22px sans-serif;fill:#9E1B32">»»</text></g>
+    </svg>
+    <div class="bdots" id="bDots"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="legend" style="margin-top:8px"><span><i style="background:#9E1B32"></i>българи</span><span><i style="background:#1B2A41"></i>подкрепление</span><span><i style="background:#7C5DA8"></i>ромеи</span></div>
+  <p class="stepcap" id="bCap"></p>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="bNext">Следваща стъпка →</button><button class="btn ghost small" id="bReset">↺ Отначало</button></div>
+  <p class="note">Схемата е опростена и показва само идеята на хитростта, описана в учебника. Подробности за броя на воините и точните позиции не се знаят.</p>
+</section>
+
+<!-- ===== ДОСИЕ 5 ===== -->
+<section class="card" id="s5" data-tm="913 – 927|X в.|Преслав">
+  <div class="dossier-tag">ДОСИЕ №5</div>
+  <h2>Лицата на историята: Симеон</h2>
+  <div data-story>
+    <p>Симеон е роден около времето на мира от 863 г. между България и Византия. Затова някои летописци го наричат <b>„дете на мира“</b>. Учил е в прочутата <b>Магнаурска школа</b> в Константинопол.</p>
+    <p>Той е един от най-образованите владетели в тогавашна Европа — наред с английския крал <b>Алфред Велики</b> (871 – 899) и византийския император <b>Лъв VI Философ</b> (886 – 912).</p>
+    <p>Още съвременниците му използват <b>златото</b> като символ на управлението му. Затова времето му е „Златен век“.</p>
+    <p class="note">🖼 В учебника има картина на цар Симеон от художник от XX в. Тя е защитена с авторски права, затова тук я заменяме със задача: докосни и разкрий символите на неговата власт.</p>
+  </div>
+  <div class="task">
+    <h3>👑 Златото на Симеон. Докосни всяка плочка</h3>
+    <div class="tiles" id="tilesG">
+      <button class="tile gold" data-tileg="0"><b>🪑 Престолът</b>Докосни…</button>
+      <button class="tile gold" data-tileg="1"><b>📿 Наниз</b>Докосни…</button>
+      <button class="tile gold" data-tileg="2"><b>🪶 Перо</b>Докосни…</button>
+      <button class="tile gold" data-tileg="3"><b>🛡 Брони</b>Докосни…</button>
+      <button class="tile gold" data-tileg="4"><b>🔱 Копия</b>Докосни…</button>
+      <button class="tile gold" data-tileg="5"><b>🤔 Защо злато?</b>Докосни…</button>
+    </div>
+    <p style="font-size:.9rem;margin-bottom:0"><b>Задача:</b> опиши с няколко думи как си представяш царските одежди на Симеон. Кои са символите на неговата власт? Какво според теб внушава изражението му — гордост, мъдрост, строгост?</p>
+  </div>
+  <button class="btn readbtn" data-done="s5" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 6 ===== -->
+<section class="card" id="s6" data-tm="IX – X в.|·|България след Покръстването">
+  <div class="dossier-tag">ДОСИЕ №6</div>
+  <h2>Промени след Покръстването</h2>
+  <div data-story>
+    <p>След Покръстването старите езически вярвания на българи и славяни постепенно са заменени с християнски ценности. Битът започва да се гради върху християнските обреди и празници.</p>
+    <p>Появява се нова влиятелна обществена група — <b>българското духовенство</b>. Крумовите закони са заменени с нови законници, в които водеща е християнската представа за престъпление и наказание.</p>
+    <p>Съхраняването и развитието на славянската писменост и книжнина превръщат България в културен и религиозен център на другите славянски народи и държави. В края на IX и началото на X в. различията между разнородните поданици са преодолени. Създадена е българската <button class="term" data-t="narodnost">народност</button> с общото име „<b>българи</b>“.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Какво се променя? Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles6">
+      <button class="tile" data-tile6="0"><b>✝️ Ценности</b>Докосни…</button>
+      <button class="tile" data-tile6="1"><b>⛪ Духовенство</b>Докосни…</button>
+      <button class="tile" data-tile6="2"><b>⚖️ Закони</b>Докосни…</button>
+      <button class="tile" data-tile6="3"><b>🇧🇬 Един народ</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s6" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ЛИНИЯ ОТ УЧЕБНИКА ===== -->
+<section class="card" id="ttl" data-tm="842 – 959|IX – X в.|владетели и дати">
+  <div class="dossier-tag navy">⏳ ЛИНИЯТА ОТ УЧЕБНИКА</div>
+  <h2>Владетели по едно време</h2>
+  <p>Българските и византийските владетели в линията на времето от учебника. Обърни плочките.</p>
+  <div class="tiles" id="tilesT">
+    <button class="tile" data-tilet="0"><b>Михаил III</b>842 – 867</button>
+    <button class="tile" data-tilet="1"><b>Борис I Михаил</b>852 – 889</button>
+    <button class="tile" data-tilet="2"><b>Василий I Македонец</b>867 – 886</button>
+    <button class="tile" data-tilet="3"><b>Лъв VI Философ</b>886 – 912</button>
+    <button class="tile" data-tilet="4"><b>Симеон I Велики</b>893 – 927</button>
+    <button class="tile" data-tilet="5"><b>Константин VII</b>913 – 959</button>
+  </div>
+</section>
+
+<section class="card" id="tl" data-tm="863 – 917|IX – X в.|по линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
+  <h2>Подреди събитията</h2>
+  <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="917|X в.|Ахелой, след битката">
+  <div class="dossier-tag gold">🧩 ЗАГАДКАТА</div>
+  <h2>Кой лъже?</h2>
+  <p>След битката при Ахелой трима свидетели разказват какво е станало. Само <b>един</b> от тях не казва истината. Познай кой!</p>
+  <div class="stage">
+    <p style="margin-top:0"><b>👤 Византийски чиновник:</b> „Ние спечелихме при Ахелой! Българите се разбягаха и Симеон се върна у дома си победен.“</p>
+    <p><b>👤 Български войник:</b> „Видях всичко. Привидно отстъпихме, а по знака на царя се обърнахме и ударихме!“</p>
+    <p style="margin-bottom:0"><b>👤 Хронист:</b> „Битката беше на 20 август 917 г. при река Ахелой, до днешно Поморие.“</p>
+  </div>
+  <div class="opts" id="liars"></div>
+  <div class="fb" id="liarFb"></div>
+</section>
+
+<!-- ===== ЗАДАЧИ ===== -->
+<section class="card" id="tasks" data-tm="2026|XXI в.|Бургас, часът по история">
+  <div class="dossier-tag gold">📝 ВЪПРОСИ И ЗАДАЧИ</div>
+  <h2>Задачите от учебника</h2>
+  <p>Първо помисли и отговори наум. После докосни „Покажи примерен отговор“.</p>
+  <div id="taskList"></div>
+</section>
+
+<!-- ===== КАРТИ ===== -->
+<section class="card" id="people" data-tm="IX – X в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+  <p class="note">Картите на <b>св. Кирил</b> и <b>св. Методий</b> са в урок 13.</p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Round%20Church%2C%20Preslav%20-%20Church%20outside%20view.jpg?width=900" alt="Кръглата църква във Велики Преслав">
+      <figcaption>Кръглата църква във Велики Преслав — от времето на цар Симеон.<small>Автор: Alexander.D.Hristov · лиценз CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Round_Church,_Preslav_-_Church_outside_view.jpg" target="_blank" rel="noopener">страница в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Veliki%20Preslav%20walls%20Enev.jpg?width=900" alt="Крепостни стени на Велики Преслав">
+      <figcaption>Останки от крепостните стени на столицата Велики Преслав.<small>Автор: Svilen Enev · лиценз CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Veliki_Preslav_walls_Enev.jpg" target="_blank" rel="noopener">страница в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+  <p class="note">В учебника (с. 50 – 53) има още: стенопис на княз Борис от Зографския манастир, миниатюра на Покръстването, икони на Климент и Наум и страница от Енинския апостол. Потърси ги там.</p>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="X в.|·|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="📅">Всяка година на 24 май България празнува Деня на българската просвета и култура и на славянската писменост.</div>
+    <div data-i="💶">Върху евро банкнотите има и кирилица: думата „ЕВРО“ е изписана на български.</div>
+    <div data-i="⛪">Кръглата църква във Велики Преслав е от времето на Симеон. В България я наричат и „Златната църква“.</div>
+    <div data-i="👑">Симеон е връстник по образованост на английския крал Алфред Велики, който пръв в Англия събира на двора си учени и преводачи.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Картата на Симеон по памет</h2>
+  <p>Нарисувай на лист границите на България при цар Симеон. Оцвети <b>трите морета</b> и постави Плиска, Преслав и Охрид. После сравни с картата на екрана.</p>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Бонус на испански</h3>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Чирак</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Книжовник</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="927|X в.|Преслав">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>Какво става между 852 и 927 г.?</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 852 – 889</b> · княз Борис I</span>
+    <span><b>🔑 865</b> · покръстването на българите в Плиска</span>
+    <span><b>🔑 870</b> · събор в Константинопол — Българска църква с архиепископ</span>
+    <span><b>🔑 886</b> · България приема учениците на Кирил и Методий</span>
+    <span><b>🔑 893 – 927</b> · цар Симеон Велики; 893 — народен събор в Преслав</span>
+    <span><b>🔑 20 август 917</b> · битката при р. Ахелой</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>През 852 г. на престола се качва <b>Борис I</b>. Той разбира, че бъдещето на България е в християнството: християнските държави не вярват на езическа България, новата вяра увеличава властта на хана и сплотява разнородните поданици в един народ.</li>
+    <li>След поражение във война през <b>863 г.</b> с ромеите е сключен 30-годишен мир, а условието е българите да приемат християнството от Константинопол. През <b>865 г.</b> византийски духовници покръстват Борис със семейството му в Плиска. Той приема титлата <b>княз</b>. Недоволството е потушено.</li>
+    <li>Борис иска самостоятелна Църква. През <b>866 г.</b> се обръща към папа Николай I, а Византия отстъпва. През <b>870 г.</b> събор в Константинопол създава Българска църква с архиепископ, а през <b>879 г.</b> тя получава пълна самостоятелност.</li>
+    <li>През <b>886 г.</b> Борис приема учениците на Кирил и Методий. <b>Климент</b> и <b>Наум</b> създават книжовни школи в Охрид и Плиска и кирилицата, която постепенно заменя глаголицата.</li>
+    <li>През <b>893 г.</b> народен събор в Преслав провъзгласява за княз <b>Симеон</b>. Преслав става столица, а старобългарският — богослужебен и държавен език. Симеон води походи на юг и югозапад, а България опира на три морета — Черно, Егейско и Адриатическо.</li>
+    <li>През <b>913 г.</b> Симеон е пред Константинопол и ромеите признават титлата цар. На <b>20 август 917 г.</b> при Ахелой българите съкрушават ромеите с военна хитрост. Времето на Симеон е „Златен век“.</li>
+    <li>След Покръстването християнските ценности заменят езическите, възниква духовенство, Крумовите закони са заменени с нови, а в края на IX — началото на X в. различията между поданиците са преодолени: създадена е българската <b>народност</b>. <b>Изводът:</b> Покръстването със самостоятелна Църква и книжовни школи превръща България в културен център на славяните.</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 50 – 53. Извън учебника: победата при Булгарофигон (896 г.), годините на папа Николай I, 24 май, надписът „ЕВРО“ на банкнотите, „Златната църква“, алтернативната датировка 864 г. за Покръстването, бележките за „василевс на ромеите“ и за битката от 926 г. Етимологии: кирилица, евангелие, хроника, летопис. Картината на цар Симеон от учебника не е използвана.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/Battle_of_Achelous_(917)" target="_blank" rel="noopener">Battle of Achelous (917)</a> · <a href="https://en.wikipedia.org/wiki/Byzantine%E2%80%93Bulgarian_war_of_913%E2%80%93927" target="_blank" rel="noopener">Byzantine–Bulgarian war of 913–927</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Christianization_of_Bulgaria" target="_blank" rel="noopener">Christianization of Bulgaria</a> · <a href="https://en.wikipedia.org/wiki/Croatian%E2%80%93Bulgarian_battle_of_926" target="_blank" rel="noopener">Croatian–Bulgarian battle of 926</a> · <a href="https://en.wikipedia.org/wiki/Bulgarian%E2%80%93Hungarian_wars" target="_blank" rel="noopener">Bulgarian–Hungarian wars</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/2007_enlargement_of_the_European_Union" target="_blank" rel="noopener">2007 enlargement of the EU</a> · <a href="https://en.wiktionary.org/wiki/%CE%B5%E1%BD%90%CE%B1%CE%B3%CE%B3%CE%AD%CE%BB%CE%B9%CE%BF%CE%BD" target="_blank" rel="noopener">Wiktionary: εὐαγγέλιον</a> · <a href="https://bnr.bg/en/post/101048956/st-kliment-man-of-letters-devoted-to-christianization" target="_blank" rel="noopener">БНР: св. Климент</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-14-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var EX=(SAVED&&SAVED.ex)||{};
+var booted=false;
+function tlOrderNow(){return (typeof sortl!=='undefined'&&sortl)?$$('.sitem',sortl).map(function(li){return +li.getAttribute('data-i')}):(EX.tlOrder||[])}
+function saveNow(){
+  if(!booted)return;
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:{
+      tSeen:tSeen,t6Seen:t6Seen,tcSeen:tcSeen,tgSeen:tgSeen,ttSeen:ttSeen,pSeen:pSeen,chainN:chainN,chain4N:chain4N,
+      mapCur:mapCur,mapReach:mapReach,seasOn:seasOn,bCur:bCur,bReach:bReach,
+      taskSeen:taskSeen,heard:heard,ySeen:ySeen,fI:fI,jumped:jumped,jumped2:jumped2,
+      tlOrder:tlOrderNow(),tlSolved:sortl.classList.contains('sorted'),tlTries:tlTries
+    }}))
+  }catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','s5','s6','dyk'];
+var FLAGS=['jump','jump2','tilesA','chess','chain','pairs','abcgame','cyr','role','src','map','mapSteps','seas','chain4','battle','gold','tiles6','tt','tl','puzzle','tasks'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=EX.jumped||false, jumped2=EX.jumped2||false;
+function jump(btnSel,ids,from,to,cent,place,short,btnTxt,fk,msg,nextSel){
+  var b=$(btnSel);b.disabled=true;var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $(ids[0]).textContent=Math.round(from-(from-to)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($(ids[1]),cent);setDial($(ids[2]),place);setTM(String(to),cent,short);
+      b.textContent=btnTxt;b.classList.add('done');if(flag(fk))addXP(5,msg);
+      setTimeout(function(){$(nextSel).scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+}
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;
+  jump('#jumpBtn',['#dY','#dC','#dP'],2026,865,'IX в.','Плиска, столицата на България','Плиска','✓ Пристигна в 865 г.','jump','Скок във времето!','#case');
+});
+$('#jumpBtn2').addEventListener('click',function(){
+  if(jumped2)return;jumped2=true;
+  jump('#jumpBtn2',['#dY2','#dC2','#dP2'],865,917,'X в.','р. Ахелой, до днешно Поморие','Ахелой','✓ Пристигна в 917 г.','jump2','Втори скок!','#s4');
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    var id=en.target.id;
+    if(en.isIntersecting&&!(id==='machine'&&!jumped)&&!(id==='machine2'&&!jumped2)){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички места на картата'},
+  {id:'diplomat',ic:'♟',n:'Дипломат',d:'Изиграй „Шахматът на Борис“'},
+  {id:'scribe',ic:'✒️',n:'Книжовник',d:'Познай глаголицата и кирилицата'},
+  {id:'general',ic:'⚔️',n:'Пълководец',d:'Разгадай хитростта при Ахелой'},
+  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди линията на времето'},
+  {id:'critic',ic:'🔎',n:'Критик на изворите',d:'Разпитай двата извора'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'boris',n:'Княз Борис I Михаил',y:'852 – 889 (ум. 907)',av:'⛪',sp:'⚡ Покръстителят',how:'Прочети Досие №1',back:'Хан от Крумовата династия. През 865 г. приема християнството от Константинопол заедно със семейството си, вместо хан се нарича княз, взема името Михаил. Потушава бунт, извоюва самостоятелна Българска църква и приема учениците на Кирил и Методий. После става монах и умира през 907 г. Църквата го провъзгласява за светец.'},
+  {id:'fotiy',n:'Патриарх Фотий',y:'IX в.',av:'📿',sp:'⚡ Патриархът, който не отстъпва',how:'Прочети Досие №2',back:'Константинополски патриарх. Не желае да допусне духовна самостоятелност на българите. Затова през 866 г. Борис се обръща към папата.'},
+  {id:'nikolay',n:'Папа Николай I',y:'858 – 867',av:'✉️',sp:'⚡ Папата, до когото пише Борис',how:'Прочети Досие №2',back:'През 866 г. княз Борис се обръща към него. Римски духовници пристигат в България и започват наново да покръстват народа — на латински. Това смущава Константинопол.'},
+  {id:'kliment',n:'Св. Климент Охридски',y:'IX – X в.',av:'📖',sp:'⚡ Първият епископ на български език',how:'Прочети Досие №3',back:'По житията — най-младият ученик на светите братя. Следва ги във Великоморавия и Рим, после идва в България. Охридската школа обучава (по житието) 3500 ученици за седем години. Провъзгласен за „пръв епископ на български език“. Погребан в Охрид.'},
+  {id:'naum',n:'Св. Наум Преславски',y:'IX – X в.',av:'🖋',sp:'⚡ Учителят на Симеон',how:'Прочети Досие №3',back:'Българин с благороден произход. В Плиска ръководи книжовна школа, където твори и младият Симеон. След Климент поема учителската му дейност в Охридската област. Погребан в Охрид, в манастира, който е създал.'},
+  {id:'rasate',n:'Владимир-Расате',y:'наследник на Борис',av:'🛡️',sp:'⚡ Опитът за връщане към езичеството',how:'Прочети Досие №4',back:'Първородният син на Борис. По негово време е направен опит България да се върне към езичеството. Борис за пореден път защитава делото си и го сваля от престола.'},
+  {id:'simeon',n:'Цар Симеон Велики',y:'893 – 927',av:'👑',sp:'⚡ Царят на три морета',how:'Прочети Досие №5',back:'Борисов син, учил в Магнаурската школа. Образован владетел, дипломат и пълководец. Столица е Преслав. През 913 г. стига до Константинопол, на 20 август 917 г. разбива ромеите при Ахелой. Времето му е „Златен век“.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'Борис приема християнството от Константинопол (865), но настоява за своя Църква — получава архиепископия (870) и пълна самостоятелност (879).',
+  2:'Учениците на Кирил и Методий, приети през 886 г., създават школи в Охрид и Плиска и кирилицата.',
+  3:'Симеон: Преслав е столица (893), старобългарският е държавен език, България опира на три морета, а при Ахелой (917) побеждава.',
+  4:'Християнските ценности заменят езическите, възниква духовенство, различията между поданиците са преодолени — български народ.'
+};
+var CLUE_FOR={s2:1,s3:2,s4:3,s6:4};
+var CARD_FOR={s1:['boris'],s2:['fotiy','nikolay'],s3:['kliment','naum'],s4:['rasate'],s5:['simeon']};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(CARD_FOR[k])CARD_FOR[k].forEach(function(id,i){setTimeout(function(){unlockCard(id)},1000+i*1500)});
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  pokrastvane:['Покръстване','Приемане на християнската вяра от владетел и народ.'],
+  tsarkva:['Църква (институция)','Тук „Църква“ значи организацията на християнската вяра — с духовенство и глава (архиепископ или патриарх), а не само сградата.'],
+  shkola:['Книжовна школа','Група книжовници, които в своята дейност следват общи принципи — език, правопис, стил, теми.'],
+  tsar:['Цар','Титла на славянски владетел, равна на императорската.'],
+  zlaten:['„Златен век“','Термин, използван от историците за период на политически възход и културен разцвет в историята на дадена държава.'],
+  narodnost:['Народност','Общност от хора, които обитават единна територия, имат единно законодателство, обща религия, книжовен език и култура и обща историческа памет.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+function qGroup(prefix,boxes,QS,xp,done){
+  var n=0;
+  QS.forEach(function(Q,i){Q.after=function(){n++;if(n===QS.length)done()};oneQ($(boxes[i]),Q,prefix+i,xp)});
+  QS.forEach(function(Q,i){restoreOneQ($(boxes[i]),Q,prefix+i)});
+}
+
+/* ================= плочки / верига (общи помощници) ================= */
+function tilesInit(attr,TXT,seen,flagKey,bonusMsg){
+  $$('.tile['+attr+']').forEach(function(t){t.addEventListener('click',function(){
+    var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+    t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+    if(Object.keys(seen).length===TXT.length&&flag(flagKey))addXP(3,bonusMsg);
+  })});
+}
+function tilesRestore(attr,TXT,seen){
+  Object.keys(seen).forEach(function(i){var t=$('.tile['+attr+'="'+i+'"]');if(t&&!t.classList.contains('open')){t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open')}});
+}
+function chainInit(sel,TXT,getN,setN,flagKey,msg){
+  $$(sel+' button').forEach(function(b){b.addEventListener('click',function(){
+    var n=+b.getAttribute('data-n');if(b.classList.contains('open'))return;
+    b.classList.add('open');b.innerHTML=TXT[n];addXP(2);setN(Math.max(getN(),n+1));
+    var nx=$(sel+' button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}
+    else if(flag(flagKey))addXP(3,msg);
+  })});
+}
+function chainRestore(sel,TXT,N){
+  for(var cn=0;cn<N;cn++){(function(n){var b=$(sel+' button[data-n="'+n+'"]');if(b){b.classList.add('open');b.innerHTML=TXT[n]}var nx=$(sel+' button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;if(!nx.classList.contains('open'))nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}})(cn)}
+}
+
+/* ================= ДОСИЕ 1 (плочки) ================= */
+var TA=['Християнските държави в Европа се отнасят с недоверие към езическа България. Новата вяра ще увеличи властта на хана и ще сплоти разнородните поданици в един народ.','Българите търпят поражение във война с ромеите. Сключен е 30-годишен мир. Най-важното условие: българите да приемат християнството от Константинопол.','Византийски духовници покръстват Борис I заедно със семейството му в Плиска. Вместо хан той се нарича княз. Покръстен е и целият народ.','Новата религия се проповядва на гръцки и е неразбираема за българите. Страхът от засилване на византийското влияние предизвиква открит бунт. Той е потушен.'];
+var tSeen=EX.tSeen||{};
+tilesInit('data-tile',TA,tSeen,'tilesA','Покръстването е разучено!');
+
+/* ================= ДОСИЕ 2: ШАХМАТЪТ НА БОРИС ================= */
+var CH=[
+ {y:'863 г.',t:'Войната с ромеите е изгубена. Византия предлага 30-годишен мир, но настоява българите да приемат християнството. Какво правиш?',o:['Приемам мира и условието — България ще приеме християнството от Константинопол','Отказвам и продължавам войната, без да броя загубите','Приемам мира, но обещавам да се върна към старите богове'],e:'Правилно е първото. Спечелен е мир за 30 години, а новата вяра увеличава властта на хана и сплотява разнородните поданици. Другите ходове водят към ново поражение или към нова война с недоверчивите християнски държави.',g:'мир за 30 години'},
+ {y:'865 г.',t:'Византийските духовници пристигат в Плиска. Как се покръства България?',o:['Борис се покръства със семейството си в Плиска и приема славянската титла княз','Борис отлага покръстването за „по-добри времена“','Борис се покръства, но запазва титлата хан'],e:'Борис е покръстен със семейството си в Плиска и вместо хан става княз. Така за християнска Европа България вече не е „езическа“.',g:'християнска България'},
+ {y:'Бунтът',t:'Недоволните боляри вдигат бунт. Гръцкият език е неразбираем, а страхът от Византия е голям. Как постъпваш?',o:['Потушавам бунта и наказвам водачите, а на народа позволявам да си отиде невредим','Наказвам всички, които са участвали','Връщам се към езичеството, за да ги успокоя'],e:'Борис наказва със смърт само петдесет и двама от най-големите бунтари, а на народа позволява да си отиде. Властта му е запазена, а християнството остава.',g:'запазена власт'},
+ {y:'866 г.',t:'Патриарх Фотий не допуска духовна самостоятелност. Борис иска своя Църква, подчинена на волята на владетеля. Какво правиш?',o:['Обръщам се към папа Николай I — Рим ми праща духовници','Мълча и приемам властта на патриарха','Изгонвам всички духовници, без да търся заместници'],e:'Борис е ловък дипломат: играе между Рим и Константинопол. Римските духовници започват наново да покръстват, този път на латински. Това обърква хората и силно смущава Константинопол.',g:'натиск върху Византия'},
+ {y:'870 г.',t:'Византия се страхува, че най-голямата славянска държава ще попадне под власт на папата. Църковният събор в Константинопол пита какво искаш.',o:['Българска църква начело с архиепископ — под върховната власт на патриарха','Църква, управлявана изцяло от Константинопол, без свой глава','Църква, подчинена завинаги на папата'],e:'Борис получава архиепископия. Тя е още под върховната власт на Константинополския патриарх, но България вече има собствена Църква.',g:'собствена Църква'},
+ {y:'879 г.',t:'Нов събор. Какво искаш за Българската архиепископия?',o:['Пълна самостоятелност — главата ѝ да се избира от българското духовенство по моя препоръка','Главата ѝ да бъде назначаван от патриарха','Главата ѝ да бъде назначаван от папата'],e:'Така и става: Българската архиепископия получава пълна самостоятелност. Християнска България заема авторитетно място в европейския Изток. Шах и мат!',g:'пълна самостоятелност'}
+];
+var chessAt=0;
+function chessDots(){
+  $('#mvdots').innerHTML=CH.map(function(c,i){var done=S.flags['ch'+i];return '<span class="'+(done?'on':(i===chessAt?'cur':''))+'">'+(done?'✓ ':'')+c.y+'</span>'}).join('');
+}
+(function(){
+  $('#chess').innerHTML=CH.map(function(c,i){return '<div class="stage cmove" id="cm'+i+'" style="'+(i?'display:none':'')+'"><h4>♟ Ход '+(i+1)+' · '+c.y+'</h4><div id="cq'+i+'"></div></div>'}).join('');
+  CH.forEach(function(c,i){
+    var Q={q:c.t,o:c.o,a:0,e:c.e+' <b>Печели България: '+c.g+'.</b>',after:function(){
+      chessAt=Math.min(CH.length-1,i+1);chessDots();
+      var nx=$('#cm'+(i+1));if(nx)nx.style.display='block';
+      if(i===CH.length-1&&flag('chess')){$('#chessFb').className='fb ok';$('#chessFb').innerHTML='<b>Шах и мат!</b> От 863 до 879 г. Борис превръща загубена война в самостоятелна Българска църква.';addXP(6,'Шахматът е спечелен!');award('diplomat')}
+      else if(i===CH.length-1){$('#chessFb').className='fb ok';$('#chessFb').innerHTML='<b>Шах и мат!</b> Борис превръща загубена война в самостоятелна Българска църква.'}
+    }};
+    oneQ($('#cq'+i),Q,'ch'+i,3);
+  });
+  CH.forEach(function(c,i){restoreOneQ($('#cq'+i),{a:0},'ch'+i)});
+  chessDots();
+})();
+
+/* ================= ДОСИЕ 3 (верига) ================= */
+var CHAINN=['<b>886 · Приемането</b> · Борис приема учениците на Кирил и Методий и става техен покровител. Сред тях се открояват Климент и Наум.','<b>Охрид</b> · Климент създава книжовна школа в Македония с център Охрид. По житието му той обучава 3500 ученици за седем години. Те се преписват и превеждат богослужебни книги.','<b>Плиска</b> · Под ръководството на Наум в столицата творят изтъкнати книжовници, сред които Борисовият син Симеон.','<b>Кирилицата</b> · Учениците създават нова славянска азбука, наречена „кирилица“. Тя постепенно заменя глаголицата.'];
+var chainN=EX.chainN||0;
+chainInit('#chain',CHAINN,function(){return chainN},function(v){chainN=v},'chain','Пътят на буквите е проследен!');
+
+/* ================= ДВЕ АЗБУКИ ================= */
+var GLT=[['а',0x30,'аз'],['б',0x31,'буки'],['в',0x32,'веде'],['г',0x33,'глаголи'],['д',0x34,'добро'],['е',0x35,'есть'],['ж',0x36,'живете'],['з',0x38,'земля'],['и',0x39,'иже'],['к',0x3d,'како'],['л',0x3e,'люди'],['м',0x3f,'мислете'],['н',0x40,'наш'],['о',0x41,'он'],['п',0x42,'покой'],['р',0x43,'рци'],['с',0x44,'слово'],['т',0x45,'твърдо'],['ш',0x4e,'ша']];
+function glyph(ch){var r=GLT.filter(function(t){return t[0]===ch})[0];return String.fromCharCode(0x2C00+r[1])}
+var PAIR=['а','б','в','г','д','е','ж','з'];
+var pSeen=EX.pSeen||{};
+$('#pairs').innerHTML=PAIR.map(function(c,i){return '<button data-p="'+i+'"><span class="gl" aria-hidden="true">'+glyph(c)+'</span><small>докосни</small></button>'}).join('');
+function pairOpen(i,quiet){
+  var b=$('#pairs [data-p="'+i+'"]'),c=PAIR[i],nm=GLT.filter(function(t){return t[0]===c})[0][2];
+  b.classList.add('open');b.innerHTML='<span class="gl" aria-hidden="true" style="font-size:1.1rem">'+glyph(c)+'</span><span class="cy">'+c.toUpperCase()+'</span><small>'+nm+'</small>';
+  if(!quiet){pSeen[i]=1;addXP(1);if(Object.keys(pSeen).length===PAIR.length&&flag('pairs'))addXP(3,'Двете азбуки са сравнени!')}
+}
+$$('#pairs [data-p]').forEach(function(b){b.addEventListener('click',function(){var i=+b.getAttribute('data-p');if(!pSeen[i])pairOpen(i)})});
+(function(){
+  var R=[['б',0],['Ж',1],['ж',0],['Ш',1],['с',0],['Д',1]];
+  $('#abcQs').innerHTML=R.map(function(r,i){return '<div class="qblock" id="abcQ'+i+'"></div>'}).join('');
+  var QS=R.map(function(r){
+    var isGl=r[1]===0, ch=isGl?glyph(r[0]):r[0];
+    return {q:'Какъв е този знак?<div class="gword'+(isGl?' gl':'')+'" style="font-size:2.4rem">'+ch+'</div>',o:['Глаголица','Кирилица'],a:isGl?0:1,e:isGl?'Това е глаголица: кръгове, извивки и кръстчета.':'Това е кирилица: основният елемент са правите линии.'};
+  });
+  qGroup('ab',R.map(function(r,i){return '#abcQ'+i}),QS,2,function(){if(flag('abcgame')){addXP(5,'Познаваш двете азбуки!');award('scribe')}});
+})();
+var TCY=['България е родината на кирилицата — тук работят книжовниците от Охрид, Плиска и Преслав.','Сърбия ползва кирилицата — както и други южни славяни.','Русия ползва кирилицата — наследена от средновековните държави на източните славяни.','Кирилица се ползва и в Украйна и в Беларус.','През 2007 г., когато България влиза в Европейския съюз, кирилицата става третата официална азбука на ЕС — след латиницата и гръцката.','По учебника кирилицата има 31 букви, а основен елемент при писането им е правата линия. Ранната кирилица обаче е имала повече знаци — зависи какво и кога се брои.'];
+var tcSeen=EX.tcSeen||{};
+tilesInit('data-tilec',TCY,tcSeen,'cyr','Кирилицата днес!');
+
+/* ================= РОЛЯ: УЧЕНИК НА КЛИМЕНТ ================= */
+(function(){
+  var Q1={q:'Учителят ти показва новата азбука, чиито знаци се пишат с прави линии и постепенно заменя глаголицата. Как се казва?',o:['Кирилица','Руни','Латиница'],a:0,e:'Кирилицата е създадена от учениците на Кирил и Методий и постепенно заменя глаголицата.'};
+  var Q2={q:'На какъв език се четат и преписват богослужебните книги в твоята школа?',o:['На български (старобългарски), а не само на гръцки','Само на латински','Само на гръцки'],a:0,e:'Делото на братята дава възможност Божието слово да се проповядва от български духовници на роден език. По решение от 893 г. старобългарският е богослужебен и държавен език.'};
+  function chk(){if(S.flags.rq1&&S.flags.rq2&&flag('role'))addXP(5,'Влезе в ролята!')}
+  Q1.after=chk;Q2.after=chk;
+  oneQ($('#roleQ1'),Q1,'rq1',4);oneQ($('#roleQ2'),Q2,'rq2',4);
+  restoreOneQ($('#roleQ1'),Q1,'rq1');restoreOneQ($('#roleQ2'),Q2,'rq2');
+})();
+
+/* ================= ДВЕ УЛИКИ ================= */
+(function(){
+  var done=0;function chk(){done++;if(done===4&&flag('src')){addXP(5,'Изворите са разпитани!');award('critic')}}
+  var QA1={q:'Как летописецът в „Бертински летописи“ обяснява успеха на Борис?',o:['С Божията помощ: Бог го вдъхновява, а князът призовава името на Христос','С огромната му армия','С помощта на византийския император'],a:0,e:'Летописецът е християнин от Запад и вижда в успеха Божията воля. Това е негова гледна точка — не обяснение на историка.',after:chk};
+  var QA2={q:'Защо Борис е безпощаден към болярите, а милостив към народа?',o:['Бунтът е воден от болярите. Наказвайки водачите, той запазва властта си, а щадейки народа, не го настройва срещу християнството','Защото болярите са чужденци','Защото народът е по-богат'],a:0,e:'Само 52 боляри са наказани със смърт, на народа е позволено да си отиде. Летописецът описва наказанието делово, като нещо обичайно за времето.',after:chk};
+  var QB1={q:'Чие име получава Борис при кръщението и какви действия следват?',o:['Михаил — по името на императора. После са изпратени отбрани духовници да укрепят вярата','Симеон — по името на сина му. Започват нови войни','Никола — по името на папата. Строят се замъци'],a:0,e:'Борис приема името Михаил — по императора Михаил III. Генезий е византиец: на първо място поставя мира и глада в България.',after:chk};
+  var QC1={q:'Кой пише всеки от двата извора и защо разказват различни неща?',o:['Единият е западен (франкски) летописец, другият е византиец. Всеки гледа от своята страна, подчертава различното и не е бил в Плиска','И двамата са били в Плиска и виждат същото','Единият лъже нарочно, а другият никога не греши'],a:0,e:'Летописецът от Запад обяснява с Божията воля, византиецът — с мира и глада на българите. Историкът сравнява изворите и не вярва напълно на нито един: кой пише, откъде и защо.',after:chk};
+  oneQ($('#srcQa1'),QA1,'sa1',4);oneQ($('#srcQa2'),QA2,'sa2',4);oneQ($('#srcQb1'),QB1,'sb1',4);oneQ($('#srcQc1'),QC1,'sc1',4);
+  restoreOneQ($('#srcQa1'),QA1,'sa1');restoreOneQ($('#srcQa2'),QA2,'sa2');restoreOneQ($('#srcQb1'),QB1,'sb1');restoreOneQ($('#srcQc1'),QC1,'sc1');
+})();
+
+/* ================= ДОСИЕ 4 (верига) ================= */
+var CHAIN4=['<b>893 · Събор в Преслав</b> · Симеон е провъзгласен за княз, Преслав е новата християнска столица, а старобългарският е богослужебен и държавен език.','<b>Образованият владетел</b> · Един от най-образованите владетели в тогавашна Европа, далновиден държавник, умел дипломат и талантлив пълководец.','<b>Три морета</b> · Походи на юг към Тракия и на югозапад към Адриатическото крайбрежие. Границите на България опират на Черно, Егейско и Адриатическо море.','<b>913 · Пред Константинопол</b> · Симеон стига до столицата на Византия. Ромеите признават титлата цар на българския владетел. Скоро империята нарушава мира.','<b>917 · Ахелой</b> · На 20 август при р. Ахелой Симеон нанася съкрушителен удар на ромеите. Победата му дава основание за титлата „василевс на ромеите“.'];
+var chain4N=EX.chain4N||0;
+chainInit('#chain4',CHAIN4,function(){return chain4N},function(v){chain4N=v},'chain4','Пътят на Симеон е проследен!');
+
+/* ================= КАРТА ================= */
+var KX=19,KY=26,LON0=12,LAT0=47.8;
+function P(lon,lat){return [((lon-LON0)*KX).toFixed(1),((LAT0-lat)*KY).toFixed(1)]}
+function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
+function linePath(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+var SEA={
+ med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
+ marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
+ black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]]
+};
+var TER=[
+ {id:'byz',n:'Византия',c:'#B9A4D6',s:0,pts:[[19.5,40.0],[21,39.7],[22.5,39.4],[23.3,40.2],[24.4,40.8],[26.2,40.9],[28.1,41.7],[28.8,41.3],[30,41.2],[33.5,41.3],[33.5,35.5],[19.5,35.5]],d:'Византийската империя със столица Константинопол. България и Византия воюват и сключват мирове. Тук са и Атина и Солун — до тях стигат походите на Симеон.'},
+ {id:'hr',n:'Хърватия',c:'#A98A7A',s:0,pts:[[13.5,45.6],[16,46.3],[18.5,45.9],[18.8,43.3],[17,43],[15.2,44.2]],d:'Хърватия на запад от България. Към 926 г. в хърватските земи е важна битка (виж стъпка „926 г.“).'},
+ {id:'simw',n:'Завоевания на Симеон (запад)',c:'#F3DD8F',s:3,pts:[[18.8,43.3],[19.5,44.0],[20.4,44.9],[20.3,43.4],[19.5,42.2]],d:'Завоевания на цар Симеон на запад — по сръбските земи и Адриатическото крайбрежие.'},
+ {id:'sims',n:'Завоевания на Симеон (юг)',c:'#F3DD8F',s:2,pts:[[19.3,41.2],[19.5,42.2],[24.5,42.2],[26.0,42.2],[27.5,42.3],[28.1,41.7],[26.2,40.9],[24.4,40.8],[23.3,40.2],[22.5,39.4],[21.0,39.6],[19.8,40.3]],d:'Завоевания на цар Симеон на юг — Тракия, Македония и Епир. Походите му стигат чак до Егейско море.'},
+ {id:'bg',n:'България при княз Борис I',c:'#F0A35E',s:0,pts:[[20.4,44.9],[22.0,45.4],[23.5,45.8],[25.5,46.4],[27.5,46.3],[28.4,45.4],[29.1,44.9],[28.8,43.7],[28.0,42.6],[27.4,42.2],[26.0,42.1],[24.5,42.1],[23.5,41.6],[22.6,41.0],[21.2,40.5],[20.3,40.9],[20.3,42.4],[20.2,43.4],[20.5,44.3]],d:'България при княз Борис I (852 – 889): от Дунав до Охрид и от Черно море до Белград. Столица е Плиска.'},
+ {id:'mag',n:'Земи, завзети от маджарите след 896',c:'#C8503C',s:1,pts:[[19.2,47.4],[21.6,47.6],[23.0,46.0],[22.0,45.4],[20.4,44.9],[19.8,45.4],[19.2,46.2]],d:'Земи на северозапад, завзети от маджарите след 896 г. Маджарите се установяват в Карпатската котловина.'}
+];
+function buildBaseMap(id){
+  var s='<defs><clipPath id="seaClip"><path d="'+poly(SEA.med)+'"/><path d="'+poly(SEA.marm)+'"/><path d="'+poly(SEA.black)+'"/></clipPath></defs>';
+  s+='<rect width="400" height="300" style="fill:var(--land)"/>';
+  TER.forEach(function(t){s+='<path class="ter'+(t.s?' stp':' ')+'" data-ter="'+t.id+'" data-step="'+t.s+'" d="'+poly(t.pts)+'" style="fill:'+t.c+';stroke:#fff;stroke-width:.8"/>'});
+  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea);pointer-events:none"/>'});
+  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'" style="pointer-events:none"/>'});
+  s+='<g id="seaHl" clip-path="url(#seaClip)"><path d="'+poly(SEA.black)+'" fill="#E8B923"/>'+
+     '<path d="'+poly([[12.2,45.8],[19.0,43.0],[19.6,41.0],[19.0,39.9],[18.4,39.7],[17.0,40.5],[15.7,41.6],[13.8,42.6],[12.3,44.0]])+'" fill="#E8B923"/>'+
+     '<path d="'+poly([[22.0,41.0],[26.5,41.0],[27.6,37.0],[27.0,35.5],[23.0,35.5],[22.0,37.0]])+'" fill="#E8B923"/></g>';
+  s+='<path d="'+linePath([[20.5,44.8],[22.5,43.8],[25,43.8],[27.3,44.1],[29.0,45.2]])+'" style="fill:none;stroke:#6FA3D4;stroke-width:2;stroke-linecap:round;pointer-events:none"/>';
+  function T(txt,lon,lat,cls){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'">'+txt+'</text>'}
+  s+=T('ЧЕРНО',30.5,43.7,'maplabel')+T('МОРЕ',30.7,43.2,'maplabel')+T('ЕГЕЙСКО МОРЕ',25.0,38.9,'maplabel')+T('АДРИАТИЧЕСКО',15.6,43.2,'maplabel')+T('ВИЗАНТИЯ',29.5,39.7,'tlabel')+T('ХЪРВАТИЯ',15.2,45.5,'tlabel')+T('Р. ДУНАВ',22.0,44.5,'tlabel');
+  $('#'+id).innerHTML=s;
+}
+buildBaseMap('mapSvg');
+var MCOL='#9E1B32',CCOL='#1B2A41';
+var PTS=[
+ {id:'pliska',n:'Плиска',lon:26.1,lat:43.3,a:'end',dy:-4,d:'Първата столица на България. Тук през 865 г. византийски духовници покръстват Борис I със семейството му. В Плиска Наум ръководи книжовна школа.'},
+ {id:'preslav',n:'Преслав',lon:26.8,lat:43.16,a:'start',dy:-6,cap:1,d:'Новата християнска столица на България — решение на народния събор през 893 г. Тук е столицата на цар Симеон. Останките от Велики Преслав се виждат на снимката.'},
+ {id:'drastar',n:'Дръстър',lon:27.27,lat:44.12,a:'start',dy:-5,d:'Дунавска крепост (днес Силистра). Нанесена е на картата в учебника.'},
+ {id:'vidin',n:'Видин',lon:22.87,lat:44.0,a:'end',dy:-4,d:'Град на р. Дунав в северозападната част на България.'},
+ {id:'belgrad',n:'Белград',lon:20.46,lat:44.8,a:'end',dy:-4,d:'Град на р. Дунав на северозападната граница на България при Борис I.'},
+ {id:'sredets',n:'Средец',lon:23.32,lat:42.7,a:'end',dy:12,d:'Днешна София. Важен град в западните български земи.'},
+ {id:'plovdiv',n:'Пловдив',lon:24.75,lat:42.15,a:'end',dy:12,d:'Град в Тракия. Влиза в България при Борис I — на границата с завоеванията на Симеон.'},
+ {id:'ohrid',n:'Охрид',lon:20.8,lat:41.1,a:'end',dy:12,d:'Център на книжовната школа в Македония. Тук работи Климент, който обучава по житието си 3500 ученици за седем години. Тук са погребани Климент и Наум.'},
+ {id:'drach',n:'Драч',lon:19.45,lat:41.32,a:'end',dy:-4,d:'Град на Адриатическото крайбрежие. Завоеванията на Симеон стигат чак до Адриатическо море.'},
+ {id:'adrianopol',n:'Адрианопол',lon:26.55,lat:41.68,a:'end',dy:12,cap:1,d:'Византийски град в Тракия (днешен Одрин). По него минават походите на Симеон към Константинопол.'},
+ {id:'solun',n:'Солун',lon:22.94,lat:40.64,a:'end',dy:12,cap:1,d:'Градът на Кирил и Методий. По учебника походите на Симеон стигат и до Солун, и по-на юг към Атина.'},
+ {id:'cpl',n:'Константинопол',lon:28.98,lat:41.01,a:'end',dx:12,dy:16,cap:1,d:'Столицата на Византия. През 913 г. Симеон стига до стените ѝ. Ромеите признават титлата цар на българския владетел.'},
+ {id:'ahelos',n:'Ахелой',lon:27.63,lat:42.65,a:'start',dy:2,d:'Река край днешното Поморие (Анхиало). На 20 август 917 г. тук Симеон нанася съкрушителен удар на ромеите — военна хитрост с привидно отстъпление.'},
+ {id:'atina',n:'Атина',lon:23.7,lat:37.98,a:'start',dy:-4,cap:1,d:'Градът на юг. На картата в учебника стрелка от българските походи стига до Атина.'},
+ {id:'pesta',n:'Пеща',lon:19.08,lat:47.5,a:'start',dy:-6,d:'Град на Дунав в Унгария. Маджарите завземат земите около него след 896 г.'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){var c=P(p.lon,p.lat);var col=p.cap?CCOL:MCOL;var a=p.a||'start',dx=(p.dx!==undefined?p.dx:(a==='end'?-8:8)),dy=(p.dy||0)+4;
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+c[0]+','+c[1]+')"><circle class="halo" r="6" stroke="'+col+'"/><circle class="dot" r="6" fill="'+col+'"/><text x="'+dx+'" y="'+dy+'" text-anchor="'+a+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+(p.cap?CCOL:MCOL)+'"></i>'+p.n+'</button>'}).join('');
+})();
+function seenMark(id){$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})}
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.n+'</h3><p>'+p.d+'</p>';
+  if(!S.seen[id]){S.seen[id]=true;seenMark(id);addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('map')){addXP(3,'Всички места са открити!');award('cartograph')}}
+}
+$$('#map .mk, #map .chip[data-id]').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+$$('#mapSvg [data-ter]').forEach(function(t){t.addEventListener('click',function(){
+  var d=TER.filter(function(x){return x.id===t.getAttribute('data-ter')})[0];
+  $('#info').innerHTML='<h3>🏳️ '+d.n+'</h3><p>'+d.d+'</p>';
+})});
+/* походи и битки */
+var ROUTES=[
+ {s:1,pts:[[28.6,46.9],[22.5,46.9]],col:'#C8503C'},
+ {s:2,pts:[[26.8,43.16],[26.55,41.68],[28.98,41.01]],col:'#1E8E4E'},
+ {s:3,pts:[[26.8,43.16],[23.32,42.7],[22.94,40.64],[23.7,37.98]],col:'#1E8E4E'},
+ {s:3,pts:[[23.32,42.7],[19.45,41.32]],col:'#1E8E4E'},
+ {s:4,pts:[[28.98,41.01],[27.63,42.65]],col:'#1B2A41'},
+ {s:5,pts:[[23.32,42.7],[20.5,43.8],[17.6,44.3]],col:'#1E8E4E'}
+];
+var STARS=[{s:1,lon:28.6,lat:46.9,t:'896'},{s:4,lon:27.63,lat:42.65,t:'917'},{s:5,lon:17.6,lat:44.3,t:'926'}];
+(function(){
+  var g='<g id="routesG">';
+  ROUTES.forEach(function(r){
+    g+='<path class="rseg" data-step="'+r.s+'" pathLength="1" style="fill:none;stroke:'+r.col+';stroke-width:3;stroke-linecap:round;stroke-linejoin:round" d="'+linePath(r.pts)+'"/>';
+    var a=P(r.pts[r.pts.length-2][0],r.pts[r.pts.length-2][1]),b=P(r.pts[r.pts.length-1][0],r.pts[r.pts.length-1][1]);
+    var ax=+a[0],ay=+a[1],bx=+b[0],by=+b[1],dx=bx-ax,dy=by-ay,L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var h=[[bx,by],[bx-dx*10+dy*5,by-dy*10-dx*5],[bx-dx*10-dy*5,by-dy*10+dx*5]].map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+    g+='<polygon data-step="'+r.s+'" class="rhead" fill="'+r.col+'" points="'+h+'"/>';
+  });
+  STARS.forEach(function(st){var p=P(st.lon,st.lat);g+='<g class="stp" data-step="'+st.s+'"><text x="'+(+p[0]-7)+'" y="'+(+p[1]+6)+'" style="font:700 17px sans-serif;fill:#C9962B;stroke:#1B2A41;stroke-width:.6px">★</text><text x="'+(+p[0]+9)+'" y="'+(+p[1]-5)+'" style="font:700 9px sans-serif;fill:#1B2A41">'+st.t+' г.</text></g>'});
+  g+='</g>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $$('#mapSvg .mk').forEach(function(m){$('#mapSvg').appendChild(m)});
+})();
+var MSTEPS=[
+  '<b>България при княз Борис I (852 – 889).</b> Оранжевото е държавата — от Дунав до Охрид и от Черно море до Белград. Докосни точките и областите. После натисни „Следваща стъпка“.',
+  '<b>896 г.</b> Маджарите се установяват в Карпатската котловина и завземат земи на северозапад — червеното. (Извън учебника: през лятото на 896 г. Симеон разбива ромеите при Булгарофигон.)',
+  '<b>Тракия.</b> Симеон насочва походите си на юг. През 913 г. стига до Константинопол. Светложълтото са неговите завоевания.',
+  '<b>Югозапад и Адриатика.</b> Походи към Македония и Гърция (до Атина по картата) и към Адриатическото крайбрежие — до Драч. България опира на три морета.',
+  '<b>20 август 917 г. — Ахелой.</b> Звездата е мястото на битката при Ахелой, до днешно Поморие. Тъмносинята стрелка е ходът на византийската войска.',
+  '<b>926 г.</b> Поход на запад към хърватските земи. Учебникът отбелязва битката като важна. Според други извори българската войска тук е победена от хърватите.'
+];
+var mapCur=EX.mapCur||0,mapReach=EX.mapReach||0,seasOn=EX.seasOn||false;
+function legend(){
+  $('#mapLegend').innerHTML='<span><i style="background:#F0A35E"></i>България при Борис</span><span><i style="background:#F3DD8F"></i>завоевания на Симеон</span><span><i style="background:#C8503C"></i>земи на маджарите</span><span><i style="background:#B9A4D6"></i>Византия</span><span><i style="background:#1E8E4E"></i>поход</span><span>★ битка</span>';
+}
+function mapStep(i,quiet){
+  mapCur=i;
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',k<=mapReach&&k>0)});
+  $$('#mapSvg [data-step]').forEach(function(p){p.classList.toggle('show',+p.getAttribute('data-step')<=i)});
+  if(!seasOn)$('#stepCap').innerHTML=MSTEPS[i];
+  $('#nextMove').textContent=i>=5?'↺ Отначало':'Следваща стъпка →';
+  if(!quiet&&i>mapReach){
+    mapReach=i;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',k<=mapReach&&k>0)});
+    addXP(3);
+    if(i===5&&flag('mapSteps'))addXP(4,'Походите на Симеон!');
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){seasOn=false;mapStep(+b.getAttribute('data-st'))})});
+$('#nextMove').addEventListener('click',function(){seasOn=false;$('#mapSvg').classList.remove('seas');mapStep(mapCur>=5?0:mapCur+1)});
+function setSeas(on,quiet){
+  seasOn=on;$('#mapSvg').classList.toggle('seas',on);
+  $('#seasBtn').textContent=on?'🌊 Скрий моретата':'🌊 Три морета';
+  if(on){
+    if(mapCur<3){mapStep(3,true)}
+    $('#stepCap').innerHTML='<b>Три морета.</b> Светещото в златно са <b>Черно</b>, <b>Егейско</b> и <b>Адриатическо</b> море. В началото на X в. границите на България опират на тях.';
+  }else $('#stepCap').innerHTML=MSTEPS[mapCur];
+  if(!quiet&&on&&flag('seas'))addXP(5,'България на три морета!');
+  saveNow();
+}
+$('#seasBtn').addEventListener('click',function(){setSeas(!seasOn)});
+legend();mapStep(mapCur,true);if(seasOn)setSeas(true,true);
+
+/* ================= АНИМАЦИЯ: АХЕЛОЙ ================= */
+(function(){
+  function rects(x0,y0,cols,rows,w,h,gap){var s='';for(var r=0;r<rows;r++)for(var c=0;c<cols;c++)s+='<rect x="'+(x0+c*(w+gap))+'" y="'+(y0+r*(h+gap))+'" width="'+w+'" height="'+h+'" rx="2"/>';return s}
+  $('#gRom').innerHTML=rects(200,50,4,4,12,12,5);
+  $('#gBul').innerHTML=rects(60,50,3,4,12,12,5);
+  $('#gRes').innerHTML=rects(20,130,4,2,12,12,5);
+})();
+var BCAP=[
+  'Българите са срещу ромеите. Цар Симеон има план. Натисни „Следваща стъпка“.',
+  '<b>1. Ромеите атакуват</b> предните линии на българите.',
+  '<b>2. Привидно отстъпление.</b> Българите като че ли започват да отстъпват, а ромеите ги преследват.',
+  '<b>3. Знакът на Симеон.</b> Царят дава знак. Основните български сили са наблизо, готови за удар.',
+  '<b>4. Обръщане и удар.</b> По знак на царя българите се обръщат срещу преследвачите и, подкрепени от основните сили, ги отблъскват.',
+  '<b>5. Ромеите бягат.</b> Византийската войска е разбита, а повечето от военачалниците ѝ са унищожени. Хитростта е сработила!'
+];
+var bCur=EX.bCur||0,bReach=EX.bReach||0;
+function bStep(i,quiet){
+  bCur=i;$('#bSvg').setAttribute('class','b'+i);
+  $$('#bDots i').forEach(function(d,k){d.classList.toggle('on',k<i)});
+  $('#bCap').innerHTML=BCAP[i];$('#bNext').textContent=i>=5?'↺ Отначало':'Следваща стъпка →';
+  if(!quiet&&i>bReach){bReach=i;addXP(2);if(i===5&&flag('battle')){addXP(5,'Хитростта е разгадана!');award('general')}}
+  saveNow();
+}
+$('#bNext').addEventListener('click',function(){bStep(bCur>=5?0:bCur+1)});
+$('#bReset').addEventListener('click',function(){bStep(0)});
+bStep(bCur,true);
+
+/* ================= ДОСИЕ 5 (злато) ================= */
+var TG=['<b>🪑 Престолът</b> · Симеон стои на „златен престол“.','<b>📿 Наниз</b> · На шията му има „златен наниз“.','<b>🪶 Перо</b> · Пише със „златно перо“.','<b>🛡 Брони</b> · Пред стените на Константинопол той се изправя с армия със „златни брони“.','<b>🔱 Копия</b> … и със „златни копия“.','<b>🤔 Защо злато?</b> · Златото е символ на богатство, слава и власт. Затова неговото време наричат „Златен век“ — политически възход и културен разцвет.'];
+var tgSeen=EX.tgSeen||{};
+tilesInit('data-tileg',TG,tgSeen,'gold','Златото на Симеон е разкрито!');
+
+/* ================= ДОСИЕ 6 (плочки) ================= */
+var T6=['Старите езически вярвания постепенно са заменени с християнските ценности. Битът на българите започва да се гради върху християнските обреди и празници.','Появява се нова влиятелна обществена група — българското духовенство.','Крумовите закони са заменени с нови законници, в които водеща е християнската представа за престъпление и наказание.','Различията между разнородните поданици са преодолени. Създадена е българската народност с общото име „българи“.'];
+var t6Seen=EX.t6Seen||{};
+tilesInit('data-tile6',T6,t6Seen,'tiles6','Промените са разучени!');
+
+/* ================= ЛИНИЯТА ОТ УЧЕБНИКА ================= */
+var TT=['Византийски император. Княз Борис I е кръстен с неговото име — Михаил.','Български княз, покръстител на българите. Приема християнското име Михаил.','Византийски император. По негово време (886 г.) България приема учениците на Кирил и Методий.','Византийски император, наричан Философ. Съвременник на Симеон; един от най-образованите владетели.','Цар на българите — „Златният век“ на България.','Византийски император. По негово време е битката при Ахелой (917 г.).'];
+var ttSeen=EX.ttSeen||{};
+tilesInit('data-tilet',TT,ttSeen,'tt','Владетелите са подредени!');
+
+/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
+var TL=[['863 г.','30-годишен мир с ромеите: българите да приемат християнството'],['865 г.','Покръстването на Борис I и семейството му в Плиска'],['866 г.','Борис се обръща към папа Николай I'],['870 г.','Събор в Константинопол: Българска църква с архиепископ'],['879 г.','Българската архиепископия получава пълна самостоятелност'],['886 г.','България приема учениците на Кирил и Методий'],['893 г.','Народен събор в Преслав: Симеон е княз, Преслав е столица'],['913 г.','Симеон е пред стените на Константинопол'],['20 август 917 г.','Битката при р. Ахелой']];
+var sortl=$('#sortl');
+function tlRender(order){
+  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+' ·</span>'+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+  $$('.sitem',sortl).forEach(bindItem);
+}
+var IDX=TL.map(function(_,i){return i});
+var order0=(EX.tlOrder&&EX.tlOrder.length===TL.length)?EX.tlOrder:(function(){var o;do{o=shuffle(IDX)}while(o.join()===IDX.join());return o})();
+tlRender(order0);
+var TLOK='<b>Отлично, хронисте!</b> От мира през 863 г. до победата при Ахелой през 917 г. минават само 54 години, а България е напълно друга.';
+if(EX.tlSolved){
+  sortl.classList.add('sorted');
+  $$('.sitem',sortl).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});
+  $('#tlCheck').disabled=true;
+  $('#tlFb').className='fb ok';
+  $('#tlFb').innerHTML=TLOK;
+}
+function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb';saveNow()}
+function bindItem(li){
+  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+    if(sortl.classList.contains('sorted'))return;
+    var d=+b.getAttribute('data-mv');
+    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
+    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
+    clearMarks();
+  })});
+  var h=$('.handle',li),startY=0,dragging=false,pid=null;
+  h.addEventListener('pointerdown',function(ev){
+    if(sortl.classList.contains('sorted'))return;
+    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+    try{h.setPointerCapture(pid)}catch(e){}
+    ev.preventDefault();
+  });
+  h.addEventListener('pointermove',function(ev){
+    if(!dragging||ev.pointerId!==pid)return;
+    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+    var prev=li.previousElementSibling,next=li.nextElementSibling;
+    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+  });
+  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+}
+var tlTries=EX.tlTries||0;
+$('#tlCheck').addEventListener('click',function(){
+  if(sortl.classList.contains('sorted'))return;
+  tlTries++;saveNow();var items=$$('.sitem',sortl),ok=0;
+  items.forEach(function(li,pos){var good=+li.getAttribute('data-i')===pos;li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+  var fb=$('#tlFb');
+  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML=TLOK;
+    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
+  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: първо е мирът, после покръстването и спорът между Рим и Константинопол (866 – 879), след това учениците, събора в Преслав и накрая — Константинопол и Ахелой.'}
+});
+
+/* ================= ЗАГАДКА: КОЙ ЛЪЖЕ? ================= */
+var LIARS=[
+ {t:'Византийският чиновник',ok:1,e:'Той лъже. Победител е цар Симеон, а византийската войска е разбита. Чиновникът би излъгал, за да скрие поражението на своята страна.'},
+ {t:'Българският войник',ok:0,e:'Не. Той казва точно хитростта от учебника: привидно отстъпление, знак на царя, обръщане и удар.'},
+ {t:'Хронистът',ok:0,e:'Не. Битката е на 20 август 917 г. при р. Ахелой, до днешно Поморие.'}
+];
+var liarDone=false;
+$('#liars').innerHTML=shuffle([0,1,2]).map(function(i){return '<button class="opt" data-l="'+i+'">'+LIARS[i].t+'</button>'}).join('');
+$$('[data-l]').forEach(function(b){b.addEventListener('click',function(){
+  var s=LIARS[+b.getAttribute('data-l')],fb=$('#liarFb');
+  if(s.ok){b.classList.add('right');$$('[data-l]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Точно, лъжецът е разкрит!</b> '+s.e;
+    if(flag('puzzle'))addXP(10,'Лъжецът е разкрит!')}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e}
+})});
+
+/* ================= ВЪПРОСИ И ЗАДАЧИ ================= */
+var TASKS=[
+  ['1. Защо хан Борис взел решение за покръстването на българите?','Християнските държави се отнасяли с недоверие към езическа България. Новата вяра щяла да увеличи властта на хана и да сплоти разнородните поданици в един народ. Борис разбрал, че бъдещето на България е в християнството.'],
+  ['2. Как Борис I извоювал самостоятелност за Българската църква?','Като играл между Рим и Константинопол. През 866 г. се обърнал към папа Николай I и римски духовници започнали наново да покръстват. Византия отстъпила: през 870 г. събор в Константинопол създал Българска църква с архиепископ, а през 879 г. тя получила пълна самостоятелност.'],
+  ['3. Какво било значението на приемането на Кирило-Методиевите ученици за България и славянския свят?','Борис спасил делото им. Климент и Наум създали книжовни школи в Охрид и Плиска, обучили много духовници и книжовници и създали кирилицата. България станала културен център на славяните, а кирилицата — азбука на много народи.'],
+  ['4. Какви решения взел народният събор в Преслав?','През 893 г. за български княз бил провъзгласен Симеон. Преслав станал новата християнска столица. Старобългарският език се утвърдил като богослужебен и държавен.'],
+  ['5. Какво целял със своята външна политика цар Симеон Велики?','Не допускал Византия да накърни българските интереси. Водел походи на юг и югозапад, а в началото на X в. владеел по-голямата част от Балканите. Планът му бил България да стане нов християнски център на мястото на Византия.'],
+  ['6. Какви промени настъпили в българското общество след Покръстването?','Християнските ценности заменили езическите вярвания, появило се българското духовенство, Крумовите закони били заменени с нови, а различията между поданиците били преодолени — създадена била българската народност.'],
+  ['7. (към стенописа) Защо според вас Борис е изобразен със свитък с букви в ръката си?','Свитъкът с букви е символ на книжовността. Борис е „покровител“ на славянската писменост — спасява делото на Кирил и Методий и приема учениците им.']
+];
+var taskSeen=EX.taskSeen||{};
+function taskOpen(i,quiet){
+  var b=$('#task'+i+' button'),a=$('#task'+i+' .infobox');a.style.display='block';b.textContent='✓ Примерният отговор е показан';b.disabled=true;
+  if(!quiet){taskSeen[i]=1;addXP(2);if(Object.keys(taskSeen).length===TASKS.length&&flag('tasks'))addXP(4,'Задачите са готови!')}
+}
+$('#taskList').innerHTML=TASKS.map(function(t,i){return '<div class="stage" id="task'+i+'"><b>'+t[0]+'</b><div class="row" style="margin-top:8px"><button class="btn ghost small" data-t="'+i+'">Покажи примерен отговор</button></div><div class="infobox" style="display:none"><p>'+t[1]+'</p></div></div>'}).join('');
+$$('#taskList button').forEach(function(b){b.addEventListener('click',function(){taskOpen(+b.getAttribute('data-t'))})});
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['to baptize','покръствам','The priest will baptize the prince.'],['rebel','бунтовник','The rebels are angry.'],['golden','златен','He sits on a golden throne.'],['sea','море','The land has three seas.'],['victory','победа','The army has a big victory.'],['scribe','книжовник, писар','The scribe writes a book.'],['pupil','ученик','The pupil learns new letters.'],['school','школа, училище','The school is in Ohrid.']];
+var ES=[['el libro','книгата','El libro es antiguo.'],['la cruz','кръстът','La cruz es de oro.'],['el maestro','учителят','El maestro enseña letras.'],['el mar','морето','El mar es azul.'],['la batalla','битката','La batalla es grande.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+var heard=EX.heard||{};
+function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'Кирил (име)',s:'„азбуката на Кирил“',b:['кирилица (бълг.)','Cyrillic (англ.)','cirílico (исп.)','кириллица (рус.)'],p:'Кирилицата е наречена на името на Кирил (Константин Философ), един от създателите на глаголицата. Самата азбука обаче е създадена от Кирило-Методиевите ученици — името е в чест на светеца.'},
+  {r:'εὐαγγέλιον (гр.)',s:'„добра вест“',b:['евангелие (бълг.)','evangelio (исп.)','gospel (англ.) — „добра вест“ със староанглийски корен','evangelist (англ.)'],p:'Гръцката дума е от εὖ („добре“) + ἀγγελία („вест“). Евангелията са „добрата вест“ за Христос. Старите книжовници я превеждат на славянски и така тя идва в нашия език. В английския същата мисъл е „gospel“ (староанглийски „добра история“).'},
+  {r:'χρόνος (гр.)',s:'„време“',b:['хроника (бълг.)','chronicle (англ.)','crónica (исп.)','хронолошки (бълг.)'],p:'Гръцкото chronos значи „време“. „Хроника“ е разказ за събития по реда на времето — като Манасиевата хроника, от чийто препис е миниатюрата за Покръстването. Същият корен е в думата „хронология“.'},
+  {r:'лѣто (старосл.) + писати',s:'„година“ + „пиша“',b:['летопис (бълг.)','летописец (бълг.)','annals (англ.) — от лат. annus „година“','anales (исп.)'],p:'Летописът е „писане на годините“: старото „лѣто“ значи „година“. Латинските „анали“ (annales) са образувани по същия начин — от annus, „година“. Така и „Бертинските летописи“ са „анали“ от Бертин.'}
+];
+$('#etym').innerHTML=ETY.map(function(e,i){return '<button class="ety" data-y="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('');
+var ySeen=EX.ySeen||{};
+$$('.ety').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'Кой български владетел покръства българите?',o:['Княз Борис I','Хан Крум','Цар Симеон'],a:0,e:'Борис I (852 – 889) покръства българите през 865 г.'},
+  {q:'През коя година (по учебника) византийски духовници покръстват Борис в Плиска?',o:['865 г.','917 г.','870 г.'],a:0,e:'По учебника — 865 г.'},
+  {q:'Каква титла приема Борис вместо хан?',o:['Княз','Император','Патриарх'],a:0,e:'Вместо хан владетелят приема славянската титла княз.'}],
+ [{q:'Какво решава църковният събор в Константинопол през 870 г.?',o:['Да се създаде Българска църква начело с архиепископ','Българите да станат римокатолици','Да се забрани кирилицата'],a:0,e:'Българската църква е под върховната власт на патриарха. Пълна самостоятелност идва през 879 г.'},
+  {q:'Кои са двамата ученици на Кирил и Методий, създали школи в Охрид и Плиска?',o:['Климент и Наум','Фотий и Николай','Симеон и Расате'],a:0,e:'Климент работи в Охрид, а Наум — в Плиска.'},
+  {q:'Коя азбука създават учениците на Кирил и Методий и тя постепенно заменя глаголицата?',o:['Кирилицата','Латиницата','Руните'],a:0,e:'Кирилицата — с основен елемент правата линия.'}],
+ [{q:'Какво решава народният събор в Преслав през 893 г.?',o:['Симеон е княз, а Преслав е новата християнска столица','Борис да си върне престола','България да стане част от Византия'],a:0,e:'Старобългарският е утвърден като богослужебен и държавен език.'},
+  {q:'Кои са трите морета, на които опират границите на България при Симеон?',o:['Черно, Егейско и Адриатическо','Балтийско, Северно и Черно','Червено, Мраморно и Каспийско'],a:0,e:'В началото на X в. България е могъща държава на три морета.'},
+  {q:'Какво прави Симеон при Ахелой на 20 август 917 г.?',o:['Прилага военна хитрост — привидно отстъпление, а после контраудар','Прави мирен договор без бой','Бяга от ромеите'],a:0,e:'Българите разбиват ромеите, като ги примамват с привидно отстъпление.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Чирак','Книжовник','Главен детектив'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Покръстване','Приемане на християнската вяра от владетел и народ.'],['Княз','Славянската титла, която Борис I приема вместо хан.'],['Архиепископия','Голяма църковна област, управлявана от архиепископ. Българската получава самостоятелност през 879 г.'],['Книжовна школа','Група книжовници, които следват общи принципи — език, правопис, стил, теми.'],['Цар','Славянска титла на владетел, равна на императорската.'],['„Златен век“','Период на политически възход и културен разцвет в историята на държава. Времето на Симеон.'],['Народност','Общност от хора с обща територия, закони, религия, книжовен език, култура и памет.'],['865 г.','Покръстване на българите в Плиска.'],['870 г.','Събор в Константинопол: Българска църква с архиепископ.'],['893 г.','Народен събор в Преслав: Симеон е княз, Преслав е столица.'],['20 август 917 г.','Битката при Ахелой.']];
+var fI=EX.fI||0,flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата (№2, №3, №4 и №6).';
+}
+var SUS=[
+ {t:'България се издига само чрез завоевания на Симеон, а религията няма значение',ok:0,e:'Не. Улики 1 – 4: основата е покръстването със самостоятелна Църква, книжовните школи и един народ.'},
+ {t:'Покръстването със самостоятелна Църква и книжовните школи обединяват поданиците в един народ, а Симеон превръща България в могъща държава и културен център на славяните',ok:1,e:'Точно! Борис покръства българите и извоюва самостоятелна Църква (улика 1), приема учениците на Кирил и Методий (улика 2), Симеон утвърждава България като могъща държава (улика 3), а обществото се променя — един народ (улика 4). Така започва „Златният век“.'},
+ {t:'България се покръства от Рим и е зависима от папата завинаги',ok:0,e:'Не. Покръстването е от Константинопол; Борис играе между Рим и Константинопол, за да извоюва самостоятелност.'},
+ {t:'Кирил и Методий са първите ханове на България',ok:0,e:'Не. Кирил и Методий са просветители, а не владетели. Ханове и князе са Аспарух, Крум, Борис.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 14. Възходът на християнска България\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nКлючови дати: 852 – 889 – княз Борис I; 865 – покръстване на българите в Плиска; 870 – събор в Константинопол, Българска църква с архиепископ; 886 – България приема учениците на Кирил и Методий; 893 – 927 – цар Симеон Велики (893 – народен събор в Преслав); 20 август 917 – битката при р. Ахелой.\n\nПонятия: покръстване, княз, архиепископия, книжовна школа, цар, „Златен век“, народност.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='865';$('#dC').textContent='IX в.';$('#dP').textContent='Плиска, столицата на България';
+    setTM('865','IX в.','Плиска');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 865 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  if(jumped2){
+    $('#dY2').textContent='917';$('#dC2').textContent='X в.';$('#dP2').textContent='р. Ахелой, до днешно Поморие';
+    var jb2=$('#jumpBtn2');jb2.textContent='✓ Пристигна в 917 г.';jb2.classList.add('done');jb2.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  if(S.flags.puzzle){var lb=$('[data-l="0"]');if(lb)lb.click()}
+  tilesRestore('data-tile',TA,tSeen);tilesRestore('data-tile6',T6,t6Seen);tilesRestore('data-tilec',TCY,tcSeen);tilesRestore('data-tileg',TG,tgSeen);tilesRestore('data-tilet',TT,ttSeen);
+  chainRestore('#chain',CHAINN,chainN);chainRestore('#chain4',CHAIN4,chain4N);
+  Object.keys(pSeen).forEach(function(i){pairOpen(+i,true)});
+  Object.keys(S.seen).forEach(function(id){if(S.seen[id])seenMark(id)});
+  Object.keys(taskSeen).forEach(function(i){taskOpen(+i,true)});
+  Object.keys(ySeen).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>
