@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#9E1B32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<title>Урок 12 · България през първата половина на IX в.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --red:#9E1B32; --red-2:#7A1426; --red-soft:#FBE9EC;
+  --navy:#1B2A41;
+  --gold:#C9962B; --gold-soft:#FFF4DA; --gold-ink:#7A5A10;
+  --paper:#F6F7F9; --card:#FFFFFF;
+  --ink:#1D1F24; --muted:#5B6270; --line:#E3E5EA;
+  --ok:#1E8E4E; --ok-soft:#E3F5EA;
+  --bad:#D1491F; --bad-soft:#FDEBE3;
+  --soft:#F1F2F5;
+  --sea:#CFE0EE; --land:#E6E8EC; --west:#E3A1AC; --east:#9DB0CF; --unit:#E9CF8E;
+  --r:16px; --shadow:0 2px 0 rgba(27,42,65,.08), 0 6px 18px rgba(29,31,36,.06);
+  --head:"PT Serif", Georgia, "Times New Roman", serif;
+  --body:system-ui, "Roboto", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);overflow-x:hidden}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .5em;color:var(--red-2)}
+h1{font-size:1.7rem}
+h2{font-size:1.35rem}
+h3{font-size:1.1rem}
+p{margin:.5em 0 .8em}
+a{color:var(--red)}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 120px}
+
+/* ---------- Top bar + машината на времето ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:8px 16px 6px;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topbar-in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.xp{display:flex;align-items:center;gap:6px;font-family:var(--head);font-weight:700;font-size:1.05rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.xp .gem{color:var(--gold)}
+.xp.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.25)}}
+.prog{flex:1;height:12px;background:rgba(255,255,255,.2);border-radius:999px;overflow:hidden}
+.prog>i{display:block;height:100%;width:0;background:var(--gold);border-radius:999px;transition:width .6s}
+.badgecount{font-size:.95rem;white-space:nowrap;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:999px}
+.tm{max-width:760px;margin:6px auto 0;display:flex;gap:6px;align-items:stretch;font-size:.8rem}
+.tm .lbl{display:flex;align-items:center;color:var(--gold);font-size:1rem}
+.tm .cell{background:#0F1A2B;border:1px solid #33455F;border-radius:8px;padding:2px 8px;overflow:hidden;display:flex;align-items:center;min-height:28px}
+.tm .cell b{display:block;font-family:"Courier New",monospace;font-weight:700;color:#FFE6A8;letter-spacing:.04em;white-space:nowrap}
+.tm .cell.place{flex:1;min-width:0}
+.tm .cell.place b{overflow:hidden;text-overflow:ellipsis;font-family:var(--body);font-weight:600;letter-spacing:0;color:#fff}
+.tm .cell b.roll{animation:roll .45s ease-out}
+@keyframes roll{0%{transform:translateY(-110%);opacity:0}60%{transform:translateY(12%);opacity:1}100%{transform:translateY(0)}}
+.toast{position:fixed;left:50%;top:92px;transform:translateX(-50%) translateY(-20px);opacity:0;background:var(--gold);color:#2E2000;font-family:var(--head);font-weight:700;padding:8px 16px;border-radius:999px;z-index:60;transition:.3s;pointer-events:none;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- Hero ---------- */
+.hero{padding:22px 0 6px}
+.kicker{font-family:var(--body);font-weight:700;color:var(--gold-ink);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
+.board{background:var(--navy);color:#fff;border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.board h2{color:#fff;margin-bottom:6px}
+.board p{color:#D6DCE6;margin:.3em 0 .8em;font-size:.95rem}
+.dials{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 12px}
+.dial{background:#0F1A2B;border:1px solid #33455F;border-radius:12px;padding:8px 10px;overflow:hidden}
+.dial small{display:block;color:#9FB0C8;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.dial b{display:block;font-family:"Courier New",monospace;font-size:1.5rem;color:#FFE6A8;line-height:1.2}
+.dial.wide{grid-column:1/-1}
+.dial.wide b{font-family:var(--body);font-size:1.1rem;color:#fff}
+.dial b.roll{animation:roll .45s ease-out}
+.case{background:var(--card);border:2px dashed var(--red);border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.clue{border-radius:12px;padding:10px;font-size:.88rem;line-height:1.4;background:var(--soft);color:var(--muted);min-height:74px}
+.clue b{display:block;font-family:var(--body);color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.clue.on{background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.clue.on b{color:var(--gold-ink)}
+@keyframes pop{0%{transform:scale(.9)}60%{transform:scale(1.05)}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--card);border-radius:var(--r);padding:18px 16px;margin:18px 0;box-shadow:var(--shadow);border:1px solid var(--line)}
+.dossier-tag{display:inline-block;font-family:var(--body);font-weight:700;font-size:.78rem;color:#fff;background:var(--red);padding:3px 10px;border-radius:6px;margin-bottom:8px;letter-spacing:.06em}
+.dossier-tag.navy{background:var(--navy)}
+.dossier-tag.gold{background:var(--gold);color:#2E2000}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:14px;padding:12px 16px;min-height:48px;font-family:var(--body);font-weight:700;font-size:1rem;background:var(--red);color:#fff;box-shadow:0 4px 0 #5E0F1D;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5E0F1D}
+.btn.ghost{background:var(--red-soft);color:var(--red-2);box-shadow:0 4px 0 #EBC6CD}
+.btn.gold{background:var(--gold);color:#2E2000;box-shadow:0 4px 0 #9A7118}
+.btn.navy{background:var(--navy);box-shadow:0 4px 0 #0B1320}
+.btn.done{background:var(--ok);box-shadow:0 4px 0 #146638}
+.btn[disabled]{opacity:.6;cursor:default}
+.btn.small{min-height:44px;padding:8px 12px;font-size:.92rem}
+.readbtn{margin-top:10px}
+.term{background:none;border:0;padding:0 2px;color:var(--red-2);font-weight:700;border-bottom:2px dotted var(--gold);font-size:inherit;line-height:inherit}
+.hl{background:var(--gold-soft);padding:0 4px;border-radius:4px}
+.key{display:inline-block;background:var(--gold-soft);color:var(--gold-ink);font-weight:700;border:1px solid #EBD39A;border-radius:6px;padding:0 5px;white-space:nowrap}
+.task{background:var(--soft);border-radius:14px;padding:12px;margin-top:14px}
+.task h3{font-size:1rem;margin-bottom:6px;color:var(--navy);font-family:var(--body)}
+.note{font-size:.88rem;color:var(--muted);background:var(--soft);border-radius:10px;padding:8px 10px}
+
+/* ribbons (стъпки, периоди) */
+.ribbon{display:flex;gap:3px;margin:10px 0 6px}
+.ribbon button{border:0;border-radius:8px;min-height:52px;padding:4px 2px;font-size:.72rem;font-weight:700;color:#fff;line-height:1.15;position:relative;min-width:0;overflow:hidden}
+.ribbon button.seen:after{content:"✓";position:absolute;top:1px;right:4px;font-size:.7rem}
+.ribbon button.active{outline:3px solid var(--gold);outline-offset:1px}
+.ribticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:6px}
+.infobox{background:var(--gold-soft);border-radius:12px;padding:12px;min-height:84px;margin-top:6px}
+.infobox h3{margin:0 0 4px;color:var(--gold-ink);font-size:1.05rem}
+.infobox p{margin:0}
+
+/* flip tiles */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{border:0;border-radius:14px;min-height:104px;padding:10px;text-align:left;background:var(--navy);color:#fff;font-size:.9rem;line-height:1.35}
+.tile b{display:block;font-family:var(--head);font-size:1.02rem;margin-bottom:4px;color:#FFE6A8}
+.tile.open{background:var(--gold-soft);color:var(--ink);animation:pop .35s}
+.tile.open b{color:var(--gold-ink)}
+
+/* sorter */
+.sorter{background:var(--soft);border-radius:14px;padding:12px;margin-top:10px}
+.sortcard{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;min-height:64px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center}
+.sortbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.col{border-radius:12px;padding:8px;font-size:.82rem;line-height:1.35;min-height:60px}
+.col h4{margin:0 0 4px;font-size:.85rem}
+.col.w{background:var(--red-soft)}.col.w h4{color:var(--red-2)}
+.col.e{background:#E6ECF5}.col.e h4{color:var(--navy)}
+.col div{margin-bottom:4px}
+
+/* names chain */
+.chain{display:grid;gap:8px;margin-top:10px}
+.chain button{border:2px solid var(--line);background:#fff;border-radius:14px;min-height:52px;text-align:left;padding:10px 12px;font-size:.95rem;color:var(--ink)}
+.chain button b{font-family:var(--head);color:var(--red-2);font-size:1.1rem}
+.chain button[disabled]{opacity:.45}
+.chain button.open{border-color:var(--gold);background:var(--gold-soft);opacity:1}
+.chain .arrow{text-align:center;color:var(--muted);font-size:1.1rem;line-height:1}
+
+/* map */
+.mapbox{background:var(--sea);border-radius:14px;overflow:hidden;border:1px solid #B7CCE0;touch-action:manipulation}
+.mapbox svg{display:block;width:100%;height:auto}
+.maplabel{font:700 11px var(--body);fill:#46617E;letter-spacing:.1em;pointer-events:none}
+.regionlabel{font:800 11px var(--body);letter-spacing:.06em;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.contlabel{font:700 13px var(--body);fill:#8A909B;letter-spacing:.3em;pointer-events:none}
+.river{fill:none;stroke:#7FA8CB;stroke-width:1.3;pointer-events:none}
+.coast{fill:none;stroke:#8FAAC4;stroke-width:.8;pointer-events:none}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:1.8}
+.mk .halo{fill:none;stroke-width:2.5;opacity:0}
+.mk.active .halo{opacity:1;animation:ring 1.2s infinite}
+@keyframes ring{0%{r:6;opacity:1}100%{r:18;opacity:0}}
+.mk.seen .dot{stroke:var(--ink)}
+.mk.fallen .dot{fill:#fff!important;stroke-width:3}
+.mk text{font:700 10px var(--body);fill:var(--ink);paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.chip{border:0;border-radius:999px;padding:8px 12px;min-height:44px;font-size:.9rem;background:var(--soft);color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.chip i{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.chip.seen{background:#E6ECF5}
+.chip.active{background:var(--navy);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:14px;height:10px;border-radius:3px;display:inline-block}
+.steps{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.steps button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:52px;padding:4px;font-size:.8rem;font-weight:700;line-height:1.2;color:var(--ink)}
+.steps button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.steps button.seen:not(.active){border-color:var(--gold)}
+input[type=range]{width:100%;height:44px;accent-color:var(--red);margin:6px 0 0}
+.stepcap{font-size:.95rem;margin:6px 0 0;min-height:3em}
+
+/* routes on the map (Великото преселение) */
+.routes path{fill:none;stroke-width:2.6;stroke-linecap:round;opacity:0;stroke-dasharray:1;stroke-dashoffset:1;transition:opacity .3s}
+.routes path.show{opacity:1;stroke-dashoffset:0;animation:draw .9s ease forwards}
+.routes path.huns{stroke:var(--red)}
+.routes path.vest{stroke:var(--navy)}
+.routes path.vand{stroke:var(--gold-ink)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* timeline sorting */
+.sortl{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;position:relative}
+.sitem{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 6px 4px 4px;min-height:56px;position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.sitem.dragging{z-index:5;box-shadow:0 10px 24px rgba(0,0,0,.18);border-color:var(--gold);transition:none}
+.sitem .handle{flex:none;width:44px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--muted);touch-action:none;cursor:grab;border-radius:10px;background:var(--soft)}
+.sitem .txt{flex:1;font-size:.95rem;line-height:1.3}
+.sitem .yr{display:none;font-weight:800;color:var(--gold-ink);margin-right:4px}
+.sitem .mv{flex:none;display:flex;flex-direction:column;gap:2px}
+.sitem .mv button{border:0;background:var(--soft);border-radius:8px;width:44px;height:24px;font-size:.8rem;color:var(--ink);padding:0}
+.sitem.ok{border-color:var(--ok);background:var(--ok-soft)}
+.sitem.bad{border-color:var(--bad);background:var(--bad-soft)}
+.sitem .mark{flex:none;font-weight:800;width:18px;text-align:center}
+.sorted .sitem .yr{display:inline}
+
+/* quiz/options */
+.stage{background:var(--soft);border-radius:14px;padding:14px;margin-top:10px}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;padding:12px 14px;min-height:52px;text-align:left;font-size:1rem;color:var(--ink)}
+.opt:active{transform:translateY(2px)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right:before{content:"✓ ";color:var(--ok);font-weight:800}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong:before{content:"✗ ";color:var(--bad);font-weight:800}
+.opt[disabled]{cursor:default}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);border:2px solid var(--ok)}
+.fb.bad{display:block;background:var(--bad-soft);border:2px solid var(--bad)}
+.fb b{font-family:var(--body)}
+.fb.ok b{color:#146638}.fb.bad b{color:#9C3312}
+.fb.ok b:before{content:"✓ "}.fb.bad b:before{content:"✗ "}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.qprog{height:14px;background:#DDE1E7;border-radius:999px;overflow:hidden;margin:8px 0 12px}
+.qprog i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.qtext{font-family:var(--head);font-weight:700;font-size:1.12rem;color:var(--ink);margin:.3em 0}
+.path{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+.node{width:84px;height:84px;border-radius:50%;border:0;font-family:var(--head);font-weight:700;font-size:1.6rem;color:#fff;background:var(--red);box-shadow:0 6px 0 #5E0F1D;position:relative}
+.node:nth-child(2){margin-left:90px}.node:nth-child(3){margin-right:90px}
+.node[disabled]{background:#C3C7CF;box-shadow:0 6px 0 #9A9FA9;cursor:default}
+.node.done{background:var(--gold);box-shadow:0 6px 0 #9A7118;color:#2E2000}
+.node span{position:absolute;top:92px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.8rem;color:var(--muted);font-weight:700;font-family:var(--body)}
+.pathwrap{padding-bottom:26px}
+
+/* source clue */
+.qblock{margin-top:14px}
+.qblock .qtext{font-size:1.02rem}
+
+/* personality cards */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;margin-top:10px}
+.pcard{perspective:900px;height:262px;border:0;padding:0;background:none;text-align:left}
+.pcard-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.pcard.flip .pcard-in{transform:rotateY(180deg)}
+.pface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:10px;overflow:hidden;display:flex;flex-direction:column}
+.pfront{background:linear-gradient(160deg,var(--red) 0%,var(--red-2) 100%);color:#fff;border:3px solid var(--gold)}
+.pfront .av{font-size:2.6rem;line-height:1;margin:4px 0 6px;height:74px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border-radius:10px;overflow:hidden}
+.pfront .av img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pfront b{font-family:var(--head);font-size:1rem;line-height:1.2}
+.pfront small{color:#FFE6A8;font-size:.78rem;display:block;margin-top:2px}
+.pfront .sp{margin-top:auto;font-size:.78rem;background:rgba(0,0,0,.2);border-radius:8px;padding:4px 6px;line-height:1.3}
+.pback{overflow-y:auto;background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:.76rem;line-height:1.35;border:3px solid var(--gold)}
+.pback b{font-family:var(--head);color:var(--red-2);font-size:.95rem;margin-bottom:4px}
+.pcard.locked .pfront{background:#D5D9E0;color:var(--muted);border-color:#C3C7CF}
+.pcard.locked .pfront .av{filter:grayscale(1) blur(2px);opacity:.5}
+.pcard.locked .pfront small,.pcard.locked .pfront .sp{color:var(--muted);background:rgba(255,255,255,.5)}
+.pcard.new .pfront{animation:pop .5s}
+
+/* gallery */
+.gallery{display:grid;gap:14px}
+figure{margin:0;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+figure img{display:block;width:100%;height:auto;max-height:75vh;object-fit:contain;background:#E4E6EA;cursor:zoom-in}
+.zoomhint{font-size:.78rem;color:var(--muted)}
+figure .noimg{height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:12px;text-align:center;background:var(--soft)}
+figcaption{padding:10px 12px;font-size:.95rem;line-height:1.45}
+figcaption small{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}
+
+/* did you know */
+.dyk{display:grid;gap:10px}
+.dyk div{background:var(--soft);border-radius:12px;padding:12px 12px 12px 48px;position:relative}
+.dyk div:before{content:attr(data-i);position:absolute;left:12px;top:10px;font-size:1.4rem}
+
+/* короната пътува (анимация) */
+.crownbox{background:var(--soft);border-radius:14px;padding:16px;position:relative;height:120px;overflow:hidden;margin-top:10px}
+.crownbox .city{position:absolute;top:8px;font-size:.78rem;font-weight:700;color:var(--muted)}
+.crownbox .city.rome{left:8px}
+.crownbox .city.cpl{right:8px;text-align:right}
+.crownbox .track{position:absolute;left:44px;right:44px;top:56px;height:2px;border-top:2px dashed #B7BFCB}
+.crownicon{position:absolute;top:56px;left:44px;transform:translate(-50%,-50%);font-size:2.1rem}
+.crownicon.go{animation:crowntrip 2.8s ease-in-out forwards}
+@keyframes crowntrip{0%{left:44px}100%{left:calc(100% - 44px)}}
+.crowncap{position:absolute;bottom:6px;left:8px;right:8px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* links */
+.linkcard{display:block;text-decoration:none;color:var(--ink);background:var(--soft);border-radius:12px;padding:12px;margin:8px 0;border:1px solid var(--line)}
+.linkcard b{font-family:var(--body);color:var(--red-2);display:block}
+.linkcard small{color:var(--muted)}
+
+/* interview / role */
+.chat{display:grid;gap:8px;margin-top:10px}
+.bubble{border-radius:14px;padding:10px 12px;font-size:.95rem;line-height:1.45;max-width:92%}
+.bubble.q{background:var(--navy);color:#fff;justify-self:end}
+.bubble.a{background:var(--soft);justify-self:start}
+.bubble.v{background:var(--gold-soft);justify-self:start;border:1px solid #EBD39A}
+.bubble small{display:block;font-size:.72rem;opacity:.75;margin-bottom:2px;font-weight:700}
+.qbtns{display:grid;gap:8px;margin-top:10px}
+
+/* vocab */
+.vocab{display:grid;gap:8px}
+.word{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px 12px}
+.word .w{font-family:var(--head);font-weight:700;color:var(--red-2);min-width:96px}
+.word .ex{font-size:.92rem;color:var(--muted);line-height:1.4}
+.word button{margin-left:auto;flex:none;border:0;background:#fff;border-radius:10px;width:44px;height:44px;font-size:1.1rem}
+.hola .word .w{color:#B0452E}
+.etym{display:grid;gap:10px;margin-top:10px}
+.ety{border:2px solid var(--line);border-radius:14px;background:#fff;padding:12px;text-align:left;color:var(--ink);font-size:.95rem;width:100%}
+.ety .root{font-family:var(--head);font-weight:700;color:var(--red-2);font-size:1.08rem}
+.ety .root small{font-family:var(--body);color:var(--muted);font-weight:400;font-size:.85rem}
+.ety .tree{display:none;margin-top:8px}
+.ety.open{border-color:var(--gold)}
+.ety.open .tree{display:block}
+.branches{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px;padding-left:12px;border-left:3px solid var(--gold)}
+.branches span{background:var(--soft);border-radius:8px;padding:3px 8px;font-size:.88rem}
+.ety p{margin:.3em 0 0;font-size:.88rem;color:var(--muted)}
+
+/* reveal / badges */
+.reveal{text-align:center;overflow:hidden}
+.stamp{display:none;margin:12px auto;width:max-content;max-width:100%;border:4px solid var(--red);color:var(--red);font-family:var(--head);font-weight:700;font-size:1.5rem;padding:6px 18px;border-radius:10px;transform:rotate(-6deg);letter-spacing:.06em}
+.stamp.show{display:block;animation:stamp .5s}
+@keyframes stamp{0%{transform:rotate(-6deg) scale(2.2);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px}
+.badge{background:var(--soft);border-radius:14px;padding:10px 6px;text-align:center;font-size:.78rem;color:var(--muted);filter:grayscale(1);opacity:.6}
+.badge .ic{font-size:2rem;display:block}
+.badge.on{filter:none;opacity:1;background:var(--gold-soft);color:var(--ink);animation:pop .4s}
+.badge b{display:block;font-size:.85rem}
+
+/* flashcards */
+.flash{perspective:900px;margin:12px 0}
+.flash-in{position:relative;height:180px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+.flash.flip .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+.front{background:var(--navy);color:#fff;font-family:var(--head);font-weight:700;font-size:1.45rem}
+.back{background:var(--gold-soft);color:var(--ink);transform:rotateY(180deg);font-size:1rem;line-height:1.45}
+
+/* summary */
+.sum li{margin-bottom:6px}
+.keydates{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.keydates span{background:var(--gold-soft);border:1px solid #EBD39A;border-radius:10px;padding:4px 8px;font-size:.9rem}
+.keydates b{color:var(--gold-ink)}
+textarea.plain{width:100%;min-height:200px;font:15px/1.5 var(--body);border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;color:var(--ink)}
+
+/* glossary sheet */
+.sheet-bg{position:fixed;inset:0;background:rgba(29,31,36,.45);z-index:70;display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s;max-width:760px;margin:0 auto;box-shadow:0 -6px 24px rgba(0,0,0,.15)}
+.sheet.open{transform:translateY(0)}
+.sheet h3{margin-bottom:6px}
+
+/* audio panel */
+.audiobar{position:fixed;left:0;right:0;bottom:0;z-index:55;background:#fff;border-top:1px solid var(--line);padding:8px 16px calc(8px + env(safe-area-inset-bottom));display:none;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.audiobar.show{display:block}
+.audiobar-in{max-width:760px;margin:0 auto;display:flex;gap:8px;align-items:center}
+.audiobar .t{flex:1;min-width:0;font-size:.85rem;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.audiobar select{font:inherit;font-size:.9rem;padding:6px;border-radius:10px;border:1px solid var(--line);background:#fff;min-height:44px}
+.voicewarn{display:none;margin-top:8px}
+
+details{background:var(--soft);border-radius:12px;padding:10px 12px;margin:10px 0}
+summary{font-weight:700;color:var(--red-2);cursor:pointer;min-height:32px}
+.src li{font-size:.88rem;margin-bottom:4px;word-break:break-word}
+@media (min-width:600px){ .gallery{grid-template-columns:1fr 1fr} }
+@media (max-width:370px){ .steps button{font-size:.72rem} .tm{font-size:.74rem} }
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+
+
+/* ===== добавки за урок 11 ===== */
+.tlabel{font:800 8px var(--body);fill:#2c3440;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:2.2px;stroke-linejoin:round;pointer-events:none;letter-spacing:.04em}
+.routes path{stroke:#9E1B32}
+.routes polygon{opacity:0;transition:opacity .3s .7s;fill:#9E1B32}
+.routes polygon.show{opacity:1}
+.ter{transition:opacity .6s}
+.ter.hid{opacity:0}
+.steps.s4{grid-template-columns:repeat(2,1fr)}
+.bbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.bbox svg{width:100%;height:auto;display:block}
+.bbox .bl{font:700 9px var(--body);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.8);stroke-width:2.5px}
+.bdots{display:flex;gap:6px;justify-content:center;margin:8px 0 0}
+.bdots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block}
+.bdots i.on{background:var(--red)}
+@keyframes dirline{to{stroke-dashoffset:0}}
+.tv-list{display:grid;gap:8px;margin-top:10px}
+.tv-chip{border:2px solid var(--line);border-bottom-width:4px;background:#fff;border-radius:14px;min-height:52px;padding:10px 12px;text-align:left;font-size:.95rem;color:var(--ink);touch-action:manipulation}
+.tv-chip.placed{border-color:var(--ok);background:var(--ok-soft)}
+.tv-chip.placed:before{content:"✓ ";color:var(--ok);font-weight:800}
+.tv-gain{display:block;margin-top:6px;font-size:.88rem;color:#146638}
+.tv-order{display:inline-block;background:var(--navy);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-right:6px}
+.cyc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.cyc span{background:#fff;border:2px solid var(--line);border-radius:10px;padding:4px 8px;font-size:.85rem}
+.cyc span.snake{border-color:var(--gold);background:var(--gold-soft);font-weight:700}
+.quote{border-left:4px solid var(--gold);background:#fff;border-radius:0 12px 12px 0;padding:10px 12px;margin:10px 0;font-size:.95rem;font-style:italic}
+.quote small{display:block;font-style:normal;color:var(--muted);margin-top:4px}
+.mad-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.mad-btns button{border:2px solid var(--line);background:#fff;border-radius:12px;min-height:48px;font-size:.85rem;font-weight:700;color:var(--ink);padding:4px}
+.mad-btns button.active{border-color:var(--navy);background:var(--navy);color:#fff}
+.mad-btns button.seen:not(.active){border-color:var(--gold)}
+.twocol{display:grid;gap:10px}
+@media (min-width:600px){.twocol{grid-template-columns:1fr 1fr}}
+/* ===== добавки за урок 12 ===== */
+.vbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.vbox svg{width:100%;height:auto;display:block}
+.vbox .bl{font:700 9px var(--body);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.8);stroke-width:2.5px}
+#vArmy,#vBg,#vBar,#vArr,#vFire{opacity:0;transition:transform 1.1s ease,opacity .7s}
+.v1 #vArmy,.v1 #vFire{opacity:1}
+.v2 #vArmy{opacity:1;transform:translate(0,48px)}
+.v2 #vFire{opacity:1}
+.v3 #vArmy{opacity:1;transform:translate(0,48px)}
+.v3 #vFire{opacity:1}
+.v3 #vBg,.v3 #vBar{opacity:1}
+.v4 #vArmy,.v4 #vFire,.v4 #vBg,.v4 #vBar,.v4 #vArr{opacity:1}
+.v4 #vArmy{transform:translate(0,58px)}
+.v5 #vFire,.v5 #vBg,.v5 #vBar{opacity:1}
+.v5 #vArmy{opacity:.3;transform:translate(0,70px)}
+.v5 #vCrown{opacity:.25}
+#vArr line{stroke-dasharray:90;stroke-dashoffset:90}
+.v4 #vArr line,.v5 #vArr line{animation:dirline .9s ease forwards}
+.v5 #vArr{opacity:.4}
+.gov{display:grid;gap:8px;margin-top:10px}
+.gov .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gov .arr{text-align:center;color:var(--muted);line-height:1}
+.gov button{border:0;border-bottom:4px solid rgba(0,0,0,.25);border-radius:12px;min-height:52px;padding:8px 10px;color:#fff;font-weight:700;font-size:.95rem;line-height:1.25;touch-action:manipulation}
+.gov button small{display:block;font-weight:400;font-size:.78rem;opacity:.9}
+.gov button.g-khan{background:#9E1B32}
+.gov button.g-sal{background:#C25E4E}
+.gov button.g-sov{background:#2F7FAE}
+.gov button.g-kom{background:#2E8B57}
+.gov button.seen:after{content:" ✓"}
+.gov button.on{outline:3px solid var(--gold);outline-offset:1px}
+#plSvg [data-b]{transition:opacity .6s,filter .6s}
+#plSvg [data-b]:not(.on){opacity:.22;filter:grayscale(1)}
+#plSvg #wallIn{stroke-dasharray:7 6;transition:stroke-dasharray .6s}
+#plSvg #wallIn.on{stroke-dasharray:none}
+#plFire{transition:opacity .6s}
+#plFire.out{opacity:0}
+.plbox{background:var(--soft);border-radius:14px;padding:8px;margin-top:10px}
+.plbox svg{width:100%;height:auto;display:block;touch-action:manipulation}
+.plbox [data-zone]{cursor:pointer}
+.plbox .zl{font:700 9px var(--body);fill:#5B6270;text-anchor:middle;pointer-events:none;letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="xp" id="xpBox"><span class="gem">◆</span><span id="xp">0</span> XP</div>
+    <div class="prog" aria-label="Напредък"><i id="progBar"></i></div>
+    <div class="badgecount">🏅 <span id="bCount">0</span>/9</div>
+  </div>
+  <div class="tm" aria-live="polite" aria-label="Машината на времето">
+    <span class="lbl">🕰</span>
+    <span class="cell"><b id="tmY">2026</b></span>
+    <span class="cell"><b id="tmC">XXI в.</b></span>
+    <span class="cell place"><b id="tmP">Бургас</b></span>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<main class="wrap">
+
+<header class="hero">
+  <div class="kicker">История и цивилизации · 6. клас · Раздел II · Урок 12</div>
+  <h1>България през първата половина на IX в.</h1>
+</header>
+
+<section class="board" id="machine" data-tm="2026|XXI в.|Бургас">
+  <h2>🕰 Машината на времето</h2>
+  <p>Детективе, в урок 11 видя как се ражда държава. Днес ще видим как тя става голяма и силна. Машината те отвежда в 803 г., в Плиска, в деня, в който на престола се възкачва хан Крум. След него идват битка в планински проход, обсада на Константинопол, нови закони и една столица, която се строи отново. Натисни бутона и скочи!</p>
+  <div class="dials">
+    <div class="dial"><small>Година</small><b id="dY">2026</b></div>
+    <div class="dial"><small>Век</small><b id="dC">XXI в.</b></div>
+    <div class="dial wide"><small>Място</small><b id="dP">Бургас, България</b></div>
+  </div>
+  <button class="btn gold" id="jumpBtn">🚀 Скочи в 803 г.</button>
+</section>
+
+<section class="case" id="case">
+  <div class="dossier-tag">🔍 СЛУЧАЯТ НА ДЕНЯ</div>
+  <h2>„Един закон за всички“</h2>
+  <p>През 811 г. най-голямата войска на империята е разбита в един планински проход. Само няколко десетилетия по-късно ханството е много по-голямо: в него живеят българи и славяни от най-различни области. А един и същи закон важи за всички и ханът знае какво се случва в най-далечния край. <b>Как се управлява огромна държава от един дворец?</b></p>
+  <p><b>Твоята задача, детективе:</b> прочети досиетата, събери 4 улики и накрая разкрий случая.</p>
+  <div class="clues" id="clues">
+    <div class="clue" data-clue="1"><b>УЛИКА 1</b>🔒 Досие №2</div>
+    <div class="clue" data-clue="2"><b>УЛИКА 2</b>🔒 Досие №3</div>
+    <div class="clue" data-clue="3"><b>УЛИКА 3</b>🔒 Досие №4</div>
+    <div class="clue" data-clue="4"><b>УЛИКА 4</b>🔒 Досие №5</div>
+  </div>
+</section>
+
+<div class="card" style="padding:12px 16px">
+  <div class="row">
+    <button class="btn ghost small" id="readAll">🔊 Чуй урока</button>
+    <button class="btn ghost small" id="resetLesson">↺ Започни урока отначало</button>
+    <span style="flex:1;min-width:160px;font-size:.9rem">Думите с <span class="term" style="pointer-events:none">точки отдолу</span> показват обяснение при докосване.</span>
+  </div>
+  <div class="note voicewarn" id="voiceWarn">
+    Телефонът няма български глас за четене. Можеш да го добавиш от настройките: <i>Език → Преобразуване на текст в говор → Услуги на Google → Инсталиране на гласови данни → Български</i> (пътят може да е малко различен).
+  </div>
+</div>
+
+<!-- ===== ДОСИЕ 1: КРУМ ===== -->
+<section class="card" id="s1" data-tm="803|IX в.|Плиска">
+  <div class="dossier-tag">ДОСИЕ №1</div>
+  <h2>Хан Крум и новата династия</h2>
+  <div data-story>
+    <p>През втората половина на VIII в. Българското ханство преживява криза. Византия се опитва да го унищожи, но не успява. От края на VIII в. България навлиза в нов период на <b>укрепване и възход</b>. В центъра му е хан Крум.</p>
+    <p>С възкачването на хан Крум на престола през <span class="key">🔑 803 г.</span> нова династия поема управлението на държавата. Тя ще го държи близо два века. Крум се възползва от разгрома на Аварския хаганат от Карл Велики (спомни си урок 9!) и присъединява към България земи на славяни и авари.</p>
+    <p>Така България става <b>обединителен център на южните славяни</b>. След това Крум насочва ударите си на юг, към Византия.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Крум накратко. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles">
+      <button class="tile" data-tile="0"><b>⏳ Преди Крум</b>Докосни…</button>
+      <button class="tile" data-tile="1"><b>🔑 803 г.</b>Докосни…</button>
+      <button class="tile" data-tile="2"><b>🛡 Аварите</b>Докосни…</button>
+      <button class="tile" data-tile="3"><b>🧭 Към юг</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s1" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 2: КРУМ И ВИЗАНТИЯ ===== -->
+<section class="card" id="s2" data-tm="809 – 813|IX в.|от Сердика до Константинопол">
+  <div class="dossier-tag">ДОСИЕ №2</div>
+  <h2>Крум срещу империята</h2>
+  <div data-story>
+    <p>През <span class="key">🔑 809 г.</span> Крум превзема <b>Сердика</b> (днешна София). Това улеснява бъдещите действия за приобщаване на славяните от <button class="term" data-t="makedonia">Македония</button> (вж. картата по-долу).</p>
+    <p>Тогава император <b>Никифор I</b> решава да покори България окончателно. През 811 г. ромеите превземат столицата Плиска. В отговор ханът организира засада във <b>Върбишкия проход</b>. В разразилата се битка (<span class="key">🔑 26 юли 811 г.</span>) загива самият император, а ромеите понасят нечуван разгром. Следващата анимация показва как се развива тя.</p>
+    <p>Крум продължава действията срещу Византия. Българските войски превземат важни крепости в Тракия и през <b>813 г.</b> се спират чак пред стените на Константинопол. Научаваш ли го, детективе? Само две години след опожарената Плиска българският хан обсажда най-голямата крепост на света!</p>
+  </div>
+  <div class="task">
+    <h3>👆 Обсадата накратко. Обърни всяка плочка</h3>
+    <div class="tiles" id="tiles2">
+      <button class="tile" data-tile2="0"><b>🏙 809 г.</b>Докосни…</button>
+      <button class="tile" data-tile2="1"><b>👑 Никифор I</b>Докосни…</button>
+      <button class="tile" data-tile2="2"><b>⛰ 811 г.</b>Докосни…</button>
+      <button class="tile" data-tile2="3"><b>🏰 813 г.</b>Докосни…</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s2" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ВЪРБИШКИЯТ ПРОХОД (анимация) ===== -->
+<section class="card" id="battle" data-tm="811|IX в.|Върбишкия проход">
+  <div class="dossier-tag navy">🎞 АНИМАЦИЯ</div>
+  <h2>Засадата във Върбишкия проход, стъпка по стъпка</h2>
+  <p>Натискай „Следваща стъпка“ и гледай как се развива събитието. Червеното са българите, тъмносиньото е византийската войска. Схемата е опростена: север е горе, а планината е в средата.</p>
+  <div class="vbox">
+    <svg id="vSvg" viewBox="0 0 320 230" role="img" aria-label="Схема на засадата във Върбишкия проход: Плиска на север, планински проход в средата, Тракия на юг">
+      <rect width="320" height="230" fill="#E6E8EC"/>
+      <polygon points="0,92 132,100 142,150 0,150" fill="#A9B4C0"/>
+      <polygon points="320,92 188,100 178,150 320,150" fill="#A9B4C0"/>
+      <text class="bl" x="62" y="128">Стара планина</text>
+      <text class="bl" x="258" y="128">Стара планина</text>
+      <text class="bl" x="160" y="186" style="fill:#4E5A68">проходът</text>
+      <text class="bl" x="160" y="216">Тракия · Византия</text>
+      <g transform="translate(160,28)"><rect x="-14" y="-12" width="28" height="22" rx="3" fill="#9E1B32" stroke="#fff" stroke-width="2"/><text y="-17" text-anchor="middle" style="font:800 10px var(--body);fill:#7A1426;paint-order:stroke;stroke:#fff;stroke-width:3px">Плиска</text></g>
+      <g id="vFire"><text x="147" y="30" style="font-size:15px">🔥</text><text x="170" y="24" style="font-size:13px">🔥</text></g>
+      <g id="vArmy"><g fill="#1B2A41"><rect x="132" y="56" width="14" height="10" rx="2"/><rect x="150" y="56" width="14" height="10" rx="2"/><rect x="168" y="56" width="14" height="10" rx="2"/><rect x="141" y="70" width="14" height="10" rx="2"/><rect x="159" y="70" width="14" height="10" rx="2"/></g><text id="vCrown" x="160" y="52" text-anchor="middle" style="font-size:14px">👑</text></g>
+      <g id="vBg"><g fill="#9E1B32"><rect x="96" y="104" width="12" height="9" rx="2"/><rect x="112" y="108" width="12" height="9" rx="2"/><rect x="212" y="104" width="12" height="9" rx="2"/><rect x="196" y="108" width="12" height="9" rx="2"/></g></g>
+      <g id="vBar"><line x1="140" y1="152" x2="180" y2="152" stroke="#9E1B32" stroke-width="6" stroke-linecap="round"/><text class="bl" x="160" y="168" style="fill:#7A1426">преграда</text></g>
+      <g id="vArr"><g stroke="#C9962B" stroke-width="3.5" stroke-linecap="round"><line x1="124" y1="114" x2="150" y2="128"/><line x1="196" y1="114" x2="170" y2="128"/></g></g>
+    </svg>
+    <div class="bdots" id="vDots"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <p class="stepcap" id="vCap"></p>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="vNext">Следваща стъпка →</button><button class="btn ghost small" id="vReset">↺ Отначало</button></div>
+  <p class="note">⚠️ Учебникът дава основното: Плиска е превзета, ханът организира засада във Върбишкия проход, императорът загива, а ромеите претърпяват нечуван разгром. Подробностите (затворен проход, местата на войските) са по-късни разкази на историците и затова схемата е опростена. Точното място на прохода е приблизително.</p>
+</section>
+
+<!-- ===== КАРТАТА ===== -->
+<section class="card" id="map" data-tm="803 – 839|IX в.|от Плиска до Македония">
+  <div class="dossier-tag navy">🗺 КАРТА НА ДЕТЕКТИВА</div>
+  <h2>Как расте България до средата на IX в.</h2>
+  <p>Първо докосни точките на картата. После натискай <b>„Следващ ход →“</b> и гледай как територията се разширява. Цветът на сянката на територията е както в учебника: най-тъмно е при Аспарух и Тервел, средно при Крум и Омуртаг, най-светло при Маламир и Пресиян.</p>
+  <div class="mapbox"><svg id="mapSvg" viewBox="0 0 400 308" role="img" aria-label="Карта на България през първата половина на IX в.: Плиска, Сердика, Върбишкия проход, Константинопол, Филопопол, Девелт, Месемврия и Македония"></svg></div>
+  <div class="steps s4" id="mapSteps">
+    <button data-st="0" class="active">Преди 803</button>
+    <button data-st="1">№1 Крум</button>
+    <button data-st="2">№2 Омуртаг</button>
+    <button data-st="3">№3 Маламир, Пресиян</button>
+  </div>
+  <div class="row" style="margin-top:10px"><button class="btn gold" id="nextMove">Следващ ход →</button></div>
+  <p class="stepcap" id="stepCap"></p>
+  <div class="legend" id="mapLegend"></div>
+  <div class="infobox" id="info"><h3>Избери точка</h3><p>Тук ще се появи описание на мястото.</p></div>
+  <div class="chips" id="chips"></div>
+  <p class="note">Картата е опростена, а границите са приблизителни: учебникът ги показва на с. 18. Франкската империя е още по-на запад, извън картата.</p>
+</section>
+
+<!-- ===== ДОСИЕ 3: НАСЛЕДНИЦИТЕ ===== -->
+<section class="card" id="s3" data-tm="815 – 852|IX в.|Плиска и Родопите">
+  <div class="dossier-tag">ДОСИЕ №3</div>
+  <h2>Наследниците на Крум</h2>
+  <div data-story>
+    <p>Наследниците на хан Крум продължават политиката му на присъединяване на славяните. Синът му <b>хан Омуртаг</b> (814 – 831) сключва <span class="key">🔑 30-годишен мир</span> с Византия през 815 г. Империята признава част от завоеванията на неговия баща. Омуртаг не се спира и пред война с Франкската империя: така прекратява опитите на някои славянски племена да се отцепят от държавата му.</p>
+    <p>Внуците на хан Крум — ханове <b>Маламир</b> (831 – 836) и <b>Пресиян</b> (836 – 852) — превземат Филипопол (днешен Пловдив) през 836 г. и други селища в Тракия, в Родопската област и в Македония (837 – 839 г.). Към държавата им се присъединяват все нови земи, населени със славяни.</p>
+  </div>
+  <div class="task">
+    <h3>👆 От Крум до Пресиян. Докосвай стъпките</h3>
+    <div class="chain" id="chain">
+      <button data-n="0"><b>Омуртаг</b> · докосни</button>
+      <div class="arrow">↓</div>
+      <button data-n="1" disabled><b>Маламир и Пресиян</b> · 🔒</button>
+      <div class="arrow">↓</div>
+      <button data-n="2" disabled><b>Резултатът</b> · 🔒</button>
+    </div>
+  </div>
+  <button class="btn readbtn" data-done="s3" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 4: ЦЕНТРАЛИЗАЦИЯ ===== -->
+<section class="card" id="s4" data-tm="814 – 831|IX в.|Плиска, дворецът на хана">
+  <div class="dossier-tag">ДОСИЕ №4</div>
+  <h2>Централизация на държавата</h2>
+  <div data-story>
+    <p>Територията расте и пред хан Крум се поставя нов въпрос: как да се управляват толкова различни хора? Той пръв въвежда <b>единни закони за всички свои <button class="term" data-t="podanici">поданици</button></b>.</p>
+    <p>Неговият наследник Омуртаг продължава <button class="term" data-t="central">централизацията</button> с реформа в управлението. Територията на ханството е разделена на военноадминистративни области — <button class="term" data-t="komitat">комитати</button>. Техните управители, <button class="term" data-t="komit">комитите</button>, се назначават от хана и лично му се отчитат. Самоуправлението на славянските князе е премахнато.</p>
+    <p>Ханът управлява от двореца си в Плиска и се съветва с най-близките си помощници — <button class="term" data-t="boili">боилите</button>. Схемата по-долу е като в учебника.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Схемата на управлението. Докосни длъжност</h3>
+    <div class="gov" id="gov">
+      <button class="g-khan" data-g="0">👑 ВЕЛИК ХАН<small>назначава…</small></button>
+      <div class="arr">↓</div>
+      <div class="g2">
+        <button class="g-sal" data-g="1">КАВХАН<small>докосни</small></button>
+        <button class="g-sal" data-g="2">ИЧИРГУ БОИЛ<small>докосни</small></button>
+      </div>
+      <div class="arr">↓</div>
+      <button class="g-sov" data-g="3">СЪВЕТ НА БОИЛИТЕ<small>докосни</small></button>
+      <div class="arr">↓</div>
+      <button class="g-kom" data-g="4">КОМИТИ<small>управители на области · докосни</small></button>
+    </div>
+    <div class="infobox" id="govInfo"><h3>Избери длъжност</h3><p>Тук ще видиш какво е правила тя.</p></div>
+  </div>
+  <div class="task">
+    <h3>🎯 Кой какво прави?</h3>
+    <div id="gq0" class="qblock"></div><div id="gq1" class="qblock"></div><div id="gq2" class="qblock"></div><div id="gq3" class="qblock"></div>
+  </div>
+  <button class="btn readbtn" data-done="s4" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ДОСИЕ 5: ПЛИСКА ===== -->
+<section class="card" id="s5" data-tm="IX в.|·|Плиска">
+  <div class="dossier-tag">ДОСИЕ №5</div>
+  <h2>Обновената столица Плиска</h2>
+  <div data-story>
+    <p>Заслуга на хан Омуртаг е и новото изграждане на опожарената от ромеите столица Плиска. <b>Вътрешният град</b> е отделен от <b>Външния</b> с вътрешна каменна стена. Подновена е и водопроводната система.</p>
+    <p>Върху останките на Крумовия дворец е издигнат <b>Големият дворец</b>, в който се намира тронната зала. В близост до него е построен нов езически храм.</p>
+    <p>Новост в архитектурата на Плиска е <button class="term" data-t="citadela">Цитаделата</button> — защитна тухлена стена, която ограждала новопостроения <b>Малък дворец</b>. В него живеело ханското семейство.</p>
+  </div>
+  <div class="task">
+    <h3>🏗 Плиска по картосхемата. Докосвай номерата</h3>
+    <div class="plbox">
+      <svg id="plSvg" viewBox="0 0 320 290" role="img" aria-label="Схема на Плиска: Външен и Вътрешен град, Малък дворец, езически храмове, водопровод, Голям дворец и Цитадела">
+        <rect width="320" height="290" fill="#E6E8EC"/>
+        <rect data-zone="outer" x="14" y="26" width="292" height="250" rx="6" fill="#F2F4F7" stroke="#8A94A3" stroke-width="2.5" stroke-dasharray="8 5"/>
+        <text class="zl" x="160" y="42">ВЪНШЕН ГРАД</text>
+        <path d="M58,26 C74,100 40,190 70,276" fill="none" stroke="#6FA3D4" stroke-width="3" stroke-linecap="round"/>
+        <rect data-zone="inner" id="wallIn" data-b="1" x="96" y="84" width="150" height="130" fill="#fff" stroke="#6B7686" stroke-width="4"/>
+        <text class="zl" x="206" y="100">ВЪТРЕШЕН ГРАД</text>
+        <path data-b="2" d="M306,152 L246,152" fill="none" stroke="#46617E" stroke-width="4" stroke-dasharray="3 4"/>
+        <rect data-b="3" x="170" y="156" width="62" height="46" rx="3" fill="#1B2A41"/>
+        <circle data-b="4" cx="272" cy="96" r="13" fill="#C9962B" stroke="#fff" stroke-width="2"/>
+        <circle data-b="4" cx="168" cy="246" r="13" fill="#C9962B" stroke="#fff" stroke-width="2"/>
+        <rect data-b="5" x="104" y="92" width="50" height="44" fill="none" stroke="#9E1B32" stroke-width="5"/>
+        <rect data-b="5" x="114" y="102" width="30" height="24" rx="2" fill="#9E1B32"/>
+        <g id="plFire"><text x="108" y="150" style="font-size:16px">🔥</text><text x="198" y="190" style="font-size:16px">🔥</text><text x="150" y="240" style="font-size:14px">🔥</text><text x="226" y="120" style="font-size:14px">🔥</text></g>
+      </svg>
+    </div>
+    <div class="row" style="margin-top:10px"><button class="btn gold" id="plBuild">🔨 Омуртаг възстановява Плиска</button></div>
+    <p class="stepcap" id="plCap">Така изглежда Плиска, опожарена от ромеите през 811 г. Докосни „Омуртаг възстановява Плиска“.</p>
+    <div class="infobox" id="plInfo"><h3>Избери номер</h3><p>Докосни номер на картосхемата или бутон по-долу.</p></div>
+    <div class="chips" id="plChips"></div>
+  </div>
+  <p class="note">Картосхемата е опростена: подредбата на сградите е приблизителна. Две от сградите са означени като езически храмове (№2 и №5).</p>
+  <button class="btn readbtn" data-done="s5" data-xp="10">✓ Прочетох досието · +10 XP</button>
+</section>
+
+<!-- ===== ИЗОБРАЖЕНИЯТА ===== -->
+<section class="card" id="arts" data-tm="IX в.|·|ханската зала">
+  <div class="dossier-tag gold">🏺 ЛИЦАТА НА ИСТОРИЯТА</div>
+  <h2>Миниатюрата и медальонът</h2>
+  <p>На с. 47 в учебника има две изображения. Обърни плочките и после отговори на въпросите, които учебникът задава за миниатюрата.</p>
+  <div class="tiles" id="tiles4">
+    <button class="tile" data-tile4="0"><b>🥂 Миниатюра</b>Докосни…</button>
+    <button class="tile" data-tile4="1"><b>🪙 Медальон</b>Докосни…</button>
+  </div>
+  <div id="artQ1" class="qblock"></div>
+  <div id="artQ2" class="qblock"></div>
+  <p class="note">Двете изображения са само в учебника: не добавяме снимки, защото не открихме потвърден свободен файл с лиценз.</p>
+</section>
+
+<!-- ===== УЛИКА 1: ЗАКОНИТЕ ===== -->
+<section class="card" id="src" data-tm="X в.|·|византийският лексикон „Свидас“">
+  <div class="dossier-tag">🔎 УЛИКАТА: ИЗВОР</div>
+  <h2>Законите на хан Крум</h2>
+  <p>Ето един кратък преразказ на откъса от учебника. Прочети го и разпитай извора.</p>
+  <div class="stage">
+    <b>📜 По „Лексикон Свидас“, X в.</b>
+    <div class="quote">Крум свикал всички българи и им заповядал: който обвини другиго, да не бъде слушан, преди обвиняемият да бъде разпитан. Ако се окаже, че обвинителят клевети и лъже, да бъде наказан със смърт. За крадците — строги наказания, а лозята да се унищожават. На всеки, който проси, да не се дава малко, а достатъчно, за да не изпада отново в нужда.<small>Кратък преразказ по откъса на с. 47 от учебника.</small></div>
+  </div>
+  <p style="margin-top:12px">Отговори на детективските въпроси.</p>
+  <div id="srcQs"></div>
+</section>
+
+<!-- ===== УЛИКА 2: НАДПИСЪТ ===== -->
+<section class="card" id="src2" data-tm="IX в.|·|стълб от Чаталар">
+  <div class="dossier-tag gold">🔎 ВТОРА УЛИКА</div>
+  <h2>Надписът на хан Омуртаг</h2>
+  <p>Освен летописци, за хановете говорят и самите те — на камък. Един от надписите на Омуртаг е открит през 1899 г. на колона край село Чаталар (днес село Хан Крум).</p>
+  <div class="stage">
+    <b>🪨 Чаталарският надпис (гръцки език, IX в.)</b>
+    <div class="quote">Канасюбиги Омуртаг, ханът на българите, построил при реката Тича мост и стан, украсени с четири колони, а над колоните — два лъва. В края на надписа се пожелава ханът да тъпче императора и да управлява много българи сто години.<small>Свободен преразказ. Преводите на надписа се различават в подробностите. „Кана сюбиги“ е ханска титла. Точното ѝ значение учените още обсъждат.</small></div>
+  </div>
+  <div id="srcQs2"></div>
+</section>
+
+<!-- ===== ЛИНИЯТА ОТ УЧЕБНИКА ===== -->
+<section class="card" id="ttl" data-tm="768 – 852|IX в.|линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯТА ОТ УЧЕБНИКА</div>
+  <h2>Какво още се случва по същото време</h2>
+  <p>В горната част на с. 47 има времева линия от 800 до 850 г. Обърни всяка плочка.</p>
+  <div class="tiles" id="tiles3">
+    <button class="tile" data-tile3="0"><b>768 – 814</b>Докосни…</button>
+    <button class="tile" data-tile3="1"><b>803 – 814</b>Докосни…</button>
+    <button class="tile" data-tile3="2"><b>809 г.</b>Докосни…</button>
+    <button class="tile" data-tile3="3"><b>26.VII.811</b>Докосни…</button>
+    <button class="tile" data-tile3="4"><b>813 г.</b>Докосни…</button>
+    <button class="tile" data-tile3="5"><b>815 г.</b>Докосни…</button>
+    <button class="tile" data-tile3="6"><b>814 – 831</b>Докосни…</button>
+    <button class="tile" data-tile3="7"><b>831 – 836</b>Докосни…</button>
+    <button class="tile" data-tile3="8"><b>836 г.</b>Докосни…</button>
+    <button class="tile" data-tile3="9"><b>836 – 852</b>Докосни…</button>
+    <button class="tile" data-tile3="10"><b>837 – 839</b>Докосни…</button>
+    <button class="tile" data-tile3="11"><b>843 г.</b>Докосни…</button>
+  </div>
+</section>
+
+<!-- ===== МИНИ ВРЕМЕВА ЛИНИЯ ===== -->
+<section class="card" id="tl" data-tm="803 – 839|IX в.|по линията на времето">
+  <div class="dossier-tag navy">⏳ ЛИНИЯ НА ВРЕМЕТО</div>
+  <h2>Подреди събитията</h2>
+  <p>Хвани ☰ и плъзни събитието нагоре или надолу. Можеш и със стрелките ▲▼. Най-ранното е горе.</p>
+  <ol class="sortl" id="sortl"></ol>
+  <div class="row"><button class="btn gold" id="tlCheck">Провери подредбата</button></div>
+  <div class="fb" id="tlFb"></div>
+</section>
+
+<!-- ===== ВЪПРОСИ И ЗАДАЧИ ===== -->
+<section class="card" id="tasks" data-tm="2026|XXI в.|Бургас, часът по история">
+  <div class="dossier-tag gold">📝 ВЪПРОСИ И ЗАДАЧИ</div>
+  <h2>Задачите от учебника</h2>
+  <p>Първо помисли и отговори наум. После докосни „Покажи примерен отговор“.</p>
+  <div id="taskList"></div>
+</section>
+
+<!-- ===== ДОСИЕТАТА НА ЛИЧНОСТИТЕ ===== -->
+<section class="card" id="people" data-tm="IX в.|·|галерията">
+  <div class="dossier-tag gold">🃏 ДОСИЕТА НА ЛИЧНОСТИТЕ</div>
+  <h2>Моята колекция</h2>
+  <p>Картите се отключват, докато минаваш през урока. Докосни отключена карта, за да я обърнеш. Така ги ползваш и като флашкарти.</p>
+  <div class="pcards" id="pcards"></div>
+  <p id="pcount" style="font-weight:700;color:var(--red-2);margin-bottom:0"></p>
+  <p class="note">Картите на <b>Карл Велики</b> (урок 9) и на <b>Тервел</b> (урок 11) са в предишните уроци — там са събрани за тях.</p>
+</section>
+
+<!-- ===== СНИМКИ ===== -->
+<section class="card" id="photos">
+  <div class="dossier-tag">📷 ВЕЩЕСТВЕНИ ДОКАЗАТЕЛСТВА</div>
+  <h2>Какво щеше да видиш, ако беше там</h2>
+  <div class="gallery">
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pliska%20-%20Gate.JPG?width=900" alt="Реконструирана порта на крепостната стена на Плиска">
+      <figcaption>Реконструирана порта на Плиска — виж и снимката в учебника.<small>Автор: Svilen Enev · лиценз CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Pliska_-_Gate.JPG" target="_blank" rel="noopener">страница в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ruins%20in%20Pliska%20Palace%209.JPG?width=900" alt="Руини на дворцовия комплекс в Плиска">
+      <figcaption>Руини в дворцовия комплекс на Плиска — от тук ханът е управлявал държавата.<small>Автор: Svilen Enev · лиценз CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Ruins_in_Pliska_Palace_9.JPG" target="_blank" rel="noopener">страница в Wikimedia Commons</a></small></figcaption>
+    </figure>
+    <figure>
+      <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Copy%20of%20Chatalar%20Inscription.jpg?width=900" alt="Копие на Чаталарския надпис на хан Омуртаг">
+      <figcaption>Копие на Чаталарския надпис на хан Омуртаг.<small>Автор: Izvora · обществено достояние · <a href="https://commons.wikimedia.org/wiki/File:Copy_of_Chatalar_Inscription.jpg" target="_blank" rel="noopener">страница в Wikimedia Commons</a></small></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== ЗНАЕШ ЛИ, ЧЕ ===== -->
+<section class="card" id="dyk" data-tm="IX в.|·|архивите на детектива">
+  <div class="dossier-tag gold">💡 ЗНАЕШ ЛИ, ЧЕ…</div>
+  <h2>Тайни от архива</h2>
+  <div class="dyk" data-story>
+    <div data-i="🌊">Крепостта Девелт (Девелтос) е в днешната Бургаска област — съвсем близо до твоя град. През 812 г. Крум я превзема. По-късно, при договора от 815 г., границата между България и Византия започва именно от Девелт.</div>
+    <div data-i="🏛">Филипопол, днешният Пловдив, носи името на македонския цар Филип II — бащата на Александър Македонски. Затова гръцкото име значи „градът на Филип“.</div>
+    <div data-i="🏙">Сердика е името на днешна София до Средновековието. Съвременното име е от църквата „Света София“. Така през 809 г. Крум превзема не „малко градче“, а голям римски град.</div>
+    <div data-i="👨‍👩‍👦">Учебникът нарича Маламир и Пресиян „внуци на Крум“. Историците уточняват, че според повечето източници Маламир е син на Омуртаг, а Пресиян — син на Омуртаговия син Звиница. Затова „внуци“ е опростяване.</div>
+    <div data-i="🪨">Селото, където е открит Чаталарският надпис, днес се казва Хан Крум — в чест на хана от този урок.</div>
+  </div>
+  <button class="btn readbtn" data-done="dyk" data-xp="10">✓ Прочетох · +10 XP</button>
+</section>
+
+<!-- ===== РОЛЯ ===== -->
+<section class="card" id="role" data-tm="IX в.|·|Плиска, залата на хана">
+  <div class="dossier-tag">🎭 РОЛЯ</div>
+  <h2>Ти си кавханът</h2>
+  <p class="note">⚠️ Разговорът е <b>измислен</b>, но длъжностите и законите са истински.</p>
+  <div data-story>
+    <p>Ханът е на поход и ти, първият му помощник, остани в Плиска. Пристигат хора, които искат отговор. Избери най-силните отговори.</p>
+  </div>
+  <div class="task">
+    <h3>👆 Първо питане: пратеник от Византия иска да говори с хана</h3>
+    <div id="roleQ1" class="qblock"></div>
+    <h3 style="margin-top:14px">👆 Второ питане: вест от комит на далечна област</h3>
+    <div id="roleQ2" class="qblock"></div>
+  </div>
+</section>
+
+<!-- ===== ЗАГАДКА ===== -->
+<section class="card" id="puzzle" data-tm="IX в.|·|Плиска, на пазара">
+  <div class="dossier-tag gold">🧩 МАЛКА ЗАГАДКА</div>
+  <h2>Кой лъже?</h2>
+  <p>Трима свидетели разказват за държавата на хан Омуртаг. Двама казват истината, а един лъже. Помогни си с досиетата.</p>
+  <div class="stage">
+    <p style="margin:0 0 8px"><b>Търговецът:</b> „Комитите, които управляват областите, ги назначава ханът и те му се отчитат лично.“</p>
+    <p style="margin:0 0 8px"><b>Пратеникът:</b> „Вътрешният град в Плиска е отделен от Външния с каменна стена.“</p>
+    <p style="margin:0"><b>Стражарят:</b> „Славянските князе управляват както преди — със свои закони, а ханът не се меси.“</p>
+  </div>
+  <div id="puzQ1" class="qblock"></div>
+  <div id="puzQ2" class="qblock"></div>
+</section>
+
+<!-- ===== ТВОРЧЕСКА ЗАДАЧА ===== -->
+<section class="card" id="draw">
+  <div class="dossier-tag">🎨 ТВОРЧЕСКА ЗАДАЧА</div>
+  <h2>Плиска по памет</h2>
+  <p>Нарисувай на лист план на Плиска. <b>Първо опитай без да гледаш схемата</b>:</p>
+  <ul>
+    <li>Външен и Вътрешен град, а между тях — каменна стена;</li>
+    <li>Големият дворец с тронната зала и Малкият дворец със защитната стена около него (Цитаделата);</li>
+    <li>езическият храм и водопроводът.</li>
+  </ul>
+  <p><b>По желание:</b> нарисувай печат на хана с негов знак и надпис.</p>
+  <button class="btn ghost readbtn" data-done="draw" data-xp="10">✓ Нарисувах · +10 XP</button>
+</section>
+
+<!-- ===== ЕЗИКОВ ЪГЪЛ ===== -->
+<section class="card" id="eng">
+  <div class="dossier-tag navy">🇬🇧 ENGLISH CORNER</div>
+  <h2>Words of the day</h2>
+  <p style="font-size:.95rem">Докосни 🔊, за да чуеш думата и изречението.</p>
+  <div class="vocab" id="vocabEn"></div>
+  <div class="hola" style="margin-top:18px">
+    <h3 style="color:#B0452E">¡Hola! 🇪🇸 Бонус на испански</h3>
+    <div class="vocab" id="vocabEs"></div>
+  </div>
+  <h3 style="margin-top:18px">🌳 Думи с история</h3>
+  <p style="font-size:.95rem;margin-top:0">Една дума, много езици. Докосни всяка карта, за да видиш „дървото“.</p>
+  <div class="etym" id="etym"></div>
+</section>
+
+<!-- ===== ТЕСТ ===== -->
+<section class="card" id="quiz">
+  <div class="dossier-tag">🎯 ПРОВЕРИ СЕ</div>
+  <h2>Изпитът на детектива</h2>
+  <p>3 нива по 3 въпроса. Всяко ниво отключва следващото. Грешните въпроси се връщат в края на нивото.</p>
+  <div class="pathwrap"><div class="path" id="path2">
+    <button class="node" data-lvl="0">1<span>Чирак</span></button>
+    <button class="node" data-lvl="1" disabled>2<span>Хронист</span></button>
+    <button class="node" data-lvl="2" disabled>3<span>Главен детектив</span></button>
+  </div></div>
+  <div id="qArea"></div>
+
+  <h3 style="margin-top:18px">🃏 Флашкарти с понятия</h3>
+  <p style="font-size:.95rem;margin-top:0">Докосни картата, за да я обърнеш.</p>
+  <div class="flash" id="flash"><div class="flash-in"><div class="face front" id="fFront"></div><div class="face back" id="fBack"></div></div></div>
+  <div class="row"><button class="btn ghost small" id="fPrev">← Назад</button><span id="fNum" style="flex:1;text-align:center;color:var(--muted)"></span><button class="btn ghost small" id="fNext">Напред →</button></div>
+</section>
+
+<!-- ===== РАЗКРИВАНЕ ===== -->
+<section class="card reveal" id="reveal" data-tm="839|IX в.|Плиска">
+  <div class="dossier-tag">🔓 РАЗКРИВАНЕ</div>
+  <h2>Как се управлява голямата държава?</h2>
+  <p id="revealLock">Събери 4-те улики, за да отключиш разкриването.</p>
+  <div id="revealBody" style="display:none;text-align:left">
+    <p>Погледни уликите. Кое обяснение е вярно?</p>
+    <div class="opts" id="suspects"></div>
+    <div class="fb" id="revealFb"></div>
+  </div>
+  <div class="stamp" id="stamp">СЛУЧАЯТ Е РАЗКРИТ!</div>
+  <h3 style="margin-top:14px">Твоите значки</h3>
+  <div class="badges" id="badges"></div>
+  <p id="finalXp" style="margin-top:12px;font-weight:700;color:var(--red-2)"></p>
+</section>
+
+<!-- ===== ЗАПОМНИ ===== -->
+<section class="card" id="sum" data-tm="2026|XXI в.|обратно в Бургас">
+  <div class="dossier-tag">📌 ЗАПОМНИ</div>
+  <h2>Най-важното от урока</h2>
+  <div class="keydates">
+    <span><b>🔑 803</b> · хан Крум — нова династия</span>
+    <span><b>🔑 26.VII.811</b> · засада във Върбишкия проход, загива Никифор I</span>
+    <span><b>🔑 815</b> · 30-годишен мир с Византия (Омуртаг)</span>
+    <span><b>836 – 839</b> · Пловдив, Родопите и Македония</span>
+  </div>
+  <ol class="sum" id="sumList">
+    <li>През втората половина на VIII в. ханството преживява криза, а опитите на Византия да го унищожи не успяват. От края на VIII в. България укрепва и се издига.</li>
+    <li>От <b>803 г.</b> властта поема нова династия с хан Крум. Той използва разгрома на Аварския хаганат от Карл Велики, присъединява земи на славяни и авари и насочва ударите си на юг. През 809 г. превзема Сердика (днешна София).</li>
+    <li>Император Никифор I решава да покори България. През 811 г. ромеите превземат Плиска, но на <b>26 юли 811 г.</b> във Върбишкия проход попадат в засада: императорът загива, а ромеите понасят нечуван разгром. Крум превзема важни крепости в Тракия и през 813 г. стига до стените на Константинопол.</li>
+    <li>Омуртаг (814 – 831) сключва 30-годишен мир с Византия (<b>815 г.</b>), която признава част от завоеванията на Крум, и воюва с Франкската империя, за да спре отцепването на славянски племена. Маламир и Пресиян превземат Филипопол (836 г.) и присъединяват селища в Тракия, Родопската област и Македония (837 – 839 г.).</li>
+    <li>Държавата е централизирана: Крум въвежда единни закони за всички поданици. Омуртаг разделя територията на комитати, чиито управители (комити) се назначават от хана и му се отчитат лично. Самоуправлението на славянските князе е премахнато.</li>
+    <li>Схема на управлението: великият хан назначава кавхан (първи помощник, предвожда армията и води преговори в негово отсъствие) и ичиргу боил (управлява столицата и вътрешната област). Ханът се съветва със съвет на боилите, а областите се управляват от комити.</li>
+    <li>Омуртаг изгражда отново Плиска: вътрешна каменна стена между Вътрешния и Външния град, водопровод, Голям дворец с тронна зала, нов езически храм и Цитадела — тухлена стена около Малкия дворец. <b>Изводът:</b> Крум и наследниците му обединяват голяма част от южните славяни, България е важна сила наред с Византия и Франкската империя, а законите и реформите я правят централизирана държава.</li>
+  </ol>
+  <details>
+    <summary>📄 Текст за копиране (Google Docs / печат)</summary>
+    <textarea class="plain" id="plain" readonly></textarea>
+    <button class="btn small" id="copyBtn" style="margin-top:8px">📋 Копирай текста</button>
+  </details>
+</section>
+
+<!-- ===== ЗА РОДИТЕЛЯ ===== -->
+<section class="card" id="parent">
+  <details>
+    <summary>👤 За родителя: какво е добавено и източници</summary>
+    <p style="font-size:.92rem">Обхват: учебник „История и цивилизации“ за 6. клас, изд. „Просвета Плюс“ (Е. Михайлова и др.), с. 46 – 47. Извън учебника са добавени: Девелт и Месемврия (812 г.), преразказът на Чаталарския надпис, фактите за Филипопол, Сердика и с. Хан Крум, етимологиите на „комит“, „цитадела“, „поданик“ и „централизация“. Анимацията, ролята и загадката са измислени. Разминаване: учебникът нарича Маламир и Пресиян „внуци на Крум“, а по повечето източници Пресиян е син на Звиница, син на Омуртаг. Въпросът за „документа на с. 21“ не може да се провери (документът не е в репото): връзката със Салическия законник е предположение.</p>
+    <ul class="src">
+      <li><a href="https://en.wikipedia.org/wiki/Battle_of_Pliska" target="_blank" rel="noopener">Battle of Pliska</a> · <a href="https://en.wikipedia.org/wiki/Varbitsa_Pass" target="_blank" rel="noopener">Varbitsa Pass</a> · <a href="https://en.wikipedia.org/wiki/Krum" target="_blank" rel="noopener">Krum</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Byzantine%E2%80%93Bulgarian_treaty_of_815" target="_blank" rel="noopener">Treaty of 815</a> · <a href="https://en.wikipedia.org/wiki/Omurtag_of_Bulgaria" target="_blank" rel="noopener">Omurtag</a> · <a href="https://en.wikipedia.org/wiki/Siege_of_Debeltos" target="_blank" rel="noopener">Siege of Debeltos</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Malamir_of_Bulgaria" target="_blank" rel="noopener">Malamir</a> · <a href="https://en.wikipedia.org/wiki/Presian_I" target="_blank" rel="noopener">Presian</a> · <a href="https://en.wikipedia.org/wiki/Chatalar_inscription" target="_blank" rel="noopener">Chatalar inscription</a></li>
+    </ul>
+  </details>
+</section>
+
+<p style="text-align:center;margin:10px 0 0"><a href="index.html">← Към всички уроци</a></p>
+
+</main>
+
+<div class="audiobar" id="audiobar">
+  <div class="audiobar-in">
+    <button class="btn small" id="aPause" aria-label="Пауза">⏸</button>
+    <button class="btn ghost small" id="aStop" aria-label="Спри">⏹</button>
+    <span class="t" id="aText">Чета…</span>
+    <select id="aRate" aria-label="Скорост"><option value="0.8">0.8×</option><option value="1" selected>1×</option><option value="1.2">1.2×</option></select>
+  </div>
+</div>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet"><h3 id="sheetT"></h3><p id="sheetD" style="margin:0 0 12px"></p><button class="btn ghost small" id="sheetClose">Разбрах</button></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ================= ЗАПАЗЕН НАПРЕДЪК (localStorage) ================= */
+var SAVE_KEY='ist6-urok-12-v1';
+var SAVED=null;
+try{var _raw=localStorage.getItem(SAVE_KEY);if(_raw)SAVED=JSON.parse(_raw)}catch(e){SAVED=null}
+var EX=(SAVED&&SAVED.ex)||{};
+var booted=false;
+function tlOrderNow(){return (typeof sortl!=='undefined'&&sortl)?$$('.sitem',sortl).map(function(li){return +li.getAttribute('data-i')}):(EX.tlOrder||[])}
+function saveNow(){
+  if(!booted)return;
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({S:S,ex:{
+      tSeen:tSeen,t2Seen:t2Seen,t3Seen:t3Seen,t4Seen:t4Seen,chainN:chainN,mapCur:mapCur,mapReach:mapReach,
+      vCur:vCur,vReach:vReach,govSeen:govSeen,plStage:plStage,taskSeen:taskSeen,
+      heard:heard,ySeen:ySeen,fI:fI,jumped:jumped,
+      tlOrder:tlOrderNow(),tlSolved:sortl.classList.contains('sorted'),tlTries:tlTries
+    }}))
+  }catch(e){}
+}
+function resetLesson(){
+  if(!window.confirm('Всичко в този урок ще започне отначало: XP, значките и решените нива. Продължаваме ли?'))return;
+  try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+  location.reload();
+}
+
+/* ================= STATE ================= */
+var S={xp:0,done:{},badges:{},seen:{},pseen:{},clues:{},cards:{},flags:{},quizDone:[false,false,false],quizFirst:0,solved:false};
+if(SAVED&&SAVED.S){for(var _sk in S){if(SAVED.S[_sk]!==undefined)S[_sk]=SAVED.S[_sk]}}
+var GOALS=['s1','s2','s3','s4','s5','dyk'];
+var FLAGS=['jump','tilesA','tilesB','battle','mapSteps','map','chain','gov','who','plan','rebuild','arts','art1','src','src2','tt','tl','tasks','role','puzzle'];
+function progress(){
+  var n=0,tot=GOALS.length+FLAGS.length+4;
+  GOALS.forEach(function(k){if(S.done[k])n++});
+  FLAGS.forEach(function(k){if(S.flags[k])n++});
+  S.quizDone.forEach(function(d){if(d)n++}); if(S.solved)n++;
+  $('#progBar').style.width=Math.min(100,Math.round(n/tot*100))+'%';
+  saveNow();
+}
+function flag(k){if(S.flags[k])return false;S.flags[k]=true;progress();return true}
+function toast(msg){var t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+function addXP(n,msg){S.xp+=n;$('#xp').textContent=S.xp;var b=$('#xpBox');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');toast('+'+n+' XP'+(msg?' · '+msg:''));progress()}
+
+/* ================= TIME MACHINE ================= */
+function setDial(el,val){if(el.textContent===val)return;el.textContent=val;el.classList.remove('roll');void el.offsetWidth;el.classList.add('roll')}
+function setTM(y,c,p){setDial($('#tmY'),y);setDial($('#tmC'),c);setDial($('#tmP'),p)}
+var jumped=EX.jumped||false;
+$('#jumpBtn').addEventListener('click',function(){
+  if(jumped)return;jumped=true;var b=this;b.disabled=true;
+  var t0=null,dur=1400;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/dur);var e=1-Math.pow(1-k,3);
+    $('#dY').textContent=Math.round(2026-(2026-803)*e);if(k<1)requestAnimationFrame(step);else{
+      setDial($('#dC'),'IX в.');setDial($('#dP'),'Плиска, столицата на хан Крум');setTM('803','IX в.','Плиска');
+      b.textContent='✓ Пристигна в 803 г.';b.classList.add('done');if(flag('jump'))addXP(5,'Скок във времето!');
+      setTimeout(function(){$('#case').scrollIntoView({behavior:'smooth',block:'start'})},500);
+    }}
+  requestAnimationFrame(step);
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(ents){ents.forEach(function(en){
+    if(en.isIntersecting&&(jumped||en.target.id!=='machine')){var v=en.target.getAttribute('data-tm').split('|');setTM(v[0],v[1],v[2])}
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  $$('[data-tm]').forEach(function(s){io.observe(s)});
+}
+
+/* ================= BADGES ================= */
+var BADGES=[
+  {id:'detective',ic:'🕵️',n:'Детектив',d:'Прочети всички досиета и архива'},
+  {id:'cartograph',ic:'🗺',n:'Картограф',d:'Открий всички места на картата'},
+  {id:'strateg',ic:'⛰',n:'Стратег',d:'Проследи засадата във Върбишкия проход'},
+  {id:'kavhan',ic:'📜',n:'Кавхан',d:'Реши играта „Кой какво прави?“'},
+  {id:'builder',ic:'🏗',n:'Строител',d:'Възстанови Плиска'},
+  {id:'chrono',ic:'⏳',n:'Хронист',d:'Подреди линията на времето'},
+  {id:'critic',ic:'🔎',n:'Критик на изворите',d:'Разпитай изворите'},
+  {id:'collector',ic:'🃏',n:'Колекционер',d:'Отключи всички карти-личности'},
+  {id:'chief',ic:'👑',n:'Главен детектив',d:'Поне 8 от 9 верни от първи опит'}
+];
+function renderBadges(){
+  $('#badges').innerHTML=BADGES.map(function(b){return '<div class="badge'+(S.badges[b.id]?' on':'')+'"><span class="ic">'+b.ic+'</span><b>'+b.n+'</b>'+b.d+'</div>'}).join('');
+  $('#bCount').textContent=Object.keys(S.badges).length;
+}
+function award(id){if(S.badges[id])return;S.badges[id]=true;var b=BADGES.filter(function(x){return x.id===id})[0];renderBadges();setTimeout(function(){toast('🏅 Нова значка: '+b.n)},900);progress()}
+
+/* ================= КАРТИ-ЛИЧНОСТИ ================= */
+var CARDS=[
+  {id:'krum',n:'Хан Крум',y:'хан 803 – 814',av:'🛡️',sp:'⚡ Обединителят и законодателят',how:'Проследи докрай засадата във Върбишкия проход',back:'Хан от нова династия. Присъединява земи на славяни и авари, превзема Сердика (809 г.), побеждава Никифор I (811 г.) и обсажда Константинопол (813 г.). Пръв въвежда единни закони за всички поданици.<br><br>💡 Виж и картата му от урок 9.'},
+  {id:'nikifor',n:'Никифор I',y:'император 802 – 811',av:'👑',sp:'⚡ Императорът, който искал да покори България',how:'Стигни до превземането на Плиска в анимацията',back:'Византийски император, наричан Геник. Решава да покори България окончателно, през 811 г. превзема Плиска, но загива при засадата във Върбишкия проход — нечуван разгром за ромеите.'},
+  {id:'omurtag',n:'Хан Омуртаг',y:'хан 814 – 831',av:'🏛️',sp:'⚡ Строителят и реформаторът',how:'Възстанови Плиска с бутона „Омуртаг възстановява Плиска“',back:'Син на Крум. Сключва 30-годишен мир с Византия (815 г.), воюва с франките, за да запази славяните в държавата, въвежда комитати и комити и изгражда отново Плиска.<br><br>💡 Негов е златният медальон от с. 47.'},
+  {id:'malamir',n:'Хан Маламир',y:'хан 831 – 836',av:'🗡️',sp:'⚡ Ханът, който стига до Пловдив',how:'Стигни до последния ход на картата',back:'Наследник на Омуртаг. Заедно с Пресиян превзема Филипопол (днешен Пловдив, 836 г.) и други селища в Тракия, в Родопската област и в Македония.'},
+  {id:'presian',n:'Хан Пресиян',y:'хан 836 – 852',av:'🌄',sp:'⚡ Присъединителят на Македония',how:'Стигни до последния ход на картата',back:'По учебника — внук на Крум. През неговото управление (837 – 839 г.) към България са присъединени славянски земи в Македония и Родопската област.'}
+];
+function renderCards(){
+  $('#pcards').innerHTML=CARDS.map(function(c){var on=S.cards[c.id];
+    return '<button class="pcard'+(on?'':' locked')+'" data-c="'+c.id+'"><div class="pcard-in"><div class="pface pfront"><div class="av">'+(on?c.av:'❔')+'</div><b>'+(on?c.n:'Заключена карта')+'</b><small>'+(on?c.y:'🔒')+'</small><div class="sp">'+(on?c.sp:'Как се отключва: '+c.how)+'</div></div><div class="pface pback"><b>'+c.n+'</b>'+c.back+'</div></div></button>'}).join('');
+  $$('.pcard').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('locked')){toast('🔒 '+CARDS.filter(function(c){return c.id===b.getAttribute('data-c')})[0].how);return}b.classList.toggle('flip')})});
+  var n=Object.keys(S.cards).length;$('#pcount').textContent='Отключени: '+n+' от '+CARDS.length;
+}
+function unlockCard(id){if(S.cards[id])return;S.cards[id]=true;renderCards();var el=$('.pcard[data-c="'+id+'"]');if(el)el.classList.add('new');
+  var c=CARDS.filter(function(x){return x.id===id})[0];setTimeout(function(){toast('🃏 Нова карта: '+c.n)},1200);addXP(3);
+  if(Object.keys(S.cards).length===CARDS.length)award('collector');}
+renderCards();
+
+/* ================= CLUES ================= */
+var CLUES={
+  1:'Крум (803 – 814) обединява земи на славяни и авари, превзема Сердика, разбива Никифор I във Върбишкия проход (811 г.) и стига до стените на Константинопол.',
+  2:'Омуртаг сключва 30-годишен мир (815 г.) и не позволява на славянските племена да се отцепят. Маламир и Пресиян присъединяват Пловдив и Македония.',
+  3:'Единни закони за всички поданици (Крум); комитати с комити, назначавани от хана и отчитащи му се лично (Омуртаг); самоуправлението на славянските князе е премахнато.',
+  4:'От Плиска ханът управлява със съвет на боилите. Омуртаг изгражда столицата отново: вътрешна стена, водопровод, Голям дворец, Цитадела.'
+};
+var CLUE_FOR={s2:1,s3:2,s4:3,s5:4};
+function giveClue(n){if(S.clues[n])return;S.clues[n]=true;var el=$('.clue[data-clue="'+n+'"]');el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n];toast('🔎 Нова улика!');checkReveal()}
+
+/* ================= READ BUTTONS ================= */
+$$('[data-done]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var k=b.getAttribute('data-done'); if(S.done[k])return;
+    S.done[k]=true; b.classList.add('done'); b.disabled=true; b.textContent='✓ Готово';
+    addXP(+b.getAttribute('data-xp'));
+    if(CLUE_FOR[k])setTimeout(function(){giveClue(CLUE_FOR[k])},700);
+    if(GOALS.every(function(x){return S.done[x]}))award('detective');
+  });
+});
+
+/* ================= GLOSSARY ================= */
+var G={
+  makedonia:['Македония','Историко-географска област в югозападната част на Балканския полуостров.'],
+  podanici:['Поданици','Всички хора, които се намират под властта и законите на владетеля на една държава.'],
+  komitat:['Комитат','Военноадминистративна област в Българското ханство. Управлява я комит.'],
+  komit:['Комит','Управител на комитат. Назначава се от хана и лично му се отчита.'],
+  boili:['Боили','Знатни хора, висши сановници и съветници на хана. С най-близките си помощници ханът се съветва в съвета на боилите.'],
+  citadela:['Цитадела','Здраво укрепена част на града. В Плиска Цитаделата е защитна тухлена стена около Малкия дворец, където живее ханското семейство.'],
+  central:['Централизация','Събиране на властта в един център. Тук: единни закони за всички и управители, които ханът назначава и които му се отчитат — управлението върви от Плиска.']
+};
+var sheet=$('#sheet'),sbg=$('#sheetBg');
+function openSheet(k){$('#sheetT').textContent=G[k][0];$('#sheetD').textContent=G[k][1];sbg.style.display='block';requestAnimationFrame(function(){sheet.classList.add('open')})}
+function closeSheet(){sheet.classList.remove('open');setTimeout(function(){sbg.style.display='none'},250)}
+$$('.term[data-t]').forEach(function(t){t.addEventListener('click',function(){openSheet(t.getAttribute('data-t'))})});
+sbg.addEventListener('click',closeSheet);$('#sheetClose').addEventListener('click',closeSheet);
+
+/* ================= SPEECH ================= */
+var synth=window.speechSynthesis, voices=[], queue=[], qi=0, speaking=false, paused=false, curLang='bg-BG', gen=0;
+function loadVoices(){if(!synth)return;voices=synth.getVoices()||[];
+  $('#voiceWarn').style.display=(voices.length&&!pickVoice('bg'))?'block':'none';}
+function pickVoice(lang){var l=lang.toLowerCase();var v=voices.filter(function(x){return x.lang&&x.lang.toLowerCase().replace('_','-').indexOf(l)===0});
+  var g=v.filter(function(x){return /google/i.test(x.name)});return g[0]||v[0]||null}
+if(synth){loadVoices();if(typeof synth.onvoiceschanged!=='undefined')synth.onvoiceschanged=loadVoices;}
+function splitText(t){t=t.replace(/\s+/g,' ').trim();var parts=t.match(/[^.!?…]+[.!?…]*/g)||[t];var out=[];
+  parts.forEach(function(p){p=p.trim();if(!p)return;while(p.length>180){var i=p.lastIndexOf(',',180);if(i<60)i=180;out.push(p.slice(0,i+1));p=p.slice(i+1).trim()}if(p)out.push(p)});return out}
+function speakNext(){
+  if(qi>=queue.length){stopSpeech();return}
+  var my=gen;var u=new SpeechSynthesisUtterance(queue[qi]);var v=pickVoice(curLang.slice(0,2));if(v)u.voice=v;u.lang=curLang;u.rate=+$('#aRate').value;
+  u.onend=u.onerror=function(){if(my!==gen||!speaking||paused)return;qi++;speakNext()};
+  $('#aText').textContent=queue[qi];synth.speak(u);
+}
+function speak(text,lang,showBar){
+  if(!synth){toast('Този браузър не може да чете на глас');return}
+  gen++;synth.cancel();queue=splitText(text);qi=0;speaking=true;paused=false;curLang=lang||'bg-BG';
+  $('#aPause').textContent='⏸';if(showBar!==false)$('#audiobar').classList.add('show');
+  var g0=gen;setTimeout(function(){if(g0===gen)speakNext()},60);
+}
+function stopSpeech(){gen++;speaking=false;paused=false;if(synth)synth.cancel();$('#audiobar').classList.remove('show')}
+$('#aPause').addEventListener('click',function(){
+  if(!speaking)return;
+  if(!paused){paused=true;gen++;synth.cancel();this.textContent='▶'}
+  else{paused=false;gen++;this.textContent='⏸';speakNext()}
+});
+$('#aStop').addEventListener('click',stopSpeech);
+$('#aRate').addEventListener('change',function(){if(speaking&&!paused){gen++;synth.cancel();setTimeout(speakNext,60)}});
+$('#readAll').addEventListener('click',function(){
+  var txt=$$('section[id^="s"] h2, [data-story]').map(function(e){return e.innerText}).join('. ');
+  speak(txt,'bg-BG');
+});
+
+/* ================= generic one-question helper ================= */
+function oneQ(box,Q,flagKey,xp){
+  var tried=false;
+  box.innerHTML='<p class="qtext">'+Q.q+'</p><div class="opts">'+shuffle(Q.o.map(function(_,i){return i})).map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="'+flagKey+'fb"></div>';
+  $$('.opt',box).forEach(function(b){b.addEventListener('click',function(){
+    if(tried)return;tried=true;
+    var i=+b.getAttribute('data-i');
+    $$('.opt',box).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    var fb=$('#'+flagKey+'fb');
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>Точно!</b> '+Q.e;if(flag(flagKey))addXP(xp);}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>Не съвсем.</b> '+Q.e;flag(flagKey);addXP(Math.max(1,xp-2))}
+    if(Q.after)Q.after();
+  })});
+}
+function restoreOneQ(box,Q,flagKey){if(S.flags[flagKey]){var b=$('.opt[data-i="'+Q.a+'"]',box);if(b)b.click()}}
+/* група от въпроси с общ финал */
+function qGroup(prefix,boxes,QS,xp,done){
+  var n=0;
+  QS.forEach(function(Q,i){Q.after=function(){n++;if(n===QS.length)done()};oneQ($(boxes[i]),Q,prefix+i,xp)});
+  QS.forEach(function(Q,i){restoreOneQ($(boxes[i]),Q,prefix+i)});
+}
+
+/* ================= плочки (общ помощник) ================= */
+function tilesInit(attr,TXT,seen,flagKey,bonusMsg){
+  $$('.tile['+attr+']').forEach(function(t){t.addEventListener('click',function(){
+    var i=+t.getAttribute(attr);if(seen[i])return;seen[i]=1;
+    t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open');addXP(2);
+    if(Object.keys(seen).length===TXT.length&&flag(flagKey))addXP(3,bonusMsg);
+  })});
+}
+function tilesRestore(attr,TXT,seen){
+  Object.keys(seen).forEach(function(i){var t=$('.tile['+attr+'="'+i+'"]');if(t&&!t.classList.contains('open')){t.innerHTML=t.querySelector('b').outerHTML+TXT[i];t.classList.add('open')}});
+}
+
+/* ================= ДОСИЕ 1: КРУМ (плочки) ================= */
+var TA=['През втората половина на VIII в. ханството преживява криза. Опитите на Византия да го унищожи не успяват, а от края на VIII в. започва период на укрепване и възход.','Хан Крум се възкачва на престола и нова династия поема управлението на държавата за близо два века.','Карл Велики разгромява Аварския хаганат (виж урок 9). Крум се възползва и присъединява към България земи на славяни и авари.','След това Крум насочва ударите си на юг — към Византия.'];
+var tSeen=EX.tSeen||{};
+tilesInit('data-tile',TA,tSeen,'tilesA','Крум е разучен!');
+
+/* ================= ДОСИЕ 2: КРУМ И ВИЗАНТИЯ (плочки) ================= */
+var TB=['Крум превзема Сердика (днешна София). Така е по-лесно да се приобщят славяните от Македония.','Император Никифор I решава да покори България окончателно. През 811 г. ромеите превземат Плиска.','Засада във Върбишкия проход (26 юли): императорът загива, а ромеите претърпяват нечуван разгром.','Българските войски превземат важни крепости в Тракия и се спират чак пред стените на Константинопол.'];
+var t2Seen=EX.t2Seen||{};
+tilesInit('data-tile2',TB,t2Seen,'tilesB','Обсадата е разучена!');
+
+/* ================= ДОСИЕ 3: ВЕРИГА ================= */
+var CHAINN=['<b>Омуртаг (814 – 831)</b> · 30-годишен мир с Византия през 815 г. Империята признава част от завоеванията на Крум. Омуртаг воюва и с Франкската империя, за да спре опитите на някои славянски племена да се отцепят.','<b>Маламир (831 – 836) и Пресиян (836 – 852)</b> · превземат Филипопол (днешен Пловдив) и други селища в Тракия, в Родопската област и в Македония. Присъединяват все нови земи със славяни.','<b>Резултатът</b> · Крум и наследниците му обединяват под властта си голяма част от южните славяни. България се утвърждава като важна политическа сила в Европа наред с Византия и Франкската империя.'];
+var chainN=EX.chainN||0;
+$$('#chain button').forEach(function(b){b.addEventListener('click',function(){
+  var n=+b.getAttribute('data-n');if(b.classList.contains('open'))return;
+  b.classList.add('open');b.innerHTML=CHAINN[n];addXP(2);chainN=Math.max(chainN,n+1);
+  var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}
+  else if(flag('chain'))addXP(3,'Наследниците са разучени!');
+})});
+
+/* ================= ВЪРБИШКИ ПРОХОД (анимация) ================= */
+var VST=[
+  'Натисни „Следваща стъпка“.',
+  '<b>1 · Плиска е превзета.</b> През 811 г. императорът Никифор I навлиза в България и ромеите превземат и опожаряват столицата Плиска.',
+  '<b>2 · Обратният път.</b> Византийската войска тръгва назад през Стара планина и навлиза в планински проход — Върбишкия.',
+  '<b>3 · Българите са готови.</b> Ханът Крум организира засада. Българите заемат склоновете и затварят изхода на прохода.',
+  '<b>4 · Ударът.</b> На 26 юли 811 г. българите нападат от двете страни на прохода. Ромеите не могат да се разгърнат в тясното.',
+  '<b>5 · Разгромът.</b> В битката загива самият император, а ромеите понасят нечуван разгром (<span class="key">🔑 26 юли 811 г.</span>). По-късно Крум стига до Константинопол.'
+];
+var vCur=EX.vCur||0,vReach=EX.vReach||0;
+function vStep(i,quiet){
+  vCur=i;
+  var c=i?'v'+i:'';
+  $('#vSvg').setAttribute('class',c);
+  $('#vCap').innerHTML=VST[i];
+  $$('#vDots i').forEach(function(d,k){d.classList.toggle('on',k<i)});
+  $('#vNext').textContent=i>=5?'↺ Още веднъж':'Следваща стъпка →';
+  if(!quiet&&i>vReach){
+    vReach=i;addXP(2);
+    if(i===1)unlockCard('nikifor');
+    if(i===5&&flag('battle')){addXP(8,'Засадата е разбрана!');award('strateg');unlockCard('krum')}
+  }
+  saveNow();
+}
+$('#vNext').addEventListener('click',function(){vStep(vCur>=5?0:vCur+1)});
+$('#vReset').addEventListener('click',function(){vStep(0)});
+vStep(vCur,true);
+
+/* ================= КАРТА ================= */
+var KX=28,KY=38,LON0=18.5;
+function P(lon,lat){return [((lon-LON0)*KX).toFixed(1),((47.6-lat)*KY).toFixed(1)]}
+function poly(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')+' Z'}
+function linePath(pts){return 'M'+pts.map(function(p){return P(p[0],p[1]).join(',')}).join(' L')}
+var SEA={
+ med:[[-5.6,36.0],[-4.4,36.7],[-2.4,36.8],[-1,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.3,42.3],[3.5,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,42.9],[12.2,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.6],[15.6,40.0],[15.7,39.0],[15.6,38.0],[16.1,37.9],[16.6,38.4],[17.1,39.0],[16.5,39.7],[17.2,40.4],[18.4,39.8],[18.5,40.1],[18,40.6],[16.9,41.1],[16.2,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.3,45.4],[13.7,45.6],[13.6,45.1],[13.9,44.8],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.1,42.0],[19.4,41.3],[19.5,40.4],[20.0,39.6],[20.7,39.0],[21.3,38.3],[21.1,37.8],[21.7,36.8],[22.4,36.4],[22.9,36.5],[23.2,36.4],[22.8,37.6],[23.2,37.9],[23.7,37.9],[24.0,37.65],[24.0,38.4],[23.0,39.0],[22.9,39.3],[22.9,40.6],[23.5,40.0],[24.0,40.2],[24.4,40.9],[25.9,40.85],[26.2,40.3],[26.4,40.1],[26.2,39.9],[26.7,39.3],[27.0,38.4],[27.2,37.9],[27.4,37.0],[28.0,36.7],[29.1,36.6],[30.4,36.3],[30.7,36.9],[31.5,36.7],[32.5,36.1],[34.0,36.3],[34.6,36.8],[36.2,36.6],[35.9,35.9],[35.8,35.5],[35.8,34.4],[35.5,33.9],[35.0,32.8],[34.8,32.1],[34.4,31.5],[33.0,31.1],[32.3,31.3],[31.8,31.5],[30.4,31.5],[29.9,31.2],[28.0,31.1],[25.2,31.6],[24.0,32.1],[22.5,32.8],[20.1,32.1],[19.0,30.3],[17.0,31.1],[15.3,32.3],[13.2,32.9],[11.5,33.2],[10.9,33.7],[10.1,33.9],[10.8,34.7],[11.1,35.2],[10.8,35.8],[11.0,37.1],[10.3,36.9],[9.9,37.3],[8.6,36.9],[7.8,36.9],[6.4,37.1],[3.0,36.8],[1.0,36.5],[-0.6,35.7],[-2.2,35.1],[-3.9,35.2],[-5.3,35.9],[-5.8,35.8]],
+ marm:[[26.6,40.4],[27.5,40.95],[28.6,41.0],[29.0,41.02],[29.3,40.75],[28.9,40.4],[27.8,40.35],[27.0,40.3]],
+ black:[[29.1,41.2],[28.0,41.9],[27.5,42.5],[27.9,43.2],[28.5,43.4],[28.7,44.2],[29.7,45.2],[30.7,46.5],[31.9,46.6],[32.6,46.1],[33.6,46.1],[32.9,45.7],[32.5,45.35],[33.4,45.2],[33.5,44.6],[34.2,44.5],[35.4,45.0],[36.5,45.3],[35.3,45.4],[34.8,46.1],[34.8,46.2],[36.8,46.7],[37.6,47.1],[38.9,47.2],[38.3,46.7],[37.8,46.0],[37.4,45.3],[36.7,45.2],[37.3,44.9],[37.8,44.7],[39.7,43.6],[41.0,43.0],[41.7,42.1],[41.6,41.6],[39.7,41.0],[37.9,41.0],[36.3,41.3],[35.1,42.0],[33.3,42.0],[31.4,41.3],[30.2,41.2],[29.6,41.2]]
+};
+/* територии (опростено); чертаят се ПОД морето, така че брегът ги изрязва */
+var TER=[
+ {id:'avar',c:'#D6DAE2',pts:[[18,47.6],[22.3,47.6],[22.3,45.6],[20.0,45.7],[18,45.7]]},
+ {id:'slav',c:'#B5D99C',pts:[[22.3,47.6],[35.5,47.6],[35.5,46.3],[31,46.4],[29.7,45.4],[28,45.5],[22.7,44.7],[22.3,44.9]]},
+ {id:'byz',c:'#B9A4D6',pts:[[18,44.9],[22.3,44.9],[22.7,44.7],[28,45.5],[29.7,45.4],[31,44],[36,42],[36,39.4],[18,39.4]]},
+ {id:'bgA',c:'#F0A35E',pts:[[22.6,44.5],[22.9,44.0],[24.9,43.75],[26.0,43.95],[27.3,44.15],[28.0,44.4],[28.0,45.0],[28.1,45.4],[29.0,45.3],[29.8,45.3],[31,44.5],[28.8,43.3],[27.9,42.85],[26,42.85],[24.5,43.2],[22.6,43.4]]},
+ {id:'bgB',c:'#F0A35E',pts:[[24.8,42.85],[26.6,42.85],[26.6,42.0],[25.4,42.0]]},
+ {id:'k1',c:'#F6C08A',st:1,pts:[[22.6,43.4],[24.5,43.2],[24.8,42.85],[24.2,42.5],[23.0,42.4],[22.4,42.9]]},
+ {id:'k2',c:'#F6C08A',st:1,pts:[[26.6,42.85],[28.0,42.85],[28.1,42.2],[27.5,41.9],[26.6,42.0]]},
+ {id:'k3',c:'#F6C08A',st:1,pts:[[21.0,45.6],[22.6,45.6],[22.6,44.55],[21.2,44.7]]},
+ {id:'o1',c:'#F6C08A',st:2,pts:[[19.0,45.5],[21.0,45.6],[21.2,44.7],[19.6,44.8]]},
+ {id:'m1',c:'#FBE0C4',st:3,pts:[[24.2,42.5],[25.4,42.3],[26.6,42.0],[26.6,41.5],[25.2,41.2],[24.0,41.4],[23.9,42.0]]},
+ {id:'m2',c:'#FBE0C4',st:3,pts:[[20.7,42.3],[23.0,42.4],[23.9,42.0],[23.8,41.0],[22.6,40.8],[21.0,40.9],[20.6,41.6]]}
+];
+var DUN=[[18.9,45.5],[19.4,45.2],[20.1,45.1],[20.45,44.82],[21.4,44.8],[22.5,44.5],[22.9,44.0],[24.9,43.7],[26.0,43.9],[27.3,44.1],[28.0,44.4],[28.0,45.0],[28.0,45.4],[29.0,45.3],[29.7,45.2]];
+var RIDGE=[[22.6,43.45],[24.5,43.2],[26.0,42.9],[27.4,42.85],[27.9,42.8]];
+function buildBaseMap(id){
+  var s='<rect width="400" height="308" style="fill:var(--land)"/>';
+  TER.forEach(function(t){s+='<path class="ter'+(t.st?' hid':'')+'" data-ter="'+t.id+'" d="'+poly(t.pts)+'" style="fill:'+t.c+';stroke:#fff;stroke-width:.8"/>'});
+  Object.keys(SEA).forEach(function(k){s+='<path d="'+poly(SEA[k])+'" style="fill:var(--sea)"/>'});
+  Object.keys(SEA).forEach(function(k){s+='<path class="coast" d="'+poly(SEA[k])+'"/>'});
+  s+='<path d="'+linePath(DUN)+'" style="fill:none;stroke:#6FA3D4;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"/>';
+  s+='<path d="'+linePath(RIDGE)+'" style="fill:none;stroke:#6B7686;stroke-width:2;stroke-dasharray:5 3"/>';
+  function T(txt,lon,lat,cls){var p=P(lon,lat);return '<text x="'+p[0]+'" y="'+p[1]+'" class="'+cls+'">'+txt+'</text>'}
+  s+=T('ЧЕРНО МОРЕ',31.4,43.6,'maplabel')+T('славяни',25.5,46.4,'tlabel')+T('авари',20.2,47.0,'tlabel')+T('◀ франки',19.5,46.35,'tlabel')+T('ВИЗАНТИЯ',31.5,40.6,'tlabel')+T('Стара планина',24.0,42.55,'tlabel');
+  $('#'+id).innerHTML=s;
+}
+buildBaseMap('mapSvg');
+var MCOL='#9E1B32';
+var PTS=[
+  {id:'pliska',n:'Плиска',lon:26.1,lat:43.27,a:'end',dy:-8,d:'Столицата на ханството. През 811 г. е превзета и опожарена от ромеите на Никифор I, а при Омуртаг е построена наново.'},
+  {id:'pass',n:'Върбишки проход',lon:26.85,lat:43.0,dy:-9,d:'Планинският проход, където на 26 юли 811 г. българите правят засада на византийската войска. Императорът загива, а ромеите претърпяват нечуван разгром. Местоположението на картата е приблизително.'},
+  {id:'serdika',n:'Сердика',lon:23.32,lat:42.7,a:'end',dy:-8,d:'Днешна София. Крум я превзема през 809 г. — така е по-лесно да се приобщят славяните от Македония.'},
+  {id:'cpl',n:'Константинопол',lon:28.98,lat:41.01,a:'end',dx:-8,d:'Столицата на Византия. През 813 г. българските войски на Крум стигат чак до стените ѝ и я обсаждат.'},
+  {id:'develt',n:'Девелт',lon:27.3,lat:42.57,a:'end',dy:13,d:'Крепостта Девелтос в днешната Бургаска област. По данни на византийския летописец Теофан Крум я превзема през 812 г. Позицията е приблизителна.'},
+  {id:'mesem',n:'Месемврия',lon:27.73,lat:42.65,dy:-6,d:'Днешният Несебър на Черно море. По данни на Теофан Крум я превзема през 812 г. — една от важните крепости, превзети в Тракия.'},
+  {id:'plovdiv',n:'Филипопол',lon:24.75,lat:42.15,a:'end',dy:7,d:'Днешният Пловдив. Превзет през 836 г. от хановете Маламир и Пресиян.'},
+  {id:'maked',n:'Македония',lon:21.9,lat:41.6,d:'Историко-географска област в югозападната част на Балканския полуостров. През 837 – 839 г. към България са присъединени славянски земи в Македония и Родопската област.'},
+  {id:'franks',n:'Франкската граница',lon:19.3,lat:45.45,dy:14,d:'На северозапад България се допира до Франкската империя. Омуртаг воюва с нея, за да спре опитите на някои славянски племена да се откъснат от държавата му. Местоположението е приблизително.'}
+];
+(function(){
+  var g='';PTS.forEach(function(p){var c=P(p.lon,p.lat);var a=p.a||'start',dx=(p.dx!==undefined?p.dx:(a==='end'?-8:8)),dy=(p.dy||0)+4;
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+c[0]+','+c[1]+')"><circle class="halo" r="6" stroke="'+MCOL+'"/><circle class="dot" r="6" fill="'+MCOL+'"/><text x="'+dx+'" y="'+dy+'" text-anchor="'+a+'">'+p.n+'</text><circle r="15" fill="transparent"/></g>'});
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+  $('#chips').innerHTML=PTS.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+MCOL+'"></i>'+p.n+'</button>'}).join('');
+})();
+function showPt(id){
+  var p=PTS.filter(function(x){return x.id===id})[0];
+  $$('#map .mk, #map .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#info').innerHTML='<h3>📍 '+p.n+'</h3><p>'+p.d+'</p>';
+  if(!S.seen[id]){S.seen[id]=true;$$('#map [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PTS.every(function(x){return S.seen[x.id]})&&flag('map')){addXP(3,'Всички места са открити!');award('cartograph')}}
+}
+$$('#map .mk, #map .chip').forEach(function(e){e.addEventListener('click',function(){showPt(e.getAttribute('data-id'))})});
+var ROUTES=[
+  {step:1,pts:[[26.1,43.2],[24.6,43.0],[23.5,42.78]]},
+  {step:1,pts:[[26.3,43.1],[27.3,42.3],[28.2,41.5],[28.8,41.15]]},
+  {step:2,pts:[[22.3,45.1],[20.8,45.3],[19.6,45.5]]},
+  {step:3,pts:[[23.3,42.6],[22.4,41.95],[21.7,41.45]]},
+  {step:3,pts:[[26.0,43.2],[25.2,42.65],[24.8,42.28]]}
+];
+(function(){
+  var g='<g class="routes" id="routesG">';
+  ROUTES.forEach(function(r){
+    g+='<path data-step="'+r.step+'" pathLength="1" style="fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round" d="'+linePath(r.pts)+'"/>';
+    var a=P(r.pts[r.pts.length-2][0],r.pts[r.pts.length-2][1]),b=P(r.pts[r.pts.length-1][0],r.pts[r.pts.length-1][1]);
+    var ax=+a[0],ay=+a[1],bx=+b[0],by=+b[1],dx=bx-ax,dy=by-ay,L=Math.sqrt(dx*dx+dy*dy)||1;dx/=L;dy/=L;
+    var h=[[bx,by],[bx-dx*9+dy*4.5,by-dy*9-dx*4.5],[bx-dx*9-dy*4.5,by-dy*9+dx*4.5]].map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+    g+='<polygon data-step="'+r.step+'" class="head" points="'+h+'"/>';
+  });
+  g+='</g>';
+  $('#mapSvg').insertAdjacentHTML('beforeend',g);
+})();
+var MSTEPS=[
+  {cap:'<b>Преди 803 г.</b> Държавата на Аспарух и Тервел е между Дунав и Стара планина (плюс Загоре). На север са славяните, на северозапад — аварите, на юг — Византия. Натисни „Следващ ход“.'},
+  {cap:'<b>№1 · Хан Крум (803 – 814).</b> Той присъединява земи на славяни и авари, превзема Сердика (809 г.) и крепости в Тракия, а през 813 г. стига до Константинопол.'},
+  {cap:'<b>№2 · Хан Омуртаг (814 – 831).</b> След 30-годишния мир (815 г.) териториите са запазени. На северозапад Омуртаг воюва с Франкската империя, за да задържи славяните в държавата.'},
+  {cap:'<b>№3 · Маламир и Пресиян (831 – 852).</b> Превземат Филипопол (836 г.) и селища в Тракия, в Родопската област и в Македония (837 – 839 г.).'}
+];
+var mapCur=EX.mapCur||0,mapReach=EX.mapReach||0;
+function mapStep(i,quiet){
+  mapCur=i;
+  $$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('active',k===i);b.classList.toggle('seen',k<=mapReach&&k>0)});
+  $$('#routesG [data-step]').forEach(function(p){p.classList.toggle('show',+p.getAttribute('data-step')<=i)});
+  $$('#routesG path').forEach(function(p){var on=+p.getAttribute('data-step')<=i;p.style.opacity=on?1:0;p.style.transition='opacity .5s'});
+  $$('.ter[data-ter]').forEach(function(t){var d=TER.filter(function(x){return x.id===t.getAttribute('data-ter')})[0];if(d.st)t.classList.toggle('hid',i<d.st)});
+  $('#stepCap').innerHTML=MSTEPS[i].cap;
+  $('#nextMove').textContent=i>=3?'↺ Отначало':'Следващ ход →';
+  $('#mapLegend').innerHTML='<span><i style="background:#F0A35E"></i>Аспарух и Тервел</span><span><i style="background:#F6C08A"></i>Крум и Омуртаг</span><span><i style="background:#FBE0C4"></i>Маламир и Пресиян</span><span><i style="background:#B9A4D6"></i>Византия</span><span><i style="background:#B5D99C"></i>славяни</span><span><i style="background:#D6DAE2"></i>авари</span>';
+  if(!quiet&&i>mapReach){
+    mapReach=i;$$('#mapSteps button').forEach(function(b){var k=+b.getAttribute('data-st');b.classList.toggle('seen',k<=mapReach&&k>0)});
+    addXP(3);
+    if(i===3){unlockCard('malamir');unlockCard('presian');if(flag('mapSteps'))addXP(4,'Пътят на разширението!')}
+  }
+  saveNow();
+}
+$$('#mapSteps button').forEach(function(b){b.addEventListener('click',function(){mapStep(+b.getAttribute('data-st'))})});
+$('#nextMove').addEventListener('click',function(){mapStep(mapCur>=3?0:mapCur+1)});
+mapStep(mapCur,true);
+
+/* ================= СХЕМА НА УПРАВЛЕНИЕТО ================= */
+var GOV=[
+  ['👑 Велик хан','Върховният владетел. Той назначава най-важните помощници — кавхана и ичиргу боила — и комитите, и се съветва със съвета на боилите.'],
+  ['Кавхан','Първият помощник на хана. Предвожда армията и води преговори в негово отсъствие. Назначава се от хана.'],
+  ['Ичиргу боил','Управлява столицата и вътрешната област на държавата. Назначава се от хана.'],
+  ['Съвет на боилите','Най-близките помощници на хана — знатни люде. С тях ханът се съветва, докато управлява от двореца в Плиска.'],
+  ['Комити','Управители на областите (комитатите). Назначават се от хана и лично му се отчитат. Така хан Омуртаг прекратява самоуправлението на славянските князе.']
+];
+var govSeen=EX.govSeen||{};
+$$('#gov [data-g]').forEach(function(b){b.addEventListener('click',function(){
+  var i=+b.getAttribute('data-g');
+  $$('#gov [data-g]').forEach(function(x){x.classList.toggle('on',x===b)});
+  $('#govInfo').innerHTML='<h3>'+GOV[i][0]+'</h3><p>'+GOV[i][1]+'</p>';
+  if(!govSeen[i]){govSeen[i]=1;b.classList.add('seen');addXP(2);
+    if(Object.keys(govSeen).length===GOV.length&&flag('gov'))addXP(4,'Схемата е разучена!')}
+})});
+var GQ=[
+  {q:'Ханът е на поход. Кой води преговорите вместо него и предвожда армията?',o:['Кавханът','Комитът','Ичиргу боилът'],a:0,e:'Кавханът е първият помощник на хана: предвожда армията и води преговори в отсъствието му.'},
+  {q:'Кой управлява столицата и вътрешната област на държавата?',o:['Ичиргу боилът','Кавханът','Славянският княз'],a:0,e:'Ичиргу боилът управлява столицата и вътрешната област.'},
+  {q:'Кой управлява отделна област (комитат) и се отчита лично на хана?',o:['Комитът','Кавханът','Съветът на боилите'],a:0,e:'Комитите управляват комитатите. Ханът ги назначава и те му се отчитат лично.'},
+  {q:'С кого се съветва ханът, докато управлява от двореца в Плиска?',o:['С най-близките си помощници — съвета на боилите','С народно събрание на всички поданици','С византийския император'],a:0,e:'Ханът управлява от Плиска и се съветва със съвета на най-близките си помощници, боилите.'}
+];
+qGroup('gq',['#gq0','#gq1','#gq2','#gq3'],GQ,3,function(){if(flag('who')){addXP(6,'Всяка длъжност е на мястото си!');award('kavhan')}});
+
+/* ================= ПЛИСКА ================= */
+var PL=[
+  {id:'pl1',n:'1 · Малък дворец',x:129,y:114,d:'Новопостроеният Малък дворец, в който живее ханското семейство. Оградена е от Цитаделата.'},
+  {id:'pl2',n:'2 · Езически храм',x:272,y:96,d:'Езически храм. Една от двете сгради с това име е новият храм, построен в близост до Големия дворец.'},
+  {id:'pl3',n:'3 · Водопровод',x:276,y:152,d:'Водопроводната система на Плиска. При Омуртаг е подновена.'},
+  {id:'pl4',n:'4 · Голям дворец',x:201,y:179,d:'Големият дворец е издигнат върху останките на Крумовия дворец. В него се намира тронната зала.'},
+  {id:'pl5',n:'5 · Езически храм',x:168,y:246,d:'Още един езически храм. Новият храм на Омуртаг е в близост до Големия дворец.'},
+  {id:'pl6',n:'6 · Цитадела',x:104,y:92,d:'Цитаделата е новост в архитектурата на Плиска: защитна тухлена стена около Малкия дворец.'},
+  {id:'plin',n:'Вътрешен град',d:'Вътрешният град е отделен от Външния с вътрешна каменна стена. В него са дворците на хана.'},
+  {id:'plout',n:'Външен град',d:'Външният град обгражда Вътрешния. Така Плиска е укрепена в два пояса.'}
+];
+(function(){
+  var g='';PL.forEach(function(p){if(p.x===undefined)return;
+    g+='<g class="mk" data-id="'+p.id+'" transform="translate('+p.x+','+p.y+')"><circle class="halo" r="12" stroke="'+MCOL+'"/><circle class="dot" r="10" fill="'+MCOL+'"/><text style="fill:#fff;stroke:none;font-weight:800;font-size:11px" text-anchor="middle" y="4">'+p.n.charAt(0)+'</text><circle r="19" fill="transparent"/></g>'});
+  $('#plSvg').insertAdjacentHTML('beforeend',g);
+  $('#plChips').innerHTML=PL.map(function(p){return '<button class="chip" data-id="'+p.id+'"><i style="background:'+MCOL+'"></i>'+p.n+'</button>'}).join('');
+})();
+function showPl(id){
+  var p=PL.filter(function(x){return x.id===id})[0];
+  $$('#s5 .mk, #s5 .chip').forEach(function(e){e.classList.toggle('active',e.getAttribute('data-id')===id)});
+  $('#plInfo').innerHTML='<h3>📍 '+p.n+'</h3><p>'+p.d+'</p>';
+  if(!S.seen[id]){S.seen[id]=true;$$('#s5 [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')});addXP(2);
+    if(PL.every(function(x){return S.seen[x.id]})&&flag('plan'))addXP(4,'Планът на Плиска е разучен!')}
+}
+$$('#s5 .mk, #s5 .chip').forEach(function(e){e.addEventListener('click',function(){showPl(e.getAttribute('data-id'))})});
+$$('#plSvg [data-zone]').forEach(function(e){e.addEventListener('click',function(){showPl(e.getAttribute('data-zone')==='inner'?'plin':'plout')})});
+var PLC=['Така изглежда Плиска, опожарена от ромеите през 811 г. Докосни „Омуртаг възстановява Плиска“.','<b>1 · Стената.</b> Вътрешният град е отделен от Външния с вътрешна каменна стена.','<b>2 · Водата.</b> Подновена е водопроводната система.','<b>3 · Големият дворец.</b> Издигнат е върху останките на Крумовия дворец — с тронна зала.','<b>4 · Храмът.</b> В близост до Големия дворец е построен нов езически храм.','<b>5 · Цитаделата.</b> Тухлена защитна стена огражда новия Малък дворец — домът на ханското семейство. Плиска е възстановена!'];
+var plStage=EX.plStage||0,plBusy=false;
+function plSet(n){
+  plStage=n;
+  $$('#plSvg [data-b]').forEach(function(e){e.classList.toggle('on',+e.getAttribute('data-b')<=n)});
+  $('#plFire').classList.toggle('out',n>=1);
+  $('#plCap').innerHTML=PLC[n];
+  $('#plBuild').textContent=n>=5?'↺ Още веднъж (от руините)':'🔨 Омуртаг възстановява Плиска';
+}
+$('#plBuild').addEventListener('click',function(){
+  if(plBusy)return;
+  if(plStage>=5){plSet(0);return}
+  plBusy=true;this.disabled=true;var btn=this,n=0;
+  (function next(){n++;plSet(n);
+    if(n<5)setTimeout(next,1100);
+    else{plBusy=false;btn.disabled=false;btn.textContent='↺ Още веднъж (от руините)';
+      if(flag('rebuild')){addXP(8,'Плиска е възстановена!');award('builder');unlockCard('omurtag')}saveNow()}
+  })();
+});
+plSet(plStage);
+
+/* ================= ИЗОБРАЖЕНИЯТА (плочки + въпроси) ================= */
+var TD=['Миниатюра от българския превод на Манасиевата хроника (XIV в.): хан Крум вдига наздравица след победата над император Никифор I. Според учебника от черепа на Никифор била изработена чаша, обкована със сребро. Древните българи вярвали, че така победителят взема силата на победения.','Златен медальон с образа на хан Омуртаг, IX в. Така ханът е показан на предмет от скъп метал — знак за власт и богатство.'];
+var t4Seen=EX.t4Seen||{};
+tilesInit('data-tile4',TD,t4Seen,'arts','Изображенията са огледани!');
+(function(){
+  var Q1={q:'По какво се разпознава фигурата на владетеля на миниатюрата?',o:['Седи начело на масата, има корона и по-богата дреха от останалите','Държи меч и стои прав пред масата','Облечен е като слугата с чашата'],a:0,e:'В миниатюрата владетелят е най-важният: седи на почетното място, носи корона и е облечен по-пищно от околните. Така средновековният художник показва кой е главният.'};
+  var Q2={q:'Какво символизира цветът на дрехата на владетеля (червеното, пурпурът)?',o:['Власт и могъщество — като пурпура на византийските императори (урок 6)','Мир и покой','Бедност и скромност'],a:0,e:'Червеното и пурпурът са цветовете на властта — спомни си „пурпура“ от урок 6.'};
+  function chk(){if(S.flags.art1&&S.flags.art2&&flag('arts2'))addXP(3,'Миниатюрата е разчетена!')}
+  Q1.after=chk;Q2.after=chk;
+  oneQ($('#artQ1'),Q1,'art1',3);oneQ($('#artQ2'),Q2,'art2',3);
+  restoreOneQ($('#artQ1'),Q1,'art1');restoreOneQ($('#artQ2'),Q2,'art2');
+})();
+
+/* ================= ИЗВОР: ЗАКОНИТЕ НА КРУМ ================= */
+var SQ=[
+  {q:'1. Кой е написал този откъс и кога?',o:['Византийският лексикон „Свидас“ от X в.','Самият хан Крум през IX в.','Български летописец, съвременник на Крум'],a:0,e:'„Лексикон Свидас“ е византийски речник от X в., т.е. написан около век след Крум и от чужда гледна точка.'},
+  {q:'2. Какви наказания предвиждат Крумовите закони?',o:['Смърт за клеветника, строги наказания за крадците и унищожаване на лозята','Само глоби за всички престъпления','Наказания само за чужденци'],a:0,e:'Клеветникът бива наказан със смърт, крадците — строго, а лозята се унищожават. Същевременно на просещия се дава достатъчно, за да не изпада пак в нужда.'},
+  {q:'3. Кое престъпление се определя като особено тежко и за българи, и за франки?',o:['Кражбата — строго я наказват и Крумовите закони, и франкският Салически законник (виж урок 3)','Пътуването в чужбина','Рисуването на стените'],a:0,e:'Кражбата е тежко престъпление и при българите, и при франките. Учебникът препраща към документ на с. 21 — провери с него.'},
+  {q:'4. Защо Крум иска еднакви закони за всички?',o:['В държавата живеят българи, славяни и авари — единният закон ги свързва и показва, че властта е една','За да се отказват хората да ходят на пазара','Защото византийският император му заповядва'],a:0,e:'Когато държавата е голяма и разнородна, общите закони свързват хората. Така законът не зависи от това къде и при кого живееш.'},
+  {q:'5. „Свидас“ е византийски лексикон от X в. Какво значи това за детектива?',o:['Авторът не е бил българин и е писал по-късно, затова сравнявам с други извори и не вярвам сляпо','Може да му се вярва напълно, защото е стар','Изворът е безполезен и го забравяме'],a:0,e:'Късният чужд източник е ценен, но има собствена гледна точка. Детективът го съпоставя с други улики.'}
+];
+(function(){
+  var box=$('#srcQs');
+  box.innerHTML=SQ.map(function(_,i){return '<div class="qblock stage" id="sq'+i+'"></div>'}).join('');
+  var n=0;
+  SQ.forEach(function(Q,i){Q.after=function(){n++;if(n===SQ.length){if(flag('src')){addXP(6,'Законите са разпитани!');award('critic')}}};oneQ($('#sq'+i),Q,'sq'+i,3);restoreOneQ($('#sq'+i),Q,'sq'+i)});
+})();
+var SQ2=[
+  {q:'1. Кой е поръчал надписа и защо е на камък?',o:['Хан Омуртаг — ханът оставя официален запис за постройките си','Византийският император','Случаен минувач'],a:0,e:'Надписът е официален: ханът иска да остане паметта за делата му (мост, стан) и за силата му.'},
+  {q:'2. Може ли да му се вярва напълно?',o:['За мястото и постройките — да, а за пожеланията и самохвалството — внимателно','Да, всичко е вярно, защото е изсечено в камък','Не, никога'],a:0,e:'Надписите са ценни, защото са от самия владетел, но славят него и показват как иска да бъде видян. Затова ги сравняваме с други извори.'}
+];
+(function(){
+  var box=$('#srcQs2');
+  box.innerHTML=SQ2.map(function(_,i){return '<div class="qblock stage" id="s2q'+i+'"></div>'}).join('');
+  var n=0;
+  SQ2.forEach(function(Q,i){Q.after=function(){n++;if(n===SQ2.length){if(flag('src2'))addXP(4,'Надписът е разчетен!')}};oneQ($('#s2q'+i),Q,'s2q'+i,3);restoreOneQ($('#s2q'+i),Q,'s2q'+i)});
+})();
+
+/* ================= ЛИНИЯТА ОТ УЧЕБНИКА (плочки) ================= */
+var TT=['Карл Велики — крал на франките, а от 800 г. император (виж урок 9). Съвременник на Крум.','Управлението на хан Крум.','Крум превзема Сердика (днешна София).','Битка във Върбишкия проход: загива император Никифор I.','Българите обсаждат Константинопол.','30-годишен мир с Византия (при хан Омуртаг).','Управлението на хан Омуртаг.','Управлението на хан Маламир.','Завладяване на Пловдив (Филипопол).','Управлението на хан Пресиян.','Присъединяване на славянски земи в Македония и Родопската област.','Франкската империя се разделя на три кралства (Верденският договор) — виж картата на с. 18.'];
+var t3Seen=EX.t3Seen||{};
+tilesInit('data-tile3',TT,t3Seen,'tt','Линията от учебника е разчетена!');
+
+/* ================= ЛИНИЯ НА ВРЕМЕТО ================= */
+var TL=[['803 г.','Хан Крум се възкачва на престола — нова династия'],['809 г.','Крум превзема Сердика'],['811 г.','Битката във Върбишкия проход'],['813 г.','Българите обсаждат Константинопол'],['815 г.','30-годишен мир с Византия'],['836 г.','Завладяване на Пловдив'],['837 – 839 г.','Присъединяване на славянски земи в Македония и Родопите']];
+var sortl=$('#sortl');
+function tlRender(order){
+  sortl.innerHTML=order.map(function(i){return '<li class="sitem" data-i="'+i+'"><span class="handle" aria-label="Плъзни">☰</span><span class="txt"><span class="yr">'+TL[i][0]+' ·</span>'+TL[i][1]+'</span><span class="mark"></span><span class="mv"><button data-mv="-1" aria-label="Нагоре">▲</button><button data-mv="1" aria-label="Надолу">▼</button></span></li>'}).join('');
+  $$('.sitem',sortl).forEach(bindItem);
+}
+var IDX=TL.map(function(_,i){return i});
+var order0=(EX.tlOrder&&EX.tlOrder.length===TL.length)?EX.tlOrder:(function(){var o;do{o=shuffle(IDX)}while(o.join()===IDX.join());return o})();
+tlRender(order0);
+var TLOK='<b>Отлично, хронисте!</b> От възкачването на Крум до Македония минават около 35 години: толкова бързо расте България.';
+if(EX.tlSolved){
+  sortl.classList.add('sorted');
+  $$('.sitem',sortl).forEach(function(li){li.classList.add('ok');$('.mark',li).textContent='✓'});
+  $('#tlCheck').disabled=true;
+  $('#tlFb').className='fb ok';
+  $('#tlFb').innerHTML=TLOK;
+}
+function clearMarks(){if(sortl.classList.contains('sorted'))return;$$('.sitem',sortl).forEach(function(li){li.classList.remove('ok','bad');$('.mark',li).textContent=''});$('#tlFb').className='fb';saveNow()}
+function bindItem(li){
+  $$('[data-mv]',li).forEach(function(b){b.addEventListener('click',function(){
+    if(sortl.classList.contains('sorted'))return;
+    var d=+b.getAttribute('data-mv');
+    if(d<0&&li.previousElementSibling)sortl.insertBefore(li,li.previousElementSibling);
+    else if(d>0&&li.nextElementSibling)sortl.insertBefore(li.nextElementSibling,li);
+    clearMarks();
+  })});
+  var h=$('.handle',li),startY=0,dragging=false,pid=null;
+  h.addEventListener('pointerdown',function(ev){
+    if(sortl.classList.contains('sorted'))return;
+    dragging=true;pid=ev.pointerId;startY=ev.clientY;li.classList.add('dragging');
+    try{h.setPointerCapture(pid)}catch(e){}
+    ev.preventDefault();
+  });
+  h.addEventListener('pointermove',function(ev){
+    if(!dragging||ev.pointerId!==pid)return;
+    var dy=ev.clientY-startY;li.style.transform='translateY('+dy+'px)';
+    var prev=li.previousElementSibling,next=li.nextElementSibling;
+    if(next&&dy>next.offsetHeight/2+4){var nh=next.offsetHeight+8;sortl.insertBefore(next,li);startY+=nh;dy-=nh;li.style.transform='translateY('+dy+'px)'}
+    else if(prev&&dy<-(prev.offsetHeight/2+4)){var ph=prev.offsetHeight+8;sortl.insertBefore(li,prev);startY-=ph;dy+=ph;li.style.transform='translateY('+dy+'px)'}
+  });
+  function end(ev){if(!dragging||(ev&&ev.pointerId!==pid))return;dragging=false;li.classList.remove('dragging');li.style.transform='';clearMarks()}
+  h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+}
+var tlTries=EX.tlTries||0;
+$('#tlCheck').addEventListener('click',function(){
+  if(sortl.classList.contains('sorted'))return;
+  tlTries++;saveNow();var items=$$('.sitem',sortl),ok=0;
+  items.forEach(function(li,pos){var good=+li.getAttribute('data-i')===pos;li.classList.toggle('ok',good);li.classList.toggle('bad',!good);$('.mark',li).textContent=good?'✓':'✗';if(good)ok++});
+  var fb=$('#tlFb');
+  if(ok===items.length){sortl.classList.add('sorted');fb.className='fb ok';fb.innerHTML=TLOK;
+    this.disabled=true;if(flag('tl')){addXP(tlTries===1?15:8,'Линията е подредена');award('chrono')}}
+  else{fb.className='fb bad';fb.innerHTML='<b>Верни места: '+ok+' от '+items.length+'.</b> Премести събитията с ✗ и провери пак. Подсказка: първо се възкачва Крум, после идват Сердика, битката и обсадата, след това мирът, а накрая — Пловдив и Македония.'}
+});
+
+/* ================= ВЪПРОСИ И ЗАДАЧИ ================= */
+var TASKS=[
+  ['1. Каква е целта на войните, водени от хан Крум и неговите наследници? Проследете на картата на с. 18 териториалното разширение на България до средата на IX в.','Целта е да се присъединят славянски земи (обединяване на южните славяни) и да се укрепи държавата срещу Византия. На картата: земите на славяни и авари и Сердика при Крум; запазване на земите и натиск на запад при Омуртаг; Пловдив, Родопите и Македония при Маламир и Пресиян.'],
+  ['2. Как българските ханове укрепили своята власт в обширната си държава?','Крум въвежда единни закони за всички поданици. Омуртаг разделя територията на комитати с комити, които ханът назначава и които му се отчитат лично. Самоуправлението на славянските князе е премахнато, а ханът управлява от Плиска със съвет на най-близките си помощници.'],
+  ['3. Какво било устройството на Българското ханство към средата на IX в.?','Велик хан; той назначава кавхан (първи помощник, предвожда армията, води преговори в негово отсъствие) и ичиргу боил (столицата и вътрешната област); съвет на боилите; комити — управители на области (комитати).'],
+  ['4. Кои били основните сгради и съоръжения в обновената столица Плиска?','Вътрешен и Външен град, отделени от вътрешна каменна стена; подновена водопроводна система; Голям дворец с тронна зала (върху останките на Крумовия дворец); нов езически храм; Цитадела — защитна тухлена стена около Малкия дворец, където живее ханското семейство.']
+];
+var taskSeen=EX.taskSeen||{};
+function taskOpen(i,quiet){
+  var b=$('#task'+i+' button'),a=$('#task'+i+' .infobox');a.style.display='block';b.textContent='✓ Примерният отговор е показан';b.disabled=true;
+  if(!quiet){taskSeen[i]=1;addXP(2);if(Object.keys(taskSeen).length===TASKS.length&&flag('tasks'))addXP(4,'Задачите са готови!')}
+}
+$('#taskList').innerHTML=TASKS.map(function(t,i){return '<div class="stage" id="task'+i+'"><b>'+t[0]+'</b><div class="row" style="margin-top:8px"><button class="btn ghost small" data-t="'+i+'">Покажи примерен отговор</button></div><div class="infobox" style="display:none"><p>'+t[1]+'</p></div></div>'}).join('');
+$$('#taskList button').forEach(function(b){b.addEventListener('click',function(){taskOpen(+b.getAttribute('data-t'))})});
+
+/* ================= РОЛЯ: КАВХАНЪТ ================= */
+(function(){
+  var Q1={q:'Пратеник от Византия иска да говори с хана. Ханът е на поход. Какво правиш?',o:['Като кавхан водя преговорите вместо хана и пазя интересите на държавата','Отказвам да приема пратеника, докато ханът не се върне','Изпращам пратеника при комит от далечна област'],a:0,e:'Кавханът води преговори в отсъствието на хана — това е част от длъжността му.'};
+  var Q2={q:'Комит от далечна област пита: „Може ли един славянски княз да си запази старото самоуправление и законите?“',o:['Не — законите са единни за всички поданици, а самоуправлението на князете е премахнато','Да — всеки княз си прави закони','Ще попитаме византийския император'],a:0,e:'Крум въвежда единни закони за всички поданици, а Омуртаг премахва самоуправлението на славянските князе.'};
+  function chk(){if(S.flags.rq1&&S.flags.rq2&&flag('role'))addXP(5,'Влезе в ролята!')}
+  Q1.after=chk;Q2.after=chk;
+  oneQ($('#roleQ1'),Q1,'rq1',4);oneQ($('#roleQ2'),Q2,'rq2',4);
+  restoreOneQ($('#roleQ1'),Q1,'rq1');restoreOneQ($('#roleQ2'),Q2,'rq2');
+})();
+
+/* ================= ЗАГАДКА: КОЙ ЛЪЖЕ? ================= */
+(function(){
+  var Q1={q:'Кой от тримата свидетели лъже?',o:['Стражарят','Търговецът','Пратеникът'],a:0,e:'Стражарят лъже: самоуправлението на славянските князе е премахнато, а законите са единни.'};
+  var Q2={q:'С коя улика от урока го разкриваш?',o:['Реформата на Омуртаг: комитати с комити, назначавани от хана, и премахнато самоуправление','Мадарският конник','Времевата линия на Тервел'],a:0,e:'Досие №4: комитите са назначавани от хана и му се отчитат лично, а самоуправлението на славянските князе е премахнато.'};
+  function chk(){if(S.flags.pz1&&S.flags.pz2&&flag('puzzle'))addXP(5,'Лъжецът е разкрит!')}
+  Q1.after=chk;Q2.after=chk;
+  oneQ($('#puzQ1'),Q1,'pz1',4);oneQ($('#puzQ2'),Q2,'pz2',4);
+  restoreOneQ($('#puzQ1'),Q1,'pz1');restoreOneQ($('#puzQ2'),Q2,'pz2');
+})();
+
+/* ================= ЕЗИКОВ ЪГЪЛ ================= */
+var EN=[['law','закон','The law is the same for all.'],['subject','поданик','He is a subject of the khan.'],['ruler','владетел','The ruler lives in a palace.'],['palace','дворец','The palace is big.'],['wall','стена','The wall is made of stone.'],['gate','порта','The east gate is open.'],['council','съвет','The council helps the khan.'],['governor','управител','The governor reports to the khan.']];
+var ES=[['la ley','законът','La ley es para todos.'],['el palacio','дворецът','El palacio es grande.'],['la muralla','крепостната стена','La muralla es alta.'],['la puerta','портата','La puerta está abierta.'],['el consejo','съветът','El consejo ayuda al jefe.']];
+$('#vocabEn').innerHTML=EN.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-en="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+$('#vocabEs').innerHTML=ES.map(function(w,i){return '<div class="word"><span class="w">'+w[0]+'</span><span class="ex">'+w[1]+'<br><i>'+w[2]+'</i></span><button data-es="'+i+'" aria-label="Чуй">🔊</button></div>'}).join('');
+var heard=EX.heard||{};
+function heardOne(k){if(heard[k])return;heard[k]=1;addXP(1)}
+$$('[data-en]').forEach(function(b){b.addEventListener('click',function(){var w=EN[+b.getAttribute('data-en')];speak(w[0]+'. '+w[2],'en-US',false);heardOne('en'+b.getAttribute('data-en'))})});
+$$('[data-es]').forEach(function(b){b.addEventListener('click',function(){var w=ES[+b.getAttribute('data-es')];speak(w[0]+'. '+w[2],'es-ES',false);heardOne('es'+b.getAttribute('data-es'))})});
+var ETY=[
+  {r:'comes (лат.)',s:'„спътник“ — com- „заедно“ + ire „вървя“',b:['comitatus (лат.) · комитат','count (англ.)','conde (исп.)','comte (фр.)'],p:'Латинското comes е „този, който върви заедно с владетеля“ — спътник и помощник. По-късно така наричат управители на области. От него идват „count“ и „conde“. Българският „комит“ прилича на тази дума и на византийската титла komēs; точният път на заемане е въпрос на специалисти. (Спомни си comes от урок 9.)'},
+  {r:'civitas (лат.)',s:'„гражданство, град“',b:['cittadella (итал.) — „малко градче“','citadel (англ.)','ciudadela (исп.)','цитадела (бълг.)'],p:'От civitas идват италианското città („град“) и малката форма cittadella — укрепено „малко градче“ вътре в града. От същия корен са и „city“ (англ.) и „ciudad“ (исп.) — град.'},
+  {r:'sub + dare / iacere (лат.)',s:'„под“ + „давам / хвърлям“',b:['поданик (бълг.) — „под“ властта','subject (англ.)','súbdito (исп.)'],p:'Идеята е една и съща в много езици: поданикът е този, който стои „под“ властта на владетеля. Латинското sub е „под“. Английското „subject“ идва от subiectus, а испанското „súbdito“ — от subditus, и двете значат „подчинен“.'},
+  {r:'κέντρον (гр.)',s:'„остро връхче“, остър връх на пергел',b:['centrum (лат.)','център (бълг.)','center / centre (англ.)','centro (исп.)'],p:'Гръцката дума kéntron е остро връхче — онова на пергела, с което чертаеш кръг. От него идва „център“ — точката в средата. „Централизация“ значи събиране на властта в един център.'}
+];
+$('#etym').innerHTML=ETY.map(function(e,i){return '<button class="ety" data-y="'+i+'"><div class="root">'+e.r+' <small>'+e.s+'</small></div><div class="tree"><div class="branches">'+e.b.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div><p>'+e.p+'</p></div></button>'}).join('');
+var ySeen=EX.ySeen||{};
+$$('.ety').forEach(function(b){b.addEventListener('click',function(){b.classList.toggle('open');var i=b.getAttribute('data-y');if(!ySeen[i]){ySeen[i]=1;addXP(2)}})});
+
+/* ================= ТЕСТ ================= */
+var LV=[
+ [{q:'През коя година се възкачва на престола хан Крум?',o:['803 г.','681 г.','815 г.'],a:0,e:'През 803 г. нова династия поема управлението за близо два века.'},
+  {q:'Коя столица превзема Крум през 809 г.?',o:['Сердика (днешна София)','Рим','Аахен'],a:0,e:'Сердика е днешна София.'},
+  {q:'Кой император загива във Върбишкия проход през 811 г.?',o:['Никифор I','Константин IV','Юстиниан II'],a:0,e:'Никифор I е убит в засадата на 26 юли 811 г.'}],
+ [{q:'Какво сключва хан Омуртаг с Византия през 815 г.?',o:['30-годишен мир','Съюз срещу арабите','Търговски договор за 100 години'],a:0,e:'30-годишен мир: Византия признава част от завоеванията на Крум.'},
+  {q:'Какво са комитати?',o:['Военноадминистративни области, управлявани от комити','Крепости по Дунав','Съвет на боилите'],a:0,e:'Комитатите са областите, на които Омуртаг разделя територията на ханството.'},
+  {q:'Какво е Цитаделата в Плиска?',o:['Защитна тухлена стена около Малкия дворец','Езически храм','Водопровод'],a:0,e:'Цитаделата огражда Малкия дворец, където живее ханското семейство.'}],
+ [{q:'Кой води преговорите в отсъствие на хана?',o:['Кавханът','Комитът','Ичиргу боилът'],a:0,e:'Кавханът е първият помощник на хана и предвожда армията.'},
+  {q:'Кои земи присъединяват Маламир и Пресиян?',o:['Филипопол (836 г.), селища в Тракия, Родопите и Македония','Земите на аварите','Територията на Франкската империя'],a:0,e:'Филипопол (Пловдив) през 836 г., после Тракия, Родопската област и Македония (837 – 839 г.).'},
+  {q:'Какво прави комитът?',o:['Управлява област, назначава го ханът и му се отчита лично','Предвожда армията на хана','Управлява Вътрешния град'],a:0,e:'Комитите управляват комитатите, назначават се от хана и му се отчитат лично.'}]
+];
+var FB_OK=['Браво!','Точно!','Отлично, детективе!','Вярно!'],FB_BAD=['Почти…','Не съвсем.','Опа!'];
+var qState=null;
+function startLevel(l){qState={l:l,queue:[0,1,2],firstOk:0,missed:{}};$('#qArea').scrollIntoView({behavior:'smooth',block:'start'});renderQ()}
+function renderQ(){
+  var st=qState,area=$('#qArea');
+  if(!st.queue.length){finishLevel();return}
+  var qi=st.queue[0],Q=LV[st.l][qi],order=shuffle([0,1,2]);
+  area.innerHTML='<div class="stage"><div class="qhead"><span>Ниво '+(st.l+1)+'</span><button class="btn ghost small" id="qQuit" aria-label="Затвори">✕</button></div>'+
+   '<div class="qprog"><i style="width:'+Math.round((3-st.queue.length)/3*100)+'%"></i></div>'+
+   '<p class="qtext">'+Q.q+'</p><div class="opts">'+order.map(function(i){return '<button class="opt" data-i="'+i+'">'+Q.o[i]+'</button>'}).join('')+'</div><div class="fb" id="qfb"></div></div>';
+  $('#qQuit').addEventListener('click',function(){qState=null;area.innerHTML=''});
+  $$('.opt',area).forEach(function(b){b.addEventListener('click',function(){
+    var i=+b.getAttribute('data-i'),fb=$('#qfb');$$('.opt',area).forEach(function(x){x.disabled=true;if(+x.getAttribute('data-i')===Q.a)x.classList.add('right')});
+    if(i===Q.a){fb.className='fb ok';fb.innerHTML='<b>'+FB_OK[Math.floor(Math.random()*FB_OK.length)]+'</b> '+Q.e;
+      if(!st.missed[qi]){st.firstOk++;addXP(10)}else addXP(3);st.queue.shift();}
+    else{b.classList.add('wrong');fb.className='fb bad';fb.innerHTML='<b>'+FB_BAD[Math.floor(Math.random()*FB_BAD.length)]+'</b> '+Q.e+' <i>Въпросът ще се върне по-късно.</i>';
+      st.missed[qi]=true;st.queue.push(st.queue.shift());}
+    fb.insertAdjacentHTML('beforeend','<div style="margin-top:10px"><button class="btn small '+(i===Q.a?'done':'')+'" id="qNext">Продължи →</button></div>');
+    $('#qNext').addEventListener('click',renderQ);
+  })});
+}
+function finishLevel(){
+  var st=qState,l=st.l,area=$('#qArea');
+  if(!S.quizDone[l]){S.quizDone[l]=true;S.quizFirst+=st.firstOk;}
+  var nodes=$$('.node');nodes[l].classList.add('done');if(nodes[l+1])nodes[l+1].disabled=false;
+  var names=['Чирак','Хронист','Главен детектив'];
+  area.innerHTML='<div class="stage" style="text-align:center"><div style="font-size:2.4rem">⭐</div><p class="qtext">Ниво „'+names[l]+'“ е преминато!</p><p>От първи опит: <b>'+st.firstOk+' от 3</b></p>'+
+   (l<2?'<button class="btn gold" id="qNextLvl">Към ниво '+(l+2)+' →</button>':'<p>Всички нива са готови! Сега отиди към <b>Разкриването</b> ↓</p>')+'</div>';
+  if(l<2)$('#qNextLvl').addEventListener('click',function(){startLevel(l+1)});
+  progress();
+  if(S.quizDone.every(Boolean)){if(S.quizFirst>=8)award('chief');checkReveal();}
+  qState=null;
+}
+$$('.node').forEach(function(n){n.addEventListener('click',function(){if(!n.disabled)startLevel(+n.getAttribute('data-lvl'))})});
+
+var FC=[['Македония','Историко-географска област в югозападната част на Балканския полуостров.'],['Поданици','Всички хора под властта и законите на владетеля.'],['Комитат','Военноадминистративна област при Омуртаг.'],['Комит','Управител на комитат; назначава го ханът и му се отчита лично.'],['Кавхан','Първи помощник на хана: предвожда армията и води преговори в негово отсъствие.'],['Ичиргу боил','Управлява столицата и вътрешната област.'],['Боили','Знатни люде и съветници на хана — съвет на боилите.'],['Цитадела','Защитна тухлена стена около Малкия дворец в Плиска.'],['Централизация','Властта е събрана в един център: единни закони и управители, назначавани от хана.'],['803 г.','Хан Крум се възкачва на престола — нова династия.'],['26.VII.811','Засада във Върбишкия проход: загива Никифор I.'],['815 г.','30-годишен мир с Византия при Омуртаг.'],['836 г.','Завладяване на Пловдив; 837 – 839 г. — Македония и Родопите.']];
+var fI=EX.fI||0,flash=$('#flash');
+function renderFC(){flash.classList.remove('flip');setTimeout(function(){$('#fFront').textContent=FC[fI][0];$('#fBack').textContent=FC[fI][1];$('#fNum').textContent=(fI+1)+' / '+FC.length},150)}
+flash.addEventListener('click',function(){flash.classList.toggle('flip')});
+$('#fPrev').addEventListener('click',function(){fI=(fI-1+FC.length)%FC.length;renderFC();saveNow()});
+$('#fNext').addEventListener('click',function(){fI=(fI+1)%FC.length;renderFC();saveNow()});
+renderFC();
+
+/* ================= РАЗКРИВАНЕ ================= */
+function checkReveal(){
+  var n=Object.keys(S.clues).length;
+  if(n===4){$('#revealLock').textContent=S.quizDone.every(Boolean)?'Уликите са събрани, изпитът е издържан. Време е да разкриеш случая!':'Всички 4 улики са събрани! Можеш да разкриеш случая (а после да минеш и изпита).';$('#revealBody').style.display='block';}
+  else $('#revealLock').textContent='Събрани улики: '+n+' от 4. Прочети досиетата (№2 – №5).';
+}
+var SUS=[
+ {t:'Всяка област се управлява от свой княз със свои закони, а ханът само събира данък',ok:0,e:'Не. Улики 2 и 3: самоуправлението на славянските князе е премахнато, а законите са единни.'},
+ {t:'Единни закони за всички (Крум), комитати с комити, назначавани от хана и отчитащи му се лично (Омуртаг), и управление от Плиска със съвет на боилите',ok:1,e:'Точно! Законите, комитатите и комитите (улики 2 и 3) и обновената столица Плиска (улика 4) правят голямата държава централизирана и управляема от един център.'},
+ {t:'Държавата се държи заедно само защото Византия я управлява',ok:0,e:'Не. Улика 1: Крум разбива византийския император, а Омуртаг сключва мир — България е самостоятелна сила.'},
+ {t:'Всеки комит е избран от народа и не отговаря пред никого',ok:0,e:'Не. Комитите се назначават от хана и лично му се отчитат.'}
+];
+$('#suspects').innerHTML=shuffle([0,1,2,3]).map(function(i){return '<button class="opt" data-s="'+i+'">'+SUS[i].t+'</button>'}).join('');
+$$('[data-s]').forEach(function(b){b.addEventListener('click',function(){
+  var s=SUS[+b.getAttribute('data-s')],fb=$('#revealFb');
+  if(s.ok){b.classList.add('right');$$('[data-s]').forEach(function(x){x.disabled=true});fb.className='fb ok';fb.innerHTML='<b>Случаят е разкрит!</b> '+s.e;
+    $('#stamp').classList.add('show');if(!S.solved){S.solved=true;addXP(20,'Случаят е разкрит!');progress()}
+    $('#finalXp').textContent='Общо събра '+S.xp+' XP, '+Object.keys(S.badges).length+' от '+BADGES.length+' значки и '+Object.keys(S.cards).length+' от '+CARDS.length+' карти-личности.';}
+  else{b.classList.add('wrong');b.disabled=true;fb.className='fb bad';fb.innerHTML='<b>Не е това.</b> '+s.e;}
+})});
+checkReveal();
+
+/* ================= ТЕКСТ ЗА КОПИРАНЕ ================= */
+var plain='Урок 12. България през първата половина на IX в.\n\nЗАПОМНИ:\n'+
+ $$('#sumList li').map(function(li,i){return (i+1)+'. '+li.innerText}).join('\n')+
+ '\n\nКлючови дати: 803 – хан Крум, нова династия; 809 – Сердика; 26.VII.811 – засада във Върбишкия проход, загива Никифор I; 813 – обсада на Константинопол; 815 – 30-годишен мир; 836 – Пловдив; 837 – 839 – Македония и Родопската област.\n\nПонятия: Македония, поданици, комитат, комит, кавхан, ичиргу боил, боили, цитадела, централизация.';
+$('#plain').value=plain;
+$('#copyBtn').addEventListener('click',function(){
+  var ta=$('#plain');
+  function ok(){toast('Текстът е копиран ✓')}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(plain).then(ok,function(){ta.select();document.execCommand('copy');ok()})}
+  else{ta.removeAttribute('readonly');ta.select();try{document.execCommand('copy');ok()}catch(e){toast('Маркирай текста и го копирай ръчно')}ta.setAttribute('readonly','')}
+});
+
+/* снимки: резервен вариант без интернет */
+$$('figure img').forEach(function(img){img.addEventListener('click',function(){window.open(img.src.replace(/\?width=\d+/,''),'_blank','noopener')});
+  var cap=img.parentNode.querySelector('figcaption small');if(cap)cap.insertAdjacentHTML('beforeend','<span class="zoomhint"><br>🔍 Докосни снимката, за да я видиш в пълен размер.</span>');
+  img.addEventListener('error',function(){var d=document.createElement('div');d.className='noimg';d.textContent='📷 Снимката се показва, когато има интернет.';img.replaceWith(d)})});
+
+$('#resetLesson').addEventListener('click',resetLesson);
+
+/* ================= ВЪЗСТАНОВЯВАНЕ НА НАПРЕДЪКА (визуално) ================= */
+(function restoreUI(){
+  $('#xp').textContent=S.xp;
+  if(jumped){
+    $('#dY').textContent='803';$('#dC').textContent='IX в.';$('#dP').textContent='Плиска, столицата на хан Крум';
+    setTM('803','IX в.','Плиска');
+    var jb=$('#jumpBtn');jb.textContent='✓ Пристигна в 803 г.';jb.classList.add('done');jb.disabled=true;
+  }
+  Object.keys(S.done).forEach(function(k){if(!S.done[k])return;var b=$('[data-done="'+k+'"]');if(b){b.classList.add('done');b.disabled=true;b.textContent='✓ Готово'}});
+  Object.keys(S.clues).forEach(function(n){if(!S.clues[n])return;var el=$('.clue[data-clue="'+n+'"]');if(el){el.classList.add('on');el.innerHTML='<b>УЛИКА '+n+' ✓</b>'+CLUES[n]}});
+  checkReveal();
+  if(S.solved){var okIdx=null;SUS.forEach(function(s,i){if(s.ok)okIdx=i});if(okIdx!==null){var sb=$('[data-s="'+okIdx+'"]');if(sb)sb.click()}}
+  tilesRestore('data-tile',TA,tSeen);tilesRestore('data-tile2',TB,t2Seen);tilesRestore('data-tile3',TT,t3Seen);tilesRestore('data-tile4',TD,t4Seen);
+  for(var cn=0;cn<chainN;cn++){(function(n){var b=$('#chain button[data-n="'+n+'"]');if(b){b.classList.add('open');b.innerHTML=CHAINN[n]}var nx=$('#chain button[data-n="'+(n+1)+'"]');if(nx){nx.disabled=false;if(!nx.classList.contains('open'))nx.innerHTML=nx.querySelector('b').outerHTML+' · докосни'}})(cn)}
+  Object.keys(S.seen).forEach(function(id){if(S.seen[id])$$('#map [data-id="'+id+'"], #s5 [data-id="'+id+'"]').forEach(function(e){e.classList.add('seen')})});
+  Object.keys(govSeen).forEach(function(i){var b=$('#gov [data-g="'+i+'"]');if(b)b.classList.add('seen')});
+  Object.keys(taskSeen).forEach(function(i){taskOpen(+i,true)});
+  Object.keys(ySeen).forEach(function(i){var b=$('.ety[data-y="'+i+'"]');if(b)b.classList.add('open')});
+  var _nodes=$$('.node');
+  S.quizDone.forEach(function(d,i){if(d){_nodes[i].classList.add('done');if(_nodes[i+1])_nodes[i+1].disabled=false}});
+})();
+
+renderBadges();progress();booted=true;
+})();
+</script>
+</body>
+</html>
